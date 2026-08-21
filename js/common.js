@@ -624,6 +624,16 @@ Util.ready(function () {
      그래서 스타일과 리소스가 모두 적용된 load 이후에 다시 맞춘다.
      헤더 높이만큼의 여백은 html 의 scroll-padding-top 과 각 요소의
      scroll-mt-* 클래스가 처리한다. */
+  function scrollToTarget(target) {
+    /* 페이지를 여는 순간의 보정이므로 애니메이션 없이 바로 맞춘다
+       (html 의 scroll-behavior: smooth 를 이 호출에서만 무시) */
+    try {
+      target.scrollIntoView({ behavior: 'instant', block: 'start' });
+    } catch (e) {
+      target.scrollIntoView();
+    }
+  }
+
   function alignToHash() {
     if (window.location.hash.length <= 1) return;
 
@@ -635,13 +645,23 @@ Util.ready(function () {
     }
     if (!target) return;
 
-    /* 페이지를 여는 순간의 보정이므로 애니메이션 없이 바로 맞춘다
-       (html 의 scroll-behavior: smooth 를 이 호출에서만 무시) */
-    try {
-      target.scrollIntoView({ behavior: 'instant', block: 'start' });
-    } catch (e2) {
-      target.scrollIntoView();
+    /* Tailwind CDN 은 DOM 변경을 감지해 CSS 를 다시 만들기 때문에,
+       JS 로 넣은 내용의 스타일이 load 이후에 적용되는 경우가 있다.
+       레이아웃이 멈출 때까지 짧게 재보정한다.
+       사용자가 직접 스크롤하면 즉시 손을 뗀다. */
+    var expected = -1;
+    var tries = 0;
+
+    function align() {
+      if (expected >= 0 && Math.abs(window.pageYOffset - expected) > 2) return;
+
+      scrollToTarget(target);
+      expected = window.pageYOffset;
+
+      if (++tries < 20) window.setTimeout(align, 50);   /* 최대 약 1초 */
     }
+
+    align();
   }
 
   if (document.readyState === 'complete') alignToHash();
