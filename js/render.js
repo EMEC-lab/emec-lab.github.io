@@ -77,36 +77,56 @@ var Render = (function () {
    *   "Min-Ro Park (박민로)"  →  'Park' 또는 '박민로' 가 들어간 저자를 굵게
    * =================================================================== */
 
-  function memberTokens() {
-    if (typeof MEMBERS === 'undefined') return { surnames: [], korean: [] };
+  /* 비교용 정규화: 공백·마침표·하이픈을 지우고 소문자로
+     "M.-R. Park" → "mrpark",  "Min-Ro Park" → "minropark" */
+  function normalizeName(s) {
+    return String(s || '').toLowerCase().replace(/[\s.\-_]/g, '');
+  }
 
-    var surnames = [], korean = [];
+  /* 구성원 한 명이 저자 목록에 쓰일 수 있는 표기들을 모은다.
+     성(姓)만으로 비교하면 동성이인(예: 다른 Park)까지 굵어지므로
+     반드시 이름 전체 형태로 대조한다. */
+  var tokenCache = null;
+
+  function memberTokens() {
+    if (tokenCache) return tokenCache;
+
+    tokenCache = {};
+    if (typeof MEMBERS === 'undefined') return tokenCache;
 
     MEMBERS.forEach(function (m) {
       var raw = String(m.name || '');
-      var ko  = (raw.match(/\(([^)]+)\)/) || [])[1] || '';
-      var en  = raw.replace(/\([^)]*\)/, '').replace(/^\s+|\s+$/g, '');
-      var parts = en.split(/\s+/);
-      var last = parts.length ? parts[parts.length - 1] : '';
+      if (raw.charAt(0) === '[') return;
 
-      if (last.length > 1 && last.charAt(0) !== '[') surnames.push(last);
-      if (ko && ko.charAt(0) !== '[') korean.push(ko.replace(/^\s+|\s+$/g, ''));
+      var ko = (raw.match(/\(([^)]+)\)/) || [])[1] || '';
+      var en = raw.replace(/\([^)]*\)/, '').replace(/^\s+|\s+$/g, '');
+
+      if (ko) tokenCache[normalizeName(ko)] = true;
+
+      if (en) {
+        tokenCache[normalizeName(en)] = true;
+
+        /* "Min-Ro Park" → "M.-R. Park" 같은 약칭 표기 */
+        var parts = en.split(/\s+/);
+        if (parts.length > 1) {
+          var last = parts.pop();
+          var initials = parts.join('-').split('-').map(function (w) {
+            return w.charAt(0);
+          }).join('');
+          tokenCache[normalizeName(initials + last)] = true;
+        }
+      }
     });
 
-    return { surnames: surnames, korean: korean };
+    return tokenCache;
   }
 
   function boldAuthors(authors) {
     if (!authors) return '';
-    var tok = memberTokens();
+    var tokens = memberTokens();
 
     return String(authors).split(',').map(function (seg) {
-      var hit =
-        tok.surnames.some(function (s) {
-          return new RegExp('(^|\\W)' + s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(\\W|$)').test(seg);
-        }) ||
-        tok.korean.some(function (k) { return seg.indexOf(k) !== -1; });
-
+      var hit = tokens[normalizeName(seg)] === true;
       return hit ? '<strong class="font-bold text-slate-900">' + esc(seg) + '</strong>' : esc(seg);
     }).join(',');
   }
