@@ -4,6 +4,7 @@
  *
  *   role   professor | postdoc | phd | ms | undergrad | alumni
  *   name   영문 + 괄호 국문 병기.  예: "Min-Ro Park (박민로)"
+ *          → 이 표기를 기준으로 논문 저자 목록에서 자동으로 굵게 표시된다
  *   email  SITE.email 과 같으면 비워둘 것 (자동으로 SITE 값을 쓴다)
  *   office 비우면 SITE.address.short 를 쓴다
  *
@@ -11,6 +12,8 @@
  *   gradYear / thesis / currentPosition : 졸업생 전용
  *
  * 국내 학회·직책은 국문 그대로 적는다. 억지로 영역하지 않는다. (CLAUDE.md 2번)
+ *
+ * 출처: 실적정리_20260428.xlsx 'Research Experience' 시트
  * ========================================================================= */
 
 const MEMBERS = [
@@ -18,17 +21,20 @@ const MEMBERS = [
     id: "prof-park",
     role: "professor",
     name: "Min-Ro Park (박민로)",
-    title: "Professor",
+    title: "Assistant Professor",
     photo: "images/members/park.jpg",
     email: "",
     office: "",
-    interests: "Electric Machine Design, Multiphysics Analysis, Optimal Design",
+    interests: "Analysis and design of electric machines, Multi-physics analysis, Model-based and AI-assisted design, Electrified propulsion system design",
 
     education: [
-      "[학위 이력 — 추후 확정]"
+      "Ph.D., Department of Automotive Engineering, Hanyang University, Seoul, 2020",
+      "B.S., Department of Electrical Engineering, Chungnam National University, Daejeon, 2013"
     ],
     career: [
-      "[경력 — 추후 확정]"
+      "2022.03 – Present, Assistant Professor, Department of Electrical Engineering, Soonchunhyang University, Asan",
+      "2025.02 – 2025.07, Lecturer, Global Partnership Center, Hyundai Motor Group",
+      "2020.07 – 2022.02, Senior Researcher, Human-Robot Interaction R&D Center, Korea Institute of Robotics & Technology Convergence"
     ],
     scholar: "",
 
@@ -44,8 +50,7 @@ const MEMBERS = [
     name: "Hyun-Woo Kim (김현우)",
     title: "M.S. Student",
     photo: "images/members/kim.jpg",
-    email: "",
-    office: "",
+    email: "", office: "",
     interests: "IPMSM Design",
     education: [], career: [], scholar: "",
     gradYear: null, thesis: "", currentPosition: ""
