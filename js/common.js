@@ -616,6 +616,37 @@ Util.ready(function () {
   var page = document.body.getAttribute('data-page');
   if (typeof Render !== 'undefined' && typeof Render[page] === 'function') Render[page]();
 
+  /* 앵커 보정 —
+     (1) 데이터로 만든 요소(research.html#machine-design 등)는 브라우저가
+         해시를 처리하는 시점에 아직 없다.
+     (2) Tailwind CDN 이 스타일을 비동기로 만들기 때문에 DOMContentLoaded
+         시점의 레이아웃 높이는 최종 높이와 다르다. 그때 스크롤하면 어긋난다.
+     그래서 스타일과 리소스가 모두 적용된 load 이후에 다시 맞춘다.
+     헤더 높이만큼의 여백은 html 의 scroll-padding-top 과 각 요소의
+     scroll-mt-* 클래스가 처리한다. */
+  function alignToHash() {
+    if (window.location.hash.length <= 1) return;
+
+    var target;
+    try {
+      target = document.querySelector(window.location.hash);
+    } catch (e) {
+      return;                     /* 선택자로 쓸 수 없는 해시는 무시 */
+    }
+    if (!target) return;
+
+    /* 페이지를 여는 순간의 보정이므로 애니메이션 없이 바로 맞춘다
+       (html 의 scroll-behavior: smooth 를 이 호출에서만 무시) */
+    try {
+      target.scrollIntoView({ behavior: 'instant', block: 'start' });
+    } catch (e2) {
+      target.scrollIntoView();
+    }
+  }
+
+  if (document.readyState === 'complete') alignToHash();
+  else window.addEventListener('load', alignToHash);
+
   /* 데이터 렌더링이 끝난 뒤에 처리한다 (동적으로 만든 요소까지 포함) */
   ImageFallback.init();
   Anim.init();
