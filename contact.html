@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <link rel="icon" href="data:,">
+
+  <!-- 제목은 common.js 가 SITE.menu 값으로 덮어쓴다 -->
+  <title>Lab Homepage</title>
+
+  <!-- 로드 순서 고정: Tailwind CDN -> theme.js -> custom.css -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/theme.js"></script>
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body data-page="contact" class="bg-white font-sans text-slate-800 antialiased">
+
+  <!-- 헤더: js/common.js 가 주입한다. 직접 작성하지 말 것 -->
+  <div id="site-header"></div>
+
+  <main id="content">
+
+    <!-- 페이지 제목 밴드: common.js 가 SITE.menu 에서 채운다 -->
+    <div id="page-head"></div>
+
+    <section id="location" class="scroll-mt-16">
+      <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
+
+        <!-- TODO: SITE 의 주소·전화·이메일·mapLat/mapLng 사용. 지도 임베드 -->
+        <div id="contact-location">
+          <p class="text-sm text-slate-500" data-wip></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="join" class="scroll-mt-16 border-t border-slate-200 bg-slate-50">
+      <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
+
+        <!-- TODO: 대학원생 모집 안내 -->
+        <div id="contact-join">
+          <p class="text-sm text-slate-500" data-wip></p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 푸터: js/common.js 가 주입한다. 직접 작성하지 말 것 -->
+  <div id="site-footer"></div>
+
+  <!-- 로드 순서 고정: data/*.js -> js/render.js -> js/common.js -->
+  <script src="data/site.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/common.js"></script>
+</body>
+</html>

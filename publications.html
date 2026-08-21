@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <link rel="icon" href="data:,">
+
+  <!-- 제목은 common.js 가 SITE.menu 값으로 덮어쓴다 -->
+  <title>Lab Homepage</title>
+
+  <!-- 로드 순서 고정: Tailwind CDN -> theme.js -> custom.css -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/theme.js"></script>
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body data-page="publications" class="bg-white font-sans text-slate-800 antialiased">
+
+  <!-- 헤더: js/common.js 가 주입한다. 직접 작성하지 말 것 -->
+  <div id="site-header"></div>
+
+  <main id="content">
+
+    <!-- 페이지 제목 밴드: common.js 가 SITE.menu 에서 채운다 -->
+    <div id="page-head"></div>
+
+    <section id="journal" class="scroll-mt-16">
+      <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
+        <!-- 제목 문구는 SITE.sectionTitles.journal 에서 온다 -->
+        <h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl"
+            data-section-title="journal"></h2>
+
+        <!-- TODO: 상단에 All/Journal/Conference/Patent 필터 버튼. 각 섹션은 연도별 그룹핑 최신순. Render.publicationItem() 재사용 -->
+        <div id="publications-journal" class="mt-8">
+          <p class="text-sm text-slate-500" data-wip></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="conference" class="scroll-mt-16 border-t border-slate-200 bg-slate-50">
+      <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
+        <!-- 제목 문구는 SITE.sectionTitles.conference 에서 온다 -->
+        <h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl"
+            data-section-title="conference"></h2>
+
+        <div id="publications-conference" class="mt-8">
+          <p class="text-sm text-slate-500" data-wip></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="patent" class="scroll-mt-16">
+      <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
+        <!-- 제목 문구는 SITE.sectionTitles.patent 에서 온다 -->
+        <h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl"
+            data-section-title="patent"></h2>
+
+        <div id="publications-patent" class="mt-8">
+          <p class="text-sm text-slate-500" data-wip></p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 푸터: js/common.js 가 주입한다. 직접 작성하지 말 것 -->
+  <div id="site-footer"></div>
+
+  <!-- 로드 순서 고정: data/*.js -> js/render.js -> js/common.js -->
+  <script src="data/site.js"></script>
+  <script src="data/members.js"></script>
+  <script src="data/publications.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/common.js"></script>
+</body>
+</html>

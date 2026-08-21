@@ -1,0 +1,12 @@
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+node_modules/
+.vscode/
+.idea/
+
+# 원본(미압축) 이미지·영상 — 압축본만 커밋한다
+images/**/original/
+images/**/_raw/
+images/_raw/
