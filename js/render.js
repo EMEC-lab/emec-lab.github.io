@@ -328,15 +328,134 @@ var Render = (function () {
    * 아래 함수를 구현하면 common.js 부트스트랩이 자동으로 호출한다.
    * =================================================================== */
 
-  /* TODO: people       — #professor / #current / #alumni (교수는 학생과 다른 레이아웃) */
-  /* TODO: research     — #areas / #equipment / #projects (Ongoing·Completed 분리) */
-  /* TODO: publications — All/Journal/Conference/Patent 필터 + 연도별 그룹핑 */
-  /* TODO: news         — 연도 구분선이 있는 피드 */
-  /* TODO: gallery      — 앨범 격자 + 라이트박스 */
-  /* TODO: contact      — 지도 임베드 + 모집 안내 */
+  /* =====================================================================
+   * PUBLICATIONS
+   *   상단 필터 [All] [Journal] [Conference] [Patent]
+   *   각 종류 안에서는 연도별로 묶어 최신순
+   *   DOI 가 있으면 제목이 링크, 구성원 이름은 굵게 (publicationItem 담당)
+   * =================================================================== */
+
+  function pubsOf(type) {
+    if (typeof PUBLICATIONS === 'undefined') return [];
+    return PUBLICATIONS.filter(function (p) { return p.type === type; })
+      .sort(function (a, b) { return b.year - a.year; });
+  }
+
+  /* [{ year, items }, ...] 최신 연도부터 */
+  function groupByYear(list) {
+    var order = [], map = {};
+    list.forEach(function (p) {
+      if (!map[p.year]) { map[p.year] = []; order.push(p.year); }
+      map[p.year].push(p);
+    });
+    return order.map(function (y) { return { year: y, items: map[y] }; });
+  }
+
+  function renderPubType(type) {
+    var host    = document.getElementById('pub-' + type);
+    var section = document.getElementById(type);
+    if (!host) return 0;
+
+    var list = pubsOf(type);
+
+    /* 항목이 없는 종류는 섹션째 감춘다 (빈 섹션 노출 금지) */
+    if (section) section.hidden = !list.length;
+    if (!list.length) { host.innerHTML = ''; return 0; }
+
+    host.innerHTML = groupByYear(list).map(function (g) {
+      return '<div class="mt-10 first:mt-0">' +
+        '<h3 class="border-b-2 border-primary pb-1 font-mono text-lg font-bold text-primary">' +
+          esc(g.year) + '</h3>' +
+        '<ul class="divide-y divide-slate-200">' +
+          g.items.map(publicationItem).join('') +
+        '</ul></div>';
+    }).join('');
+
+    return list.length;
+  }
+
+  function renderPubFilter(counts) {
+    var host = document.getElementById('pub-filter');
+    if (!host) return;
+
+    var total = PUBLICATION_TYPES.reduce(function (n, t) { return n + (counts[t] || 0); }, 0);
+
+    var buttons = [{ key: 'all', label: SITE.ui.all, count: total }].concat(
+      PUBLICATION_TYPES.map(function (t) {
+        return { key: t, label: SITE.submenu[t], count: counts[t] || 0 };
+      })
+    );
+
+    host.className = 'sticky top-16 z-40 border-b border-slate-200 bg-white/95 backdrop-blur';
+    host.innerHTML =
+      '<div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">' +
+        '<div class="flex gap-2 overflow-x-auto py-3">' +
+          buttons.map(function (b) {
+            return '<button type="button" class="js-pub-filter shrink-0 rounded-full border px-4 py-1.5 text-sm font-semibold transition-colors"' +
+              ' data-filter="' + esc(b.key) + '">' + esc(b.label) +
+              ' <span class="font-mono text-xs opacity-70">' + esc(b.count) + '</span></button>';
+          }).join('') +
+        '</div>' +
+      '</div>';
+  }
+
+  function applyPubFilter(key) {
+    PUBLICATION_TYPES.forEach(function (t) {
+      var section = document.getElementById(t);
+      if (!section) return;
+      var empty = !pubsOf(t).length;
+      section.hidden = empty || (key !== 'all' && key !== t);
+    });
+
+    var btns = document.querySelectorAll('.js-pub-filter');
+    for (var i = 0; i < btns.length; i++) {
+      var on = btns[i].getAttribute('data-filter') === key;
+      btns[i].className = 'js-pub-filter shrink-0 rounded-full border px-4 py-1.5 text-sm font-semibold transition-colors ' +
+        (on ? 'border-primary bg-primary text-white'
+            : 'border-slate-300 text-slate-600 hover:border-primary hover:text-primary');
+      btns[i].setAttribute('aria-pressed', on ? 'true' : 'false');
+    }
+  }
+
+  function bindPubFilter() {
+    var btns = document.querySelectorAll('.js-pub-filter');
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener('click', function () {
+        applyPubFilter(this.getAttribute('data-filter'));
+      });
+    }
+  }
+
+  function publications() {
+    var counts = {};
+    PUBLICATION_TYPES.forEach(function (t) { counts[t] = renderPubType(t); });
+
+    renderPubFilter(counts);
+    bindPubFilter();
+
+    /* 메뉴에서 publications.html#journal 로 들어오면 그 종류만 보여 준다 */
+    var hash = (window.location.hash || '').replace('#', '');
+    applyPubFilter(PUBLICATION_TYPES.indexOf(hash) !== -1 ? hash : 'all');
+
+    window.addEventListener('hashchange', function () {
+      var h = (window.location.hash || '').replace('#', '');
+      if (PUBLICATION_TYPES.indexOf(h) !== -1) applyPubFilter(h);
+    });
+  }
+
+  /* =====================================================================
+   * 나머지 페이지 — CLAUDE.md 10번에 따라 한 페이지씩 완성한다
+   * =================================================================== */
+
+  /* TODO: people   — #professor / #current / #alumni (교수는 학생과 다른 레이아웃) */
+  /* TODO: research — #areas / #equipment / #projects (Ongoing·Completed 분리) */
+  /* TODO: news     — 연도 구분선이 있는 피드 */
+  /* TODO: gallery  — 앨범 격자 + 라이트박스 */
+  /* TODO: contact  — 지도 임베드 + 모집 안내 */
 
   return {
     home: home,
+    publications: publications,
 
     /* 다른 페이지에서 재사용할 조각 */
     getStatus: getStatus,
