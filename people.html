@@ -9,7 +9,7 @@
   <!-- 제목은 common.js 가 SITE.menu 값으로 덮어쓴다 -->
   <title>Lab Homepage</title>
 
-  <!-- 로드 순서 고정: Tailwind CDN -> theme.js -> custom.css -->
+  <!-- 로드 순서 고정: Tailwind CDN → theme.js → custom.css -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="js/theme.js"></script>
   <link rel="stylesheet" href="css/custom.css">
@@ -24,42 +24,34 @@
     <!-- 페이지 제목 밴드: common.js 가 SITE.menu 에서 채운다 -->
     <div id="page-head"></div>
 
+    <!-- ===== 지도교수 =====
+         학생과 다른 레이아웃. 사진을 크게 두고
+         학력·경력·학회활동·학회회원·초청강연을 모두 노출한다 -->
     <section id="professor" class="scroll-mt-16">
       <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
-        <!-- 제목 문구는 SITE.sectionTitles.professor 에서 온다 -->
-        <h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl"
+        <h2 class="mb-10 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl"
             data-section-title="professor"></h2>
-
-        <!-- TODO: 사진 크게, 학력·경력·연구관심사·Google Scholar 전체 노출. 학생과 다른 레이아웃으로 렌더링할 것 -->
-        <div id="people-professor" class="mt-8">
-          <p class="text-sm text-slate-500" data-wip></p>
-        </div>
+        <div id="people-professor"></div>
       </div>
     </section>
 
+    <!-- ===== 재학생 =====
+         MEMBER_ROLE_ORDER 순서(박사 → 석사 → 학부)로 작은 카드 그리드 -->
     <section id="current" class="scroll-mt-16 border-t border-slate-200 bg-slate-50">
       <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
-        <!-- 제목 문구는 SITE.sectionTitles.current 에서 온다 -->
-        <h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl"
+        <h2 class="mb-8 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl"
             data-section-title="current"></h2>
-
-        <!-- TODO: MEMBER_ROLE_ORDER 순서(박사→석사→학부)로 작은 카드 그리드 -->
-        <div id="people-current" class="mt-8">
-          <p class="text-sm text-slate-500" data-wip></p>
-        </div>
+        <div id="people-current"></div>
       </div>
     </section>
 
-    <section id="alumni" class="scroll-mt-16">
+    <!-- ===== 졸업생 =====
+         사진 없이 텍스트 목록. 졸업연도 내림차순 -->
+    <section id="alumni" class="scroll-mt-16 border-t border-slate-200">
       <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
-        <!-- 제목 문구는 SITE.sectionTitles.alumni 에서 온다 -->
-        <h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl"
+        <h2 class="mb-8 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl"
             data-section-title="alumni"></h2>
-
-        <!-- TODO: 사진 없이 텍스트 목록. 이름, 학위, 졸업연도(gradYear), 현재 소속(currentPosition) -->
-        <div id="people-alumni" class="mt-8">
-          <p class="text-sm text-slate-500" data-wip></p>
-        </div>
+        <div id="people-alumni"></div>
       </div>
     </section>
 
@@ -68,7 +60,7 @@
   <!-- 푸터: js/common.js 가 주입한다. 직접 작성하지 말 것 -->
   <div id="site-footer"></div>
 
-  <!-- 로드 순서 고정: data/*.js -> js/render.js -> js/common.js -->
+  <!-- 로드 순서 고정: data/*.js → js/render.js → js/common.js -->
   <script src="data/site.js"></script>
   <script src="data/members.js"></script>
   <script src="js/render.js"></script>

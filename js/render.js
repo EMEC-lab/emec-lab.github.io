@@ -600,7 +600,190 @@ var Render = (function () {
     researchProjects();
   }
 
-  /* TODO: people   — #professor / #current / #alumni (교수는 학생과 다른 레이아웃) */
+  /* =====================================================================
+   * PEOPLE
+   *   #professor  사진 크게 + 학력·경력·연구관심사·학회활동·초청강연 전체 노출
+   *   #current    박사 → 석사 → 학부 순, 작은 카드 그리드
+   *   #alumni     사진 없이 텍스트 목록
+   *
+   * 교수는 학생과 다른 레이아웃으로 그린다. (CLAUDE.md 7번)
+   * =================================================================== */
+
+  /* 프로필 안의 소제목 + 내용 한 덩어리 */
+  function profileBlock(title, inner) {
+    if (!inner) return '';
+    return '<section class="mt-8">' +
+      '<h3 class="mb-3 text-xs font-bold uppercase tracking-wider2 text-primary">' + esc(title) + '</h3>' +
+      inner +
+    '</section>';
+  }
+
+  function bulletList(items) {
+    if (!items || !items.length) return '';
+    return '<ul class="space-y-1.5 text-sm leading-relaxed text-slate-600">' +
+      items.map(function (v) {
+        return '<li class="flex gap-2"><span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-slate-400"></span>' +
+               '<span>' + esc(v) + '</span></li>';
+      }).join('') + '</ul>';
+  }
+
+  /* 학회 활동 / 학회 회원 — 기간이 있으면 앞에 붙인다 */
+  function periodList(items, mainKey) {
+    if (!items || !items.length) return '';
+    return '<ul class="space-y-2 text-sm text-slate-600">' +
+      items.map(function (x) {
+        var main = x[mainKey] ? '<span class="font-semibold text-slate-800">' + esc(x[mainKey]) + '</span> ' : '';
+        return '<li class="sm:flex sm:gap-4">' +
+          '<span class="block font-mono text-xs text-slate-400 sm:w-36 sm:shrink-0 sm:pt-0.5">' +
+            esc(x.period || '') + '</span>' +
+          '<span class="block leading-relaxed">' + main + esc(x.org) + '</span>' +
+        '</li>';
+      }).join('') + '</ul>';
+  }
+
+  function talkList(items) {
+    if (!items || !items.length) return '';
+    return '<ul class="divide-y divide-slate-100 text-sm">' +
+      items.map(function (t) {
+        return '<li class="py-2.5 sm:flex sm:gap-4">' +
+          '<span class="block font-mono text-xs text-slate-400 sm:w-24 sm:shrink-0 sm:pt-0.5">' +
+            esc(Util.formatDate(t.date)) + '</span>' +
+          '<span class="block min-w-0 leading-relaxed">' +
+            '<span class="text-slate-700">' + esc(t.title) + '</span>' +
+            (t.host ? '<span class="ml-2 text-xs text-slate-500">' + esc(t.host) + '</span>' : '') +
+          '</span>' +
+        '</li>';
+      }).join('') + '</ul>';
+  }
+
+  function peopleProfessor() {
+    var host = document.getElementById('people-professor');
+    if (!host) return;
+
+    var prof = (typeof MEMBERS !== 'undefined')
+      ? MEMBERS.filter(function (m) { return m.role === 'professor'; })[0] : null;
+    if (!prof) { host.innerHTML = emptyNote(); return; }
+
+    /* 대표 연락처와 같으면 members.js 에 중복 입력하지 않는다 (CLAUDE.md 0번) */
+    var email  = prof.email  || SITE.email;
+    var office = prof.office || SITE.address.short;
+    var scholar = prof.scholar || SITE.links.scholar;
+
+    var contact =
+      '<dl class="mt-6 space-y-2 text-sm">' +
+        '<div class="flex gap-3"><dt class="w-16 shrink-0 text-slate-400">' + esc(SITE.people.office) + '</dt>' +
+          '<dd class="text-slate-700">' + esc(office) + '</dd></div>' +
+        '<div class="flex gap-3"><dt class="w-16 shrink-0 text-slate-400">' + esc(SITE.people.email) + '</dt>' +
+          '<dd><a class="break-all text-primary hover:underline" href="mailto:' + esc(email) + '">' + esc(email) + '</a></dd></div>' +
+        '<div class="flex gap-3"><dt class="w-16 shrink-0 text-slate-400">' + esc(SITE.people.phone) + '</dt>' +
+          '<dd><a class="text-slate-700 hover:text-primary" href="tel:' + esc(String(SITE.phone).replace(/[^+0-9]/g, '')) + '">' +
+            esc(SITE.phone) + '</a></dd></div>' +
+        (scholar
+          ? '<div class="flex gap-3"><dt class="w-16 shrink-0 text-slate-400">' + esc(SITE.people.scholar) + '</dt>' +
+            '<dd><a class="text-primary hover:underline" href="' + esc(scholar) + '" target="_blank" rel="noopener noreferrer">' +
+              esc(SITE.people.scholar) + ' &rarr;</a></dd></div>'
+          : '') +
+      '</dl>';
+
+    host.innerHTML =
+      /* 위: 사진(크게) + 이름·소속·연락처 */
+      '<div class="grid gap-8 md:grid-cols-3">' +
+        '<div class="md:col-span-1">' +
+          imageBox(prof.photo, prof.name, 'aspect-[3/4]', 'rounded-lg') +
+        '</div>' +
+        '<div class="md:col-span-2">' +
+          '<h3 class="text-2xl font-bold text-slate-900 sm:text-3xl">' + esc(prof.name) + '</h3>' +
+          '<p class="mt-1 text-base text-primary">' + esc(prof.title) + '</p>' +
+          '<p class="mt-1 text-sm text-slate-500">' + esc(SITE.department) + ', ' + esc(SITE.university) + '</p>' +
+          contact +
+          (prof.interests
+            ? '<p class="mt-6 border-t border-slate-200 pt-6 text-sm leading-relaxed text-slate-600">' +
+              esc(prof.interests) + '</p>'
+            : '') +
+        '</div>' +
+      '</div>' +
+
+      /* 아래: 학력 · 경력 · 학회 활동 · 학회 회원 · 초청강연 */
+      '<div class="mt-10 border-t border-slate-200 pt-2">' +
+        profileBlock(SITE.people.education,   bulletList(prof.education)) +
+        profileBlock(SITE.people.career,      bulletList(prof.career)) +
+        profileBlock(SITE.people.activities,  periodList(prof.activities, 'role')) +
+        profileBlock(SITE.people.memberships, periodList(prof.memberships, null)) +
+        profileBlock(SITE.people.talks,       talkList(prof.talks)) +
+      '</div>';
+  }
+
+  /* --- 재학생 : 작은 카드 그리드 ----------------------------------------- */
+  function peopleCurrent() {
+    var host = document.getElementById('people-current');
+    if (!host) return;
+
+    var all = (typeof MEMBERS !== 'undefined') ? MEMBERS : [];
+    var order = (typeof MEMBER_ROLE_ORDER !== 'undefined') ? MEMBER_ROLE_ORDER : [];
+
+    var groups = order.map(function (role) {
+      return { role: role, items: all.filter(function (m) { return m.role === role; }) };
+    }).filter(function (g) { return g.items.length; });
+
+    if (!groups.length) { host.innerHTML = emptyNote(); return; }
+
+    host.innerHTML = groups.map(function (g) {
+      var label = (typeof MEMBER_ROLE_LABELS !== 'undefined' && MEMBER_ROLE_LABELS[g.role]) || g.role;
+      return '<div class="mt-10 first:mt-0">' +
+        '<h3 class="mb-4 text-xs font-bold uppercase tracking-wider2 text-primary">' + esc(label) + '</h3>' +
+        '<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">' +
+          g.items.map(function (m) {
+            return '<div class="card-hover overflow-hidden rounded-lg border border-slate-200 bg-white">' +
+              imageBox(m.photo, m.name, 'aspect-[3/4]') +
+              '<div class="p-4">' +
+                '<p class="text-sm font-bold text-slate-900">' + esc(m.name) + '</p>' +
+                (m.interests ? '<p class="mt-1.5 text-xs leading-relaxed text-slate-500">' + esc(m.interests) + '</p>' : '') +
+                (m.email ? '<a class="mt-2 block break-all text-xs text-primary hover:underline" href="mailto:' +
+                  esc(m.email) + '">' + esc(m.email) + '</a>' : '') +
+              '</div>' +
+            '</div>';
+          }).join('') +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  /* --- 졸업생 : 사진 없이 텍스트 목록 ------------------------------------ */
+  function peopleAlumni() {
+    var host = document.getElementById('people-alumni');
+    if (!host) return;
+
+    var list = (typeof MEMBERS !== 'undefined')
+      ? MEMBERS.filter(function (m) { return m.role === 'alumni'; }) : [];
+
+    if (!list.length) { host.innerHTML = emptyNote(); return; }
+
+    list.sort(function (a, b) { return (b.gradYear || 0) - (a.gradYear || 0); });
+
+    host.innerHTML = '<ul class="divide-y divide-slate-200">' + list.map(function (m) {
+      var meta = [];
+      if (m.title) meta.push(esc(m.title));
+      if (m.currentPosition) meta.push(esc(m.currentPosition));
+
+      return '<li class="py-4 sm:flex sm:gap-6">' +
+        '<span class="block font-mono text-sm text-slate-400 sm:w-20 sm:shrink-0 sm:pt-0.5">' +
+          esc(m.gradYear || '') + '</span>' +
+        '<span class="block min-w-0">' +
+          '<span class="text-sm font-semibold text-slate-900">' + esc(m.name) + '</span>' +
+          (meta.length ? '<span class="ml-2 text-sm text-slate-500">' + meta.join(' &middot; ') + '</span>' : '') +
+          (m.thesis ? '<span class="mt-1 block text-xs leading-relaxed text-slate-500">' +
+            esc(SITE.people.thesis) + ': ' + esc(m.thesis) + '</span>' : '') +
+        '</span>' +
+      '</li>';
+    }).join('') + '</ul>';
+  }
+
+  function people() {
+    peopleProfessor();
+    peopleCurrent();
+    peopleAlumni();
+  }
+
   /* TODO: news     — 연도 구분선이 있는 피드 */
   /* TODO: gallery  — 앨범 격자 + 라이트박스 */
   /* TODO: contact  — 지도 임베드 + 모집 안내 */
@@ -609,6 +792,7 @@ var Render = (function () {
     home: home,
     publications: publications,
     research: research,
+    people: people,
 
     /* 다른 페이지에서 재사용할 조각 */
     getStatus: getStatus,

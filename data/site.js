@@ -98,6 +98,24 @@ const SITE = {
     }
   },
 
+  /* --- PEOPLE 페이지 소제목 --------------------------------------------
+   * 교수 프로필 안에서 쓰는 라벨. (sectionTitles 는 대분류 3개만 담는다)
+   * ------------------------------------------------------------------- */
+  people: {
+    interests:   "Research Interests",
+    education:   "Education",
+    career:      "Career",
+    activities:  "Academic Activities",
+    memberships: "Memberships",
+    talks:       "Invited Talks",
+    scholar:     "Google Scholar",
+    office:      "Office",
+    email:       "Email",
+    phone:       "Phone",
+    thesis:      "Thesis",
+    position:    "Current Position"
+  },
+
   /* --- 공통 UI 문구 ----------------------------------------------------- */
   ui: {
     viewAll:    "View all",
