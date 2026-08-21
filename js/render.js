@@ -447,8 +447,160 @@ var Render = (function () {
    * 나머지 페이지 — CLAUDE.md 10번에 따라 한 페이지씩 완성한다
    * =================================================================== */
 
+  /* =====================================================================
+   * RESEARCH
+   *   #areas      RESEARCH      주제별 카드 + 한 문단 이상의 설명
+   *   #equipment  EQUIPMENT     장비명 · 사양 · 사진
+   *   #projects   PROJECTS      Ongoing / Completed 두 그룹
+   * =================================================================== */
+
+  /* 줄바꿈(\n)을 문단으로 */
+  function paragraphs(text, cls) {
+    return String(text || '').split('\n')
+      .filter(function (line) { return line.replace(/^\s+|\s+$/g, '') !== ''; })
+      .map(function (line) { return '<p class="' + (cls || '') + '">' + esc(line) + '</p>'; })
+      .join('');
+  }
+
+  /* --- 연구분야 --------------------------------------------------------- */
+  function researchAreas() {
+    var host = document.getElementById('research-areas');
+    if (!host) return;
+    if (typeof RESEARCH === 'undefined' || !RESEARCH.length) { host.innerHTML = emptyNote(); return; }
+
+    host.innerHTML = RESEARCH.map(function (a, i) {
+      var flip = (i % 2 === 1);   /* 짝수 번째는 이미지를 오른쪽으로 */
+      return '<article id="' + esc(a.id) + '" class="scroll-mt-4 border-t border-slate-200 py-10 first:border-t-0 first:pt-0">' +
+        '<div class="grid items-start gap-8 md:grid-cols-5">' +
+          '<div class="md:col-span-2' + (flip ? ' md:order-2' : '') + '">' +
+            imageBox(a.image, a.title, 'aspect-[4/3]', 'rounded-lg') +
+          '</div>' +
+          '<div class="md:col-span-3' + (flip ? ' md:order-1' : '') + '">' +
+            '<h3 class="text-xl font-bold text-slate-900">' + esc(a.title) + '</h3>' +
+            '<p class="mt-2 text-sm font-medium text-primary">' + esc(a.summary) + '</p>' +
+            '<div class="mt-4 space-y-3 text-sm leading-relaxed text-slate-600">' +
+              paragraphs(a.description) +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</article>';
+    }).join('');
+  }
+
+  /* --- 연구장비 --------------------------------------------------------- */
+  function researchEquipment() {
+    var host    = document.getElementById('research-equipment');
+    var section = document.getElementById('equipment');
+    if (!host) return;
+
+    var list = (typeof EQUIPMENT !== 'undefined') ? EQUIPMENT : [];
+    if (section) section.hidden = !list.length;
+    if (!list.length) { host.innerHTML = ''; return; }
+
+    host.innerHTML = list.map(function (e) {
+      return '<div class="card-hover overflow-hidden rounded-lg border border-slate-200 bg-white">' +
+        imageBox(e.image, e.name, 'aspect-[4/3]') +
+        '<div class="p-5">' +
+          '<h3 class="text-base font-bold text-slate-900">' + esc(e.name) + '</h3>' +
+          '<div class="mt-2 space-y-1 text-sm leading-relaxed text-slate-600">' +
+            paragraphs(e.spec) +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  /* --- 연구과제 --------------------------------------------------------- */
+
+  /* 지원기관 CI. 로고가 없으면 기관명 텍스트로 대체한다.
+     로고마다 가로세로비가 달라 높이만 맞추고 너비는 auto 로 둔다. */
+  function sponsorMark(sp) {
+    var name = (sp && sp.name) || '';
+    var inner;
+
+    if (sp && sp.logo) {
+      inner = '<img src="' + esc(sp.logo) + '" alt="' + esc(name) +
+              '" loading="lazy" data-fallback class="h-8 w-auto max-w-full object-contain">';
+    } else {
+      inner = '<span class="text-xs font-semibold leading-snug text-slate-500">' + esc(name) + '</span>';
+    }
+
+    if (sp && sp.url) {
+      return '<a href="' + esc(sp.url) + '" target="_blank" rel="noopener noreferrer"' +
+             ' class="flex h-8 items-center">' + inner + '</a>';
+    }
+    return '<div class="flex h-8 items-center">' + inner + '</div>';
+  }
+
+  function statusBadge(status) {
+    var label = SITE.sectionTitles[status === 'ongoing' ? 'ongoing' : 'completed'];
+    var cls = status === 'ongoing'
+      ? 'bg-primary text-white'
+      : 'bg-slate-200 text-slate-600';
+    return '<span class="shrink-0 rounded-full px-2.5 py-0.5 text-[11px] font-semibold ' + cls + '">' +
+           esc(label) + '</span>';
+  }
+
+  function projectRow(p) {
+    var status = getStatus(p);
+    var period = Util.formatMonth(p.startDate) + ' ~ ' + Util.formatMonth(p.endDate);
+    var roleFull = (typeof PROJECT_ROLES !== 'undefined' && PROJECT_ROLES[p.role]) || p.role;
+
+    /* 로고가 없으면 CI 자리에 기관명 텍스트가 들어가므로
+       아래 메타 줄에서는 기관명을 한 번 더 쓰지 않는다 */
+    var showSponsorInMeta = !!(p.sponsor && p.sponsor.logo);
+
+    return '<li class="flex flex-col gap-3 py-5 sm:flex-row sm:items-start sm:gap-6">' +
+      '<div class="w-32 shrink-0">' + sponsorMark(p.sponsor) + '</div>' +
+      '<div class="min-w-0 flex-1">' +
+        '<p class="text-sm font-semibold leading-snug text-slate-900">' + esc(p.title) + '</p>' +
+        '<p class="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-slate-500">' +
+          (showSponsorInMeta
+            ? '<span>' + esc(p.sponsor.name) + '</span><span aria-hidden="true">&middot;</span>'
+            : '') +
+          /* 좁은 화면에서는 약어(PI / Co-I)로 대체 표기 */
+          '<span class="sm:hidden">' + esc(p.role) + '</span>' +
+          '<span class="hidden sm:inline">' + esc(roleFull) + '</span>' +
+          '<span aria-hidden="true">&middot;</span>' +
+          '<span class="font-mono">' + esc(period) + '</span>' +
+          statusBadge(status) +
+        '</p>' +
+        (p.description ? '<p class="mt-2 text-sm leading-relaxed text-slate-600">' + esc(p.description) + '</p>' : '') +
+      '</div>' +
+    '</li>';
+  }
+
+  function researchProjects() {
+    var host = document.getElementById('research-projects');
+    if (!host) return;
+
+    var all = sortedProjects();
+    if (!all.length) { host.innerHTML = emptyNote(); return; }
+
+    /* 과제가 없는 그룹은 소제목째 렌더링하지 않는다 (빈 섹션 노출 금지) */
+    var groups = [
+      { key: 'ongoing',   items: all.filter(function (p) { return getStatus(p) === 'ongoing'; }) },
+      { key: 'completed', items: all.filter(function (p) { return getStatus(p) !== 'ongoing'; }) }
+    ].filter(function (g) { return g.items.length; });
+
+    host.innerHTML = groups.map(function (g) {
+      return '<div class="mt-10 first:mt-0">' +
+        '<h3 class="flex items-center gap-2 border-b border-slate-200 pb-2 text-lg font-bold text-slate-900">' +
+          esc(SITE.sectionTitles[g.key]) +
+          '<span class="font-mono text-sm font-normal text-slate-400">' + esc(g.items.length) + '</span>' +
+        '</h3>' +
+        '<ul class="divide-y divide-slate-100">' + g.items.map(projectRow).join('') + '</ul>' +
+      '</div>';
+    }).join('');
+  }
+
+  function research() {
+    researchAreas();
+    researchEquipment();
+    researchProjects();
+  }
+
   /* TODO: people   — #professor / #current / #alumni (교수는 학생과 다른 레이아웃) */
-  /* TODO: research — #areas / #equipment / #projects (Ongoing·Completed 분리) */
   /* TODO: news     — 연도 구분선이 있는 피드 */
   /* TODO: gallery  — 앨범 격자 + 라이트박스 */
   /* TODO: contact  — 지도 임베드 + 모집 안내 */
@@ -456,6 +608,7 @@ var Render = (function () {
   return {
     home: home,
     publications: publications,
+    research: research,
 
     /* 다른 페이지에서 재사용할 조각 */
     getStatus: getStatus,

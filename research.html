@@ -9,7 +9,7 @@
   <!-- 제목은 common.js 가 SITE.menu 값으로 덮어쓴다 -->
   <title>Lab Homepage</title>
 
-  <!-- 로드 순서 고정: Tailwind CDN -> theme.js -> custom.css -->
+  <!-- 로드 순서 고정: Tailwind CDN → theme.js → custom.css -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="js/theme.js"></script>
   <link rel="stylesheet" href="css/custom.css">
@@ -24,42 +24,33 @@
     <!-- 페이지 제목 밴드: common.js 가 SITE.menu 에서 채운다 -->
     <div id="page-head"></div>
 
+    <!-- ===== 연구분야 =====
+         RESEARCH 각 항목이 자기 id 를 앵커로 갖는다 (research.html#machine-design 등) -->
     <section id="areas" class="scroll-mt-16">
       <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
-        <!-- 제목 문구는 SITE.sectionTitles.areas 에서 온다 -->
         <h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl"
             data-section-title="areas"></h2>
-
-        <!-- TODO: RESEARCH 를 주제별 카드로. 각 주제마다 description 한 문단 이상 -->
-        <div id="research-areas" class="mt-8">
-          <p class="text-sm text-slate-500" data-wip></p>
-        </div>
+        <div id="research-areas" class="mt-10"></div>
       </div>
     </section>
 
+    <!-- ===== 연구장비 =====
+         EQUIPMENT 가 비어 있으면 render.js 가 이 섹션을 감춘다 -->
     <section id="equipment" class="scroll-mt-16 border-t border-slate-200 bg-slate-50">
       <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
-        <!-- 제목 문구는 SITE.sectionTitles.equipment 에서 온다 -->
         <h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl"
             data-section-title="equipment"></h2>
-
-        <!-- TODO: EQUIPMENT 의 장비명·사양·사진 -->
-        <div id="research-equipment" class="mt-8">
-          <p class="text-sm text-slate-500" data-wip></p>
-        </div>
+        <div id="research-equipment" class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"></div>
       </div>
     </section>
 
-    <section id="projects" class="scroll-mt-16">
+    <!-- ===== 연구과제 =====
+         진행 상태는 데이터가 아니라 endDate 로 매번 계산한다 (render.js getStatus) -->
+    <section id="projects" class="scroll-mt-16 border-t border-slate-200">
       <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
-        <!-- 제목 문구는 SITE.sectionTitles.projects 에서 온다 -->
         <h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl"
             data-section-title="projects"></h2>
-
-        <!-- TODO: Render.sortedProjects() 사용. Ongoing/Completed 두 그룹, 빈 그룹은 소제목째 렌더링 금지. 기간은 YYYY.MM ~ YYYY.MM, 역할은 PROJECT_ROLES[p.role] -->
-        <div id="research-projects" class="mt-8">
-          <p class="text-sm text-slate-500" data-wip></p>
-        </div>
+        <div id="research-projects" class="mt-8"></div>
       </div>
     </section>
 
@@ -68,7 +59,7 @@
   <!-- 푸터: js/common.js 가 주입한다. 직접 작성하지 말 것 -->
   <div id="site-footer"></div>
 
-  <!-- 로드 순서 고정: data/*.js -> js/render.js -> js/common.js -->
+  <!-- 로드 순서 고정: data/*.js → js/render.js → js/common.js -->
   <script src="data/site.js"></script>
   <script src="data/research.js"></script>
   <script src="data/equipment.js"></script>
