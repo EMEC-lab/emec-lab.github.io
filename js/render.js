@@ -877,8 +877,166 @@ var Render = (function () {
     contactJoin();
   }
 
-  /* TODO: news     — 연도 구분선이 있는 피드 */
-  /* TODO: gallery  — 앨범 격자 + 라이트박스 */
+  /* =====================================================================
+   * NEWS
+   *   날짜 + 1~3문장이 시간순으로 누적되는 피드. 연도별 구분선.
+   *   게시판·상세페이지·페이지네이션을 만들지 않는다. (CLAUDE.md 7번)
+   * =================================================================== */
+
+  function newsItem(n) {
+    var label = (SITE.newsCategories && SITE.newsCategories[n.category]) || n.category || '';
+
+    var body = esc(n.text);
+    if (n.link) {
+      body = '<a href="' + esc(n.link) + '" target="_blank" rel="noopener noreferrer"' +
+             ' class="underline-offset-2 hover:text-primary hover:underline">' + body + '</a>';
+    }
+
+    return '<li class="flex gap-4 py-5">' +
+      (n.image
+        ? '<img src="' + esc(n.image) + '" alt="" loading="lazy" data-fallback' +
+          ' class="h-16 w-16 shrink-0 rounded object-cover sm:h-20 sm:w-20">'
+        : '') +
+      '<div class="min-w-0">' +
+        '<div class="flex flex-wrap items-center gap-2">' +
+          '<time class="font-mono text-xs text-slate-500">' + esc(Util.formatDate(n.date)) + '</time>' +
+          (label ? '<span class="rounded bg-primary-light px-1.5 py-0.5 text-[10px] font-semibold text-primary">' +
+            esc(label) + '</span>' : '') +
+        '</div>' +
+        '<p class="mt-1.5 text-sm leading-relaxed text-slate-700">' + body + '</p>' +
+      '</div>' +
+    '</li>';
+  }
+
+  function news() {
+    var host = document.getElementById('news-feed');
+    if (!host) return;
+
+    var list = (typeof NEWS !== 'undefined') ? NEWS.slice() : [];
+    if (!list.length) { host.innerHTML = emptyNote(); return; }
+
+    list.sort(function (a, b) { return a.date < b.date ? 1 : -1; });
+
+    /* 연도별로 묶어 구분선을 넣는다 */
+    var order = [], map = {};
+    list.forEach(function (n) {
+      var y = Util.yearOf(n.date);
+      if (!map[y]) { map[y] = []; order.push(y); }
+      map[y].push(n);
+    });
+
+    host.innerHTML = order.map(function (y) {
+      return '<div class="mt-10 first:mt-0">' +
+        '<h2 class="border-b-2 border-primary pb-1 font-mono text-lg font-bold text-primary">' +
+          esc(y) + '</h2>' +
+        '<ul class="divide-y divide-slate-200">' + map[y].map(newsItem).join('') + '</ul>' +
+      '</div>';
+    }).join('');
+  }
+
+  /* =====================================================================
+   * GALLERY
+   *   앨범 단위 격자 + 클릭 시 라이트박스.
+   *   모든 이미지에 loading="lazy". (CLAUDE.md 7·8번)
+   * =================================================================== */
+
+  function albumImages(album) {
+    return (album.images || []).filter(function (im) { return im && im.src; });
+  }
+
+  function albumCover(album) {
+    if (album.cover) return album.cover;
+    var imgs = albumImages(album);
+    return imgs.length ? imgs[0].src : '';
+  }
+
+  function gallery() {
+    var host = document.getElementById('gallery-albums');
+    if (!host) return;
+
+    var list = (typeof GALLERY !== 'undefined') ? GALLERY.slice() : [];
+    if (!list.length) { host.innerHTML = emptyNote(); return; }
+
+    list.sort(function (a, b) { return a.date < b.date ? 1 : -1; });
+
+    host.innerHTML = list.map(function (al, i) {
+      var count = albumImages(al).length;
+      return '<button type="button" class="js-album card-hover block overflow-hidden rounded-lg border border-slate-200 bg-white text-left"' +
+        ' data-album="' + i + '">' +
+        imageBox(albumCover(al), al.title, 'aspect-[4/3]') +
+        '<div class="p-4">' +
+          '<p class="text-sm font-bold text-slate-900">' + esc(al.title) + '</p>' +
+          '<p class="mt-1 flex items-center gap-2 text-xs text-slate-500">' +
+            '<time>' + esc(Util.formatDate(al.date)) + '</time>' +
+            (count ? '<span aria-hidden="true">&middot;</span><span>' + esc(count) + '</span>' : '') +
+          '</p>' +
+        '</div>' +
+      '</button>';
+    }).join('');
+
+    bindLightbox(list);
+  }
+
+  /* --- 라이트박스 (외부 라이브러리 없이) --------------------------------- */
+  function bindLightbox(albums) {
+    var box = document.getElementById('lightbox');
+    if (!box) return;
+
+    var images = [], index = 0;
+
+    function paint() {
+      var im = images[index];
+      if (!im) return;
+      box.querySelector('[data-lb-img]').src = im.src;
+      box.querySelector('[data-lb-img]').alt = im.caption || '';
+      box.querySelector('[data-lb-caption]').textContent = im.caption || '';
+      box.querySelector('[data-lb-count]').textContent = (index + 1) + ' / ' + images.length;
+      box.querySelector('[data-lb-prev]').hidden = images.length < 2;
+      box.querySelector('[data-lb-next]').hidden = images.length < 2;
+    }
+
+    function open(albumIndex) {
+      images = albumImages(albums[albumIndex]);
+      if (!images.length) return;
+      index = 0;
+      paint();
+      box.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      box.querySelector('[data-lb-close]').focus();
+    }
+
+    function close() {
+      box.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    function step(delta) {
+      if (!images.length) return;
+      index = (index + delta + images.length) % images.length;
+      paint();
+    }
+
+    var buttons = document.querySelectorAll('.js-album');
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].addEventListener('click', function () {
+        open(Number(this.getAttribute('data-album')));
+      });
+    }
+
+    box.querySelector('[data-lb-close]').addEventListener('click', close);
+    box.querySelector('[data-lb-prev]').addEventListener('click', function () { step(-1); });
+    box.querySelector('[data-lb-next]').addEventListener('click', function () { step(1); });
+
+    /* 배경(사진 바깥)을 누르면 닫는다 */
+    box.addEventListener('click', function (e) { if (e.target === box) close(); });
+
+    document.addEventListener('keydown', function (e) {
+      if (!box.classList.contains('is-open')) return;
+      if (e.key === 'Escape' || e.keyCode === 27) close();
+      else if (e.key === 'ArrowLeft'  || e.keyCode === 37) step(-1);
+      else if (e.key === 'ArrowRight' || e.keyCode === 39) step(1);
+    });
+  }
   /* TODO: contact  — 지도 임베드 + 모집 안내 */
 
   return {
@@ -887,6 +1045,8 @@ var Render = (function () {
     research: research,
     people: people,
     contact: contact,
+    news: news,
+    gallery: gallery,
 
     /* 다른 페이지에서 재사용할 조각 */
     getStatus: getStatus,

@@ -99,6 +99,15 @@ const SITE = {
     }
   },
 
+  /* --- 소식 분류 라벨 (news.js 의 category 값과 대응) -------------------- */
+  newsCategories: {
+    paper:   "Paper",
+    award:   "Award",
+    member:  "Member",
+    project: "Project",
+    etc:     "News"
+  },
+
   /* --- PEOPLE 페이지 소제목 --------------------------------------------
    * 교수 프로필 안에서 쓰는 라벨. (sectionTitles 는 대분류 3개만 담는다)
    * ------------------------------------------------------------------- */

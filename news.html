@@ -9,7 +9,7 @@
   <!-- 제목은 common.js 가 SITE.menu 값으로 덮어쓴다 -->
   <title>Lab Homepage</title>
 
-  <!-- 로드 순서 고정: Tailwind CDN -> theme.js -> custom.css -->
+  <!-- 로드 순서 고정: Tailwind CDN → theme.js → custom.css -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="js/theme.js"></script>
   <link rel="stylesheet" href="css/custom.css">
@@ -24,13 +24,12 @@
     <!-- 페이지 제목 밴드: common.js 가 SITE.menu 에서 채운다 -->
     <div id="page-head"></div>
 
+    <!-- ===== 소식 피드 =====
+         data/news.js 를 날짜 내림차순으로 그린다. 연도마다 구분선이 들어간다.
+         게시판·상세페이지·페이지네이션을 만들지 않는다 -->
     <section id="feed" class="scroll-mt-16">
-      <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
-
-        <!-- TODO: 날짜 + 1~3문장이 누적되는 피드. 연도별 구분선. 게시판·상세페이지·페이지네이션 금지 -->
-        <div id="news-feed">
-          <p class="text-sm text-slate-500" data-wip></p>
-        </div>
+      <div class="mx-auto max-w-3xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
+        <div id="news-feed"></div>
       </div>
     </section>
 
@@ -39,7 +38,7 @@
   <!-- 푸터: js/common.js 가 주입한다. 직접 작성하지 말 것 -->
   <div id="site-footer"></div>
 
-  <!-- 로드 순서 고정: data/*.js -> js/render.js -> js/common.js -->
+  <!-- 로드 순서 고정: data/*.js → js/render.js → js/common.js -->
   <script src="data/site.js"></script>
   <script src="data/news.js"></script>
   <script src="js/render.js"></script>

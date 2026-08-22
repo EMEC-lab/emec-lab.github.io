@@ -9,7 +9,7 @@
   <!-- 제목은 common.js 가 SITE.menu 값으로 덮어쓴다 -->
   <title>Lab Homepage</title>
 
-  <!-- 로드 순서 고정: Tailwind CDN -> theme.js -> custom.css -->
+  <!-- 로드 순서 고정: Tailwind CDN → theme.js → custom.css -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="js/theme.js"></script>
   <link rel="stylesheet" href="css/custom.css">
@@ -24,22 +24,57 @@
     <!-- 페이지 제목 밴드: common.js 가 SITE.menu 에서 채운다 -->
     <div id="page-head"></div>
 
+    <!-- ===== 앨범 격자 =====
+         data/gallery.js 를 날짜 내림차순으로 그린다.
+         앨범을 누르면 아래 라이트박스가 열린다 -->
     <section id="albums" class="scroll-mt-16">
       <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
-
-        <!-- TODO: 앨범 단위 격자. 클릭 시 라이트박스. 모든 이미지 loading="lazy" -->
-        <div id="gallery-albums">
-          <p class="text-sm text-slate-500" data-wip></p>
-        </div>
+        <div id="gallery-albums" class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"></div>
       </div>
     </section>
 
   </main>
 
+  <!-- 라이트박스: render.js 가 조작한다. 외부 라이브러리를 쓰지 않는다 -->
+  <div id="lightbox"
+       class="fixed inset-0 z-[60] flex flex-col bg-black/90 p-4 sm:p-8"
+       role="dialog" aria-modal="true">
+
+    <div class="flex shrink-0 items-center justify-between text-white">
+      <span data-lb-count class="font-mono text-sm text-white/70"></span>
+      <button type="button" data-lb-close aria-label="Close"
+              class="grid h-10 w-10 place-items-center rounded-full text-white/80 transition-colors hover:bg-white/10 hover:text-white">
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="flex min-h-0 flex-1 items-center gap-2 sm:gap-4">
+      <button type="button" data-lb-prev aria-label="Previous"
+              class="grid h-11 w-11 shrink-0 place-items-center rounded-full text-white/70 transition-colors hover:bg-white/10 hover:text-white">
+        <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/>
+        </svg>
+      </button>
+
+      <img data-lb-img src="" alt="" class="mx-auto max-h-full min-h-0 max-w-full flex-1 object-contain">
+
+      <button type="button" data-lb-next aria-label="Next"
+              class="grid h-11 w-11 shrink-0 place-items-center rounded-full text-white/70 transition-colors hover:bg-white/10 hover:text-white">
+        <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5"/>
+        </svg>
+      </button>
+    </div>
+
+    <p data-lb-caption class="mt-3 shrink-0 text-center text-sm text-white/80"></p>
+  </div>
+
   <!-- 푸터: js/common.js 가 주입한다. 직접 작성하지 말 것 -->
   <div id="site-footer"></div>
 
-  <!-- 로드 순서 고정: data/*.js -> js/render.js -> js/common.js -->
+  <!-- 로드 순서 고정: data/*.js → js/render.js → js/common.js -->
   <script src="data/site.js"></script>
   <script src="data/gallery.js"></script>
   <script src="js/render.js"></script>
