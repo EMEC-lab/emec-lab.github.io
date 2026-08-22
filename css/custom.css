@@ -167,6 +167,15 @@ body {
   border-radius: 0.375rem;
 }
 
+/* --- 갤러리 라이트박스 ---------------------------------------------------
+ * gallery.html 의 #lightbox 는 평소에 숨어 있다가
+ * js/render.js 가 .is-open 을 붙일 때만 나타난다.
+ * (이 규칙이 없으면 검은 오버레이가 페이지를 계속 덮는다)
+ * --------------------------------------------------------------------- */
+#lightbox:not(.is-open) {
+  display: none;
+}
+
 /* --- 이미지가 아직 없는 자리에 쓰는 자리표시자 -------------------------- */
 .img-placeholder {
   background-color: var(--color-primary-light);
