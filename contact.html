@@ -9,7 +9,7 @@
   <!-- 제목은 common.js 가 SITE.menu 값으로 덮어쓴다 -->
   <title>Lab Homepage</title>
 
-  <!-- 로드 순서 고정: Tailwind CDN -> theme.js -> custom.css -->
+  <!-- 로드 순서 고정: Tailwind CDN → theme.js → custom.css -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="js/theme.js"></script>
   <link rel="stylesheet" href="css/custom.css">
@@ -24,23 +24,22 @@
     <!-- 페이지 제목 밴드: common.js 가 SITE.menu 에서 채운다 -->
     <div id="page-head"></div>
 
+    <!-- ===== 오시는 길 =====
+         주소·전화·이메일·좌표는 전부 SITE 에서 온다. 여기에 직접 쓰지 말 것.
+         지도는 별도 라이브러리 없이 iframe 임베드만 쓴다 -->
     <section id="location" class="scroll-mt-16">
       <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
-
-        <!-- TODO: SITE 의 주소·전화·이메일·mapLat/mapLng 사용. 지도 임베드 -->
-        <div id="contact-location">
-          <p class="text-sm text-slate-500" data-wip></p>
-        </div>
+        <h2 class="mb-8 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl"
+            data-section-title="location"></h2>
+        <div id="contact-location"></div>
       </div>
     </section>
 
-    <section id="join" class="scroll-mt-16 border-t border-slate-200 bg-slate-50">
+    <!-- ===== 대학원생 모집 안내 =====
+         문구는 SITE.home 의 joinTitle / joinLead 를 함께 쓴다 (단일 소스) -->
+    <section id="join" class="scroll-mt-16 bg-primary-dark">
       <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
-
-        <!-- TODO: 대학원생 모집 안내 -->
-        <div id="contact-join">
-          <p class="text-sm text-slate-500" data-wip></p>
-        </div>
+        <div id="contact-join"></div>
       </div>
     </section>
 
@@ -49,7 +48,7 @@
   <!-- 푸터: js/common.js 가 주입한다. 직접 작성하지 말 것 -->
   <div id="site-footer"></div>
 
-  <!-- 로드 순서 고정: data/*.js -> js/render.js -> js/common.js -->
+  <!-- 로드 순서 고정: data/*.js → js/render.js → js/common.js -->
   <script src="data/site.js"></script>
   <script src="js/render.js"></script>
   <script src="js/common.js"></script>

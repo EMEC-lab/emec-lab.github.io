@@ -784,6 +784,99 @@ var Render = (function () {
     peopleAlumni();
   }
 
+  /* =====================================================================
+   * CONTACT
+   *   #location  SITE 의 주소·전화·이메일·좌표를 쓴 오시는 길 + 지도 임베드
+   *   #join      대학원생 모집 안내
+   *
+   * 지도는 별도 라이브러리 없이 iframe 임베드만 쓴다. (CLAUDE.md 3번)
+   * =================================================================== */
+
+  function mapEmbedUrl() {
+    return 'https://www.google.com/maps?q=' + SITE.mapLat + ',' + SITE.mapLng +
+           '&hl=ko&z=17&output=embed';
+  }
+
+  /* 길찾기 링크 — 좌표/주소를 넘기기만 하므로 API 키가 필요 없다 */
+  function directionLinks() {
+    var lat = SITE.mapLat, lng = SITE.mapLng;
+    var links = [
+      { label: 'Google Maps', url: 'https://www.google.com/maps/search/?api=1&query=' + lat + ',' + lng },
+      { label: '카카오맵',     url: 'https://map.kakao.com/link/map/' + encodeURIComponent(SITE.labShort) + ',' + lat + ',' + lng },
+      { label: '네이버지도',   url: 'https://map.naver.com/v5/search/' + encodeURIComponent(SITE.address.fullKo) }
+    ];
+
+    return '<div class="mt-6">' +
+      '<p class="mb-2 text-xs font-bold uppercase tracking-wider2 text-primary">' +
+        esc(SITE.ui.directions) + '</p>' +
+      '<div class="flex flex-wrap gap-2">' +
+        links.map(function (l) {
+          return '<a href="' + esc(l.url) + '" target="_blank" rel="noopener noreferrer"' +
+            ' class="rounded-full border border-slate-300 px-3.5 py-1.5 text-sm text-slate-600 transition-colors hover:border-primary hover:text-primary">' +
+            esc(l.label) + '</a>';
+        }).join('') +
+      '</div></div>';
+  }
+
+  function contactLocation() {
+    var host = document.getElementById('contact-location');
+    if (!host) return;
+
+    var tel = String(SITE.phone || '').replace(/[^+0-9]/g, '');
+
+    var info =
+      '<dl class="space-y-5 text-sm">' +
+        '<div>' +
+          '<dt class="text-xs font-bold uppercase tracking-wider2 text-primary">' + esc(SITE.ui.address) + '</dt>' +
+          '<dd class="mt-1.5 leading-relaxed text-slate-700">' + esc(SITE.address.full) + '</dd>' +
+          '<dd class="mt-1 leading-relaxed text-slate-500">' + esc(SITE.address.fullKo) + '</dd>' +
+        '</div>' +
+        '<div>' +
+          '<dt class="text-xs font-bold uppercase tracking-wider2 text-primary">' + esc(SITE.ui.phone) + '</dt>' +
+          '<dd class="mt-1.5"><a class="text-slate-700 hover:text-primary" href="tel:' + esc(tel) + '">' +
+            esc(SITE.phone) + '</a></dd>' +
+        '</div>' +
+        '<div>' +
+          '<dt class="text-xs font-bold uppercase tracking-wider2 text-primary">' + esc(SITE.ui.email) + '</dt>' +
+          '<dd class="mt-1.5"><a class="break-all text-primary hover:underline" href="mailto:' + esc(SITE.email) + '">' +
+            esc(SITE.email) + '</a></dd>' +
+        '</div>' +
+      '</dl>' +
+      directionLinks();
+
+    host.innerHTML =
+      '<div class="grid gap-8 lg:grid-cols-5">' +
+        '<div class="lg:col-span-3">' +
+          '<div class="aspect-[4/3] w-full overflow-hidden rounded-lg border border-slate-200 sm:aspect-[16/10]">' +
+            '<iframe src="' + esc(mapEmbedUrl()) + '" title="' + esc(SITE.labName) + '"' +
+              ' class="h-full w-full" style="border:0"' +
+              ' loading="lazy" referrerpolicy="no-referrer-when-downgrade"' +
+              ' allowfullscreen></iframe>' +
+          '</div>' +
+        '</div>' +
+        '<div class="lg:col-span-2">' + info + '</div>' +
+      '</div>';
+  }
+
+  function contactJoin() {
+    var host = document.getElementById('contact-join');
+    if (!host) return;
+
+    host.innerHTML =
+      '<h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">' +
+        esc(SITE.home.joinTitle) + '</h2>' +
+      '<p class="mt-4 max-w-2xl text-sm leading-relaxed text-white/85 sm:text-base">' +
+        esc(SITE.home.joinLead) + '</p>' +
+      '<a href="mailto:' + esc(SITE.email) + '"' +
+        ' class="mt-8 inline-block rounded bg-white px-5 py-3 text-sm font-semibold text-primary-dark transition-colors hover:bg-slate-100">' +
+        esc(SITE.email) + '</a>';
+  }
+
+  function contact() {
+    contactLocation();
+    contactJoin();
+  }
+
   /* TODO: news     — 연도 구분선이 있는 피드 */
   /* TODO: gallery  — 앨범 격자 + 라이트박스 */
   /* TODO: contact  — 지도 임베드 + 모집 안내 */
@@ -793,6 +886,7 @@ var Render = (function () {
     publications: publications,
     research: research,
     people: people,
+    contact: contact,
 
     /* 다른 페이지에서 재사용할 조각 */
     getStatus: getStatus,

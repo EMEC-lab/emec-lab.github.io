@@ -70,7 +70,8 @@ const SITE = {
     conference: "Conference Papers",
     patent:     "Patents",
     ongoing:    "Ongoing",
-    completed:  "Completed"
+    completed:  "Completed",
+    location:   "Location"
   },
 
   /* --- HOME 섹션 문구 --------------------------------------------------
@@ -118,6 +119,10 @@ const SITE = {
 
   /* --- 공통 UI 문구 ----------------------------------------------------- */
   ui: {
+    address:    "Address",
+    phone:      "Phone",
+    email:      "Email",
+    directions: "Get Directions",
     viewAll:    "View all",
     readMore:   "Read more",
     scrollDown: "Scroll down",
