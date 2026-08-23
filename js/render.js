@@ -670,15 +670,15 @@ var Render = (function () {
 
     var contact =
       '<dl class="mt-6 space-y-2 text-sm">' +
-        '<div class="flex gap-3"><dt class="w-16 shrink-0 text-slate-400">' + esc(SITE.people.office) + '</dt>' +
+        '<div class="flex gap-3"><dt class="w-24 shrink-0 text-slate-400">' + esc(SITE.people.office) + '</dt>' +
           '<dd class="text-slate-700">' + esc(office) + '</dd></div>' +
-        '<div class="flex gap-3"><dt class="w-16 shrink-0 text-slate-400">' + esc(SITE.people.email) + '</dt>' +
+        '<div class="flex gap-3"><dt class="w-24 shrink-0 text-slate-400">' + esc(SITE.people.email) + '</dt>' +
           '<dd><a class="break-all text-primary hover:underline" href="mailto:' + esc(email) + '">' + esc(email) + '</a></dd></div>' +
-        '<div class="flex gap-3"><dt class="w-16 shrink-0 text-slate-400">' + esc(SITE.people.phone) + '</dt>' +
+        '<div class="flex gap-3"><dt class="w-24 shrink-0 text-slate-400">' + esc(SITE.people.phone) + '</dt>' +
           '<dd><a class="text-slate-700 hover:text-primary" href="tel:' + esc(String(SITE.phone).replace(/[^+0-9]/g, '')) + '">' +
             esc(SITE.phone) + '</a></dd></div>' +
         (scholar
-          ? '<div class="flex gap-3"><dt class="w-16 shrink-0 text-slate-400">' + esc(SITE.people.scholar) + '</dt>' +
+          ? '<div class="flex gap-3"><dt class="w-24 shrink-0 text-slate-400">' + esc(SITE.people.scholar) + '</dt>' +
             '<dd><a class="text-primary hover:underline" href="' + esc(scholar) + '" target="_blank" rel="noopener noreferrer">' +
               esc(SITE.people.viewProfile) + ' &rarr;</a></dd></div>'
           : '') +
