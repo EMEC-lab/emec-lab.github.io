@@ -16,8 +16,7 @@
   <script src="js/theme.js"></script>
   <link rel="stylesheet" href="css/custom.css">
 </head>
-<!-- data-hero="true" 는 헤더를 히어로 위에 투명하게 얹으라는 표시다 -->
-<body data-page="home" data-hero="true" class="bg-white font-sans text-slate-800 antialiased">
+<body data-page="home" class="bg-white font-sans text-slate-800 antialiased">
 
   <!-- 헤더: js/common.js 가 주입한다. 직접 작성하지 말 것 -->
   <div id="site-header"></div>
@@ -29,7 +28,7 @@
          muted·playsinline 이 없으면 모바일에서 자동 재생이 차단된다.
          768px 미만과 prefers-reduced-motion 에서는 css/custom.css 가
          영상을 숨기고 정지 이미지로 대체한다. -->
-    <section id="hero" class="relative h-screen min-h-[32rem] overflow-hidden bg-primary-dark">
+    <section id="hero" class="relative h-[calc(100svh-4rem)] min-h-[30rem] overflow-hidden bg-primary-dark">
 
       <video class="hero-video absolute inset-0 h-full w-full object-cover"
              autoplay muted loop playsinline
@@ -44,11 +43,9 @@
       <div class="absolute inset-0 bg-black/50"></div>
 
       <div class="relative z-10 flex h-full items-center">
-        <div class="mx-auto w-full max-w-6xl px-4 pt-16 sm:px-6 lg:px-8">
-          <p data-hero-eyebrow
-             class="text-[11px] font-semibold uppercase tracking-wider2 text-white/70"></p>
+        <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
           <h1 data-hero-title
-              class="mt-5 max-w-4xl text-3xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl"></h1>
+              class="max-w-4xl text-3xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl"></h1>
           <p data-hero-tagline
              class="mt-6 max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg"></p>
         </div>

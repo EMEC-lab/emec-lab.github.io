@@ -165,7 +165,6 @@ var Render = (function () {
       if (el) el.textContent = value;
     };
 
-    setText('[data-hero-eyebrow]', SITE.department + ', ' + SITE.university);
     setText('[data-hero-title]', SITE.labName);
     setText('[data-hero-scroll]', SITE.ui.scrollDown);
 

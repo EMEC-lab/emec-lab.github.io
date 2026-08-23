@@ -82,32 +82,21 @@ body {
 }
 
 /* =========================================================================
- * 헤더 : 히어로 위에서는 투명, 스크롤하면 흰 배경으로 전환
- * .is-solid 는 js/common.js 가 붙이고 뗀다.
- * 히어로가 없는 페이지(data-hero 미지정)는 항상 흰 배경이다.
+ * 헤더 : 항상 흰 배경
+ * 로고가 파란색이라 어두운 히어로 위에 투명하게 얹으면 잘 보이지 않는다.
+ * 그래서 모든 페이지에서 흰 막대를 유지한다.
  * ========================================================================= */
 
 .site-bar {
-  background-color: transparent;
-  border-bottom-color: transparent;
-  transition: background-color 0.25s ease, border-color 0.25s ease;
-}
-
-.site-bar .nav-link { color: rgba(255, 255, 255, 0.92); }
-.site-bar .nav-link:hover { color: #fff; }
-.site-bar .nav-sub { color: rgba(255, 255, 255, 0.65); }
-
-.site-bar.is-solid {
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(255, 255, 255, 0.96);
   backdrop-filter: saturate(180%) blur(8px);
   -webkit-backdrop-filter: saturate(180%) blur(8px);
   border-bottom-color: #e2e8f0;
 }
 
-.site-bar.is-solid .nav-link { color: #334155; }
-.site-bar.is-solid .nav-link:hover { color: var(--color-primary); }
-.site-bar.is-solid .nav-link.is-current { color: var(--color-primary); }
-.site-bar.is-solid .nav-sub { color: #64748b; }
+.site-bar .nav-link { color: #334155; }
+.site-bar .nav-link:hover { color: var(--color-primary); }
+.site-bar .nav-link.is-current { color: var(--color-primary); }
 
 /* 현재 메뉴 밑줄 */
 .nav-link.is-current {

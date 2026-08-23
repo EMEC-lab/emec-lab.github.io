@@ -116,13 +116,9 @@ var Layout = (function () {
   'use strict';
 
   var LG = 1024;                /* Tailwind lg */
-  var SOLID_AFTER = 24;         /* 이만큼 스크롤하면 헤더를 흰 배경으로 */
   var esc = Util.esc;
 
   function currentPage() { return document.body.getAttribute('data-page') || ''; }
-
-  /* HOME 처럼 전체 화면 히어로가 있는 페이지는 헤더가 히어로 위에 겹친다 */
-  function hasHero() { return document.body.getAttribute('data-hero') === 'true'; }
 
   function isGroupCurrent(item) {
     var page = currentPage();
@@ -230,7 +226,7 @@ var Layout = (function () {
   function headerHTML() {
     return '' +
     '<a class="skip-link" href="#content">Skip to content</a>' +
-    '<div class="site-bar fixed inset-x-0 top-0 z-50 border-b">' +
+    '<div class="site-bar sticky top-0 z-50 border-b">' +
       '<div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">' +
         '<div class="flex h-16 items-center justify-between gap-3">' +
 
@@ -306,14 +302,6 @@ var Layout = (function () {
     '</footer>';
   }
 
-  /* --- 헤더 배경 전환 ------------------------------------------------------ */
-  function updateBar() {
-    var bar = document.querySelector('.site-bar');
-    if (!bar) return;
-    var solid = !hasHero() || isMenuOpen() || window.pageYOffset > SOLID_AFTER;
-    bar.classList.toggle('is-solid', solid);
-  }
-
   /* --- 모바일 메뉴 --------------------------------------------------------- */
   function isMenuOpen() {
     var m = document.getElementById('mobile-menu');
@@ -330,7 +318,6 @@ var Layout = (function () {
     document.getElementById('icon-close').classList.toggle('hidden', !open);
     btn.setAttribute('aria-expanded', open ? 'true' : 'false');
     btn.setAttribute('aria-label', open ? SITE.ui.closeMenu : SITE.ui.openMenu);
-    updateBar();
   }
 
   function bindMenu() {
@@ -391,7 +378,7 @@ var Layout = (function () {
 
     host.className = 'border-b border-slate-200 bg-primary-light';
     host.innerHTML =
-      '<div class="mx-auto max-w-6xl px-4 pb-10 pt-28 sm:px-6 sm:pb-14 sm:pt-32 lg:px-8">' +
+      '<div class="mx-auto max-w-6xl px-4 pb-10 pt-12 sm:px-6 sm:pb-14 sm:pt-16 lg:px-8">' +
         '<h1 class="text-2xl font-bold tracking-wider2 text-primary-dark sm:text-3xl">' +
           esc(pageLabel()) + '</h1>' +
       '</div>';
@@ -426,11 +413,9 @@ var Layout = (function () {
     if (footer) footer.innerHTML = footerHTML();
 
     bindMenu();
-    updateBar();
 
-    window.addEventListener('scroll', updateBar, { passive: true });
     window.addEventListener('hashchange', function () {
-      if (header) { header.innerHTML = headerHTML(); bindMenu(); updateBar(); }
+      if (header) { header.innerHTML = headerHTML(); bindMenu(); }
     });
   }
 
