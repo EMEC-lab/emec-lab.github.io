@@ -37,6 +37,24 @@ const SITE = {
     university: "https://home.sch.ac.kr"
   },
 
+  /* --- 연구실 심볼 -------------------------------------------------------
+   * 원본은 images/logo/emec-logo.png (4193x469, 투명 배경).
+   * 크기별 파일은 images/logo/make-logo.ps1 이 만든다.
+   * w/h 는 원본 픽셀 크기 — 브라우저가 세로비를 미리 잡아 화면이 흔들리지 않게 한다.
+   *
+   *   full      가로형 락업 (EMEC + 부제)
+   *   wordmark  EMEC 글자만. 좁은 화면용
+   *   mark      C 글자만 잘라낸 정사각형. 파비콘·앱 아이콘용
+   *   *White    어두운 배경용 흰색 버전
+   * -------------------------------------------------------------------- */
+  logo: {
+    full:          { src: "images/logo/emec-logo-800.png",           w: 800, h: 89 },
+    fullWhite:     { src: "images/logo/emec-logo-white-800.png",     w: 800, h: 89 },
+    wordmark:      { src: "images/logo/emec-wordmark-400.png",       w: 400, h: 92 },
+    wordmarkWhite: { src: "images/logo/emec-wordmark-white-400.png", w: 400, h: 92 },
+    mark:          { src: "images/logo/emec-mark-512.png",           w: 512, h: 512 }
+  },
+
   menu: {
     home:         "HOME",
     people:       "PEOPLE",

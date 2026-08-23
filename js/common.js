@@ -207,6 +207,25 @@ var Layout = (function () {
              '<nav class="mx-auto max-w-6xl px-4 py-2 sm:px-6">' + items + '</nav></div>';
   }
 
+  /* --- 로고 ---------------------------------------------------------------
+   * 넓은 화면은 가로형 락업, 좁은 화면은 EMEC 글자만.
+   * width/height 를 적어 두면 이미지가 늦게 떠도 자리가 밀리지 않는다.
+   * 가로세로 비율은 원본 그대로 유지된다 (h-* + w-auto).
+   * ---------------------------------------------------------------------- */
+  function logoHTML() {
+    var L = SITE.logo;
+    var alt = esc(SITE.labName);
+
+    return '<a href="index.html" class="flex min-w-0 shrink-0 items-center">' +
+      '<img src="' + esc(L.full.src) + '" alt="' + alt + '"' +
+        ' width="' + L.full.w + '" height="' + L.full.h + '"' +
+        ' class="hidden h-[30px] w-auto sm:block">' +
+      '<img src="' + esc(L.wordmark.src) + '" alt="' + alt + '"' +
+        ' width="' + L.wordmark.w + '" height="' + L.wordmark.h + '"' +
+        ' class="h-[26px] w-auto sm:hidden">' +
+    '</a>';
+  }
+
   /* --- 헤더 -------------------------------------------------------------- */
   function headerHTML() {
     return '' +
@@ -215,14 +234,7 @@ var Layout = (function () {
       '<div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">' +
         '<div class="flex h-16 items-center justify-between gap-3">' +
 
-          '<a href="index.html" class="flex min-w-0 items-center gap-2.5">' +
-            '<span class="grid h-9 w-9 shrink-0 place-items-center rounded bg-primary text-[0.7rem] font-bold tracking-tight text-white">' +
-              esc(SITE.labShort) + '</span>' +
-            '<span class="nav-link flex min-w-0 flex-col leading-tight">' +
-              '<span class="truncate text-sm font-bold">' + esc(SITE.labShort) + ' Lab</span>' +
-              '<span class="nav-sub hidden truncate text-[10px] sm:block">' + esc(SITE.university) + '</span>' +
-            '</span>' +
-          '</a>' +
+          logoHTML() +
 
           desktopNav() +
 
@@ -262,8 +274,10 @@ var Layout = (function () {
         '<div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">' +
 
           '<div class="lg:col-span-2">' +
-            '<p class="text-base font-bold text-white">' + esc(SITE.labName) + '</p>' +
-            '<p class="mt-1 text-sm text-white/70">' + esc(SITE.labNameKo) + '</p>' +
+            '<img src="' + esc(SITE.logo.fullWhite.src) + '" alt="' + esc(SITE.labName) + '"' +
+              ' width="' + SITE.logo.fullWhite.w + '" height="' + SITE.logo.fullWhite.h + '"' +
+              ' class="mb-5 h-[34px] w-auto" loading="lazy">' +
+            '<p class="text-sm text-white/70">' + esc(SITE.labNameKo) + '</p>' +
             '<p class="mt-1 text-sm text-white/70">' + esc(SITE.department) + ', ' + esc(SITE.university) + '</p>' +
             '<ul class="mt-5 space-y-1.5 text-sm text-white/70">' +
               '<li>' + esc(SITE.address.full) + '</li>' +
