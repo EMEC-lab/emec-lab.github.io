@@ -21,7 +21,7 @@ const SITE = {
   address: {
     full:  "M417, Multimedia Building, Soonchunhyang University, 22 Soonchunhyang-ro, Asan-si, Chungcheongnam-do 31538, Republic of Korea",
     fullKo: "충남 아산시 순천향로 22 순천향대학교 멀티미디어관 M417호",
-    short: "Multimedia Bldg. M417"
+    short: "Multimedia Building, M417"
   },
 
   phone: "041-530-1334",

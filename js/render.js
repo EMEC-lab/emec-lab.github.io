@@ -799,11 +799,15 @@ var Render = (function () {
 
   /* 길찾기 링크 — 좌표/주소를 넘기기만 하므로 API 키가 필요 없다 */
   function directionLinks() {
+    /* 세 곳 모두 좌표로 핀을 찍는다.
+       주소 문자열로 검색시키면 대학 대표 주소(본부)로 끌려가므로 쓰지 않는다. */
     var lat = SITE.mapLat, lng = SITE.mapLng;
+    var name = encodeURIComponent(SITE.labNameKo);
+
     var links = [
       { label: 'Google Maps', url: 'https://www.google.com/maps/search/?api=1&query=' + lat + ',' + lng },
-      { label: '카카오맵',     url: 'https://map.kakao.com/link/map/' + encodeURIComponent(SITE.labShort) + ',' + lat + ',' + lng },
-      { label: '네이버지도',   url: 'https://map.naver.com/v5/search/' + encodeURIComponent(SITE.address.fullKo) }
+      { label: '카카오맵',     url: 'https://map.kakao.com/link/map/' + name + ',' + lat + ',' + lng },
+      { label: '네이버지도',   url: 'https://map.naver.com/p?title=' + name + '&lat=' + lat + '&lng=' + lng }
     ];
 
     return '<div class="mt-6">' +
