@@ -681,7 +681,7 @@ var Render = (function () {
         (scholar
           ? '<div class="flex gap-3"><dt class="w-16 shrink-0 text-slate-400">' + esc(SITE.people.scholar) + '</dt>' +
             '<dd><a class="text-primary hover:underline" href="' + esc(scholar) + '" target="_blank" rel="noopener noreferrer">' +
-              esc(SITE.people.scholar) + ' &rarr;</a></dd></div>'
+              esc(SITE.people.viewProfile) + ' &rarr;</a></dd></div>'
           : '') +
       '</dl>';
 

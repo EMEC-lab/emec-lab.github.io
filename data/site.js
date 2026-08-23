@@ -27,12 +27,13 @@ const SITE = {
   phone: "041-530-1334",
   email: "minro@sch.ac.kr",
 
-  // 지도 좌표 — 캠퍼스 기준 근사값. 멀티미디어관 정확한 위치로 검증 후 교체할 것
-  mapLat: 36.7706,
-  mapLng: 126.9328,
+  // 지도 좌표 — Google 지도 플러스 코드 8Q88QW9M+JV 를 변환한 값 (멀티미디어관)
+  // 바꿀 때는 Google 지도에서 해당 지점을 우클릭해 나오는 좌표를 그대로 넣으면 된다
+  mapLat: 36.769062,
+  mapLng: 126.934688,
 
   links: {
-    scholar:    "",
+    scholar:    "https://scholar.google.com/citations?user=01FS4l4AAAAJ&hl=ko",
     university: "https://home.sch.ac.kr"
   },
 
@@ -119,6 +120,7 @@ const SITE = {
     memberships: "Memberships",
     talks:       "Invited Talks",
     scholar:     "Google Scholar",
+    viewProfile: "View profile",
     office:      "Office",
     email:       "Email",
     phone:       "Phone",
