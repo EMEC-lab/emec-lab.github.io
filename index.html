@@ -70,23 +70,6 @@
       </div>
     </section>
 
-    <!-- ===== 3. 지도교수 소개 ===== -->
-    <section id="professor" class="scroll-mt-16 border-y border-slate-200 bg-slate-50">
-      <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-        <div id="home-professor-head"></div>
-        <!-- render.js 가 MEMBERS 의 role: 'professor' 를 찾아 채운다 -->
-        <div id="home-professor" class="mt-8"></div>
-      </div>
-    </section>
-
-    <!-- ===== 4. 현황 지표 (숫자는 전부 자동 집계 + 카운트업) ===== -->
-    <section id="stats" class="scroll-mt-16 bg-white">
-      <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-        <div id="home-stats-head"></div>
-        <div id="home-stats" class="reveal-group mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4"></div>
-      </div>
-    </section>
-
     <!-- ===== 5. 최근 소식 ===== -->
     <section id="news" class="scroll-mt-16 border-y border-slate-200 bg-slate-50">
       <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
@@ -95,7 +78,30 @@
       </div>
     </section>
 
-    <!-- ===== 6. 최근 논문 ===== -->
+    <!-- ===== 감춘 섹션 =====
+         지도교수 소개 · 현황 지표 · 최근 논문을 메인에서 내렸다.
+         다시 보이게 하려면 아래 주석만 풀면 된다.
+         (render.js 의 그리는 함수는 그대로 남아 있고,
+          담을 자리가 없으면 아무 일도 하지 않는다)
+
+    <!-- ===== 3. 지도교수 소개 ===== - ->
+    <section id="professor" class="scroll-mt-16 border-y border-slate-200 bg-slate-50">
+      <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+        <div id="home-professor-head"></div>
+        <!-- render.js 가 MEMBERS 의 role: 'professor' 를 찾아 채운다 - ->
+        <div id="home-professor" class="mt-8"></div>
+      </div>
+    </section>
+
+    <!-- ===== 4. 현황 지표 (숫자는 전부 자동 집계 + 카운트업) ===== - ->
+    <section id="stats" class="scroll-mt-16 bg-white">
+      <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+        <div id="home-stats-head"></div>
+        <div id="home-stats" class="reveal-group mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4"></div>
+      </div>
+    </section>
+
+    <!-- ===== 6. 최근 논문 ===== - ->
     <section id="papers" class="scroll-mt-16 bg-white">
       <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div id="home-papers-head"></div>
@@ -103,9 +109,13 @@
       </div>
     </section>
 
-    <!-- ===== 7. 함께하실 분 ===== -->
-    <section id="join" class="scroll-mt-16 bg-primary-dark">
-      <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+    ===== 감춘 섹션 끝 ===== -->
+
+    <!-- ===== 함께하실 분 =====
+         푸터와 같은 남색이면 두 블록이 붙어 보여 푸터의 일부로 읽힌다.
+         흰 영역 안의 밝은 카드로 두어 메인 페이지의 내용임을 분명히 한다 -->
+    <section id="join" class="scroll-mt-16 bg-white">
+      <div class="mx-auto max-w-6xl px-4 pb-20 sm:px-6 sm:pb-24 lg:px-8">
         <div id="home-join"></div>
       </div>
     </section>

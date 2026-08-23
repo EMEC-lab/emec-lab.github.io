@@ -280,16 +280,21 @@ var Render = (function () {
     }).join('') + '</ul>';
   }
 
-  /* 7. 함께하실 분 */
+  /* 함께하실 분 — 흰 영역 안의 밝은 카드.
+     푸터와 같은 남색으로 두면 두 블록이 붙어 푸터의 일부로 읽힌다.
+     자세한 모집 안내는 CONTACT 페이지에 있고 여기서는 그리로 보낸다. */
   function homeJoin() {
     var host = document.getElementById('home-join');
     if (!host) return;
 
     host.innerHTML =
-      '<div class="reveal">' +
-        '<h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">' + esc(SITE.home.joinTitle) + '</h2>' +
-        '<p class="mt-4 max-w-2xl text-sm leading-relaxed text-white/85 sm:text-base">' + esc(SITE.home.joinLead) + '</p>' +
-        '<a href="contact.html" class="mt-8 inline-block rounded bg-white px-5 py-3 text-sm font-semibold text-primary-dark transition-colors hover:bg-slate-100">' +
+      '<div class="reveal rounded-lg border border-slate-200 bg-primary-light p-8 sm:p-12">' +
+        '<h2 class="text-2xl font-bold tracking-tight text-primary-dark sm:text-3xl">' +
+          esc(SITE.home.joinTitle) + '</h2>' +
+        '<p class="mt-4 max-w-2xl text-sm leading-relaxed text-slate-700 sm:text-base">' +
+          esc(SITE.home.joinLead) + '</p>' +
+        '<a href="contact.html"' +
+          ' class="mt-8 inline-block rounded bg-primary px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-dark">' +
           esc(SITE.home.joinCta) + '</a>' +
       '</div>';
   }
@@ -861,18 +866,22 @@ var Render = (function () {
       '</div>';
   }
 
+  /* 모집 안내 — CONTACT 페이지가 이 내용의 본거지다.
+     HOME 의 카드는 여기로 보내는 역할만 한다. 문구는 SITE.home 을 함께 쓴다. */
   function contactJoin() {
     var host = document.getElementById('contact-join');
     if (!host) return;
 
     host.innerHTML =
-      '<h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">' +
-        esc(SITE.home.joinTitle) + '</h2>' +
-      '<p class="mt-4 max-w-2xl text-sm leading-relaxed text-white/85 sm:text-base">' +
-        esc(SITE.home.joinLead) + '</p>' +
-      '<a href="mailto:' + esc(SITE.email) + '"' +
-        ' class="mt-8 inline-block rounded bg-white px-5 py-3 text-sm font-semibold text-primary-dark transition-colors hover:bg-slate-100">' +
-        esc(SITE.email) + '</a>';
+      '<div class="rounded-lg border border-slate-200 bg-primary-light p-8 sm:p-12">' +
+        '<h2 class="text-2xl font-bold tracking-tight text-primary-dark sm:text-3xl">' +
+          esc(SITE.home.joinTitle) + '</h2>' +
+        '<p class="mt-4 max-w-2xl text-sm leading-relaxed text-slate-700 sm:text-base">' +
+          esc(SITE.home.joinLead) + '</p>' +
+        '<a href="mailto:' + esc(SITE.email) + '"' +
+          ' class="mt-8 inline-block rounded bg-primary px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-dark">' +
+          esc(SITE.email) + '</a>' +
+      '</div>';
   }
 
   function contact() {
