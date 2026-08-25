@@ -42,7 +42,7 @@ grep -rn "041-530\|minro@\|M417" *.html js/
 const SITE = {
   labName:    "Electro-Mechanical Energy Conversion Lab",
   labShort:   "EMEC",
-  labNameKo:  "전기기계에너지변환 연구실",     // 푸터·타이틀에서 필요 시 병기
+  labNameKo:  "전기-기계 에너지변환 연구실",     // 푸터·타이틀에서 필요 시 병기
   university: "Soonchunhyang University",
   department: "Department of Electrical Engineering",
   professor:  "Min-Ro Park",

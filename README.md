@@ -331,7 +331,7 @@ ffmpeg -i images/hero.mp4 -ss 00:00:02 -vframes 1 -q:v 3 images/hero-poster.jpg
 const SITE = {
   labName:    "Electro-Mechanical Energy Conversion Lab",
   labShort:   "EMEC",
-  labNameKo:  "전기기계에너지변환 연구실",
+  labNameKo:  "전기-기계 에너지변환 연구실",
   university: "Soonchunhyang University",
   department: "Department of Electrical Engineering",
   tagline:    "한 줄 소개 문구",

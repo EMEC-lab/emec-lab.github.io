@@ -915,7 +915,7 @@ var Render = (function () {
     function block(label, inner) {
       if (!label || !inner) return '';
       return '<section class="mt-10">' +
-        '<h3 class="mb-3 text-xs font-bold uppercase tracking-wider2 text-primary">' + esc(label) + '</h3>' +
+        '<h3 class="mb-3 text-base font-bold uppercase tracking-wider2 text-primary">' + esc(label) + '</h3>' +
         inner +
       '</section>';
     }
@@ -974,7 +974,7 @@ var Render = (function () {
     /* 대상별 조건. 라벨을 왼쪽에 두어 표처럼 읽히게 한다 */
     function defs(rows) {
       if (!rows || !rows.length) return '';
-      return '<dl class="space-y-4 text-sm leading-relaxed">' +
+      return '<dl class="space-y-4 pl-3.5 text-sm leading-relaxed">' +
         rows.map(function (r) {
           return '<div class="sm:flex sm:gap-6">' +
             '<dt class="shrink-0 font-semibold text-slate-900 sm:w-28">' + esc(r.label) + '</dt>' +
