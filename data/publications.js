@@ -218,7 +218,7 @@ const PUBLICATIONS = [
   {
     type: "journal", year: 2026,
     date: "2026-07",
-    authors: "Yong-Min Lee†, Dong-Hoon Ko, Sungan Yoon, Jeongho Cho, Soo-Hwan Park, Min-Ro Park*",
+    authors: "Yong-Min Lee†, Dong-Hoon Ko, Sungan Yoon, Jeongho Cho, Soo-Hwan Park*, Min-Ro Park*",
     title: "Characteristics Estimation and Design of SPMSM using Analytic Method-based Transfer Learning",
     venue: "IEEE Transactions on Magnetics",
     detail: "vol. 62, no. 7, pp. 1-6 (Art no. 7401806)",
@@ -568,7 +568,7 @@ const PUBLICATIONS = [
   {
     type: "journal", year: 2025,
     date: "2025-05",
-    authors: "Kyoung-Soo Cha†, Young-Hoon Jung, Soo-Hwan Park, Min-Ro Park*",
+    authors: "Kyoung-Soo Cha†, Young-Hoon Jung, Soo-Hwan Park*, Min-Ro Park*",
     title: "Optimal Design Considering AC Copper Loss of Traction Motor Applied HSFF Coil for Improving Electric Bus Fuel Economy",
     venue: "Mathematics",
     detail: "vol. 13, no. 9, pp. 1-20 (1509)",
@@ -578,7 +578,7 @@ const PUBLICATIONS = [
   {
     type: "journal", year: 2025,
     date: "2025-05",
-    authors: "Young-Hoon Jung†, Dong-Min Kim, Kyoung-Soo Cha, Soo-Hwan Park, Min-Ro Park*",
+    authors: "Young-Hoon Jung†, Dong-Min Kim, Kyoung-Soo Cha, Soo-Hwan Park*, Min-Ro Park*",
     title: "Vibration Reduction of Permanent Magnet Synchronous Motors by Four-Layer Winding: Mathematical Modeling and Experimental Validation",
     venue: "Mathematics",
     detail: "vol. 13, no. 10, pp. 1-19 (1603)",
