@@ -26,10 +26,13 @@
     <!-- 페이지 제목 밴드: common.js 가 SITE.menu 에서 채운다 -->
     <div id="page-head"></div>
 
+    <!-- 섹션 탭 : render.js 가 그린다. 한 번에 한 섹션만 보인다 -->
+    <div id="page-tabs"></div>
+
     <!-- ===== 지도교수 =====
          학생과 다른 레이아웃. 사진을 크게 두고
          학력·경력·학회활동·학회회원·초청강연을 모두 노출한다 -->
-    <section id="professor" class="scroll-mt-16">
+    <section id="professor" class="scroll-mt-32">
       <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
         <h2 class="mb-10 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl"
             data-section-title="professor"></h2>
@@ -39,7 +42,7 @@
 
     <!-- ===== 재학생 =====
          MEMBER_ROLE_ORDER 순서(박사 → 석사 → 학부)로 작은 카드 그리드 -->
-    <section id="current" class="scroll-mt-16 border-t border-slate-200 bg-slate-50">
+    <section id="current" class="scroll-mt-32">
       <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
         <h2 class="mb-8 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl"
             data-section-title="current"></h2>
@@ -49,7 +52,7 @@
 
     <!-- ===== 졸업생 =====
          사진 없이 텍스트 목록. 졸업연도 내림차순 -->
-    <section id="alumni" class="scroll-mt-16 border-t border-slate-200">
+    <section id="alumni" class="scroll-mt-32">
       <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
         <h2 class="mb-8 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl"
             data-section-title="alumni"></h2>

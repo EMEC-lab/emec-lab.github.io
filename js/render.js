@@ -52,6 +52,83 @@ var Render = (function () {
   }
 
   /* =====================================================================
+   * 섹션 탭
+   * 한 페이지 안에서 한 번에 한 섹션만 보여 준다.
+   *
+   *   config.tabs = [{ key, label, count, all }]
+   *     key   그 섹션의 id 와 같아야 한다
+   *     count 있으면 라벨 옆에 숫자를 붙인다
+   *     all   true 면 모든 섹션을 함께 보여 주는 탭
+   *
+   * 주소의 #해시와 연동되므로 상단 드롭다운에서 바로 해당 탭으로 들어온다.
+   * 페이지에 <div id="page-tabs"></div> 를 두면 그 자리에 그려진다.
+   * =================================================================== */
+
+  function sectionTabs(config) {
+    var host = document.getElementById('page-tabs');
+    if (!host) return;
+
+    var tabs = config.tabs || [];
+    if (!tabs.length) return;
+
+    var keys = tabs.map(function (t) { return t.key; });
+
+    host.className = 'sticky top-16 z-40 border-b border-slate-200 bg-white/95 backdrop-blur';
+    host.innerHTML =
+      '<div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">' +
+        '<div class="flex gap-2 overflow-x-auto py-3">' +
+          tabs.map(function (t) {
+            return '<button type="button" class="js-tab shrink-0 rounded-full border px-4 py-1.5 text-sm font-semibold transition-colors"' +
+              ' data-tab="' + esc(t.key) + '">' + esc(t.label) +
+              (t.count === undefined ? ''
+                : ' <span class="font-mono text-xs opacity-70">' + esc(t.count) + '</span>') +
+              '</button>';
+          }).join('') +
+        '</div>' +
+      '</div>';
+
+    function apply(key) {
+      tabs.forEach(function (t) {
+        if (t.all) return;
+        var sec = document.getElementById(t.key);
+        if (sec) sec.hidden = !(key === 'all' || key === t.key);
+      });
+
+      var btns = document.querySelectorAll('.js-tab');
+      for (var i = 0; i < btns.length; i++) {
+        var on = btns[i].getAttribute('data-tab') === key;
+        btns[i].className = 'js-tab shrink-0 rounded-full border px-4 py-1.5 text-sm font-semibold transition-colors ' +
+          (on ? 'border-primary bg-primary text-white'
+              : 'border-slate-300 text-slate-600 hover:border-primary hover:text-primary');
+        btns[i].setAttribute('aria-pressed', on ? 'true' : 'false');
+      }
+
+      /* 주소를 맞춰 두면 새로고침이나 링크 공유에도 같은 탭이 열린다.
+         history 를 늘리지 않도록 replaceState 를 쓴다 (hashchange 도 발생하지 않는다).
+         file:// 에서는 막힐 수 있어 실패해도 넘어간다. */
+      try {
+        window.history.replaceState(null, '', key === 'all' ? window.location.pathname : '#' + key);
+      } catch (e) { /* 무시 */ }
+
+      /* 주소가 바뀌었으니 상단 메뉴의 활성 표시도 맞춘다 */
+      if (typeof Layout !== 'undefined' && Layout.refresh) Layout.refresh();
+    }
+
+    var btns = document.querySelectorAll('.js-tab');
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener('click', function () { apply(this.getAttribute('data-tab')); });
+    }
+
+    var hash = (window.location.hash || '').replace('#', '');
+    apply(keys.indexOf(hash) !== -1 ? hash : (config.defaultKey || keys[0]));
+
+    window.addEventListener('hashchange', function () {
+      var h = (window.location.hash || '').replace('#', '');
+      if (keys.indexOf(h) !== -1) apply(h);
+    });
+  }
+
+  /* =====================================================================
    * 연구과제 상태 판정과 정렬 (CLAUDE.md 6번)
    * status 를 데이터에 적어두지 않고 endDate 로 매번 계산한다.
    * =================================================================== */
@@ -280,21 +357,19 @@ var Render = (function () {
     }).join('') + '</ul>';
   }
 
-  /* 함께하실 분 — 흰 영역 안의 밝은 카드.
-     푸터와 같은 남색으로 두면 두 블록이 붙어 푸터의 일부로 읽힌다.
+  /* 함께하실 분 — 제목줄은 homeHeadings 가 그리고 여기서는 본문만.
+     위 섹션들과 같은 양식·같은 왼쪽 정렬을 쓴다.
      자세한 모집 안내는 CONTACT 페이지에 있고 여기서는 그리로 보낸다. */
   function homeJoin() {
     var host = document.getElementById('home-join');
     if (!host) return;
 
     host.innerHTML =
-      '<div class="reveal rounded-lg border border-slate-200 bg-primary-light p-8 sm:p-12">' +
-        '<h2 class="text-2xl font-bold tracking-tight text-primary-dark sm:text-3xl">' +
-          esc(SITE.home.joinTitle) + '</h2>' +
-        '<p class="mt-4 max-w-2xl text-sm leading-relaxed text-slate-700 sm:text-base">' +
+      '<div class="reveal">' +
+        '<p class="max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">' +
           esc(SITE.home.joinLead) + '</p>' +
         '<a href="contact.html"' +
-          ' class="mt-8 inline-block rounded bg-primary px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-dark">' +
+          ' class="mt-6 inline-block rounded bg-primary px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-dark">' +
           esc(SITE.home.joinCta) + '</a>' +
       '</div>';
   }
@@ -306,7 +381,8 @@ var Render = (function () {
       ['home-professor-head', SITE.home.professorTitle, '', ''],
       ['home-stats-head', SITE.home.statsTitle, '', ''],
       ['home-news-head', SITE.home.newsTitle, '', 'news.html'],
-      ['home-papers-head', SITE.home.papersTitle, '', 'publications.html']
+      ['home-papers-head', SITE.home.papersTitle, '', 'publications.html'],
+      ['home-join-head', SITE.home.joinTitle, '', '']   /* 링크는 아래 버튼이 대신한다 */
     ];
 
     map.forEach(function (m) {
@@ -356,15 +432,11 @@ var Render = (function () {
   }
 
   function renderPubType(type) {
-    var host    = document.getElementById('pub-' + type);
-    var section = document.getElementById(type);
+    var host = document.getElementById('pub-' + type);
     if (!host) return 0;
 
     var list = pubsOf(type);
-
-    /* 항목이 없는 종류는 섹션째 감춘다 (빈 섹션 노출 금지) */
-    if (section) section.hidden = !list.length;
-    if (!list.length) { host.innerHTML = ''; return 0; }
+    if (!list.length) { host.innerHTML = emptyNote(); return 0; }
 
     host.innerHTML = groupByYear(list).map(function (g) {
       return '<div class="mt-10 first:mt-0">' +
@@ -378,78 +450,21 @@ var Render = (function () {
     return list.length;
   }
 
-  function renderPubFilter(counts) {
-    var host = document.getElementById('pub-filter');
-    if (!host) return;
-
-    var total = PUBLICATION_TYPES.reduce(function (n, t) { return n + (counts[t] || 0); }, 0);
-
-    var buttons = [{ key: 'all', label: SITE.ui.all, count: total }].concat(
-      PUBLICATION_TYPES.map(function (t) {
-        return { key: t, label: SITE.submenu[t], count: counts[t] || 0 };
-      })
-    );
-
-    host.className = 'sticky top-16 z-40 border-b border-slate-200 bg-white/95 backdrop-blur';
-    host.innerHTML =
-      '<div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">' +
-        '<div class="flex gap-2 overflow-x-auto py-3">' +
-          buttons.map(function (b) {
-            return '<button type="button" class="js-pub-filter shrink-0 rounded-full border px-4 py-1.5 text-sm font-semibold transition-colors"' +
-              ' data-filter="' + esc(b.key) + '">' + esc(b.label) +
-              ' <span class="font-mono text-xs opacity-70">' + esc(b.count) + '</span></button>';
-          }).join('') +
-        '</div>' +
-      '</div>';
-  }
-
-  function applyPubFilter(key) {
-    PUBLICATION_TYPES.forEach(function (t) {
-      var section = document.getElementById(t);
-      if (!section) return;
-      var empty = !pubsOf(t).length;
-      section.hidden = empty || (key !== 'all' && key !== t);
-    });
-
-    var btns = document.querySelectorAll('.js-pub-filter');
-    for (var i = 0; i < btns.length; i++) {
-      var on = btns[i].getAttribute('data-filter') === key;
-      btns[i].className = 'js-pub-filter shrink-0 rounded-full border px-4 py-1.5 text-sm font-semibold transition-colors ' +
-        (on ? 'border-primary bg-primary text-white'
-            : 'border-slate-300 text-slate-600 hover:border-primary hover:text-primary');
-      btns[i].setAttribute('aria-pressed', on ? 'true' : 'false');
-    }
-  }
-
-  function bindPubFilter() {
-    var btns = document.querySelectorAll('.js-pub-filter');
-    for (var i = 0; i < btns.length; i++) {
-      btns[i].addEventListener('click', function () {
-        applyPubFilter(this.getAttribute('data-filter'));
-      });
-    }
-  }
-
   function publications() {
     var counts = {};
     PUBLICATION_TYPES.forEach(function (t) { counts[t] = renderPubType(t); });
 
-    renderPubFilter(counts);
-    bindPubFilter();
+    var total = PUBLICATION_TYPES.reduce(function (n, t) { return n + counts[t]; }, 0);
 
-    /* 메뉴에서 publications.html#journal 로 들어오면 그 종류만 보여 준다 */
-    var hash = (window.location.hash || '').replace('#', '');
-    applyPubFilter(PUBLICATION_TYPES.indexOf(hash) !== -1 ? hash : 'all');
-
-    window.addEventListener('hashchange', function () {
-      var h = (window.location.hash || '').replace('#', '');
-      if (PUBLICATION_TYPES.indexOf(h) !== -1) applyPubFilter(h);
+    sectionTabs({
+      defaultKey: 'all',
+      tabs: [{ key: 'all', label: SITE.ui.all, count: total, all: true }].concat(
+        PUBLICATION_TYPES.map(function (t) {
+          return { key: t, label: SITE.submenu[t], count: counts[t] };
+        })
+      )
     });
   }
-
-  /* =====================================================================
-   * 나머지 페이지 — CLAUDE.md 10번에 따라 한 페이지씩 완성한다
-   * =================================================================== */
 
   /* =====================================================================
    * RESEARCH
@@ -493,13 +508,11 @@ var Render = (function () {
 
   /* --- 연구장비 --------------------------------------------------------- */
   function researchEquipment() {
-    var host    = document.getElementById('research-equipment');
-    var section = document.getElementById('equipment');
+    var host = document.getElementById('research-equipment');
     if (!host) return;
 
     var list = (typeof EQUIPMENT !== 'undefined') ? EQUIPMENT : [];
-    if (section) section.hidden = !list.length;
-    if (!list.length) { host.innerHTML = ''; return; }
+    if (!list.length) { host.innerHTML = emptyNote(); return; }
 
     host.innerHTML = list.map(function (e) {
       return '<div class="card-hover overflow-hidden rounded-lg border border-slate-200 bg-white">' +
@@ -602,6 +615,14 @@ var Render = (function () {
     researchAreas();
     researchEquipment();
     researchProjects();
+
+    sectionTabs({
+      tabs: [
+        { key: 'areas',     label: SITE.submenu.areas },
+        { key: 'equipment', label: SITE.submenu.equipment },
+        { key: 'projects',  label: SITE.submenu.projects }
+      ]
+    });
   }
 
   /* =====================================================================
@@ -786,6 +807,14 @@ var Render = (function () {
     peopleProfessor();
     peopleCurrent();
     peopleAlumni();
+
+    sectionTabs({
+      tabs: [
+        { key: 'professor', label: SITE.submenu.professor },
+        { key: 'current',   label: SITE.submenu.current },
+        { key: 'alumni',    label: SITE.submenu.alumni }
+      ]
+    });
   }
 
   /* =====================================================================
@@ -873,20 +902,25 @@ var Render = (function () {
     if (!host) return;
 
     host.innerHTML =
-      '<div class="rounded-lg border border-slate-200 bg-primary-light p-8 sm:p-12">' +
-        '<h2 class="text-2xl font-bold tracking-tight text-primary-dark sm:text-3xl">' +
-          esc(SITE.home.joinTitle) + '</h2>' +
-        '<p class="mt-4 max-w-2xl text-sm leading-relaxed text-slate-700 sm:text-base">' +
-          esc(SITE.home.joinLead) + '</p>' +
-        '<a href="mailto:' + esc(SITE.email) + '"' +
-          ' class="mt-8 inline-block rounded bg-primary px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-dark">' +
-          esc(SITE.email) + '</a>' +
-      '</div>';
+      '<h2 class="mb-8 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">' +
+        esc(SITE.home.joinTitle) + '</h2>' +
+      '<p class="max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">' +
+        esc(SITE.home.joinLead) + '</p>' +
+      '<a href="mailto:' + esc(SITE.email) + '"' +
+        ' class="mt-6 inline-block rounded bg-primary px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-dark">' +
+        esc(SITE.email) + '</a>';
   }
 
   function contact() {
     contactLocation();
     contactJoin();
+
+    sectionTabs({
+      tabs: [
+        { key: 'location', label: SITE.sectionTitles.location },
+        { key: 'join',     label: SITE.home.joinTitle }
+      ]
+    });
   }
 
   /* =====================================================================

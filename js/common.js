@@ -419,8 +419,17 @@ var Layout = (function () {
     });
   }
 
+  /* 주소(해시)가 바뀐 뒤 상단 메뉴의 활성 표시만 다시 맞춘다 */
+  function refresh() {
+    var header = document.getElementById('site-header');
+    if (!header) return;
+    header.innerHTML = headerHTML();
+    bindMenu();
+  }
+
   return {
     render: render,
+    refresh: refresh,
     renderPageHead: renderPageHead,
     renderTitle: renderTitle,
     renderSectionTitles: renderSectionTitles,

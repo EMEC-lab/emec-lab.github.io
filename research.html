@@ -26,9 +26,12 @@
     <!-- 페이지 제목 밴드: common.js 가 SITE.menu 에서 채운다 -->
     <div id="page-head"></div>
 
+    <!-- 섹션 탭 : render.js 가 그린다. 한 번에 한 섹션만 보인다 -->
+    <div id="page-tabs"></div>
+
     <!-- ===== 연구분야 =====
          RESEARCH 각 항목이 자기 id 를 앵커로 갖는다 (research.html#machine-design 등) -->
-    <section id="areas" class="scroll-mt-16">
+    <section id="areas" class="scroll-mt-32">
       <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
         <h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl"
             data-section-title="areas"></h2>
@@ -38,7 +41,7 @@
 
     <!-- ===== 연구장비 =====
          EQUIPMENT 가 비어 있으면 render.js 가 이 섹션을 감춘다 -->
-    <section id="equipment" class="scroll-mt-16 border-t border-slate-200 bg-slate-50">
+    <section id="equipment" class="scroll-mt-32">
       <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
         <h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl"
             data-section-title="equipment"></h2>
@@ -48,7 +51,7 @@
 
     <!-- ===== 연구과제 =====
          진행 상태는 데이터가 아니라 endDate 로 매번 계산한다 (render.js getStatus) -->
-    <section id="projects" class="scroll-mt-16 border-t border-slate-200">
+    <section id="projects" class="scroll-mt-32">
       <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
         <h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl"
             data-section-title="projects"></h2>
