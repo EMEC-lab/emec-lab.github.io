@@ -934,6 +934,12 @@ var Render = (function () {
       return text ? '<p class="max-w-2xl text-sm leading-relaxed text-slate-700">' + esc(text) + '</p>' : '';
     }
 
+    /* 문자열이면 한 문단, 배열이면 목록으로 그린다.
+     * 개조식 항목이 여러 개인 덩어리는 배열로 적으면 된다 */
+    function textOrList(v) {
+      return (v instanceof Array) ? bullets(v) : para(v);
+    }
+
     /* 문턱을 낮추는 안내문 — 본문과 구분되게 옅게 깐다 */
     function note(text) {
       return text
@@ -953,18 +959,18 @@ var Render = (function () {
       block(J.qualifyLabel, bullets(J.qualify) + note(J.qualifyNote)) +
 
       block(J.researchLabel,
-        para(J.researchNote) +
+        textOrList(J.researchNote) +
         (J.researchLink
           ? '<a href="' + esc(J.researchLink) + '"' +
             ' class="mt-3 inline-block text-sm font-semibold text-primary hover:underline">' +
             esc(J.researchLinkLabel || SITE.ui.readMore) + ' &rarr;</a>'
           : '')) +
 
-      block(J.applyLabel, para(J.howToApply) + note(J.applyNote)) +
+      block(J.applyLabel, textOrList(J.howToApply) + note(J.applyNote)) +
 
       block(J.supportLabel, bullets(J.support)) +
 
-      block(J.cultureLabel, para(J.culture)) +
+      block(J.cultureLabel, textOrList(J.culture)) +
 
       '<a href="mailto:' + esc(SITE.email) + '"' +
         ' class="mt-10 inline-block rounded bg-primary px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-dark">' +
