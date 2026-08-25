@@ -389,7 +389,7 @@ var Render = (function () {
       ['home-stats-head', SITE.home.statsTitle, '', ''],
       ['home-news-head', SITE.home.newsTitle, '', 'news.html'],
       ['home-papers-head', SITE.home.papersTitle, '', 'publications.html'],
-      ['home-join-head', SITE.join.title, '', 'contact.html#join']
+      ['home-join-head', SITE.join.title, '', 'join.html']
     ];
 
     map.forEach(function (m) {
@@ -905,8 +905,8 @@ var Render = (function () {
   /* 모집 안내 — CONTACT 페이지가 이 내용의 본거지다.
      HOME 은 요약만 보여 주고 제목줄의 View all 이 여기로 보낸다.
      문구는 전부 data/site.js 의 SITE.join 에서 온다. */
-  function contactJoin() {
-    var host = document.getElementById('contact-join');
+  function joinPage() {
+    var host = document.getElementById('join-content');
     if (!host) return;
 
     var J = SITE.join;
@@ -1012,9 +1012,7 @@ var Render = (function () {
     }).join('');
 
     host.innerHTML =
-      '<h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">' +
-        esc(J.title) + '</h2>' +
-      '<p class="mt-4 max-w-2xl text-base font-semibold leading-relaxed text-slate-900">' +
+      '<p class="max-w-2xl text-base font-semibold leading-relaxed text-slate-900">' +
         esc(J.lead) + '</p>' +
       intro +
 
@@ -1040,14 +1038,15 @@ var Render = (function () {
 
   function contact() {
     contactLocation();
-    contactJoin();
+  }
 
-    sectionTabs({
-      tabs: [
-        { key: 'join',     label: SITE.join.title },
-        { key: 'location', label: SITE.sectionTitles.location }
-      ]
-    });
+  /* =====================================================================
+   * JOIN US
+   *   대학원생 모집 안내. 문구는 SITE.join 한 곳에서 온다.
+   * =================================================================== */
+
+  function join() {
+    joinPage();
   }
 
   /* =====================================================================
@@ -1224,6 +1223,7 @@ var Render = (function () {
     research: research,
     people: people,
     contact: contact,
+    join: join,
     news: news,
 
     /* 다른 페이지에서 재사용할 조각 */

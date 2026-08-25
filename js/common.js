@@ -99,13 +99,8 @@ var NAV = [
     ]
   },
   { key: 'news', page: 'news', href: 'news.html' },
-  {
-    key: 'contact', page: 'contact', href: 'contact.html',
-    children: [
-      { key: 'join',     page: 'contact', href: 'contact.html#join' },
-      { key: 'location', page: 'contact', href: 'contact.html#location' }
-    ]
-  }
+  { key: 'join', page: 'join', href: 'join.html' },
+  { key: 'contact', page: 'contact', href: 'contact.html' }
 ];
 
 /* =========================================================================
@@ -148,7 +143,7 @@ var Layout = (function () {
 
       var trigger =
         '<a href="' + esc(item.href) + '"' +
-        ' class="nav-link flex items-center gap-1 px-3 py-2 text-[0.8rem] font-semibold tracking-wider2 transition-colors' +
+        ' class="nav-link flex items-center gap-1 px-2 py-2 text-[0.8rem] font-semibold tracking-wider2 transition-colors xl:px-3' +
         (on ? ' is-current' : '') + '"' + (on ? ' aria-current="page"' : '') + '>' +
         esc(SITE.menu[item.key]) + (kids.length ? CHEVRON : '') + '</a>';
 

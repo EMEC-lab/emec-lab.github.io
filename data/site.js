@@ -61,6 +61,7 @@ const SITE = {
     research:     "RESEARCH",
     publications: "PUBLICATIONS",
     news:         "NEWS",
+    join:         "JOIN US",
     contact:      "CONTACT"
   },
 
@@ -73,9 +74,7 @@ const SITE = {
     projects:   "Projects",
     journal:    "Journal",
     conference: "Conference",
-    patent:     "Patent",
-    join:       "Join Us",
-    location:   "Location"
+    patent:     "Patent"
   },
 
   sectionTitles: {

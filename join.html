@@ -16,7 +16,7 @@
   <script src="js/theme.js"></script>
   <link rel="stylesheet" href="css/custom.css">
 </head>
-<body data-page="contact" class="bg-white font-sans text-slate-800 antialiased">
+<body data-page="join" class="bg-white font-sans text-slate-800 antialiased">
 
   <!-- 헤더: js/common.js 가 주입한다. 직접 작성하지 말 것 -->
   <div id="site-header"></div>
@@ -26,14 +26,12 @@
     <!-- 페이지 제목 밴드: common.js 가 SITE.menu 에서 채운다 -->
     <div id="page-head"></div>
 
-    <!-- ===== 오시는 길 =====
-         주소·전화·이메일·좌표는 전부 SITE 에서 온다. 여기에 직접 쓰지 말 것.
-         지도는 별도 라이브러리 없이 iframe 임베드만 쓴다 -->
-    <section id="location">
-      <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
-        <h2 class="mb-8 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl"
-            data-section-title="location"></h2>
-        <div id="contact-location"></div>
+    <!-- ===== 대학원생 모집 안내 =====
+         문구는 data/site.js 의 SITE.join 한 곳에서 온다 (메인과 공유).
+         여기에 직접 쓰지 말 것 -->
+    <section id="join">
+      <div class="mx-auto max-w-6xl px-4 pb-16 sm:px-6 sm:pb-20 lg:px-8">
+        <div id="join-content"></div>
       </div>
     </section>
 
