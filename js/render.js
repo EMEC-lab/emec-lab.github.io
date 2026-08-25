@@ -198,13 +198,33 @@ var Render = (function () {
     return tokenCache;
   }
 
+  /* 이름 뒤에 붙은 역할 표기를 이름과 분리한다.
+   *   †  주저자 (공동 주저자면 여러 명에 붙는다)
+   *   *  교신저자 (공동 교신저자도 같은 표기)
+   * 표기는 data/publications.js 의 authors 문자열에 직접 적혀 있다. */
+  function splitMarks(seg) {
+    var m = seg.match(/^([\s\S]*?)([\u2020\u2021*]+)\s*$/);
+    return m ? { name: m[1], marks: m[2] } : { name: seg, marks: '' };
+  }
+
   function boldAuthors(authors) {
     if (!authors) return '';
     var tokens = memberTokens();
 
     return String(authors).split(',').map(function (seg) {
-      var hit = tokens[normalizeName(seg)] === true;
-      return hit ? '<strong class="font-bold text-slate-900">' + esc(seg) + '</strong>' : esc(seg);
+      var part = splitMarks(seg);
+      var hit = tokens[normalizeName(part.name)] === true;
+
+      var html = hit
+        ? '<strong class="font-bold text-slate-900 underline decoration-slate-400' +
+          ' decoration-1 underline-offset-2">' + esc(part.name) + '</strong>'
+        : esc(part.name);
+
+      if (part.marks) {
+        html += '<sup class="ml-px text-[0.7em] font-bold text-primary">' +
+                esc(part.marks) + '</sup>';
+      }
+      return html;
     }).join(',');
   }
 
@@ -529,7 +549,28 @@ var Render = (function () {
     return list.length;
   }
 
+  /* 저자 표기 안내. 문구는 SITE.pubMarks 에서 온다 */
+  function pubLegend() {
+    var host = document.getElementById('pub-legend');
+    if (!host) return;
+
+    var list = SITE.pubMarks || [];
+    if (!list.length) return;
+
+    host.innerHTML =
+      '<div class="mx-auto max-w-6xl px-4 pt-8 sm:px-6 lg:px-8">' +
+        '<p class="flex flex-wrap gap-x-5 gap-y-1 text-xs text-slate-500">' +
+          list.map(function (m) {
+            return '<span><sup class="text-[0.9em] font-bold text-primary">' +
+              esc(m.mark) + '</sup> ' + esc(m.label) + '</span>';
+          }).join('') +
+        '</p>' +
+      '</div>';
+  }
+
   function publications() {
+    pubLegend();
+
     var counts = {};
     PUBLICATION_TYPES.forEach(function (t) { counts[t] = renderPubType(t); });
 

@@ -93,6 +93,16 @@ const SITE = {
     gallery:    "Gallery"
   },
 
+  /* --- 저자 표기 안내 -----------------------------------------------
+   * PUBLICATIONS 페이지 상단에 범례로 표시된다.
+   * 실제 표기는 data/publications.js 의 authors 문자열에 직접 붙여 쓴다.
+   * 기호를 바꾸려면 여기와 authors 문자열을 함께 고쳐야 한다.
+   * ------------------------------------------------------------------- */
+  pubMarks: [
+    { mark: "†", label: "First author" },
+    { mark: "*", label: "Corresponding author" }
+  ],
+
   /* --- PUBLICATIONS 의 국제 / 국내 제목 ------------------------------
    * 저널·학술대회는 종류 제목 대신 이 네 가지가 바로 큰 제목으로 나온다.
    * 구분은 각 항목의 domestic 값을 따른다.
