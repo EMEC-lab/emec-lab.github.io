@@ -18,8 +18,11 @@ const SITE = {
 
   tagline: "[한 줄 정체성 문구 — 추후 확정]",   // <strong> 태그 사용 가능
 
+  /* \n 은 줄을 바꾸고 싶은 지점이다. 푸터에서만 적용되고,
+   * 폭이 좁은 CONTACT 페이지에서는 그냥 띄어쓰기로 이어진다.
+   * 주소가 바뀌면 \n 위치도 보기 좋은 곳으로 옮기면 된다 */
   address: {
-    full:  "M417, Multimedia Building, Soonchunhyang University, 22 Soonchunhyang-ro, Asan-si, Chungcheongnam-do 31538, Republic of Korea",
+    full:  "M417, Multimedia Building, Soonchunhyang University, 22 Soonchunhyang-ro,\nAsan-si, Chungcheongnam-do 31538, Republic of Korea",
     fullKo: "충남 아산시 순천향로 22 순천향대학교 멀티미디어관 M417호",
     short: "Multimedia Building, M417"
   },

@@ -872,7 +872,8 @@ var Render = (function () {
       '<dl class="space-y-5 text-sm">' +
         '<div>' +
           '<dt class="text-xs font-bold uppercase tracking-wider2 text-primary">' + esc(SITE.ui.address) + '</dt>' +
-          '<dd class="mt-1.5 leading-relaxed text-slate-700">' + esc(SITE.address.full) + '</dd>' +
+          '<dd class="mt-1.5 leading-relaxed text-slate-700">' +
+            esc(String(SITE.address.full).replace(/\n/g, ' ')) + '</dd>' +
           '<dd class="mt-1 leading-relaxed text-slate-500">' + esc(SITE.address.fullKo) + '</dd>' +
         '</div>' +
         '<div>' +
