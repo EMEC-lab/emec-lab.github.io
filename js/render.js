@@ -418,17 +418,41 @@ var Render = (function () {
   /* =====================================================================
    * PUBLICATIONS
    *   상단 필터 [Journal] [Conference] [Patent] — 한 번에 하나만 보인다
-   *   종류마다 한 번 더 나눈 뒤 연도별로 묶어 최신순
+   *   종류마다 한 번 더 나눈 뒤 연도별로 묶는다
+   *   연도 안에서는 Early Access → date 내림차순 → 날짜 미상 순 (comparePubs)
    *     저널 · 학술대회  International / Domestic  (domestic 값)
    *     특허              Registered / Application  (patentNo 유무)
    *   나누는 기준은 PUB_SPLITS, 제목 문구는 SITE.pubGroups 에 있다
    *   DOI 가 있으면 제목이 링크, 구성원 이름은 굵게 (publicationItem 담당)
    * =================================================================== */
 
+  /* 아직 호가 정해지지 않은 온라인 선공개.
+   * detail 에 적힌 말로 판단한다 — 같은 사실을 두 곳에 적지 않기 위해서다 */
+  function isEarlyAccess(p) {
+    return /early\s*access/i.test(p.detail || '');
+  }
+
+  /* 같은 연도 안에서의 자리. 큰 값이 위로 온다 */
+  function pubRank(p) {
+    if (isEarlyAccess(p)) return 2;   /* 아직 게재 전 — 가장 최근 */
+    return p.date ? 1 : 0;            /* 날짜를 모르는 항목은 맨 아래 */
+  }
+
+  /* 연도 내림차순 → Early Access → 날짜 내림차순 */
+  function comparePubs(a, b) {
+    if (a.year !== b.year) return b.year - a.year;
+
+    var ra = pubRank(a), rb = pubRank(b);
+    if (ra !== rb) return rb - ra;
+
+    if (ra === 1 && a.date !== b.date) return a.date < b.date ? 1 : -1;
+    return 0;
+  }
+
   function pubsOf(type) {
     if (typeof PUBLICATIONS === 'undefined') return [];
     return PUBLICATIONS.filter(function (p) { return p.type === type; })
-      .sort(function (a, b) { return b.year - a.year; });
+      .sort(comparePubs);
   }
 
   /* [{ year, items }, ...] 최신 연도부터 */

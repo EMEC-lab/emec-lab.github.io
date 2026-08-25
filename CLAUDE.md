@@ -350,7 +350,8 @@ const MEMBERS = [
 const PUBLICATIONS = [
   {
     type: "journal",          // journal | conference | patent
-    year: 2026,
+    year: 2026,               // 연도별 그룹핑 기준
+    date: "2026-03",          // 같은 연도 안에서의 정렬 기준. 아래 표 참조
     authors: "H. Kim, M.-R. Park",
     title: "",
     venue: "IEEE Transactions on Magnetics",
@@ -366,6 +367,21 @@ const PUBLICATIONS = [
 
 국내 학술대회는 국문 그대로 적는다.
 예: `venue: "대한전기학회 하계학술대회"`, `title: "매입형 영구자석 전동기의 ..."`
+
+**`date` 는 종류마다 가리키는 날짜가 다르다.**
+
+| 종류 | 적는 날짜 | 형식 |
+|---|---|---|
+| journal | 게재 년월 (Issue Date) | `"2026-03"` |
+| conference | 발표일 | `"2026-07-16"` |
+| patent | 등록일 | `"2023-08-22"` |
+
+Early Access 라 아직 호가 정해지지 않았으면 **빈 문자열로 둔다.**
+`detail` 에 `Early Access` 라 적혀 있으면 그 해의 **맨 위**로 올라간다.
+날짜를 모르는 항목(비었고 Early Access 도 아닌 경우)은 맨 아래로 내려간다.
+
+정렬 순서는 `js/render.js` 의 `comparePubs()` 에 있다.
+연도 내림차순 → Early Access → `date` 내림차순 → 날짜 미상.
 
 **분류를 손으로 적어두지 않는다.** 화면의 묶음은 아래 두 값에서 매번 계산된다.
 
@@ -556,6 +572,7 @@ const ongoingCount = PROJECTS.filter(p => getStatus(p) === 'ongoing').length;
 - 종류 제목(`Journal Papers` 등)은 따로 두지 않는다.
   위 표의 **묶음 이름이 그 페이지의 큰 제목**이다
 - 묶음 안에서 다시 **연도별 그룹핑**, 최신순
+- 한 연도 안에서는 `date` 기준 최신순. Early Access 가 맨 위 (6번 항목 참조)
 - 비어 있는 묶음은 제목째 렌더링하지 않는다 (빈 섹션 노출 금지)
 - DOI가 있으면 제목을 링크로
 - 저자 목록에서 EMEC 구성원 이름은 굵게 표시 (`MEMBERS` 데이터로 판별)

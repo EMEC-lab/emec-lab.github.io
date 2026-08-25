@@ -65,6 +65,7 @@ const NEWS = [
   {
     type: "journal",
     year: 2026,
+    date: "2026-08",
     authors: "Hong-Gil Dong, Min-Ro Park",
     title: "Design of a High Torque Density Motor for Robot Joints",
     venue: "IEEE Transactions on Magnetics",
@@ -83,6 +84,7 @@ const NEWS = [
   {
     type: "conference",
     year: 2026,
+    date: "2026-07-16",
     authors: "홍길동, 박민로",
     title: "매입형 영구자석 전동기의 토크 리플 저감 설계",
     venue: "2026년도 대한전기학회 하계학술대회",
@@ -99,6 +101,7 @@ const NEWS = [
   {
     type: "patent",
     year: 2026,
+    date: "2026-05-20",
     authors: "박민로, 홍길동",
     title: "회전자 구조를 개선한 영구자석 전동기",
     venue: "순천향대학교 산학협력단",
@@ -113,7 +116,18 @@ const NEWS = [
 
 **알아두면 좋은 것**
 
-- `year` 만 맞으면 **연도별로 자동 정렬**됩니다. 순서 신경 쓰지 않아도 됩니다.
+- `year` 와 `date` 만 맞으면 **자동으로 정렬**됩니다. 붙여넣는 위치는 신경 쓰지 않아도 됩니다.
+- `date` 는 종류별로 적는 날짜가 다릅니다.
+
+  | 종류 | 적는 날짜 | 예 |
+  |---|---|---|
+  | 학술지 | 게재 년월 | `"2026-08"` |
+  | 학술대회 | 발표일 | `"2026-07-16"` |
+  | 특허 | 등록일 | `"2026-05-20"` |
+
+- **아직 호가 안 나온 Early Access 논문**은 `date: ""` 로 비워 두고
+  `detail: "Early Access"` 라고 적으세요. 그해 목록의 **맨 위**에 놓입니다.
+  나중에 호가 나오면 `date` 와 `detail` 을 채우면 제자리로 내려갑니다.
 - `doi` 를 넣으면 논문 제목이 **자동으로 링크**가 됩니다. 없으면 `""`.
 - `data/members.js` 에 등록된 사람 이름은 저자 목록에서 **자동으로 굵게** 표시됩니다.
 - `type` 은 `journal` / `conference` / `patent` 셋 중 하나입니다.
