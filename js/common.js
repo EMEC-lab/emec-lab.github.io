@@ -98,14 +98,14 @@ var NAV = [
       { key: 'patent',     page: 'publications', href: 'publications.html#patent' }
     ]
   },
+  { key: 'news', page: 'news', href: 'news.html' },
   {
-    key: 'news', page: 'news', href: 'news.html',
+    key: 'contact', page: 'contact', href: 'contact.html',
     children: [
-      { key: 'newsfeed', page: 'news',    href: 'news.html' },
-      { key: 'gallery',  page: 'gallery', href: 'gallery.html' }
+      { key: 'join',     page: 'contact', href: 'contact.html#join' },
+      { key: 'location', page: 'contact', href: 'contact.html#location' }
     ]
-  },
-  { key: 'contact', page: 'contact', href: 'contact.html' }
+  }
 ];
 
 /* =========================================================================

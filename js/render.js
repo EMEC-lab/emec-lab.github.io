@@ -925,8 +925,10 @@ var Render = (function () {
     }
 
     /* 하위 항목 표식. 상위의 점과 모양을 달리해 단계가 보이게 한다 */
-    function dash() {
-      return '<span class="mt-2.5 h-px w-2.5 shrink-0 bg-primary-mid"></span>';
+    function check() {
+      return '<svg class="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" fill="none"' +
+        ' stroke="currentColor" stroke-width="2.6" viewBox="0 0 24 24" aria-hidden="true">' +
+        '<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>';
     }
 
     /* 항목 여러 개를 한 줄에 나란히. 좀은 화면에서는 자연스럽게 접힌다 */
@@ -960,7 +962,7 @@ var Render = (function () {
               (sub.length
                 ? '<ul class="' + subCls + '">' +
                     sub.map(function (t) {
-                      return '<li class="flex gap-2.5 text-slate-600">' + dash() +
+                      return '<li class="flex gap-2 text-slate-600">' + check() +
                              '<span>' + esc(t) + '</span></li>';
                     }).join('') +
                   '</ul>'
@@ -1042,8 +1044,8 @@ var Render = (function () {
 
     sectionTabs({
       tabs: [
-        { key: 'location', label: SITE.sectionTitles.location },
-        { key: 'join',     label: SITE.join.title }
+        { key: 'join',     label: SITE.join.title },
+        { key: 'location', label: SITE.sectionTitles.location }
       ]
     });
   }
@@ -1079,7 +1081,7 @@ var Render = (function () {
     '</li>';
   }
 
-  function news() {
+  function newsFeed() {
     var host = document.getElementById('news-feed');
     if (!host) return;
 
@@ -1105,8 +1107,14 @@ var Render = (function () {
     }).join('');
   }
 
+  /* NEWS 페이지는 위에 글 소식, 아래에 사진 게시글을 이어 그린다 */
+  function news() {
+    newsFeed();
+    gallery();
+  }
+
   /* =====================================================================
-   * GALLERY
+   * 사진 게시글 (NEWS 페이지 하단)
    *   앨범 단위 격자 + 클릭 시 라이트박스.
    *   모든 이미지에 loading="lazy". (CLAUDE.md 7·8번)
    * =================================================================== */
@@ -1217,7 +1225,6 @@ var Render = (function () {
     people: people,
     contact: contact,
     news: news,
-    gallery: gallery,
 
     /* 다른 페이지에서 재사용할 조각 */
     getStatus: getStatus,

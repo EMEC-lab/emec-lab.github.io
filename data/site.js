@@ -74,8 +74,8 @@ const SITE = {
     journal:    "Journal",
     conference: "Conference",
     patent:     "Patent",
-    newsfeed:   "News",
-    gallery:    "Gallery"
+    join:       "Join Us",
+    location:   "Location"
   },
 
   sectionTitles: {
@@ -90,7 +90,8 @@ const SITE = {
     patent:     "Patents",
     ongoing:    "Ongoing",
     completed:  "Completed",
-    location:   "Location"
+    location:   "Location",
+    gallery:    "Gallery"
   },
 
   /* --- HOME 섹션 문구 --------------------------------------------------
@@ -140,8 +141,8 @@ const SITE = {
 
     /* 문의 안내. {email} 은 굴지 말 것 — SITE.email 이 그 자리에 들어간다 */
     contact: [
-      "모집 관련 상담을 원하시면 관심 분야를 작성하여 {email} 로 연락주세요.",
-      "연구실 합류 여부와 관계없이, 대학원 생활이나 연구 방향이 궁금하신 분들도 편하게 문의주세요."
+      "모집 상담 : 관심 분야를 작성하여 {email} 로 연락",
+      "합류 여부와 무관하게 대학원 생활 · 연구 방향 문의도 환영"
     ],
 
     /* 메인 화면에 요약으로 보여 줄 항목. 아래 상세에서 골라 적는다 */
@@ -166,18 +167,18 @@ const SITE = {
     ],
     qualify: [
       {
+        label: "석사과정",
+        items: ["학부연구생 1년 이상 수행 권장"]
+      },
+      {
         label: "학부연구생",
         items: [
           "학부 3학년 이상 권장",
           "석사과정 진학 희망자 우대"
         ]
-      },
-      {
-        label: "석사과정",
-        items: ["학부연구생 1년 이상 수행 권장"]
       }
     ],
-    qualifyNote: "위 항목은 권장 · 우대 사항이며 필수 조건이 아닙니다.",
+    qualifyNote: "위 항목은 권장 · 우대 사항이며 필수 조건 아님",
 
     researchLabel: "연구 내용",
     researchNote:  "[연구분야와 연결한 설명 — 추후 확정]",
@@ -201,9 +202,9 @@ const SITE = {
 
     cultureLabel: "연구실 생활",
     culture: [
-      "정규 연구 시간 — 평일 오전 9시 ~ 오후 6시",
-      "개인별 연구 내용 — 1:1 미팅",
-      "참여 프로젝트 — 팀 단위 미팅",
+      "정규 연구 시간 : 평일 오전 9시 ~ 오후 6시",
+      "개인별 연구 내용 : 1:1 미팅",
+      "참여 프로젝트 : 팀 단위 미팅",
       "주제별 주 1회 이상 진행"
     ]
   },
