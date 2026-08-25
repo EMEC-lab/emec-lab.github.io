@@ -1017,6 +1017,8 @@ var Render = (function () {
         esc(J.heading) + '</h2>' +
       intro +
 
+      aside(J.contactNote) +
+
       block(J.targetsLabel, inlineRow(J.targets)) +
 
       block(J.qualifyLabel,
