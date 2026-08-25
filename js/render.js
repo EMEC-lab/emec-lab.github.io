@@ -920,43 +920,100 @@ var Render = (function () {
       '</section>';
     }
 
+    function dot(color) {
+      return '<span class="mt-2 h-1 w-1 shrink-0 rounded-full ' + color + '"></span>';
+    }
+
+    /* 항목 여러 개를 한 줄에 나란히. 좀은 화면에서는 자연스럽게 접힌다 */
+    function inlineRow(items) {
+      if (!items || !items.length) return '';
+      return '<ul class="text-sm leading-relaxed text-slate-700"><li class="flex gap-2.5">' +
+        dot('bg-primary-mid') +
+        '<span class="flex flex-wrap items-center gap-x-3 gap-y-1">' +
+          items.map(function (v, i) {
+            return (i ? '<span class="text-slate-300">·</span>' : '') +
+                   '<span>' + esc(v) + '</span>';
+          }).join('') +
+        '</span></li></ul>';
+    }
+
+    /* 점 목록. 항목은 문자열이거나 { text, sub, row } 객체다 */
     function bullets(items) {
       if (!items || !items.length) return '';
-      return '<ul class="space-y-2 text-sm leading-relaxed text-slate-700">' +
+      return '<ul class="space-y-2.5 text-sm leading-relaxed text-slate-700">' +
         items.map(function (v) {
-          return '<li class="flex gap-2.5">' +
-            '<span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary-mid"></span>' +
-            '<span>' + esc(v) + '</span></li>';
+          if (typeof v === 'string') {
+            return '<li class="flex gap-2.5">' + dot('bg-primary-mid') +
+                   '<span>' + esc(v) + '</span></li>';
+          }
+          var sub = v.sub || [];
+          /* row 가 true 면 하위 항목을 두 칸으로 나란히 놓는다 */
+          var subCls = v.row ? 'mt-2 grid max-w-3xl gap-x-8 gap-y-2 sm:grid-cols-2' : 'mt-2 space-y-1.5';
+          return '<li class="flex gap-2.5">' + dot('bg-primary-mid') +
+            '<div class="min-w-0 flex-1">' +
+              '<span>' + esc(v.text) + '</span>' +
+              (sub.length
+                ? '<ul class="' + subCls + '">' +
+                    sub.map(function (t) {
+                      return '<li class="flex gap-2 text-slate-600">' + dot('bg-slate-300') +
+                             '<span>' + esc(t) + '</span></li>';
+                    }).join('') +
+                  '</ul>'
+                : '') +
+            '</div></li>';
         }).join('') + '</ul>';
+    }
+
+    /* 대상별 조건. 라벨을 왼쪽에 두어 표처럼 읽히게 한다 */
+    function defs(rows) {
+      if (!rows || !rows.length) return '';
+      return '<dl class="space-y-4 text-sm leading-relaxed">' +
+        rows.map(function (r) {
+          return '<div class="sm:flex sm:gap-6">' +
+            '<dt class="shrink-0 font-semibold text-slate-900 sm:w-28">' + esc(r.label) + '</dt>' +
+            '<dd class="mt-1 space-y-1 text-slate-700 sm:mt-0">' +
+              (r.items || []).map(function (t) { return '<div>' + esc(t) + '</div>'; }).join('') +
+            '</dd></div>';
+        }).join('') + '</dl>';
     }
 
     function para(text) {
       return text ? '<p class="max-w-2xl text-sm leading-relaxed text-slate-700">' + esc(text) + '</p>' : '';
     }
 
-    /* 문자열이면 한 문단, 배열이면 목록으로 그린다.
-     * 개조식 항목이 여러 개인 덩어리는 배열로 적으면 된다 */
+    /* 문자열이면 한 문단, 배열이면 목록으로 그린다 */
     function textOrList(v) {
       return (v instanceof Array) ? bullets(v) : para(v);
     }
 
-    /* 문턱을 낮추는 안내문 — 본문과 구분되게 옅게 깐다 */
-    function note(text) {
+    /* 곁들이는 말. 본문보다 작고 옛게 — 여기가 강조되면 안 된다 */
+    function aside(text) {
       return text
-        ? '<p class="mt-3 max-w-2xl rounded border-l-2 border-primary-mid bg-primary-light px-4 py-3 text-sm leading-relaxed text-slate-700">' +
-            esc(text) + '</p>'
+        ? '<p class="mt-4 max-w-2xl text-xs leading-relaxed text-slate-500">' + esc(text) + '</p>'
         : '';
     }
+
+    /* 안내문의 {email} 자리에 SITE.email 을 mailto 링크로 넣는다 */
+    function withEmail(text) {
+      return esc(text).replace('{email}',
+        '<a href="mailto:' + esc(SITE.email) + '"' +
+        ' class="font-semibold text-primary hover:underline">' + esc(SITE.email) + '</a>');
+    }
+
+    var intro = (J.contact || []).map(function (t) {
+      return '<p class="mt-3 max-w-2xl text-sm leading-relaxed text-slate-600">' + withEmail(t) + '</p>';
+    }).join('');
 
     host.innerHTML =
       '<h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">' +
         esc(J.title) + '</h2>' +
-      '<p class="mt-4 max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">' +
+      '<p class="mt-4 max-w-2xl text-base font-semibold leading-relaxed text-slate-900">' +
         esc(J.lead) + '</p>' +
+      intro +
 
-      block(J.targetsLabel, bullets(J.targets)) +
+      block(J.targetsLabel, inlineRow(J.targets)) +
 
-      block(J.qualifyLabel, bullets(J.qualify) + note(J.qualifyNote)) +
+      block(J.qualifyLabel, defs(J.qualify) + aside(J.qualifyNote)) +
 
       block(J.researchLabel,
         textOrList(J.researchNote) +
@@ -966,15 +1023,9 @@ var Render = (function () {
             esc(J.researchLinkLabel || SITE.ui.readMore) + ' &rarr;</a>'
           : '')) +
 
-      block(J.applyLabel, textOrList(J.howToApply) + note(J.applyNote)) +
-
       block(J.supportLabel, bullets(J.support)) +
 
-      block(J.cultureLabel, textOrList(J.culture)) +
-
-      '<a href="mailto:' + esc(SITE.email) + '"' +
-        ' class="mt-10 inline-block rounded bg-primary px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-dark">' +
-        esc(SITE.email) + '</a>';
+      block(J.cultureLabel, bullets(J.culture));
   }
 
   function contact() {
