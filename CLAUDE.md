@@ -368,6 +368,17 @@ const PUBLICATIONS = [
 국내 학술대회는 국문 그대로 적는다.
 예: `venue: "대한전기학회 하계학술대회"`, `title: "매입형 영구자석 전동기의 ..."`
 
+**학술대회의 `venue` 와 `detail`**
+
+```javascript
+venue:  "2026 IEEE Energy Conversion Congress and Exposition (ECCE 2026)"
+detail: "Vancouver, Canada, 2026.10.04 ~ 10.08"
+```
+
+- 풀네임 뒤에 **괄호로 약어를 병기**한다. 약어에는 년도를 포함한다 (`ECCE 2026`)
+- 약어가 없는 국내 학회는 풀네임만 적는다
+- 기간은 `개최지, YYYY.MM.DD ~ MM.DD`. 해가 넘어가면 끝 날짜도 연도까지 적는다
+
 **`date` 는 종류마다 가리키는 날짜가 다르다.**
 
 | 종류 | 적는 날짜 | 형식 |

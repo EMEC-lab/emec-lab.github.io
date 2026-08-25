@@ -88,7 +88,7 @@ const NEWS = [
     authors: "홍길동, 박민로",
     title: "매입형 영구자석 전동기의 토크 리플 저감 설계",
     venue: "2026년도 대한전기학회 하계학술대회",
-    detail: "용평",
+    detail: "용평, 2026.07.08 ~ 07.11",
     doi: "",
     domestic: true,
     patentNo: "", applicationNo: "", country: ""
@@ -131,6 +131,15 @@ const NEWS = [
 - `doi` 를 넣으면 논문 제목이 **자동으로 링크**가 됩니다. 없으면 `""`.
 - `data/members.js` 에 등록된 사람 이름은 저자 목록에서 **자동으로 굵게** 표시됩니다.
 - `type` 은 `journal` / `conference` / `patent` 셋 중 하나입니다.
+- **학술대회**는 `venue` 에 풀네임을 적고 뒤에 괄호로 약어를 붙입니다.
+
+  ```javascript
+  venue:  "2026 IEEE Energy Conversion Congress and Exposition (ECCE 2026)"
+  detail: "Vancouver, Canada, 2026.10.04 ~ 10.08"
+  ```
+
+  약어가 없는 국내 학회는 풀네임만 적으면 됩니다.
+  기간은 `개최지, 시작날 ~ 끝날` 순서로, 같은 해면 끝날은 월·일만 적습니다.
 
 **페이지 안에서 어느 칸에 들어갈지는 자동으로 정해집니다.**
 
