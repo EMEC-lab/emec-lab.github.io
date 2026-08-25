@@ -367,10 +367,10 @@ var Render = (function () {
     host.innerHTML =
       '<div class="reveal">' +
         '<p class="max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">' +
-          esc(SITE.home.joinLead) + '</p>' +
+          esc(SITE.join.lead) + '</p>' +
         '<a href="contact.html"' +
           ' class="mt-6 inline-block rounded bg-primary px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-dark">' +
-          esc(SITE.home.joinCta) + '</a>' +
+          esc(SITE.join.cta) + '</a>' +
       '</div>';
   }
 
@@ -382,7 +382,7 @@ var Render = (function () {
       ['home-stats-head', SITE.home.statsTitle, '', ''],
       ['home-news-head', SITE.home.newsTitle, '', 'news.html'],
       ['home-papers-head', SITE.home.papersTitle, '', 'publications.html'],
-      ['home-join-head', SITE.home.joinTitle, '', '']   /* 링크는 아래 버튼이 대신한다 */
+      ['home-join-head', SITE.join.title, '', '']   /* 링크는 아래 버튼이 대신한다 */
     ];
 
     map.forEach(function (m) {
@@ -901,13 +901,40 @@ var Render = (function () {
     var host = document.getElementById('contact-join');
     if (!host) return;
 
+    var J = SITE.join;
+
+    /* 소제목 + 목록 한 덩어리 */
+    function block(label, inner) {
+      if (!inner) return '';
+      return '<section class="mt-10">' +
+        '<h3 class="mb-3 text-xs font-bold uppercase tracking-wider2 text-primary">' + esc(label) + '</h3>' +
+        inner +
+      '</section>';
+    }
+
+    function bullets(items) {
+      if (!items || !items.length) return '';
+      return '<ul class="space-y-2 text-sm leading-relaxed text-slate-700">' +
+        items.map(function (v) {
+          return '<li class="flex gap-2.5">' +
+            '<span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary-mid"></span>' +
+            '<span>' + esc(v) + '</span></li>';
+        }).join('') + '</ul>';
+    }
+
     host.innerHTML =
-      '<h2 class="mb-8 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">' +
-        esc(SITE.home.joinTitle) + '</h2>' +
-      '<p class="max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">' +
-        esc(SITE.home.joinLead) + '</p>' +
+      '<h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">' +
+        esc(J.title) + '</h2>' +
+      '<p class="mt-4 max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">' +
+        esc(J.lead) + '</p>' +
+
+      block(J.targetsLabel, bullets(J.targets)) +
+      block(J.applyLabel,
+        '<p class="max-w-2xl text-sm leading-relaxed text-slate-700">' + esc(J.howToApply) + '</p>') +
+      block(J.supportLabel, bullets(J.support)) +
+
       '<a href="mailto:' + esc(SITE.email) + '"' +
-        ' class="mt-6 inline-block rounded bg-primary px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-dark">' +
+        ' class="mt-10 inline-block rounded bg-primary px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-dark">' +
         esc(SITE.email) + '</a>';
   }
 
@@ -918,7 +945,7 @@ var Render = (function () {
     sectionTabs({
       tabs: [
         { key: 'location', label: SITE.sectionTitles.location },
-        { key: 'join',     label: SITE.home.joinTitle }
+        { key: 'join',     label: SITE.join.title }
       ]
     });
   }

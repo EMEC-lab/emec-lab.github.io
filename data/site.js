@@ -105,10 +105,6 @@ const SITE = {
     statsTitle:     "At a Glance",
     newsTitle:      "Recent News",
     papersTitle:    "Recent Publications",
-    joinTitle:      "Join Us",
-    joinLead:       "[대학원생 모집 안내 문구 — 추후 확정]",
-    joinCta:        "Contact Us",
-
     /* 현황 지표 라벨. 값은 render.js 가 데이터에서 자동 집계한다 */
     stats: {
       phd:     "Ph.D. Students",
@@ -116,6 +112,38 @@ const SITE = {
       alumni:  "Alumni",
       ongoing: "Ongoing Projects"
     }
+  },
+
+  /* --- 대학원생 모집 안내 -----------------------------------------------
+   * 메인(HOME)은 title + lead + cta 만 쓰고, 나머지는 CONTACT 에서만 쓴다.
+   * 한 곳만 고치면 두 페이지가 같이 바뀐다.
+   *
+   * 목록(targets, support)은 항목을 늘리거나 줄여도 화면이 알아서 따라간다.
+   *
+   * ⚠ 아래 문구는 초안이다. 특히 support 의 지원 항목은 실제로 제공되는
+   *   내용인지 확인한 뒤 확정할 것.
+   * -------------------------------------------------------------------- */
+  join: {
+    title: "Join Us",
+    lead:  "전기기기 설계와 다중물리 해석에 관심 있는 분들과 함께 연구하고 싶습니다.",
+    cta:   "Contact Us",
+
+    targetsLabel: "모집 대상",
+    targets: [
+      "박사과정 · 석박사통합과정",
+      "석사과정",
+      "학부연구생"
+    ],
+
+    applyLabel: "지원 방법",
+    howToApply: "관심 있는 연구분야와 이력서를 아래 메일로 보내주세요. 편한 시간에 연구실에서 이야기 나눌 수 있습니다.",
+
+    supportLabel: "지원 내용",
+    support: [
+      "연구과제 참여를 통한 인건비 지원",
+      "국내외 학회 참가 지원",
+      "산학 프로젝트 참여 경험"
+    ]
   },
 
   /* --- 소식 분류 라벨 (news.js 의 category 값과 대응) -------------------- */
