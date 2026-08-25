@@ -213,18 +213,25 @@ var Render = (function () {
 
     return String(authors).split(',').map(function (seg) {
       var part = splitMarks(seg);
-      var hit = tokens[normalizeName(part.name)] === true;
 
-      var html = hit
+      /* 이름 앞뒤의 공백은 밑줄 밖으로 빼둔다.
+         안 그러면 쉼표 뒤 띄어쓰기까지 줄이 그어진다 */
+      var lead  = (part.name.match(/^\s*/) || [''])[0];
+      var trail = (part.name.match(/\s*$/) || [''])[0];
+      var bare  = part.name.slice(lead.length, part.name.length - trail.length);
+
+      var hit = tokens[normalizeName(bare)] === true;
+
+      var html = lead + (hit
         ? '<strong class="font-bold text-slate-900 underline decoration-slate-400' +
-          ' decoration-1 underline-offset-2">' + esc(part.name) + '</strong>'
-        : esc(part.name);
+          ' decoration-1 underline-offset-2">' + esc(bare) + '</strong>'
+        : esc(bare));
 
       if (part.marks) {
         html += '<sup class="ml-px text-[0.7em] font-bold text-primary">' +
                 esc(part.marks) + '</sup>';
       }
-      return html;
+      return html + trail;
     }).join(',');
   }
 
