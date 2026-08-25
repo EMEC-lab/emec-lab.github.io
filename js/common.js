@@ -249,15 +249,8 @@ var Layout = (function () {
     var year = new Date().getFullYear();
     var tel  = String(SITE.phone || '').replace(/[^+0-9]/g, '');
 
-    var ext = [];
-    if (SITE.links.university) {
-      ext.push('<li><a href="' + esc(SITE.links.university) + '" target="_blank" rel="noopener noreferrer"' +
-        ' class="text-white/70 transition-colors hover:text-white">' + esc(SITE.university) + '</a></li>');
-    }
-    if (SITE.links.scholar) {
-      ext.push('<li><a href="' + esc(SITE.links.scholar) + '" target="_blank" rel="noopener noreferrer"' +
-        ' class="text-white/70 transition-colors hover:text-white">Google Scholar</a></li>');
-    }
+    /* 푸터에는 외부 링크를 두지 않는다.
+     * SITE.links.scholar 는 PEOPLE 의 교수 프로필에서 그대로 쓴다. */
 
     return '' +
     '<footer class="mt-auto bg-primary-dark text-white/80">' +
@@ -275,7 +268,6 @@ var Layout = (function () {
               '<li><a class="transition-colors hover:text-white" href="tel:' + esc(tel) + '">' + esc(SITE.phone) + '</a></li>' +
               '<li><a class="break-all transition-colors hover:text-white" href="mailto:' + esc(SITE.email) + '">' + esc(SITE.email) + '</a></li>' +
             '</ul>' +
-            (ext.length ? '<ul class="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-sm">' + ext.join('') + '</ul>' : '') +
           '</div>' +
 
           '<div>' +
