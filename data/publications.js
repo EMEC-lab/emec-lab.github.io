@@ -937,16 +937,6 @@ const PUBLICATIONS = [
   },
   {
     type: "conference", year: 2020,
-    date: "2020-05-04",
-    authors: "K. Kim, Y. Jung, J. Park, M.-R. Park*",
-    title: "Design for Reducing of Induced Voltage Harmonics by Separating Flux Linkage Components of High-Speed Multilayer IPMSM",
-    venue: "International Magnetics Conference (Intermag 2020)",
-    detail: "Montreal, Canada, 2020.05.04 ~ 05.08",
-    doi: "", domestic: false,
-    patentNo: "", applicationNo: "", country: ""
-  },
-  {
-    type: "conference", year: 2020,
     date: "2020-11-18",
     authors: "Ki-O Kim, Jun-Yeol Ryu, Do-Jin Kim, Min-Ro Park, Myung-Seop Lim",
     title: "Electromechanical Dynamics Characteristics of Voice Coil Actuator for Circuit Breaker in Power Transmission Systems",
@@ -962,16 +952,6 @@ const PUBLICATIONS = [
     title: "Equivalent Magnetic Circuit of External Rotor SPMSM considering Magnetization Distribution of Multi-Pole PM",
     venue: "19th Biennial IEEE Conference on Electromagnetic Field Computation (CEFC 2020)",
     detail: "Pisa, Italy, 2020.11.16 ~ 11.18",
-    doi: "", domestic: false,
-    patentNo: "", applicationNo: "", country: ""
-  },
-  {
-    type: "conference", year: 2020,
-    date: "2020-05-04",
-    authors: "D. Kim1, J. Kim1, M. Park1 and M. Lim1",
-    title: "Estimation Method of Rotor Eddy Current Loss in Ultra-High-Speed Surface-Mounted Permanent Magnet",
-    venue: "International Magnetics Conference (Intermag 2020)",
-    detail: "Montreal, Canada, 2020.05.04 ~ 05.08",
     doi: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
