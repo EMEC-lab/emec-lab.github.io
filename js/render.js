@@ -924,6 +924,11 @@ var Render = (function () {
       return '<span class="mt-2 h-1 w-1 shrink-0 rounded-full ' + color + '"></span>';
     }
 
+    /* 하위 항목 표식. 상위의 점과 모양을 달리해 단계가 보이게 한다 */
+    function dash() {
+      return '<span class="mt-2.5 h-px w-2.5 shrink-0 bg-primary-mid"></span>';
+    }
+
     /* 항목 여러 개를 한 줄에 나란히. 좀은 화면에서는 자연스럽게 접힌다 */
     function inlineRow(items) {
       if (!items || !items.length) return '';
@@ -955,7 +960,7 @@ var Render = (function () {
               (sub.length
                 ? '<ul class="' + subCls + '">' +
                     sub.map(function (t) {
-                      return '<li class="flex gap-2 text-slate-600">' + dot('bg-slate-300') +
+                      return '<li class="flex gap-2.5 text-slate-600">' + dash() +
                              '<span>' + esc(t) + '</span></li>';
                     }).join('') +
                   '</ul>'
@@ -1013,7 +1018,10 @@ var Render = (function () {
 
       block(J.targetsLabel, inlineRow(J.targets)) +
 
-      block(J.qualifyLabel, defs(J.qualify) + aside(J.qualifyNote)) +
+      block(J.qualifyLabel,
+        bullets(J.qualifyCommon) +
+        ((J.qualifyCommon && J.qualifyCommon.length) ? '<div class="mt-4"></div>' : '') +
+        defs(J.qualify) + aside(J.qualifyNote)) +
 
       block(J.researchLabel,
         textOrList(J.researchNote) +
