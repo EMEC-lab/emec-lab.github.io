@@ -417,7 +417,7 @@ var Render = (function () {
 
   /* =====================================================================
    * PUBLICATIONS
-   *   상단 필터 [All] [Journal] [Conference] [Patent]
+   *   상단 필터 [Journal] [Conference] [Patent] — 한 번에 하나만 보인다
    *   종류마다 한 번 더 나눈 뒤 연도별로 묶어 최신순
    *     저널 · 학술대회  International / Domestic  (domestic 값)
    *     특허              Registered / Application  (patentNo 유무)
@@ -509,15 +509,11 @@ var Render = (function () {
     var counts = {};
     PUBLICATION_TYPES.forEach(function (t) { counts[t] = renderPubType(t); });
 
-    var total = PUBLICATION_TYPES.reduce(function (n, t) { return n + counts[t]; }, 0);
-
+    /* 한 번에 한 종류만 보여 준다. 첫 탭(Journal)이 기본이다 */
     sectionTabs({
-      defaultKey: 'all',
-      tabs: [{ key: 'all', label: SITE.ui.all, count: total, all: true }].concat(
-        PUBLICATION_TYPES.map(function (t) {
-          return { key: t, label: SITE.submenu[t], count: counts[t] };
-        })
-      )
+      tabs: PUBLICATION_TYPES.map(function (t) {
+        return { key: t, label: SITE.submenu[t], count: counts[t] };
+      })
     });
   }
 

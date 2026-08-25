@@ -111,7 +111,7 @@ const SITE = {
     },
     /* 특허는 등록번호(patentNo)가 있으면 등록, 없으면 출원으로 본다 */
     patent: {
-      registered:  "Registered Patent",
+      registered:  "Granted Patent",
       application: "Patent Application"
     }
   },
