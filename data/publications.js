@@ -558,7 +558,7 @@ const PUBLICATIONS = [
   {
     type: "journal", year: 2025,
     date: "2025-06",
-    authors: "Kyoung-Soo Cha†, Jae-Hyun Kim, Soo-Gyung Lee, Min-Ro Park*",
+    authors: "Kyoung-Soo Cha†, Jae-Hyun Kim†, Soo-Gyung Lee, Min-Ro Park*",
     title: "Design of a High-Efficiency External Rotor Interior Permanent Magnet Synchronous Motor Without Magnetic Leakage Flux Path",
     venue: "Mathematics",
     detail: "vol. 13, no. 11, pp. 1-17 (1865)",
@@ -568,7 +568,7 @@ const PUBLICATIONS = [
   {
     type: "journal", year: 2025,
     date: "2025-05",
-    authors: "Kyoung-Soo Cha†, Young-Hoon Jung, Soo-Hwan Park*, Min-Ro Park*",
+    authors: "Kyoung-Soo Cha†, Young-Hoon Jung†, Soo-Hwan Park*, Min-Ro Park*",
     title: "Optimal Design Considering AC Copper Loss of Traction Motor Applied HSFF Coil for Improving Electric Bus Fuel Economy",
     venue: "Mathematics",
     detail: "vol. 13, no. 9, pp. 1-20 (1509)",
@@ -578,7 +578,7 @@ const PUBLICATIONS = [
   {
     type: "journal", year: 2025,
     date: "2025-05",
-    authors: "Young-Hoon Jung†, Dong-Min Kim, Kyoung-Soo Cha, Soo-Hwan Park*, Min-Ro Park*",
+    authors: "Young-Hoon Jung†, Dong-Min Kim†, Kyoung-Soo Cha, Soo-Hwan Park*, Min-Ro Park*",
     title: "Vibration Reduction of Permanent Magnet Synchronous Motors by Four-Layer Winding: Mathematical Modeling and Experimental Validation",
     venue: "Mathematics",
     detail: "vol. 13, no. 10, pp. 1-19 (1603)",
