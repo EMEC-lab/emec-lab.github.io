@@ -87,9 +87,6 @@ const SITE = {
     areas:      "Research Areas",
     equipment:  "Facilities",
     projects:   "Research Projects",
-    journal:    "Journal Papers",
-    conference: "Conference Papers",
-    patent:     "Patents",
     ongoing:    "Ongoing",
     completed:  "Completed",
     location:   "Location",
@@ -281,7 +278,6 @@ const SITE = {
     menu:       "Menu",
     openMenu:   "Open menu",
     closeMenu:  "Close menu",
-    all:        "All",
     rights:     "All rights reserved."
   }
 };

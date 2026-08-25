@@ -90,6 +90,7 @@ const SITE = {
     patent:     "Patent"
   },
 
+  // 페이지 안의 섹션 제목. HTML 은 <h2 data-section-title="areas"> 처럼 키만 적는다
   sectionTitles: {
     professor:  "Professor",
     current:    "Students",
@@ -97,11 +98,17 @@ const SITE = {
     areas:      "Research Areas",
     equipment:  "Facilities",
     projects:   "Research Projects",
-    journal:    "Journal Papers",
-    conference: "Conference Papers",
-    patent:     "Patents",
     ongoing:    "Ongoing",
-    completed:  "Completed"
+    completed:  "Completed",
+    location:   "Location",
+    gallery:    "Gallery"
+  },
+
+  // PUBLICATIONS 의 묶음 제목. 판정 기준은 js/render.js 의 PUB_SPLITS
+  pubGroups: {
+    journal:    { international: "International Journal",    domestic:    "Domestic Journal" },
+    conference: { international: "International Conference", domestic:    "Domestic Conference" },
+    patent:     { registered:    "Granted Patent",           application: "Patent Application" }
   }
 };
 ```
@@ -289,9 +296,9 @@ CONTACT                             → contact.html
 | Overview | Research Areas | `research.js` | `#areas` |
 | Facilities | Facilities | `equipment.js` | `#equipment` |
 | Projects | Research Projects | `projects.js` | `#projects` |
-| Journal | Journal Papers | `publications.js` (`type: journal`) | `#journal` |
-| Conference | Conference Papers | `publications.js` (`type: conference`) | `#conference` |
-| Patent | Patents | `publications.js` (`type: patent`) | `#patent` |
+| Journal | International / Domestic Journal | `publications.js` (`type: journal`) | `#journal` |
+| Conference | International / Domestic Conference | `publications.js` (`type: conference`) | `#conference` |
+| Patent | Granted Patent / Patent Application | `publications.js` (`type: patent`) | `#patent` |
 | NEWS | — | `news.js` | `#feed` |
 | NEWS 하단 | Gallery | `gallery.js` | `#albums` |
 | JOIN US | — | `site.js` (`SITE.join`) | `#join` |
@@ -349,8 +356,8 @@ const PUBLICATIONS = [
     venue: "IEEE Transactions on Magnetics",
     detail: "vol. 62, no. 3, pp. 1-5",
     doi: "",
-    domestic: false,          // 화면 표시 안 함. 학과 평가·통계용
-    patentNo: "",             // patent 전용. 등록번호
+    domestic: false,          // 화면 분류 기준. false → International, true → Domestic
+    patentNo: "",             // patent 전용. 등록번호. 채워지면 Granted 로 분류된다
     applicationNo: "",        // patent 전용. 출원번호
     country: "KR"
   }
@@ -359,6 +366,17 @@ const PUBLICATIONS = [
 
 국내 학술대회는 국문 그대로 적는다.
 예: `venue: "대한전기학회 하계학술대회"`, `title: "매입형 영구자석 전동기의 ..."`
+
+**분류를 손으로 적어두지 않는다.** 화면의 묶음은 아래 두 값에서 매번 계산된다.
+
+| 종류 | 묶음 | 판정 |
+|---|---|---|
+| journal, conference | International / Domestic | `domestic` |
+| patent | Granted / Application | `patentNo` 가 비어 있으면 출원 |
+
+`domestic` 은 학과 평가·통계에도 그대로 쓴다.
+특허가 등록되면 `patentNo` 를 채우기만 하면 저절로 Granted 묶음으로 옮겨간다.
+과제의 `getStatus()` 와 같은 이유다 — 상태를 손으로 적으면 갱신되지 않는다.
 
 ### data/projects.js
 
@@ -528,15 +546,26 @@ const ongoingCount = PROJECTS.filter(p => getStatus(p) === 'ongoing').length;
 ### PUBLICATIONS (publications.html)
 
 ```
-#journal      Journal Papers
-#conference   Conference Papers
-#patent       Patents
+#journal      International Journal    / Domestic Journal
+#conference   International Conference / Domestic Conference
+#patent       Granted Patent           / Patent Application
 ```
 
-- 상단에 `[All] [Journal] [Conference] [Patent]` 필터 버튼
-- 각 섹션 안에서는 **연도별 그룹핑**, 최신순
+- 상단에 `[Journal] [Conference] [Patent]` 필터 버튼. **한 번에 한 종류만 보인다**
+  (첫 탭 Journal 이 기본. `All` 은 두지 않는다)
+- 종류 제목(`Journal Papers` 등)은 따로 두지 않는다.
+  위 표의 **묶음 이름이 그 페이지의 큰 제목**이다
+- 묶음 안에서 다시 **연도별 그룹핑**, 최신순
+- 비어 있는 묶음은 제목째 렌더링하지 않는다 (빈 섹션 노출 금지)
 - DOI가 있으면 제목을 링크로
 - 저자 목록에서 EMEC 구성원 이름은 굵게 표시 (`MEMBERS` 데이터로 판별)
+
+**묶는 기준과 제목 문구는 따로 둔다.**
+
+- 판정 기준 — `js/render.js` 의 `PUB_SPLITS`
+- 제목 문구 — `data/site.js` 의 `SITE.pubGroups`
+
+다른 기준으로 한 번 더 나누거나 제목을 바꿀 때는 이 두 곳만 고친다.
 
 ### NEWS (news.html)
 

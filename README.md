@@ -116,8 +116,20 @@ const NEWS = [
 - `year` 만 맞으면 **연도별로 자동 정렬**됩니다. 순서 신경 쓰지 않아도 됩니다.
 - `doi` 를 넣으면 논문 제목이 **자동으로 링크**가 됩니다. 없으면 `""`.
 - `data/members.js` 에 등록된 사람 이름은 저자 목록에서 **자동으로 굵게** 표시됩니다.
-- `domestic` 은 화면에 나오지 않습니다. 학과 평가·통계용이니 사실대로 적습니다.
 - `type` 은 `journal` / `conference` / `patent` 셋 중 하나입니다.
+
+**페이지 안에서 어느 칸에 들어갈지는 자동으로 정해집니다.**
+
+| 종류 | 나뉘는 칸 | 기준 |
+|---|---|---|
+| 학술지 · 학술대회 | International / Domestic | `domestic: false` 면 International |
+| 특허 | Granted Patent / Patent Application | `patentNo` 가 `""` 면 출원 |
+
+- `domestic` 은 이제 **화면의 분류를 결정합니다.** 사실대로 적어 주세요.
+  학과 평가·통계에도 그대로 쓰입니다.
+- **아직 등록되지 않은 출원 특허**는 `patentNo: ""` 로 두고 `applicationNo` 만 적으세요.
+  나중에 등록되면 `patentNo` 를 채우기만 하면 Granted Patent 로 옮겨갑니다.
+- 출원 특허가 하나도 없으면 `Patent Application` 제목 자체가 나오지 않습니다.
 
 ---
 
