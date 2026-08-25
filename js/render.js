@@ -443,29 +443,31 @@ var Render = (function () {
   function yearBlocks(list) {
     return groupByYear(list).map(function (g) {
       return '<div class="mt-8 first:mt-0">' +
-        '<h4 class="border-b-2 border-primary pb-1 font-mono text-lg font-bold text-primary">' +
-          esc(g.year) + '</h4>' +
+        '<h3 class="border-b-2 border-primary pb-1 font-mono text-lg font-bold text-primary">' +
+          esc(g.year) + '</h3>' +
         '<ul class="divide-y divide-slate-200">' +
           g.items.map(publicationItem).join('') +
         '</ul></div>';
     }).join('');
   }
 
-  /* 국제 / 국내로 먼저 나누고, 그 안에서 다시 연도별로 묶는다.
-   * 한쪽이 비면 소제목째 그리지 않는다 (빈 섹션 노출 금지) */
-  function originBlocks(list) {
+  /* 국제 / 국내가 이 페이지의 큰 제목이다. 그 안에서 다시 연도별로 묶는다.
+   * 한쪽이 비면 제목째 그리지 않는다 (빈 섹션 노출 금지) */
+  function originBlocks(type, list) {
+    var labels = (SITE.pubGroups && SITE.pubGroups[type]) || {};
+
     return [
       { key: 'international', items: list.filter(function (p) { return !p.domestic; }) },
       { key: 'domestic',      items: list.filter(function (p) { return !!p.domestic; }) }
     ].filter(function (g) { return g.items.length; })
      .map(function (g) {
-       return '<section class="mt-14 first:mt-0">' +
-         '<h3 class="mb-6 flex items-baseline gap-3 border-l-4 border-primary pl-3' +
-           ' text-lg font-bold text-slate-900">' +
-           esc(SITE.sectionTitles[g.key]) +
-           '<span class="font-mono text-sm font-semibold text-slate-400">' +
+       return '<section class="mt-16 first:mt-0">' +
+         '<h2 class="mb-8 flex flex-wrap items-baseline gap-x-3 text-2xl font-bold' +
+           ' tracking-tight text-slate-900 sm:text-3xl">' +
+           esc(labels[g.key] || g.key) +
+           '<span class="font-mono text-base font-semibold text-slate-400">' +
              esc(g.items.length) + '</span>' +
-         '</h3>' +
+         '</h2>' +
          yearBlocks(g.items) +
        '</section>';
      }).join('');
@@ -479,7 +481,7 @@ var Render = (function () {
     if (!list.length) { host.innerHTML = emptyNote(); return 0; }
 
     /* 특허는 전부 국내라 나누지 않는다 */
-    host.innerHTML = (type === 'patent') ? yearBlocks(list) : originBlocks(list);
+    host.innerHTML = (type === 'patent') ? yearBlocks(list) : originBlocks(type, list);
 
     return list.length;
   }

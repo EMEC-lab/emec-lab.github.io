@@ -90,13 +90,25 @@ const SITE = {
     journal:    "Journal Papers",
     conference: "Conference Papers",
     patent:     "Patents",
-    /* 저널 · 학술대회 안을 국제 / 국내로 나눠 보여 줄 때 쓰는 소제목 */
-    international: "International",
-    domestic:      "Domestic",
     ongoing:    "Ongoing",
     completed:  "Completed",
     location:   "Location",
     gallery:    "Gallery"
+  },
+
+  /* --- PUBLICATIONS 의 국제 / 국내 제목 ------------------------------
+   * 저널·학술대회는 종류 제목 대신 이 네 가지가 바로 큰 제목으로 나온다.
+   * 구분은 각 항목의 domestic 값을 따른다.
+   * ------------------------------------------------------------------- */
+  pubGroups: {
+    journal: {
+      international: "International Journal",
+      domestic:      "Domestic Journal"
+    },
+    conference: {
+      international: "International Conference",
+      domestic:      "Domestic Conference"
+    }
   },
 
   /* --- HOME 섹션 문구 --------------------------------------------------
