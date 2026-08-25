@@ -245,6 +245,15 @@ var Layout = (function () {
   }
 
   /* --- 푸터 -------------------------------------------------------------- */
+
+  /* 라벨 + 값 한 줄. 라벨은 SITE.ui 에서 온다 (CONTACT 페이지와 같은 말) */
+  function contactRow(label, valueHTML) {
+    return '<div class="flex gap-3">' +
+      '<dt class="w-16 shrink-0 font-semibold text-white/50">' + esc(label) + '</dt>' +
+      '<dd class="min-w-0">' + valueHTML + '</dd>' +
+    '</div>';
+  }
+
   function footerHTML() {
     var year = new Date().getFullYear();
     var tel  = String(SITE.phone || '').replace(/[^+0-9]/g, '');
@@ -263,11 +272,13 @@ var Layout = (function () {
               ' class="mb-5 h-[34px] w-auto" loading="lazy">' +
             '<p class="text-sm text-white/70">' + esc(SITE.labNameKo) + '</p>' +
             '<p class="mt-1 text-sm text-white/70">' + esc(SITE.department) + ', ' + esc(SITE.university) + '</p>' +
-            '<ul class="mt-5 space-y-1.5 text-sm text-white/70">' +
-              '<li>' + esc(SITE.address.full) + '</li>' +
-              '<li><a class="transition-colors hover:text-white" href="tel:' + esc(tel) + '">' + esc(SITE.phone) + '</a></li>' +
-              '<li><a class="break-all transition-colors hover:text-white" href="mailto:' + esc(SITE.email) + '">' + esc(SITE.email) + '</a></li>' +
-            '</ul>' +
+            '<dl class="mt-5 space-y-1.5 text-sm text-white/70">' +
+              contactRow(SITE.ui.address, esc(SITE.address.full)) +
+              contactRow(SITE.ui.phone,
+                '<a class="transition-colors hover:text-white" href="tel:' + esc(tel) + '">' + esc(SITE.phone) + '</a>') +
+              contactRow(SITE.ui.email,
+                '<a class="break-all transition-colors hover:text-white" href="mailto:' + esc(SITE.email) + '">' + esc(SITE.email) + '</a>') +
+            '</dl>' +
           '</div>' +
 
           '<div>' +
