@@ -418,8 +418,10 @@ var Render = (function () {
   /* =====================================================================
    * PUBLICATIONS
    *   상단 필터 [All] [Journal] [Conference] [Patent]
-   *   저널·학술대회는 International / Domestic 으로 나눈 뒤 연도별로 묶어 최신순
-   *   구분은 각 항목의 domestic 값을 따른다
+   *   종류마다 한 번 더 나눈 뒤 연도별로 묶어 최신순
+   *     저널 · 학술대회  International / Domestic  (domestic 값)
+   *     특허              Registered / Application  (patentNo 유무)
+   *   나누는 기준은 PUB_SPLITS, 제목 문구는 SITE.pubGroups 에 있다
    *   DOI 가 있으면 제목이 링크, 구성원 이름은 굵게 (publicationItem 담당)
    * =================================================================== */
 
@@ -451,15 +453,33 @@ var Render = (function () {
     }).join('');
   }
 
-  /* 국제 / 국내가 이 페이지의 큰 제목이다. 그 안에서 다시 연도별로 묶는다.
-   * 한쪽이 비면 제목째 그리지 않는다 (빈 섹션 노출 금지) */
-  function originBlocks(type, list) {
-    var labels = (SITE.pubGroups && SITE.pubGroups[type]) || {};
+  /* 종류마다 나누는 기준이 다르다. 키는 SITE.pubGroups 의 키와 같다.
+   * 순서대로 화면에 나타난다 */
+  var PUB_SPLITS = {
+    journal: [
+      { key: 'international', test: function (p) { return !p.domestic; } },
+      { key: 'domestic',      test: function (p) { return !!p.domestic; } }
+    ],
+    conference: [
+      { key: 'international', test: function (p) { return !p.domestic; } },
+      { key: 'domestic',      test: function (p) { return !!p.domestic; } }
+    ],
+    patent: [
+      { key: 'registered',  test: function (p) { return !!p.patentNo; } },
+      { key: 'application', test: function (p) { return !p.patentNo; } }
+    ]
+  };
 
-    return [
-      { key: 'international', items: list.filter(function (p) { return !p.domestic; }) },
-      { key: 'domestic',      items: list.filter(function (p) { return !!p.domestic; }) }
-    ].filter(function (g) { return g.items.length; })
+  /* 나눠진 묶음이 이 페이지의 큰 제목이다. 그 안에서 다시 연도별로 묶는다.
+   * 비어 있는 묶음은 제목째 그리지 않는다 (빈 섹션 노출 금지) */
+  function groupBlocks(type, list) {
+    var labels = (SITE.pubGroups && SITE.pubGroups[type]) || {};
+    var splits = PUB_SPLITS[type];
+    if (!splits) return yearBlocks(list);
+
+    return splits.map(function (sp) {
+      return { key: sp.key, items: list.filter(sp.test) };
+    }).filter(function (g) { return g.items.length; })
      .map(function (g) {
        return '<section class="mt-16 first:mt-0">' +
          '<h2 class="mb-8 flex flex-wrap items-baseline gap-x-3 text-2xl font-bold' +
@@ -480,8 +500,7 @@ var Render = (function () {
     var list = pubsOf(type);
     if (!list.length) { host.innerHTML = emptyNote(); return 0; }
 
-    /* 특허는 전부 국내라 나누지 않는다 */
-    host.innerHTML = (type === 'patent') ? yearBlocks(list) : originBlocks(type, list);
+    host.innerHTML = groupBlocks(type, list);
 
     return list.length;
   }
