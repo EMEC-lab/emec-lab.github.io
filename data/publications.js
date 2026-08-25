@@ -917,16 +917,6 @@ const PUBLICATIONS = [
   },
   {
     type: "conference", year: 2020,
-    date: "2020-05-04",
-    authors: "Doo-Young. Kim, Min-Ro Park, Young-Hoon Jung and Myung-Seop Lim",
-    title: "Abnormal Torque Ripple Analysis Method by MR Sensor of Controller Integrated Motor for EPS",
-    venue: "International Magnetics Conference (Intermag 2020)",
-    detail: "Montreal, Canada, 2020.05.04 ~ 05.08",
-    doi: "", domestic: false,
-    patentNo: "", applicationNo: "", country: ""
-  },
-  {
-    type: "conference", year: 2020,
     date: "2020-08-23",
     authors: "Jun-Woo Chin, Young-Hoon Jung, Jun-Yeol Ryu, Min-Ro Park, Myung-Seop Lim",
     title: "Computationally Cost-efficient Characteristics Analysis of EV Traction Motor considering AC Copper Loss based on 2-D Magneto-Static Analysis",
