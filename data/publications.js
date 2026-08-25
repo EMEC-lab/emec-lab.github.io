@@ -1067,16 +1067,6 @@ const PUBLICATIONS = [
   },
   {
     type: "conference", year: 2019,
-    date: "2019-07-16",
-    authors: "Min-Ro Park†, Hae-Joong Kim, Ho-Young Lee, Myung-Seop Lim",
-    title: "Optimum Design of Sensorless-oriented IPMSM Considering Torque Characteristics",
-    venue: "22th International Conference on the Computation of Electromagnetic Fields (COMPUMAG 2019)",
-    detail: "Paris, France, 2019.07.15 ~ 07.19",
-    doi: "", domestic: false,
-    patentNo: "", applicationNo: "", country: ""
-  },
-  {
-    type: "conference", year: 2019,
     date: "2019-06-19",
     authors: "Soo-Gyung Lee, Saekyeol Kim, Min-Ro Park, Tae Hee Lee, Jung-Pyo Hong",
     title: "Sensitivity Analysis for Robust Performance of Electrical Machines Affected by Manufacturing Tolerance",
