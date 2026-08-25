@@ -357,20 +357,27 @@ var Render = (function () {
     }).join('') + '</ul>';
   }
 
-  /* 함께하실 분 — 제목줄은 homeHeadings 가 그리고 여기서는 본문만.
-     위 섹션들과 같은 양식·같은 왼쪽 정렬을 쓴다.
-     자세한 모집 안내는 CONTACT 페이지에 있고 여기서는 그리로 보낸다. */
+  /* 함께하실 분 — 제목줄은 homeHeadings 가 그리고 여기서는 요약만.
+     자세한 안내는 CONTACT 의 Join Us 탭에 있고, 제목줄의 View all 이 그리로 보낸다. */
   function homeJoin() {
     var host = document.getElementById('home-join');
     if (!host) return;
 
+    var J = SITE.join;
+
     host.innerHTML =
       '<div class="reveal">' +
         '<p class="max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">' +
-          esc(SITE.join.lead) + '</p>' +
-        '<a href="contact.html"' +
-          ' class="mt-6 inline-block rounded bg-primary px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-dark">' +
-          esc(SITE.join.cta) + '</a>' +
+          esc(J.lead) + '</p>' +
+        ((J.highlights && J.highlights.length)
+          ? '<ul class="mt-6 space-y-2.5">' +
+              J.highlights.map(function (v) {
+                return '<li class="flex gap-2.5 text-sm leading-relaxed text-slate-700">' +
+                  '<span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary-mid"></span>' +
+                  '<span>' + esc(v) + '</span></li>';
+              }).join('') +
+            '</ul>'
+          : '') +
       '</div>';
   }
 
@@ -382,7 +389,7 @@ var Render = (function () {
       ['home-stats-head', SITE.home.statsTitle, '', ''],
       ['home-news-head', SITE.home.newsTitle, '', 'news.html'],
       ['home-papers-head', SITE.home.papersTitle, '', 'publications.html'],
-      ['home-join-head', SITE.join.title, '', '']   /* 링크는 아래 버튼이 대신한다 */
+      ['home-join-head', SITE.join.title, '', 'contact.html#join']
     ];
 
     map.forEach(function (m) {
@@ -896,16 +903,17 @@ var Render = (function () {
   }
 
   /* 모집 안내 — CONTACT 페이지가 이 내용의 본거지다.
-     HOME 의 카드는 여기로 보내는 역할만 한다. 문구는 SITE.home 을 함께 쓴다. */
+     HOME 은 요약만 보여 주고 제목줄의 View all 이 여기로 보낸다.
+     문구는 전부 data/site.js 의 SITE.join 에서 온다. */
   function contactJoin() {
     var host = document.getElementById('contact-join');
     if (!host) return;
 
     var J = SITE.join;
 
-    /* 소제목 + 목록 한 덩어리 */
+    /* 소제목 + 내용 한 덩어리. 라벨이나 내용이 비면 통째로 생략한다 */
     function block(label, inner) {
-      if (!inner) return '';
+      if (!label || !inner) return '';
       return '<section class="mt-10">' +
         '<h3 class="mb-3 text-xs font-bold uppercase tracking-wider2 text-primary">' + esc(label) + '</h3>' +
         inner +
@@ -922,6 +930,18 @@ var Render = (function () {
         }).join('') + '</ul>';
     }
 
+    function para(text) {
+      return text ? '<p class="max-w-2xl text-sm leading-relaxed text-slate-700">' + esc(text) + '</p>' : '';
+    }
+
+    /* 문턱을 낮추는 안내문 — 본문과 구분되게 옅게 깐다 */
+    function note(text) {
+      return text
+        ? '<p class="mt-3 max-w-2xl rounded border-l-2 border-primary-mid bg-primary-light px-4 py-3 text-sm leading-relaxed text-slate-700">' +
+            esc(text) + '</p>'
+        : '';
+    }
+
     host.innerHTML =
       '<h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">' +
         esc(J.title) + '</h2>' +
@@ -929,9 +949,22 @@ var Render = (function () {
         esc(J.lead) + '</p>' +
 
       block(J.targetsLabel, bullets(J.targets)) +
-      block(J.applyLabel,
-        '<p class="max-w-2xl text-sm leading-relaxed text-slate-700">' + esc(J.howToApply) + '</p>') +
+
+      block(J.qualifyLabel, bullets(J.qualify) + note(J.qualifyNote)) +
+
+      block(J.researchLabel,
+        para(J.researchNote) +
+        (J.researchLink
+          ? '<a href="' + esc(J.researchLink) + '"' +
+            ' class="mt-3 inline-block text-sm font-semibold text-primary hover:underline">' +
+            esc(J.researchLinkLabel || SITE.ui.readMore) + ' &rarr;</a>'
+          : '')) +
+
+      block(J.applyLabel, para(J.howToApply) + note(J.applyNote)) +
+
       block(J.supportLabel, bullets(J.support)) +
+
+      block(J.cultureLabel, para(J.culture)) +
 
       '<a href="mailto:' + esc(SITE.email) + '"' +
         ' class="mt-10 inline-block rounded bg-primary px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-dark">' +
