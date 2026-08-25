@@ -16,6 +16,7 @@
 | 메뉴 라벨, 섹션 제목 | `data/site.js` | 네비게이션, 각 페이지 소제목 |
 | 메인 색상 및 파생 색상 | `js/theme.js` + `css/custom.css` | Tailwind 클래스에 hex 직접 입력 |
 | 교수 정보 | `data/members.js` | HOME의 교수 소개 섹션 |
+| 모집 안내 문구 | `data/site.js` (`SITE.join`) | `join.html`, HOME의 모집 요약 |
 | SNS·외부 링크 | `data/site.js` | 푸터 |
 
 **연락처 참조 규칙**
@@ -31,7 +32,7 @@
 
 ```bash
 grep -rn "EMEC" *.html
-grep -rn "26539C" --include="*.html" --include="*.css" . | grep -v theme.js
+grep -rn "26539C" --include="*.html" --include="*.css" . | grep -v "theme.js\|custom.css"
 grep -rn "041-530\|minro@\|M417" *.html js/
 ```
 
@@ -51,7 +52,7 @@ const SITE = {
   address: {
     full:  "M417, Multimedia Building, Soonchunhyang University, 22 Soonchunhyang-ro, Asan-si, Chungcheongnam-do 31538, Republic of Korea",
     fullKo: "충남 아산시 순천향로 22 순천향대학교 멀티미디어관 M417호",
-    short: "Multimedia Bldg. M417"
+    short: "Multimedia Building, M417"
   },
 
   phone: "041-530-1334",
@@ -72,9 +73,11 @@ const SITE = {
     research:     "RESEARCH",
     publications: "PUBLICATIONS",
     news:         "NEWS",
+    join:         "JOIN US",
     contact:      "CONTACT"
   },
 
+  // 드롭다운이 있는 세 메뉴에만 하위 항목이 있다
   submenu: {
     professor:  "Professor",
     current:    "Students",
@@ -84,9 +87,7 @@ const SITE = {
     projects:   "Projects",
     journal:    "Journal",
     conference: "Conference",
-    patent:     "Patent",
-    newsfeed:   "News",
-    gallery:    "Gallery"
+    patent:     "Patent"
   },
 
   sectionTitles: {
@@ -217,8 +218,8 @@ tailwind.config = {
 ├── people.html
 ├── research.html
 ├── publications.html
-├── news.html
-├── gallery.html
+├── news.html        # 글 소식 + 사진 게시글
+├── join.html        # 대학원생 모집 안내
 ├── contact.html
 ├── .nojekyll
 ├── css/
@@ -264,17 +265,19 @@ PUBLICATIONS ▾
   ├ Journal                         → publications.html#journal
   ├ Conference                      → publications.html#conference
   └ Patent                          → publications.html#patent
-NEWS ▾
-  ├ News                            → news.html
-  └ Gallery                         → gallery.html
+NEWS                                → news.html
+JOIN US                             → join.html
 CONTACT                             → contact.html
 ```
 
 - 1단계 메뉴는 **대문자**로 표기한다. 드롭다운 항목은 일반 표기.
-- PEOPLE, RESEARCH, PUBLICATIONS의 하위 항목은 **별도 파일이 아니라 같은 페이지의 앵커**로 연결한다.
-- NEWS만 예외로 `news.html`과 `gallery.html` 두 파일로 분리한다. (갤러리 이미지 용량 때문)
+- 드롭다운은 **PEOPLE, RESEARCH, PUBLICATIONS 세 곳뿐**이고,
+  하위 항목은 **별도 파일이 아니라 같은 페이지의 앵커**로 연결한다.
+- HOME, NEWS, JOIN US, CONTACT 는 하위 항목이 없다. 한 번에 해당 페이지로 간다.
 - 각 섹션에는 반드시 아래 표의 `id` 속성을 부여한다.
 - 메뉴 라벨은 **상위·하위 모두** `SITE.menu` / `SITE.submenu`에서 읽어온다. 네비게이션 HTML에 직접 쓰지 않는다.
+- 상위 메뉴가 일곱 개라 가로로 빽빽하다. **더 늘릴 때는 가로 메뉴가 나타나는
+  기준 폭을 `lg`(1024px)에서 `xl`(1280px)로 올려야 한다.**
 
 **용어 대응표** — 문서·코드 전반에서 혼용하지 말 것.
 
@@ -289,8 +292,10 @@ CONTACT                             → contact.html
 | Journal | Journal Papers | `publications.js` (`type: journal`) | `#journal` |
 | Conference | Conference Papers | `publications.js` (`type: conference`) | `#conference` |
 | Patent | Patents | `publications.js` (`type: patent`) | `#patent` |
-| News | — | `news.js` | — |
-| Gallery | — | `gallery.js` | — |
+| NEWS | — | `news.js` | `#feed` |
+| NEWS 하단 | Gallery | `gallery.js` | `#albums` |
+| JOIN US | — | `site.js` (`SITE.join`) | `#join` |
+| CONTACT | Location | `site.js` | `#location` |
 
 ---
 
@@ -457,17 +462,22 @@ const NEWS = [
 
 ### HOME (index.html)
 
-**섹션 순서 (변경 금지)**
+**섹션 순서**
 
 1. **히어로** — 9번 항목의 상세 규격에 따름
 2. **연구분야 요약** — 3~4개 카드, 제목 + 두 줄 설명 → `research.html#areas` 링크
-3. **지도교수 소개** — 사진 + 3~4문장 → `people.html#professor` 링크
-4. **현황 지표** — 아래 자동 집계 참조
-5. **최근 소식** — 최신 3건 → `news.html` 링크
-6. **최근 논문** — 최신 3건 → `publications.html` 링크
-7. **함께하실 분** — 대학원생 모집 안내 → `contact.html` 링크
+3. **최근 소식** — 최신 3건 → `news.html` 링크
+4. **모집 안내 요약** — `SITE.join.heading` + `highlights` → `join.html` 링크
 
-연구분야가 교수 소개보다 먼저 온다. 방문자의 첫 질문은 "무엇을 연구하는가"이기 때문.
+연구분야가 먼저 온다. 방문자의 첫 질문은 "무엇을 연구하는가"이기 때문.
+
+**잠시 감춘 섹션** — 아래 세 가지는 사용자 요청으로 화면에서 내렸다.
+`index.html` 의 "감쯐 섹션" 주석 안에 그대로 남아 있으므로 **주석만 풀면 되살아난다.**
+다시 살릴 때 위치는 연구분야 다음이다.
+
+- **지도교수 소개** — 사진 + 3~4문장 → `people.html#professor` 링크
+- **현황 지표** — 아래 자동 집계 참조
+- **최근 논문** — 최신 3건 → `publications.html` 링크
 
 **현황 지표는 반드시 자동 집계한다.** 숫자 하드코딩 금지.
 
@@ -530,20 +540,48 @@ const ongoingCount = PROJECTS.filter(p => getStatus(p) === 'ongoing').length;
 
 ### NEWS (news.html)
 
+글 소식과 사진 게시글을 **한 페이지에 위아래로** 둔다. 탭을 두지 않는다.
+
+```
+#feed     — 글 소식. 제목 없이 바로 피드가 시작된다
+#albums   — 사진 게시글. 연한 배경 밴드에 Gallery 제목을 단다
+```
+
+**글 소식 (`#feed`)**
+
 - **게시판 형태 금지.** 상세 페이지, 목록 페이지, 페이지네이션 없음
 - 날짜 + 1~3문장이 시간순으로 누적되는 피드
 - 연도별 구분선
 - `link`가 있으면 문장을 링크로, `image`가 있으면 좌측에 작은 썸네일
 
-### GALLERY (gallery.html)
+**사진 게시글 (`#albums`)**
 
 - 앨범 단위 격자 배치. 클릭 시 라이트박스로 확대
 - 이미지 `loading="lazy"` 필수
+- 앨범이 많아져 페이지가 무거워지면 다시 별도 파일로 분리하는 것을 검토한다
+
+### JOIN US (join.html)
+
+문구는 전부 `SITE.join` 한 곳에서 온다. HTML 에 직접 쓰지 않는다.
+메인의 모집 요약도 같은 곳을 쓴다.
+
+```
+제목        SITE.join.heading
+문의 안내   SITE.join.contact  — {email} 자리에 SITE.email 이 링크로 들어간다
+본문        모집 대상 · 자격·우대 사항 · 연구 내용 · 지원 내용 · 연구실 생활
+```
+
+- 문체는 **개조식**으로 통일한다. 한 항목은 한 줄, 명사형으로 끝낸다
+- 라벨을 빈 문자열로 두면 그 덩어리 전체가 표시되지 않는다
+- 항목은 문자열 또는 `{ text, sub, row }` 객체다.
+  `sub` 는 체크 표시의 하위 항목으로, `row: true` 면 두 칸으로 나란히 놓인다
+- 문턱을 낮추는 안내문(`qualifyNote`)은 **강조하지 않는다.**
+  본문보다 작고 옛게 둔다. 여기가 눈에 먼저 들어오면 조건이 까다로운 것처럼 읽힌다
 
 ### CONTACT (contact.html)
 
 - `SITE`의 주소·전화·이메일·좌표를 사용한 오시는 길 (지도 임베드)
-- 하단에 대학원생 모집 안내
+- 모집 안내는 여기 두지 않는다. `join.html` 이 따로 있다
 
 ---
 
@@ -699,7 +737,8 @@ const ongoingCount = PROJECTS.filter(p => getStatus(p) === 'ongoing').length;
 - 과제 추가하는 법, 진행중/완료가 자동 전환된다는 설명
 - 구성원 추가 / 졸업생으로 이동시키는 법
 - 소식 올리는 법
-- 갤러리에 사진 올리는 법 (이미지 크기 조정 포함)
+- 갤러리에 사진 올리는 법 (이미지 크기 조정 포함). 사진은 NEWS 페이지 하단에 보인다는 점도 적는다
+- 모집 안내 문구를 고치는 법 (`data/site.js` 의 `SITE.join`)
 - 히어로 영상 교체 및 `ffmpeg` 압축 명령
 - **연구실 이름이나 색상을 바꾸는 법** (`data/site.js`, `js/theme.js` 위치 안내)
 - 수정한 내용을 실제 사이트에 반영하는 법 (commit & push)
@@ -713,4 +752,6 @@ const ongoingCount = PROJECTS.filter(p => getStatus(p) === 'ongoing').length;
 - **수상 페이지** — 현재는 `news.js`에 `category: "award"`로 누적. 충분히 쌓이면 필터링해서 생성
 - **About 독립 페이지** — 현재는 HOME에 통합. 연혁 등이 길어지면 `#about` 섹션을 분리
 - **Publications 페이지 분할** — 논문 200편 초과 시
+- **Gallery 페이지 분리** — 현재는 NEWS 하단에 함께 있다.
+  사진이 많아져 NEWS 페이지가 무거워지면 `gallery.html` 로 다시 떼어낸다
 - **커스텀 도메인 연결**

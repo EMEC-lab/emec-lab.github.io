@@ -367,8 +367,8 @@ var Render = (function () {
 
     host.innerHTML =
       '<div class="reveal">' +
-        '<p class="max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">' +
-          esc(J.lead) + '</p>' +
+        '<p class="max-w-2xl text-sm font-semibold leading-relaxed text-slate-900 sm:text-base">' +
+          esc(J.heading) + '</p>' +
         ((J.highlights && J.highlights.length)
           ? '<ul class="mt-6 space-y-2.5">' +
               J.highlights.map(function (v) {
@@ -1007,13 +1007,14 @@ var Render = (function () {
         ' class="font-semibold text-primary hover:underline">' + esc(SITE.email) + '</a>');
     }
 
-    var intro = (J.contact || []).map(function (t) {
-      return '<p class="mt-3 max-w-2xl text-sm leading-relaxed text-slate-600">' + withEmail(t) + '</p>';
+    var intro = (J.contact || []).map(function (t, i) {
+      return '<p class="' + (i ? 'mt-3' : 'mt-5') +
+        ' max-w-2xl text-sm leading-relaxed text-slate-600">' + withEmail(t) + '</p>';
     }).join('');
 
     host.innerHTML =
-      '<p class="max-w-2xl text-base font-semibold leading-relaxed text-slate-900">' +
-        esc(J.lead) + '</p>' +
+      '<h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">' +
+        esc(J.heading) + '</h2>' +
       intro +
 
       block(J.targetsLabel, inlineRow(J.targets)) +
