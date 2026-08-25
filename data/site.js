@@ -90,6 +90,9 @@ const SITE = {
     journal:    "Journal Papers",
     conference: "Conference Papers",
     patent:     "Patents",
+    /* 저널 · 학술대회 안을 국제 / 국내로 나눠 보여 줄 때 쓰는 소제목 */
+    international: "International",
+    domestic:      "Domestic",
     ongoing:    "Ongoing",
     completed:  "Completed",
     location:   "Location",
