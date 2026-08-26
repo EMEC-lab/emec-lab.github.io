@@ -7,6 +7,8 @@
  *          -> 이 표기를 기준으로 논문 저자 목록에서 자동으로 굵게 표시된다
  *   email  SITE.email 과 같으면 비워둘 것 (자동으로 SITE 값을 쓴다)
  *   office 비우면 SITE.address.short 를 쓴다
+ *   grade  학부연구생 전용. 학년(숫자). 학년별로 묶어 이름만 나열한다
+ *          대학원생은 null 로 둔다
  *
  *   교수 전용 필드
  *     education    문자열 배열                     학력
@@ -98,6 +100,150 @@ const MEMBERS = [
     gradYear: null,
     thesis: "",
     currentPosition: ""
+  },
+  {
+    id: "ms-lee-yongmin",
+    role: "ms",
+    name: "Yong-Min Lee (이용민)",
+    title: "M.S. Student",
+    photo: "images/members/lee-yongmin.jpg",
+    email: "", office: "",
+    interests: "",
+    grade: null,
+    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: null, thesis: "", currentPosition: ""
+  },
+  {
+    id: "ms-kim-hyeseong",
+    role: "ms",
+    name: "Hye-Seong Kim (김혜성)",
+    title: "M.S. Student",
+    photo: "images/members/kim-hyeseong.jpg",
+    email: "", office: "",
+    interests: "",
+    grade: null,
+    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: null, thesis: "", currentPosition: ""
+  },
+  {
+    id: "ms-lee-younghoon",
+    role: "ms",
+    name: "Young-Hoon Lee (이영훈)",
+    title: "M.S. Student",
+    photo: "images/members/lee-younghoon.jpg",
+    email: "", office: "",
+    interests: "",
+    grade: null,
+    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: null, thesis: "", currentPosition: ""
+  },
+  {
+    id: "ug-01",
+    role: "undergrad",
+    name: "정민구",
+    title: "",
+    photo: "",
+    email: "", office: "",
+    interests: "",
+    grade: 4,
+    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: null, thesis: "", currentPosition: ""
+  },
+  {
+    id: "ug-02",
+    role: "undergrad",
+    name: "신주현",
+    title: "",
+    photo: "",
+    email: "", office: "",
+    interests: "",
+    grade: 4,
+    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: null, thesis: "", currentPosition: ""
+  },
+  {
+    id: "ug-03",
+    role: "undergrad",
+    name: "이현규",
+    title: "",
+    photo: "",
+    email: "", office: "",
+    interests: "",
+    grade: 4,
+    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: null, thesis: "", currentPosition: ""
+  },
+  {
+    id: "ug-04",
+    role: "undergrad",
+    name: "김호윤",
+    title: "",
+    photo: "",
+    email: "", office: "",
+    interests: "",
+    grade: 4,
+    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: null, thesis: "", currentPosition: ""
+  },
+  {
+    id: "ug-05",
+    role: "undergrad",
+    name: "노진성",
+    title: "",
+    photo: "",
+    email: "", office: "",
+    interests: "",
+    grade: 4,
+    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: null, thesis: "", currentPosition: ""
+  },
+  {
+    id: "ug-06",
+    role: "undergrad",
+    name: "한영준",
+    title: "",
+    photo: "",
+    email: "", office: "",
+    interests: "",
+    grade: 4,
+    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: null, thesis: "", currentPosition: ""
+  },
+  {
+    id: "ug-07",
+    role: "undergrad",
+    name: "최영준",
+    title: "",
+    photo: "",
+    email: "", office: "",
+    interests: "",
+    grade: 4,
+    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: null, thesis: "", currentPosition: ""
+  },
+  {
+    id: "ug-08",
+    role: "undergrad",
+    name: "정석환",
+    title: "",
+    photo: "",
+    email: "", office: "",
+    interests: "",
+    grade: 3,
+    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: null, thesis: "", currentPosition: ""
+  },
+  {
+    id: "ug-09",
+    role: "undergrad",
+    name: "김우성",
+    title: "",
+    photo: "",
+    email: "", office: "",
+    interests: "",
+    grade: 3,
+    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: null, thesis: "", currentPosition: ""
   }
 
   /* --- 학생 · 졸업생은 아래 형식으로 추가한다 --------------------------

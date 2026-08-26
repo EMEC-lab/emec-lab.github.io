@@ -267,6 +267,7 @@ const SITE = {
     talks:       "Invited Talks",
     scholar:     "Google Scholar",
     viewProfile: "View profile",
+    gradeSuffix: "학년",      // 학부연구생 목록의 학년 라벨
     office:      "Office",
     email:       "Email",
     phone:       "Phone",

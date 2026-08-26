@@ -1027,6 +1027,38 @@ var Render = (function () {
     '</div>';
   }
 
+  /* 학부연구생은 인원이 많고 사진도 없다. 학년별로 묶어 이름만 나열한다 */
+  function undergradList(items) {
+    var order = [], map = {};
+    items.forEach(function (m) {
+      var g = (m.grade === null || m.grade === undefined) ? '' : String(m.grade);
+      if (!map[g]) { map[g] = []; order.push(g); }
+      map[g].push(m);
+    });
+
+    /* 높은 학년부터. 학년을 안 적은 사람은 맨 아래 */
+    order.sort(function (a, b) {
+      if (!a) return 1;
+      if (!b) return -1;
+      return Number(b) - Number(a);
+    });
+
+    return '<dl class="space-y-3 text-sm leading-relaxed">' +
+      order.map(function (g) {
+        var names = map[g].map(function (m) {
+          var n = splitName(m.name);
+          return esc(n.ko || n.en);
+        }).join('<span class="px-1.5 text-slate-300">·</span>');
+
+        return '<div class="sm:flex sm:gap-6">' +
+          '<dt class="shrink-0 font-semibold text-slate-900 sm:w-20">' +
+            (g ? esc(g + SITE.people.gradeSuffix) : esc(SITE.ui.empty)) + '</dt>' +
+          '<dd class="mt-1 text-slate-700 sm:mt-0">' + names + '</dd>' +
+        '</div>';
+      }).join('') +
+    '</dl>';
+  }
+
   function peopleCurrent() {
     var host = document.getElementById('people-current');
     if (!host) return;
@@ -1049,9 +1081,11 @@ var Render = (function () {
           '<span class="font-mono text-sm font-normal text-slate-400">' +
             esc(g.items.length) + '</span>' +
         '</h3>' +
-        '<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">' +
-          g.items.map(studentCard).join('') +
-        '</div>' +
+        (g.role === 'undergrad'
+          ? undergradList(g.items)
+          : '<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">' +
+              g.items.map(studentCard).join('') +
+            '</div>') +
       '</div>';
     }).join('');
   }

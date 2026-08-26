@@ -329,6 +329,7 @@ const MEMBERS = [
     email: "",                // SITE.email과 같으면 비워둘 것
     office: "",
     interests: "Electric Machine Design, Multiphysics Analysis, Optimal Design",
+    grade: null,              // 학부연구생 전용. 학년(숫자). 대학원생은 null
 
     // 교수 전용
     education: [
@@ -611,6 +612,13 @@ Ph.D. Candidate     title 값 (파란색)
 ```
 
 - `interests` 는 **쉼표로 구분해 적으면 태그 하나씩으로 나눠진다**
+- **학부연구생은 카드를 쓰지 않는다.** 인원이 많고 사진도 없어,
+  `grade` 로 묶어 이름만 나열한다 (높은 학년부터)
+
+  ```
+  4학년   정민구 · 신주현 · 이현규 · 김호윤 · 노진성 · 한영준 · 최영준
+  3학년   정석환 · 김우성
+  ```
 - 카드마다 개별 프로필 페이지로 가는 버튼은 두지 않는다. 학생 개별 페이지가 없기 때문이다
 
 ### RESEARCH (research.html)
