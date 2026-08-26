@@ -919,36 +919,43 @@ var Render = (function () {
     '</section>';
   }
 
-  function bulletList(items) {
-    if (!items || !items.length) return '';
-    return '<ul class="space-y-1.5 text-sm leading-relaxed text-slate-600">' +
-      items.map(function (v) {
-        return '<li class="flex gap-2"><span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-slate-400"></span>' +
-               '<span>' + esc(v) + '</span></li>';
-      }).join('') + '</ul>';
-  }
+  /* 날짜 칸 — 학력 · 경력 · 학회 활동 · 학회 회원 · 초청강연이 모두 이 모양을 쓴다 */
+  var DATE_COL = 'block font-mono text-xs text-slate-400 sm:w-36 sm:shrink-0 sm:pt-0.5';
 
-  /* 학력 — "Ph.D., 학과, 학교, 2020.02" 처럼 뒤에 붙은 취득년월을 앞으로 뺀다.
-     학위명(첫 쉼표 앞)은 굵게 짚는다 */
-  var EDU_DATE = /,\s*((\d{4}(\.\d{2})?)(\s*[–-]\s*(\d{4}(\.\d{2})?|Present))?)\s*$/;
+  /* 기간이 붙은 한 줄 문자열을 날짜 칸과 본문으로 나눈다.
+     학력은 뒤에 ("…, 2020.02"), 경력은 앞에 ("2022.03 – Present, …") 붙는다.
+     기간 바로 옆 조각(학위명 · 직위)은 굵게 짚는다 */
+  var PERIOD_HEAD = /^\s*(\d{4}(?:\.\d{2}(?:\.\d{2})?)?(?:\s*[–-]\s*(?:\d{4}(?:\.\d{2}(?:\.\d{2})?)?|Present))?)\s*,\s*/;
+  var PERIOD_TAIL = /,\s*(\d{4}(?:\.\d{2}(?:\.\d{2})?)?(?:\s*[–-]\s*(?:\d{4}(?:\.\d{2}(?:\.\d{2})?)?|Present))?)\s*$/;
 
-  function eduList(items) {
+  function datedList(items) {
     if (!items || !items.length) return '';
     return '<ul class="space-y-2 text-sm text-slate-600">' +
       items.map(function (raw) {
         var line = String(raw || '');
-        var hit  = line.match(EDU_DATE);
-        var when = hit ? hit[1] : '';
-        var rest = hit ? line.slice(0, hit.index) : line;
-        var cut  = rest.indexOf(',');
-        var degree = cut === -1 ? rest : rest.slice(0, cut);
-        var tail   = cut === -1 ? ''   : rest.slice(cut + 1).replace(/^\s+/, '');
+        var when = '';
+
+        var head = line.match(PERIOD_HEAD);
+        if (head) {
+          when = head[1];
+          line = line.slice(head[0].length);
+        } else {
+          var tail = line.match(PERIOD_TAIL);
+          if (tail) {
+            when = tail[1];
+            line = line.slice(0, tail.index);
+          }
+        }
+
+        var cut  = line.indexOf(',');
+        var lead = cut === -1 ? line : line.slice(0, cut);
+        var rest = cut === -1 ? ''   : line.slice(cut + 1).replace(/^\s+/, '');
+
         return '<li class="sm:flex sm:gap-4">' +
-          '<span class="block font-mono text-xs text-slate-400 sm:w-36 sm:shrink-0 sm:pt-0.5">' +
-            esc(when) + '</span>' +
+          '<span class="' + DATE_COL + '">' + esc(when) + '</span>' +
           '<span class="block leading-relaxed">' +
-            '<span class="font-semibold text-slate-800">' + esc(degree) + '</span>' +
-            (tail ? ' ' + esc(tail) : '') +
+            '<span class="font-semibold text-slate-800">' + esc(lead) + '</span>' +
+            (rest ? ' ' + esc(rest) : '') +
           '</span>' +
         '</li>';
       }).join('') + '</ul>';
@@ -961,7 +968,7 @@ var Render = (function () {
       items.map(function (x) {
         var main = x[mainKey] ? '<span class="font-semibold text-slate-800">' + esc(x[mainKey]) + '</span> ' : '';
         return '<li class="sm:flex sm:gap-4">' +
-          '<span class="block font-mono text-xs text-slate-400 sm:w-36 sm:shrink-0 sm:pt-0.5">' +
+          '<span class="' + DATE_COL + '">' +
             esc(x.period || '') + '</span>' +
           '<span class="block leading-relaxed">' + main + esc(x.org) + '</span>' +
         '</li>';
@@ -973,7 +980,7 @@ var Render = (function () {
     return '<ul class="divide-y divide-slate-100 text-sm">' +
       items.map(function (t) {
         return '<li class="py-2.5 sm:flex sm:gap-4">' +
-          '<span class="block font-mono text-xs text-slate-400 sm:w-24 sm:shrink-0 sm:pt-0.5">' +
+          '<span class="' + DATE_COL + '">' +
             esc(Util.formatDate(t.date)) + '</span>' +
           '<span class="block min-w-0 leading-relaxed">' +
             '<span class="text-slate-700">' + esc(t.title) + '</span>' +
@@ -1032,8 +1039,8 @@ var Render = (function () {
 
       /* 아래: 학력 · 경력 · 학회 활동 · 학회 회원 · 초청강연 */
       '<div class="mt-10 border-t border-slate-200 pt-2">' +
-        profileBlock(SITE.people.education,   eduList(prof.education)) +
-        profileBlock(SITE.people.career,      bulletList(prof.career)) +
+        profileBlock(SITE.people.education,   datedList(prof.education)) +
+        profileBlock(SITE.people.career,      datedList(prof.career)) +
         profileBlock(SITE.people.activities,  periodList(prof.activities, 'role')) +
         profileBlock(SITE.people.memberships, periodList(prof.memberships, null)) +
         profileBlock(SITE.people.talks,       talkList(prof.talks)) +
@@ -1159,7 +1166,7 @@ var Render = (function () {
       '</section>';
     }
 
-    var edu = eduList(m.education);
+    var edu = datedList(m.education);
 
     /* PUBLICATIONS 페이지와 같은 기준으로 나눈다.
        종류(저널 → 학술대회 → 특허) 안에서 국제 → 국내, 그 안은 최신순 */
