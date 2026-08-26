@@ -594,11 +594,24 @@ const ongoingCount = PROJECTS.filter(p => getStatus(p) === 'ongoing').length;
 
 ```
 #professor   — 사진 크게, 학력·경력·연구관심사·Google Scholar 전체 노출
-#current     — 박사 / 석사 / 학부연구생 순, 작은 카드 그리드
+#current     — 박사 / 석사 / 학부연구생 순. 학위 과정별로 소제목을 두고 카드 그리드
 #alumni      — 사진 없이 텍스트 목록. 이름, 학위, 졸업연도, 현재 소속
 ```
 
 교수는 학생과 **다른 레이아웃**으로 렌더링한다. 같은 카드 크기로 나열하지 않는다.
+
+**학생 카드 구성** — 가운데 정렬, 위에서부터
+
+```
+[증명사진 3:4]
+Yong-Min Lee        영문 이름 (굵게)
+이용민               국문 이름 (작게 · 회색)
+Ph.D. Candidate     title 값 (파란색)
+[Electric Machine Design] [Multi-physics Analysis]   interests 를 쉼표로 가른 태그
+```
+
+- `interests` 는 **쉼표로 구분해 적으면 태그 하나씩으로 나눠진다**
+- 카드마다 개별 프로필 페이지로 가는 버튼은 두지 않는다. 학생 개별 페이지가 없기 때문이다
 
 ### RESEARCH (research.html)
 

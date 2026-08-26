@@ -990,6 +990,43 @@ var Render = (function () {
   }
 
   /* --- 재학생 : 작은 카드 그리드 ----------------------------------------- */
+  /* "Min-Ro Park (박민로)" → { en: "Min-Ro Park", ko: "박민로" } */
+  function splitName(raw) {
+    var m = String(raw || '').match(/^\s*([^(]*?)\s*(?:\(([^)]*)\))?\s*$/);
+    return m ? { en: m[1], ko: m[2] || '' } : { en: raw || '', ko: '' };
+  }
+
+  /* interests 는 쉼표로 가른 문자열이다. 하나씩 알약 태그로 보여 준다 */
+  function interestTags(text) {
+    var list = String(text || '').split(',')
+      .map(function (t) { return t.replace(/^\s+|\s+$/g, ''); })
+      .filter(Boolean);
+    if (!list.length) return '';
+
+    return '<div class="mt-3 flex flex-wrap justify-center gap-1.5">' +
+      list.map(function (t) {
+        return '<span class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px]' +
+          ' leading-tight text-slate-600">' + esc(t) + '</span>';
+      }).join('') +
+    '</div>';
+  }
+
+  function studentCard(m) {
+    var n = splitName(m.name);
+
+    return '<div class="card-hover rounded-lg border border-slate-200 bg-white p-4 text-center">' +
+      imageBox(m.photo, n.en, 'aspect-[3/4]', 'rounded') +
+      '<p class="mt-4 text-sm font-bold text-slate-900">' + esc(n.en) + '</p>' +
+      (n.ko ? '<p class="mt-0.5 text-xs text-slate-500">' + esc(n.ko) + '</p>' : '') +
+      (m.title ? '<p class="mt-1.5 text-xs font-semibold text-primary">' + esc(m.title) + '</p>' : '') +
+      interestTags(m.interests) +
+      (m.email
+        ? '<a class="mt-3 block break-all text-[11px] text-slate-400 hover:text-primary"' +
+          ' href="mailto:' + esc(m.email) + '">' + esc(m.email) + '</a>'
+        : '') +
+    '</div>';
+  }
+
   function peopleCurrent() {
     var host = document.getElementById('people-current');
     if (!host) return;
@@ -1005,20 +1042,15 @@ var Render = (function () {
 
     host.innerHTML = groups.map(function (g) {
       var label = (typeof MEMBER_ROLE_LABELS !== 'undefined' && MEMBER_ROLE_LABELS[g.role]) || g.role;
-      return '<div class="mt-10 first:mt-0">' +
-        '<h3 class="mb-4 text-xs font-bold uppercase tracking-wider2 text-primary">' + esc(label) + '</h3>' +
-        '<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">' +
-          g.items.map(function (m) {
-            return '<div class="card-hover overflow-hidden rounded-lg border border-slate-200 bg-white">' +
-              imageBox(m.photo, m.name, 'aspect-[3/4]') +
-              '<div class="p-4">' +
-                '<p class="text-sm font-bold text-slate-900">' + esc(m.name) + '</p>' +
-                (m.interests ? '<p class="mt-1.5 text-xs leading-relaxed text-slate-500">' + esc(m.interests) + '</p>' : '') +
-                (m.email ? '<a class="mt-2 block break-all text-xs text-primary hover:underline" href="mailto:' +
-                  esc(m.email) + '">' + esc(m.email) + '</a>' : '') +
-              '</div>' +
-            '</div>';
-          }).join('') +
+
+      return '<div class="mt-12 first:mt-0">' +
+        '<h3 class="mb-5 flex items-baseline gap-2 text-lg font-bold text-slate-900">' +
+          esc(label) +
+          '<span class="font-mono text-sm font-normal text-slate-400">' +
+            esc(g.items.length) + '</span>' +
+        '</h3>' +
+        '<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">' +
+          g.items.map(studentCard).join('') +
         '</div>' +
       '</div>';
     }).join('');
