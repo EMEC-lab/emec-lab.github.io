@@ -680,11 +680,28 @@ var Render = (function () {
 
   /* 지원기관 CI. 로고가 없으면 기관명 텍스트로 대체한다.
      로고마다 가로세로비가 달라 높이만 맞추고 너비는 auto 로 둔다. */
-  /* 기관명. 로고는 사업명 아래에 따로 그린다 (sponsorLogo) */
-  function sponsorName(sp) {
-    var name = (sp && sp.name) || '';
+  /* 사업명이 짧으면 기관명 옆에 붙이고, 길면 다음 줄로 내린다.
+   * 한 줄로 끝나면 그만큼 로고가 차지할 세로 공간이 생긴다. */
+  var PROGRAM_INLINE_MAX = 10;
+
+  function sponsorHead(p) {
+    var name = (p.sponsor && p.sponsor.name) || '';
     if (!name) return '';
-    return '<p class="text-xs font-semibold leading-snug text-slate-600">' + esc(name) + '</p>';
+
+    var prog = p.program || '';
+    var inline = prog && prog.length <= PROGRAM_INLINE_MAX;
+
+    var out = '<p class="text-xs font-semibold leading-snug text-slate-600">' + esc(name) +
+      (inline
+        ? '<span class="font-normal text-slate-400"> \u00b7 ' + esc(prog) + '</span>'
+        : '') +
+      '</p>';
+
+    if (prog && !inline) {
+      out += '<p class="mt-0.5 break-keep text-[11px] leading-tight text-slate-400">' +
+             esc(prog) + '</p>';
+    }
+    return out;
   }
 
   /* 기관명이 이미 적혀 있으므로 alt 는 비운다 (음성 안내에서 중복되지 않게) */
@@ -692,13 +709,13 @@ var Render = (function () {
     if (!sp || !sp.logo) return '';
 
     var img = '<img src="' + esc(sp.logo) + '" alt="" loading="lazy" data-fallback' +
-              ' class="h-7 w-auto max-w-full object-contain object-left">';
+              ' class="max-h-10 w-auto max-w-full object-contain object-left">';
 
     if (sp.url) {
       return '<a href="' + esc(sp.url) + '" target="_blank" rel="noopener noreferrer"' +
-             ' class="mt-2 flex h-7 items-center transition-opacity hover:opacity-70">' + img + '</a>';
+             ' class="mt-2 flex items-center transition-opacity hover:opacity-70">' + img + '</a>';
     }
-    return '<span class="mt-2 flex h-7 items-center">' + img + '</span>';
+    return '<span class="mt-2 flex items-center">' + img + '</span>';
   }
 
   function statusBadge(status) {
@@ -721,9 +738,8 @@ var Render = (function () {
     /* 역할. 지도교수가 아닌 사람이 연구책임자면 두 사람을 함께 적는다.
        그렇지 않으면 이름을 붙이지 않는다 — 이 페이지의 과제는 모두 지도교수의 것이다 */
     var roleText = p.pi
-      ? esc(roleOf('PI')) + ' (' + esc(p.pi) + ')' +
-        ' <span class="text-slate-400">/</span> ' +
-        esc(roleOf(p.role)) + ' (' + esc(SITE.professor) + ')'
+      ? '<span class="block">' + esc(roleOf('PI')) + ' (' + esc(p.pi) + ')</span>' +
+        '<span class="block">' + esc(roleOf(p.role)) + ' (' + esc(SITE.professor) + ')</span>'
       : esc(roleOf(p.role));
 
     /* 라벨 + 값 한 줄 */
@@ -737,12 +753,8 @@ var Render = (function () {
 
     /* 로고가 없으면 CI 자리에 기관명 텍스트가 들어간다 */
     return '<li class="flex flex-col gap-3 py-5 sm:flex-row sm:items-start sm:gap-6">' +
-      '<div class="w-40 shrink-0">' +
-        sponsorName(p.sponsor) +
-        (p.program
-          ? '<p class="mt-1 break-keep text-[11px] leading-tight text-slate-400">' +
-            esc(p.program) + '</p>'
-          : '') +
+      '<div class="w-48 shrink-0">' +
+        sponsorHead(p) +
         sponsorLogo(p.sponsor) +
       '</div>' +
       '<div class="min-w-0 flex-1">' +

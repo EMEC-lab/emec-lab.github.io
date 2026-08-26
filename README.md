@@ -222,10 +222,13 @@ const NEWS = [
 화면에는 이렇게 나옵니다.
 
 ```
-한국연구재단              전기자동차의 동적 주행 특성을 고려한 …
-석사과정생연구장려금지원사업   Role     Principal Investigator (Yong-Min Lee, M.S. candidate)
-                                  / Academic Advisor (Min-Ro Park)
-                         Period   2024.07 ~ 2025.06   [Completed]
+한국연구재단                  전기자동차의 동적 주행 특성을 고려한 …
+석사과정생연구장려금지원사업
+[한국연구재단 CI]          Role     Principal Investigator (Yong-Min Lee, M.S. candidate)
+                                   Academic Advisor (Min-Ro Park)
+                          Period   2024.07 ~ 2025.06   [Completed]
+
+짧은 사업명(예: `생애 첫 연구`)은 기관명 옆에 `한국연구재단 · 생애 첫 연구` 처럼 붙습니다.
 ```
 
 보통 과제는 `program` 과 `pi` 를 `""` 로 비워 두거나 아예 적지 않으면 됩니다.

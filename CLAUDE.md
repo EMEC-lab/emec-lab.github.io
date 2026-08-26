@@ -607,15 +607,19 @@ const ongoingCount = PROJECTS.filter(p => getStatus(p) === 'ongoing').length;
 - 카드 또는 행 하나에 담을 내용:
 
   ```
-  [지원기관 CI]   과제명
-  [세부 사업명]   Role     Principal Investigator
-                 Period   2024.03 ~ 2027.02   [Ongoing]
+  지원기관 · 세부사업   과제명
+  [지원기관 CI]      Role     Principal Investigator
+                    Period   2024.03 ~ 2027.02   [Ongoing]
   ```
+
+  세부 사업명은 **짧으면 기관명 옆에**, 길면 다음 줄로 내린다.
+  기준은 `js/render.js` 의 `PROGRAM_INLINE_MAX`.
 
   학생이 연구책임자면 두 사람을 함께 적는다.
 
   ```
-  Role     Principal Investigator (Yong-Min Lee, M.S. candidate) / Academic Advisor (Min-Ro Park)
+  Role     Principal Investigator (Yong-Min Lee, M.S. candidate)
+           Academic Advisor (Min-Ro Park)
   ```
 
 - 역할 라벨은 `PROJECT_ROLES[p.role]`에서 가져온다. 직접 문자열을 쓰지 않는다
