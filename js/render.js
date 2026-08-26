@@ -970,13 +970,15 @@ var Render = (function () {
       .filter(Boolean);
     if (list.length < 2) return esc(text);
 
-    /* 구분점은 연하게 두어 저널명이 먼저 읽히게 하고,
-       이름 하나가 두 줄로 쪼개지지 않게 묶어 둔다 */
-    return list.map(function (t, i) {
-      var sep = (i < list.length - 1)
-        ? '<span class="ml-1.5 text-slate-300">·</span>' : '';
-      return '<span class="whitespace-nowrap">' + esc(t) + sep + '</span>';
-    }).join(' ');
+    /* 한 줄에 세 개씩 줄을 맞춰 놓는다.
+       줄 끝의 구분점은 css/custom.css 의 .org-sep 규칙이 감춘다 —
+       칸 수가 화면 폭에 따라 3 → 2 → 1 로 바뀌기 때문이다 */
+    return '<span class="org-grid mt-1.5 grid gap-x-3 gap-y-1 sm:grid-cols-2 lg:grid-cols-3">' +
+      list.map(function (t) {
+        return '<span>' + esc(t) +
+          '<span class="org-sep ml-1.5 text-slate-300">·</span></span>';
+      }).join('') +
+    '</span>';
   }
 
   function periodList(items, mainKey) {
