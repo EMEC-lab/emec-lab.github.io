@@ -123,7 +123,7 @@ const PROJECTS = [
   {
     id: "proj-2025-10",
     title: "미래 라이프스타일을 고려한 X care 컨셉 기반 지능형 모빌리티(제품 및 서비스) 플랫폼 로봇 디자인 개발",
-    sponsor: { name: "한국로봇융합연구원", logo: "images/sponsors/kiro.png", url: "https://www.kiro.re.kr" },
+    sponsor: { name: "한국로봇융합연구원", logo: "images/sponsors/kiro.jpg", url: "https://www.kiro.re.kr" },
     ministry: "",
     startDate: "2025-07-01", endDate: "2026-12-31",
     role: "Co-I", orgRole: "",
