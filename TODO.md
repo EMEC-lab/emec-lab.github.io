@@ -63,7 +63,47 @@
 
 ---
 
-## 3. 받아야 할 자료
+## 3. JCR 순위 자료 (조회 필요)
+
+`data/publications.js` 의 `jcrTop` · `jcrRank` · `jcrQuartile` 을 채우려면
+아래 조합의 JCR 자료가 필요하다. **게재 시점에 공개되어 있던 판본** 기준이다.
+(JCR `<연도>` 판은 그 이듬해 6월 말에 공개된다)
+
+저널이 여러 카테고리에 속하면 **가장 높은 카테고리** 기준으로 적는다.
+
+| 저널 | 논문 | 필요한 JCR 판본 |
+|---|---|---|
+| IEEE Transactions on Magnetics | 7건 | 2014, 2018, 2019, 2024 |
+| International Journal of Automotive Technology | 4건 | 2024, 최신 |
+| Journal of Magnetics | 3건 | 2018, 2021, 2023 |
+| Mathematics | 3건 | 2023 |
+| IEEE Transactions on Energy Conversion | 3건 | 2019 |
+| IEEE Transactions on Industry Applications | 2건 | 2017, 2019 |
+| Energies | 1건 | 2019 |
+| Journal of Electrical Engineering & Technology | 1건 | 2021 |
+| Machines | 1건 | 2024 |
+| Mechanical Systems and Signal Processing | 1건 | 2024 |
+| Mechatronics | 1건 | 2020 |
+| Renewable and Sustainable Energy Reviews | 1건 | 2021 |
+| Sensors | 1건 | 2019 |
+| Structural and Multidisciplinary Optimization | 1건 | 2024 |
+| IEEE/ASME Transactions on Mechatronics | 1건 | 2016 |
+
+저널 15개 · 조합 22개 · 논문 31건
+
+**판본을 어떻게 정했나** — 논문에 이미 들어 있는 `impact` 값을
+엑셀 `Impact Factor` 시트의 연도별 IF 행렬에서 역으로 찾았다.
+교수님이 실제로 어느 판본을 쓰셨는지 그대로 나온다. 31건 중 29건이 이렇게 확정됐다.
+
+나머지 2건은 확인이 필요하다.
+
+- **IEEE Transactions on Magnetics, 2016.03 게재 2건** — IF `1.386`.
+  엑셀 행렬이 2015년부터 시작해 이 값이 없다. 게재일로 보면 **JCR 2014** 다.
+- **International Journal of Automotive Technology, Early Access 1건** — IF `2.1`.
+  행렬의 IJAT 값(0.876~1.6)에 없다. **JCR 2025** 처럼 더 최근 판본으로 보인다.
+
+---
+## 4. 받아야 할 자료
 
 ### 이미지 · 영상
 
@@ -91,7 +131,7 @@
 
 ---
 
-## 4. 데이터 출처
+## 5. 데이터 출처
 
 - 논문 · 과제 · 학회활동 · 초청강연 : `D:\개인서류\2_실적\실적정리_20260428.xlsx`
 - 로고 원본 : `images/logo/EMEC_Lab Identity.png` (4192×468, 투명 배경, #26539C)
@@ -102,7 +142,7 @@
 
 ---
 
-## 5. 아직 안 한 것
+## 6. 아직 안 한 것
 
 - **배포** — GitHub Pages 설정 (조직 `EMEC`, 저장소 `EMEC.github.io`).
   `.nojekyll` 은 준비되어 있고 원격 저장소만 연결하면 된다.
@@ -110,7 +150,7 @@
 
 ---
 
-## 6. 새 세션에서 시작할 때
+## 7. 새 세션에서 시작할 때
 
 1. `CLAUDE.md` 를 읽는다. 기술 제약(3번)과 데이터 명세(6번)가 이 프로젝트의 존재 이유다.
 2. 이 문서의 2번(대기 중인 질문)을 확인한다.
