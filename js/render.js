@@ -209,9 +209,36 @@ var Render = (function () {
     return m ? { name: m[1], marks: m[2] } : { name: seg, marks: '' };
   }
 
-  function boldAuthors(authors) {
+  /* 구성원 한 명이 쓸 수 있는 이름 표기들 */
+  function tokensOf(m) {
+    var t = {};
+    var raw = String((m && m.name) || '');
+    var ko = (raw.match(/\(([^)]+)\)/) || [])[1] || '';
+    var en = raw.replace(/\([^)]*\)/, '').replace(/^\s+|\s+$/g, '');
+
+    if (ko) t[normalizeName(ko)] = true;
+    if (en) {
+      t[normalizeName(en)] = true;
+      var parts = en.split(/\s+/);
+      if (parts.length > 1) {
+        var last = parts.pop();
+        var initials = parts.join('-').split('-').map(function (w) {
+          return w.charAt(0);
+        }).join('');
+        t[normalizeName(initials + last)] = true;
+      }
+    }
+    return t;
+  }
+
+  /* only 를 넘기면 그 사람만, 안 넘기면 모든 구성원을 짚는다.
+     style 은 'member'(굵게+밑줄) 또는 'self'(굵게+파란색) */
+  function boldAuthors(authors, only, style) {
     if (!authors) return '';
-    var tokens = memberTokens();
+    var tokens = only ? tokensOf(only) : memberTokens();
+    var hitCls = (style === 'self')
+      ? 'font-bold text-primary underline decoration-primary/40 decoration-1 underline-offset-2'
+      : 'font-bold text-slate-900 underline decoration-slate-400 decoration-1 underline-offset-2';
 
     return String(authors).split(',').map(function (seg) {
       var part = splitMarks(seg);
@@ -225,8 +252,7 @@ var Render = (function () {
       var hit = tokens[normalizeName(bare)] === true;
 
       var html = lead + (hit
-        ? '<strong class="font-bold text-slate-900 underline decoration-slate-400' +
-          ' decoration-1 underline-offset-2">' + esc(bare) + '</strong>'
+        ? '<strong class="' + hitCls + '">' + esc(bare) + '</strong>'
         : esc(bare));
 
       if (part.marks) {
@@ -266,7 +292,7 @@ var Render = (function () {
   }
 
   /* 논문 한 건 */
-  function publicationItem(p) {
+  function publicationItem(p, only, style) {
     var titleHtml = esc(p.title);
     if (p.doi) {
       var href = p.doi.indexOf('http') === 0 ? p.doi : 'https://doi.org/' + p.doi;
@@ -282,7 +308,7 @@ var Render = (function () {
 
     return '<li class="py-4">' +
       '<p class="text-sm font-semibold leading-snug text-slate-900">' + titleHtml + '</p>' +
-      '<p class="mt-1 text-sm text-slate-600">' + boldAuthors(p.authors) + '</p>' +
+      '<p class="mt-1 text-sm text-slate-600">' + boldAuthors(p.authors, only, style) + '</p>' +
       (meta.length
         ? '<p class="mt-0.5 text-xs text-slate-500">' + meta.join(', ') +
           journalMetrics(p) + '</p>'
@@ -1020,10 +1046,10 @@ var Render = (function () {
       (n.ko ? '<p class="mt-0.5 text-xs text-slate-500">' + esc(n.ko) + '</p>' : '') +
       (m.title ? '<p class="mt-1.5 text-xs font-semibold text-primary">' + esc(m.title) + '</p>' : '') +
       interestTags(m.interests) +
-      (m.email
-        ? '<a class="mt-3 block break-all text-[11px] text-slate-400 hover:text-primary"' +
-          ' href="mailto:' + esc(m.email) + '">' + esc(m.email) + '</a>'
-        : '') +
+      '<button type="button" class="js-profile mt-4 w-full rounded border border-slate-300' +
+        ' px-3 py-1.5 text-xs font-semibold text-slate-600 transition-colors' +
+        ' hover:border-primary hover:text-primary" data-member="' + esc(m.id) + '">' +
+        esc(SITE.people.viewProfile) + '</button>' +
     '</div>';
   }
 
@@ -1057,6 +1083,104 @@ var Render = (function () {
         '</div>';
       }).join('') +
     '</dl>';
+  }
+
+  /* --- 구성원 프로필 창 -------------------------------------------------
+   * 카드의 View Profile 을 누르면 학력과 참여 논문을 보여 준다.
+   * 논문은 PUBLICATIONS 에서 그 사람 이름이 저자에 있는 것만 골라 온다.
+   * ------------------------------------------------------------------- */
+  function pubsOfMember(m) {
+    if (typeof PUBLICATIONS === 'undefined') return [];
+    var t = tokensOf(m);
+
+    return PUBLICATIONS.filter(function (p) {
+      return String(p.authors || '').split(',').some(function (seg) {
+        var bare = seg.replace(/[\u2020\u2021*]+\s*$/, '');
+        return t[normalizeName(bare)] === true;
+      });
+    }).sort(comparePubs);
+  }
+
+  function profileBody(m) {
+    var n = splitName(m.name);
+    var pubs = pubsOfMember(m);
+
+    var head =
+      '<div class="flex flex-col gap-5 sm:flex-row sm:items-start sm:gap-6">' +
+        (m.photo ? '<div class="w-28 shrink-0">' +
+          imageBox(m.photo, n.en, 'aspect-[3/4]', 'rounded') + '</div>' : '') +
+        '<div class="min-w-0">' +
+          '<h2 id="member-modal-name" class="text-2xl font-bold tracking-tight text-slate-900">' +
+            esc(n.en) + '</h2>' +
+          (n.ko ? '<p class="mt-0.5 text-sm text-slate-500">' + esc(n.ko) + '</p>' : '') +
+          (m.title ? '<p class="mt-1.5 text-sm font-semibold text-primary">' +
+            esc(m.title) + '</p>' : '') +
+          interestTags(m.interests) +
+          (m.email ? '<a class="mt-3 block break-all text-xs text-slate-400 hover:text-primary"' +
+            ' href="mailto:' + esc(m.email) + '">' + esc(m.email) + '</a>' : '') +
+        '</div>' +
+      '</div>';
+
+    function block(label, inner) {
+      if (!inner) return '';
+      return '<section class="mt-8">' +
+        '<h3 class="mb-3 text-xs font-bold uppercase tracking-wider2 text-primary">' +
+          esc(label) + '</h3>' + inner +
+      '</section>';
+    }
+
+    var edu = (m.education && m.education.length)
+      ? '<ul class="space-y-1.5 text-sm leading-relaxed text-slate-700">' +
+          m.education.map(function (e) {
+            return '<li class="flex gap-2.5">' +
+              '<span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary-mid"></span>' +
+              '<span>' + esc(e) + '</span></li>';
+          }).join('') + '</ul>'
+      : '';
+
+    var pubList = pubs.length
+      ? '<ul class="divide-y divide-slate-200">' +
+          pubs.map(function (p) { return publicationItem(p, m, 'self'); }).join('') +
+        '</ul>'
+      : '<p class="text-sm text-slate-500">' + esc(SITE.ui.empty) + '</p>';
+
+    return head +
+      block(SITE.people.education, edu) +
+      block(SITE.people.publications,
+        '<p class="mb-2 font-mono text-xs text-slate-400">' + esc(pubs.length) + '</p>' + pubList);
+  }
+
+  var profileBound = false;
+  function bindProfile() {
+    var modal = document.getElementById('member-modal');
+    var body = document.getElementById('member-modal-body');
+    if (!modal || !body || profileBound) return;
+    profileBound = true;
+
+    function close() {
+      modal.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('click', function (e) {
+      var btn = e.target && e.target.closest && e.target.closest('.js-profile');
+      if (btn) {
+        var id = btn.getAttribute('data-member');
+        var m = (typeof MEMBERS !== 'undefined')
+          ? MEMBERS.filter(function (x) { return x.id === id; })[0] : null;
+        if (!m) return;
+        body.innerHTML = profileBody(m);
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+        if (typeof ImageFallback !== 'undefined' && ImageFallback.init) ImageFallback.init();
+        return;
+      }
+      if (e.target && e.target.closest && e.target.closest('[data-mm-close]')) close();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' || e.keyCode === 27) close();
+    });
   }
 
   function peopleCurrent() {
@@ -1124,6 +1248,7 @@ var Render = (function () {
     peopleProfessor();
     peopleCurrent();
     peopleAlumni();
+    bindProfile();
 
     sectionTabs({
       tabs: [

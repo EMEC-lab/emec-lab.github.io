@@ -261,6 +261,7 @@ const SITE = {
   people: {
     interests:   "Research Interests",
     education:   "Education",
+    publications: "Publications",   // 프로필 창의 참여 논문 소제목
     career:      "Career",
     activities:  "Academic Activities",
     memberships: "Memberships",

@@ -165,6 +165,13 @@ body {
   display: none;
 }
 
+/* --- 구성원 프로필 창 ---------------------------------------------------
+ * people.html 의 #member-modal 도 같은 방식으로 숨겨 둔다.
+ * --------------------------------------------------------------------- */
+#member-modal:not(.is-open) {
+  display: none;
+}
+
 /* --- 이미지가 아직 없는 자리에 쓰는 자리표시자 -------------------------- */
 .img-placeholder {
   background-color: var(--color-primary-light);

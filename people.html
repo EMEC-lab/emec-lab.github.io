@@ -62,12 +62,35 @@
 
   </main>
 
+  <!-- 구성원 프로필 창 : render.js 가 내용을 채우고 .is-open 으로 여닫는다.
+       외부 라이브러리를 쓰지 않는다 -->
+  <div id="member-modal" class="fixed inset-0 z-[60] overflow-y-auto"
+       role="dialog" aria-modal="true" aria-labelledby="member-modal-name">
+
+    <div data-mm-close class="fixed inset-0 bg-slate-900/50"></div>
+
+    <div class="relative mx-auto my-6 w-full max-w-3xl px-4 sm:my-10">
+      <div class="rounded-lg bg-white shadow-xl">
+        <button type="button" data-mm-close aria-label="Close"
+                class="absolute right-6 top-4 grid h-9 w-9 place-items-center rounded-full
+                       text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"
+               viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+          </svg>
+        </button>
+        <div id="member-modal-body" class="px-6 py-8 sm:px-8"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- 푸터: js/common.js 가 주입한다. 직접 작성하지 말 것 -->
   <div id="site-footer"></div>
 
   <!-- 로드 순서 고정: data/*.js → js/render.js → js/common.js -->
   <script src="data/site.js"></script>
   <script src="data/members.js"></script>
+  <script src="data/publications.js"></script>   <!-- 프로필 창의 참여 논문 목록 -->
   <script src="js/render.js"></script>
   <script src="js/common.js"></script>
 </body>

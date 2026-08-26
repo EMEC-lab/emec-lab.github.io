@@ -197,31 +197,7 @@ const MEMBERS = [
     education: [], career: [], activities: [], memberships: [], talks: [], scholar: "",
     gradYear: null, thesis: "", currentPosition: ""
   },
-  {
-    id: "ug-06",
-    role: "undergrad",
-    name: "한영준",
-    title: "",
-    photo: "",
-    email: "", office: "",
-    interests: "",
-    grade: 4,
-    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "",
-    gradYear: null, thesis: "", currentPosition: ""
-  },
-  {
-    id: "ug-07",
-    role: "undergrad",
-    name: "최영준",
-    title: "",
-    photo: "",
-    email: "", office: "",
-    interests: "",
-    grade: 4,
-    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "",
-    gradYear: null, thesis: "", currentPosition: ""
-  },
-  {
+      {
     id: "ug-08",
     role: "undergrad",
     name: "정석환",
