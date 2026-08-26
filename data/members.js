@@ -138,7 +138,7 @@ const MEMBERS = [
     title: "M.S. Candidate",
     photo: "images/members/lee-younghoon.jpg",
     email: "", office: "",
-    interests: "Analytical method-based optimal design and analysis, Electromagnetic and thermal multi-physics analysis, System model-based design",
+    interests: "Analytical method-based optimal design and analysis, Multi-physics analysis of electric machines, System model-based design",
     grade: null,
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2026.02",
