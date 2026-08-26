@@ -1138,11 +1138,36 @@ var Render = (function () {
           }).join('') + '</ul>'
       : '';
 
-    var pubList = pubs.length
-      ? '<ul class="divide-y divide-slate-200">' +
-          pubs.map(function (p) { return publicationItem(p, m, 'self'); }).join('') +
-        '</ul>'
-      : '<p class="text-sm text-slate-500">' + esc(SITE.ui.empty) + '</p>';
+    /* PUBLICATIONS 페이지와 같은 기준으로 나눈다.
+       종류(저널 → 학술대회 → 특허) 안에서 국제 → 국내, 그 안은 최신순 */
+    var pubList = '';
+    (typeof PUBLICATION_TYPES !== 'undefined' ? PUBLICATION_TYPES : []).forEach(function (type) {
+      var ofType = pubs.filter(function (p) { return p.type === type; });
+      if (!ofType.length) return;
+
+      var labels = (SITE.pubGroups && SITE.pubGroups[type]) || {};
+      var splits = PUB_SPLITS[type] || [{ key: '', test: function () { return true; } }];
+
+      splits.forEach(function (sp) {
+        var items = sp.key ? ofType.filter(sp.test) : ofType;
+        if (!items.length) return;
+
+        pubList +=
+          '<h4 class="mb-2 mt-6 flex items-baseline gap-2 border-b border-slate-200 pb-1' +
+            ' text-sm font-bold text-slate-900 first:mt-0">' +
+            esc(labels[sp.key] || SITE.submenu[type] || type) +
+            '<span class="font-mono text-xs font-normal text-slate-400">' +
+              esc(items.length) + '</span>' +
+          '</h4>' +
+          '<ul class="divide-y divide-slate-200">' +
+            items.map(function (p) { return publicationItem(p, m, 'self'); }).join('') +
+          '</ul>';
+      });
+    });
+
+    if (!pubList) {
+      pubList = '<p class="text-sm text-slate-500">' + esc(SITE.ui.empty) + '</p>';
+    }
 
     return head +
       block(SITE.people.education, edu) +
