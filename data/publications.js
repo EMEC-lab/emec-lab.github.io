@@ -335,7 +335,7 @@ const PUBLICATIONS = [
     authors: "Hye-Seong Kim†, Soo-Hwan Park†, Yong-Min Lee, Min-Ro Park*",
     title: "Transfer Learning-Assisted Analytical Quasi-3D Surrogate Modeling for Electromagnetic Performance Prediction of AFPMs Considering Eccentricity",
     venue: "IEEE Transactions on Magnetics",
-    detail: "pp. 1-6 (Art no. ), Early Access",
+    detail: "pp. 1-6, Early Access",
     doi: "10.1109/TMAG.2026.3701418",
     impact: "1.9",
     jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
