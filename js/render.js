@@ -704,18 +704,15 @@ var Render = (function () {
     return out;
   }
 
-  /* 기관명이 이미 적혀 있으므로 alt 는 비운다 (음성 안내에서 중복되지 않게) */
+  /* 기관명이 이미 적혀 있으므로 alt 는 비운다 (음성 안내에서 중복되지 않게).
+   * 로고에 링크를 걸지 않는다 — 기관 홈페이지로 나가는 것은 방문자에게 쓸모가 없다. */
   function sponsorLogo(sp) {
     if (!sp || !sp.logo) return '';
 
-    var img = '<img src="' + esc(sp.logo) + '" alt="" loading="lazy" data-fallback' +
-              ' class="max-h-10 w-auto max-w-full object-contain object-left">';
-
-    if (sp.url) {
-      return '<a href="' + esc(sp.url) + '" target="_blank" rel="noopener noreferrer"' +
-             ' class="mt-2 flex items-center transition-opacity hover:opacity-70">' + img + '</a>';
-    }
-    return '<span class="mt-2 flex items-center">' + img + '</span>';
+    return '<span class="mt-2 flex items-center">' +
+      '<img src="' + esc(sp.logo) + '" alt="" loading="lazy" data-fallback' +
+      ' class="max-h-10 w-auto max-w-full object-contain object-left">' +
+    '</span>';
   }
 
   function statusBadge(status) {

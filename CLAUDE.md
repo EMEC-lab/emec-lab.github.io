@@ -445,7 +445,7 @@ const PROJECTS = [
     sponsor: {
       name: "한국연구재단",
       logo: "images/sponsors/nrf.svg",
-      url: "https://www.nrf.re.kr"     // 선택. 있으면 로고에 링크
+      url: "https://www.nrf.re.kr"     // 선택. 화면 표시 안 함
     },
     ministry: "과학기술정보통신부",       // 선택. 기본적으로 표시하지 않음
     startDate: "2024-03-01",            // YYYY-MM-DD 필수
@@ -522,6 +522,7 @@ const sorted = [...PROJECTS].sort((a, b) => {
 - **기관명은 항상 텍스트로 보여 주고, 로고는 그 아래에 붙인다.** 로고가 이름을 대신하지 않는다
 - `logo`가 비어 있으면 기관명만 나온다
 - 기관 CI는 사용 지침이 있는 경우가 많다. 색상 변형·형태 왜곡 없이 원본 그대로 사용
+- 로고에 링크를 걸지 않는다
 - `ministry`는 기본적으로 표시하지 않는다. 필요하면 지원기관 옆에 작은 글씨로 병기
 
 ### data/news.js

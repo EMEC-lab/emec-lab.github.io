@@ -4,7 +4,9 @@
  *
  *   id             고유 식별자
  *   title          과제명
- *   sponsor        { name, logo, url }  logo 가 비면 기관명 텍스트로 표시된다
+ *   sponsor        { name, logo, url }
+ *                  name 은 항상 표시된다. logo 가 비면 기관명만 나온다
+ *                  url 은 화면에 표시하지 않는다. 기관 주소를 적어두는 자리다
  *   ministry       선택. 기본적으로 표시하지 않음
  *   startDate      'YYYY-MM-DD' 필수
  *   endDate        'YYYY-MM-DD' 필수
