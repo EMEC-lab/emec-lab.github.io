@@ -28,7 +28,7 @@
  *                 게재 시점에 공개되어 있던 판본 기준이다
  *                 (예: 2020.01 게재 → JCR 2018. JCR 2019 는 2020년 6월 공개)
  *   jcrTop        상위 %  예 "3.3"        ┐
- *   jcrRank       순위     예 "6/182"      │ 여러 카테고리에 속하면 가장 높은 것
+ *   jcrRank       순위     예 "6/184"      │ 여러 카테고리에 속하면 가장 높은 것
  *   jcrQuartile   분위     예 "Q1"         ┘ 지금은 자료가 없어 비워 둔다
  *   domestic      화면에 표시하지 않음. 학과 평가·통계용
  *   patentNo      patent 전용. 등록번호
@@ -326,7 +326,7 @@ const PUBLICATIONS = [
     detail: "vol. 244, pp. 1-19 (113776)",
     doi: "10.1016/j.ymssp.2025.113776",
     impact: "8.9",
-    jcrTop: "3.3", jcrRank: "6/182", jcrQuartile: "Q1", domestic: false,
+    jcrTop: "3.3", jcrRank: "6/184", jcrQuartile: "Q1", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {

@@ -72,18 +72,11 @@
 판본은 논문에 적혀 있던 IF 값을 엑셀에서 역으로 찾아 확정했다.
 31건 중 30건이 정확히 일치했다.
 
-### 남은 확인 1건
+### 확인된 것
 
-**Mechanical Systems and Signal Processing — JCR 2024판 IF 값이 두 파일에서 다르다.**
-
-| 출처 | 2024판 IF | 2025판 IF |
-|---|---|---|
-| `실적정리_20260428.xlsx` | 8.9 | — |
-| `Journal&Conference_2026update2.xlsx` | 10.2 | 10.2 |
-
-순위는 두 파일 모두 `6/182` 로 같고 IF 셀만 엇갈린다.
-2024판과 2025판이 똑같은 10.2 인 것이 어색해 **사이트에는 `8.9` 를 유지했다.**
-확인 후 고치면 된다.
+**Mechanical Systems and Signal Processing** — 두 엑셀의 IF 값이 엇갈렸던 건은
+`IF 8.9, 6/184` 로 확정했다 (사용자 확인). 사이트에 반영했고,
+`Journal&Conference_2026update2.xlsx` 원본도 사용자가 고치기로 했다.
 
 ---
 
