@@ -70,7 +70,7 @@ const SITE = {
 
   submenu: {
     professor:  "Professor",
-    current:    "Students",
+    current:    "Researchers",
     alumni:     "Alumni",
     areas:      "Overview",
     equipment:  "Facilities",
@@ -82,7 +82,7 @@ const SITE = {
 
   sectionTitles: {
     professor:  "Professor",
-    current:    "Students",
+    current:    "Researchers",
     alumni:     "Alumni",
     areas:      "Research Areas",
     equipment:  "Facilities",
