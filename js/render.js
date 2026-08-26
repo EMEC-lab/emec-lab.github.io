@@ -784,17 +784,8 @@ var Render = (function () {
     '</span>';
   }
 
-  function statusBadge(status) {
-    var label = SITE.sectionTitles[status === 'ongoing' ? 'ongoing' : 'completed'];
-    var cls = status === 'ongoing'
-      ? 'bg-primary text-white'
-      : 'bg-slate-200 text-slate-600';
-    return '<span class="shrink-0 rounded-full px-2.5 py-0.5 text-[11px] font-semibold ' + cls + '">' +
-           esc(label) + '</span>';
-  }
 
   function projectRow(p) {
-    var status = getStatus(p);
     var period = Util.formatMonth(p.startDate) + ' ~ ' + Util.formatMonth(p.endDate);
 
     var roleOf = function (key) {
@@ -827,11 +818,7 @@ var Render = (function () {
         '<p class="text-sm font-semibold leading-snug text-slate-900">' + esc(p.title) + '</p>' +
         '<dl class="mt-2 space-y-1 text-xs text-slate-500">' +
           metaRow(SITE.ui.role, roleText) +
-          metaRow(SITE.ui.period,
-            '<span class="flex flex-wrap items-center gap-x-2 gap-y-1">' +
-              '<span class="font-mono">' + esc(period) + '</span>' +
-              statusBadge(status) +
-            '</span>') +
+          metaRow(SITE.ui.period, '<span class="font-mono">' + esc(period) + '</span>') +
         '</dl>' +
         (p.description ? '<p class="mt-2 text-sm leading-relaxed text-slate-600">' + esc(p.description) + '</p>' : '') +
       '</div>' +
