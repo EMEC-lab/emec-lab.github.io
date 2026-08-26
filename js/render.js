@@ -625,26 +625,19 @@ var Render = (function () {
 
     if (!past.length) return html;
 
-    /* 묶음 안에서는 연도를 작은 소제목으로만 두고 따로 접지 않는다 */
-    var count = past.reduce(function (n, g) { return n + g.items.length; }, 0);
-    var label = String((SITE.ui && SITE.ui.pubEarlier) || '{year} and earlier')
-      .replace('{year}', past[0].year);
+    /* 묶음 안은 연도 소제목 없이 한 목록으로 이어 붙인다.
+       이미 최신순으로 정렬되어 있어 순서는 그대로 유지된다 */
+    var items = past.reduce(function (acc, g) { return acc.concat(g.items); }, []);
 
-    var body = past.map(function (g) {
-      return '<div class="mt-6 first:mt-4">' +
-        '<div class="mb-1 flex items-baseline gap-2 border-b border-slate-200 pb-1">' +
-          '<span class="font-mono text-base font-bold text-slate-600">' + esc(g.year) + '</span>' +
-          '<span class="font-mono text-xs font-semibold text-slate-400">' +
-            esc(g.items.length) + '</span>' +
-        '</div>' +
-        pubItems(g.items) +
-      '</div>';
-    }).join('');
+    /* 라벨은 묶음 안의 최근 연도가 아니라 항상 작년이다.
+       그래야 탭을 옮겨도(예: 특허) 같은 문구가 나온다 */
+    var label = String((SITE.ui && SITE.ui.pubEarlier) || '~ {year}')
+      .replace('{year}', openFrom - 1);
 
     /* 올해 것이 하나도 없으면(예: 특허) 이 묶음을 펼쳐 둔다.
        안 그러면 탭을 열자마자 빈 화면처럼 보인다 */
     return html + '<div class="mt-8 first:mt-0">' +
-      disclosure(pubHead(label, count), PUB_HEAD_CLS, body, !html) +
+      disclosure(pubHead(label, items.length), PUB_HEAD_CLS, pubItems(items), !html) +
     '</div>';
   }
 
