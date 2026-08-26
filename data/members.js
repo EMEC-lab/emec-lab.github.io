@@ -138,7 +138,7 @@ const MEMBERS = [
     title: "M.S. Candidate",
     photo: "images/members/lee-younghoon.jpg",
     email: "", office: "",
-    interests: "Analytical method-based analysis and optimal design, Multi-physics analysis, System model-based design",
+    interests: "Analytical method-based optimal design and analysis, Multi-physics analysis, System model-based design",
     grade: null,
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2026.02",
@@ -237,7 +237,7 @@ const MEMBERS = [
     title: "M.S.",
     photo: "images/members/ko-donghoon.jpg",
     email: "", office: "",
-    interests: "Analytical method-based analysis and optimal design, Manufacturing uncertainty analysis, Robust optimal design",
+    interests: "Analytical method-based optimal design and analysis, Manufacturing uncertainty analysis, Robust optimal design",
     grade: null,
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2024.02",
@@ -285,8 +285,8 @@ const MEMBER_ROLE_ORDER = ["postdoc", "phd", "ms", "undergrad"];
 const ALUMNI_DEGREE_ORDER = ["phd", "ms", "undergrad"];
 
 const ALUMNI_DEGREE_LABELS = {
-  phd:       "Ph.D.",
-  ms:        "M.S.",
+  phd:       "Ph.D. degree",
+  ms:        "M.S. degree",
   undergrad: "Undergraduate"
 };
 

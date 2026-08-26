@@ -1119,10 +1119,10 @@ var Render = (function () {
       imageBox(m.photo, n.en, 'aspect-[3/4]', 'rounded') +
       '<p class="mt-4 text-sm font-bold text-slate-900">' + esc(n.en) + '</p>' +
       (n.ko ? '<p class="mt-0.5 text-xs text-slate-500">' + esc(n.ko) + '</p>' : '') +
-      /* 졸업생은 학위 옆에 졸업연도를 붙인다 */
-      (m.title ? '<p class="mt-1.5 text-xs font-semibold text-primary">' + esc(m.title) +
-        (m.gradYear ? '<span class="ml-1.5 font-mono font-normal text-slate-400">' +
-          esc(m.gradYear) + '</span>' : '') + '</p>' : '') +
+      /* 졸업생은 학위 옆에 졸업 년월을 붙인다 */
+      (m.title ? '<p class="mt-1.5 text-xs font-semibold text-primary">' + esc(degreeLabel(m)) +
+        (gradDate(m) ? '<span class="ml-1.5 font-mono font-normal text-slate-400">' +
+          esc(gradDate(m)) + '</span>' : '') + '</p>' : '') +
       (m.currentPosition ? '<p class="mt-1.5 text-xs leading-relaxed text-slate-600">' +
         esc(m.currentPosition) + '</p>' : '') +
       interestTags(m.interests) +
@@ -1329,6 +1329,33 @@ var Render = (function () {
     return '';
   }
 
+  /* 카드에 적는 문구. 졸업생은 "M.S. degree", 재학생은 title 그대로 */
+  function degreeLabel(m) {
+    if (m.role !== 'alumni') return m.title;
+    return (typeof ALUMNI_DEGREE_LABELS !== 'undefined' && ALUMNI_DEGREE_LABELS[degreeOf(m)])
+      || m.title;
+  }
+
+  /* 졸업 년월은 학력에 이미 적혀 있다.
+     title 과 같은 학위 줄을 찾아 그 끌의 날짜를 가져온다.
+     따로 적어 두면 학력과 어긋나기 쉬우므로 한 곳에서만 읽는다 */
+  function gradDate(m) {
+    if (m.role !== 'alumni') return '';
+
+    var key = degreeOf(m);
+    var lines = m.education || [];
+
+    for (var i = lines.length - 1; i >= 0; i--) {
+      var line = String(lines[i]);
+      var test = ALUMNI_DEGREE_TESTS[key];
+      if (key && test && !test.test(line)) continue;
+
+      var hit = line.match(PERIOD_TAIL);
+      if (hit) return hit[1];
+    }
+    return m.gradYear ? String(m.gradYear) : '';
+  }
+
   function peopleAlumni() {
     var host = document.getElementById('people-alumni');
     if (!host) return;
@@ -1338,8 +1365,10 @@ var Render = (function () {
 
     if (!list.length) { host.innerHTML = emptyNote(); return; }
 
-    /* 최근 졸업이 앞으로 */
-    list.sort(function (a, b) { return (b.gradYear || 0) - (a.gradYear || 0); });
+    /* 최근 졸업이 앞으로. 같은 해에도 월까지 보고 가른다 */
+    list.sort(function (a, b) {
+      return String(gradDate(b) || '').localeCompare(String(gradDate(a) || ''));
+    });
 
     var order = (typeof ALUMNI_DEGREE_ORDER !== 'undefined')
       ? ALUMNI_DEGREE_ORDER : ['phd', 'ms', 'undergrad'];
