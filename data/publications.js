@@ -24,6 +24,12 @@
  *                 학회 기간은 "개최지, YYYY.MM.DD ~ MM.DD" 형식.
  *                 해가 넘어가면 끝 날짜도 연도까지 적는다
  *   doi           'https://doi.org/...' 또는 '10.xxxx/...'
+ *   impact        게재 당시의 JCR Impact Factor. 국제 저널에만 적는다
+ *                 게재 시점에 공개되어 있던 판본 기준이다
+ *                 (예: 2020.01 게재 → JCR 2018. JCR 2019 는 2020년 6월 공개)
+ *   jcrTop        상위 %  예 "3.3"        ┐
+ *   jcrRank       순위     예 "6/182"      │ 여러 카테고리에 속하면 가장 높은 것
+ *   jcrQuartile   분위     예 "Q1"         ┘ 지금은 자료가 없어 비워 둔다
  *   domestic      화면에 표시하지 않음. 학과 평가·통계용
  *   patentNo      patent 전용. 등록번호
  *   applicationNo patent 전용. 출원번호
@@ -212,7 +218,9 @@ const PUBLICATIONS = [
     title: "Analytical Estimation and Verification of Cogging Torque in an SPMSM Considering Segmented-Core Manufacturing Tolerances for EPS Motors",
     venue: "International Journal of Automotive Technology",
     detail: "Early Access",
-    doi: "10.1007/s12239-026-00465-3", domestic: false,
+    doi: "10.1007/s12239-026-00465-3",
+    impact: "1.5",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -222,7 +230,9 @@ const PUBLICATIONS = [
     title: "Characteristics Estimation and Design of SPMSM using Analytic Method-based Transfer Learning",
     venue: "IEEE Transactions on Magnetics",
     detail: "vol. 62, no. 7, pp. 1-6 (Art no. 7401806)",
-    doi: "10.1109/TMAG.2025.3640767", domestic: false,
+    doi: "10.1109/TMAG.2025.3640767",
+    impact: "1.9",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -232,7 +242,9 @@ const PUBLICATIONS = [
     title: "Comparative study of kriging and deep neural networks as surrogate models for parameter prediction of PMSM",
     venue: "International Journal of Automotive Technology",
     detail: "Early Access",
-    doi: "10.1007/s12239-026-00462-6", domestic: false,
+    doi: "10.1007/s12239-026-00462-6",
+    impact: "1.5",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -242,7 +254,9 @@ const PUBLICATIONS = [
     title: "Design and Performance Evaluation of a Hybrid Flux-Path Limited-Angle Torque Motor",
     venue: "Machines",
     detail: "vol. 14, no. 1, pp. 1-17 (3)",
-    doi: "10.3390/machines14010003", domestic: false,
+    doi: "10.3390/machines14010003",
+    impact: "2.5",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -252,7 +266,9 @@ const PUBLICATIONS = [
     title: "Driving Condition Based-Design and Performance Analysis of Wound-Field Synchronous Motor in Electric Vehicles",
     venue: "International Journal of Automotive Technology",
     detail: "vol. 27, no. 1, pp. 33-44",
-    doi: "10.1007/s12239-025-00270-4", domestic: false,
+    doi: "10.1007/s12239-025-00270-4",
+    impact: "1.5",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -272,7 +288,9 @@ const PUBLICATIONS = [
     title: "Efficient multi-objective design optimization of axial-flux permanent magnet machines for drone propulsion system using multi-fidelity gaussian process",
     venue: "Structural and Multidisciplinary Optimization",
     detail: "vol. 69, no. 115, pp. 1-16",
-    doi: "10.1007/s00158-026-04316-8", domestic: false,
+    doi: "10.1007/s00158-026-04316-8",
+    impact: "4.0",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -282,7 +300,9 @@ const PUBLICATIONS = [
     title: "Flux Linkage Decomposition-based Analysis and Harmonic Reduction Design of Induced Voltage in High-Speed Multilayer IPMSM",
     venue: "International Journal of Automotive Technology",
     detail: "Early Access",
-    doi: "", domestic: false,
+    doi: "",
+    impact: "2.1",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -292,7 +312,9 @@ const PUBLICATIONS = [
     title: "Robust Design Optimization of SPMSM based on Manufacturing Uncertainty Analysis of Prototype",
     venue: "IEEE Transactions on Magnetics",
     detail: "vol. 62, no. 7, pp. 1-6 (Art no. 8100806)",
-    doi: "10.1109/TMAG.2025.3616812", domestic: false,
+    doi: "10.1109/TMAG.2025.3616812",
+    impact: "1.9",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -302,7 +324,9 @@ const PUBLICATIONS = [
     title: "Rotor eccentricity in electric machines: An analytical framework with experimental validation for fault diagnosis",
     venue: "Mechanical Systems and Signal Processing",
     detail: "vol. 244, pp. 1-19 (113776)",
-    doi: "10.1016/j.ymssp.2025.113776", domestic: false,
+    doi: "10.1016/j.ymssp.2025.113776",
+    impact: "8.9",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -312,7 +336,9 @@ const PUBLICATIONS = [
     title: "Transfer Learning-Assisted Analytical Quasi-3D Surrogate Modeling for Electromagnetic Performance Prediction of AFPMs Considering Eccentricity",
     venue: "Transactions on Magnetics",
     detail: "pp. 1-6 (Art no. ), Early Access",
-    doi: "10.1109/TMAG.2026.3701418", domestic: false,
+    doi: "10.1109/TMAG.2026.3701418",
+    impact: "1.9",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -562,7 +588,9 @@ const PUBLICATIONS = [
     title: "Design of a High-Efficiency External Rotor Interior Permanent Magnet Synchronous Motor Without Magnetic Leakage Flux Path",
     venue: "Mathematics",
     detail: "vol. 13, no. 11, pp. 1-17 (1865)",
-    doi: "10.3390/math13111865", domestic: false,
+    doi: "10.3390/math13111865",
+    impact: "2.3",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -572,7 +600,9 @@ const PUBLICATIONS = [
     title: "Optimal Design Considering AC Copper Loss of Traction Motor Applied HSFF Coil for Improving Electric Bus Fuel Economy",
     venue: "Mathematics",
     detail: "vol. 13, no. 9, pp. 1-20 (1509)",
-    doi: "10.3390/math13091509", domestic: false,
+    doi: "10.3390/math13091509",
+    impact: "2.3",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -582,7 +612,9 @@ const PUBLICATIONS = [
     title: "Vibration Reduction of Permanent Magnet Synchronous Motors by Four-Layer Winding: Mathematical Modeling and Experimental Validation",
     venue: "Mathematics",
     detail: "vol. 13, no. 10, pp. 1-19 (1603)",
-    doi: "10.3390/math13101603", domestic: false,
+    doi: "10.3390/math13101603",
+    impact: "2.3",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -652,7 +684,9 @@ const PUBLICATIONS = [
     title: "Multi-physics Analysis of Interior Permanent Magnet Synchronous Motor with Torque Ripple Reduction Using Voltage Control Method",
     venue: "Journal of Magnetics",
     detail: "vol. 29, no. 3, pp. 259-268",
-    doi: "10.4283/JMAG.2024.29.3.259", domestic: false,
+    doi: "10.4283/JMAG.2024.29.3.259",
+    impact: "0.6",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -712,7 +746,9 @@ const PUBLICATIONS = [
     title: "Analysis on Noise Source of Claw Pole Machine in Duplex Three-phase and Belt-Driven System",
     venue: "Journal of Electrical Engineering & Technology",
     detail: "vol. 17, no. 5, pp. 2779-2788",
-    doi: "10.1007/s42835-022-01173-5", domestic: false,
+    doi: "10.1007/s42835-022-01173-5",
+    impact: "1.528",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -722,7 +758,9 @@ const PUBLICATIONS = [
     title: "High energy efficiency oriented-control and design of WFSM based on driving condition of electric vehicle",
     venue: "Mechatronics",
     detail: "vol. 81, pp. 1-18 (102696)",
-    doi: "10.1016/j.mechatronics.2021.102696", domestic: false,
+    doi: "10.1016/j.mechatronics.2021.102696",
+    impact: "3.498",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -732,7 +770,9 @@ const PUBLICATIONS = [
     title: "Prediction of Conductor Ratio for Tubular Linear Induction Motors using Finite Element Method and Response Surface Methodology",
     venue: "Journal of Magnetics",
     detail: "vol. 27, no. 3, pp. 298-302",
-    doi: "10.4283/JMAG.2022.27.3.298", domestic: false,
+    doi: "10.4283/JMAG.2022.27.3.298",
+    impact: "0.551",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -742,7 +782,9 @@ const PUBLICATIONS = [
     title: "Sizing and optimization process of hybrid electric propulsion system for heavy-duty vehicle based on Gaussian process modeling considering traction motor characteristics",
     venue: "Renewable and Sustainable Energy Reviews",
     detail: "vol. 161, pp. 1-12 (112286)",
-    doi: "10.1016/j.rser.2022.112286", domestic: false,
+    doi: "10.1016/j.rser.2022.112286",
+    impact: "16.799",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -822,7 +864,9 @@ const PUBLICATIONS = [
     title: "Analysis of Effect of the Magnetization Distribution of Multi-Pole PM on SPMSM Performance Using Equivalent Magnetic Circuit Considering Dead Zone",
     venue: "Energies",
     detail: "vol. 14, no. 11, pp. 1-12 (3279)",
-    doi: "10.3390/en14113279", domestic: false,
+    doi: "10.3390/en14113279",
+    impact: "2.702",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -832,7 +876,9 @@ const PUBLICATIONS = [
     title: "Design of High-speed Multi-layer IPMSM Using Ferrite PM for EV traction Considering Mechanical and Electrical Characteristics",
     venue: "IEEE Transactions on Industry Applications",
     detail: "vol. 57, no. 1, pp. 327-339",
-    doi: "10.1109/TIA.2020.3033783", domestic: false,
+    doi: "10.1109/TIA.2020.3033783",
+    impact: "3.488",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -842,7 +888,9 @@ const PUBLICATIONS = [
     title: "Estimation Method for Rotor Eddy Current Loss in Ultra-High-Speed Surface-Mounted Permanent Magnet Synchronous Motor",
     venue: "IEEE Transactions on Magnetics",
     detail: "vol. 57, no. 2, pp. 1–5 (Art. no. 8103205)",
-    doi: "10.1109/TMAG.2020.3030684", domestic: false,
+    doi: "10.1109/TMAG.2020.3030684",
+    impact: "1.626",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -852,7 +900,9 @@ const PUBLICATIONS = [
     title: "High Efficiency PMSM with High Slot Fill Factor Coil for Heavy-Duty EV Traction Considering AC Resistance",
     venue: "IEEE Transactions on Energy Conversion",
     detail: "vol. 36, no. 2, pp. 883 - 894",
-    doi: "10.1109/TEC.2020.3035165", domestic: false,
+    doi: "10.1109/TEC.2020.3035165",
+    impact: "4.501",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -862,7 +912,9 @@ const PUBLICATIONS = [
     title: "Marker-Based Method for Recognition of Camera Position for Mobile Robots",
     venue: "Sensors",
     detail: "vol. 21, no. 4, pp. 1-16 (1077)",
-    doi: "10.3390/s21041077", domestic: false,
+    doi: "10.3390/s21041077",
+    impact: "3.275",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -982,7 +1034,9 @@ const PUBLICATIONS = [
     title: "Asymmetric Rotor Design of IPMSM for Vibration Reduction Under Certain Load Condition",
     venue: "IEEE Transactions on Energy Conversion",
     detail: "vol. 35, no. 2, pp. 928-937",
-    doi: "10.1109/TEC.2020.2966299", domestic: false,
+    doi: "10.1109/TEC.2020.2966299",
+    impact: "4.501",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -992,7 +1046,9 @@ const PUBLICATIONS = [
     title: "Optimum Design of Sensorless-Oriented IPMSM Considering Torque Characteristics",
     venue: "IEEE Transactions on Magnetics",
     detail: "vol. 56, no. 1, pp. 1-4 (Art. no. 750074)",
-    doi: "10.1109/TMAG.2019.2949613", domestic: false,
+    doi: "10.1109/TMAG.2019.2949613",
+    impact: "1.651",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -1002,7 +1058,9 @@ const PUBLICATIONS = [
     title: "Robust Design Optimization of SPMSM for Robotic Actuator Considering Assembly Imperfection of Segmented Stator Core",
     venue: "IEEE Transactions on Energy Conversion",
     detail: "vol. 35, no. 4, pp. 2076-2085",
-    doi: "10.1109/TEC.2020.2999127", domestic: false,
+    doi: "10.1109/TEC.2020.2999127",
+    impact: "4.501",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -1122,7 +1180,9 @@ const PUBLICATIONS = [
     title: "Characteristics of Electric Motor according to the Weld-laminated Core and the Bond-laminated Core",
     venue: "Journal of Magnetics",
     detail: "vol. 24, no. 4, pp. 641-649",
-    doi: "10.4283/JMAG.2019.24.4.641", domestic: false,
+    doi: "10.4283/JMAG.2019.24.4.641",
+    impact: "0.837",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -1132,7 +1192,9 @@ const PUBLICATIONS = [
     title: "Design of High Torque Density Multi-Core Concentrated Flux-Type Synchronous Motors Considering Vibration Characteristics",
     venue: "IEEE Transactions on Industry Applications",
     detail: "vol. 55, no. 2, pp. 1351-1359",
-    doi: "10.1109/TIA.2018.2876329", domestic: false,
+    doi: "10.1109/TIA.2018.2876329",
+    impact: "2.743",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -1182,7 +1244,9 @@ const PUBLICATIONS = [
     title: "Advanced Method of Selecting Number of Poles and Slots for Low-Frequency Vibration Reduction of Traction Motor for Elevator",
     venue: "IEEE Transactions on Mechatronics",
     detail: "vol. 22, no. 4, pp. 1554-1562",
-    doi: "10.1109/TMECH.2017.2695059", domestic: false,
+    doi: "10.1109/TMECH.2017.2695059",
+    impact: "4.357",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -1232,7 +1296,9 @@ const PUBLICATIONS = [
     title: "Characteristics of IPMSM According to Rotor Design Considering Nonlinearity of Permanent Magnet",
     venue: "IEEE Transactions on Magnetics",
     detail: "vol. 52, no. 3, pp. 1-4 (Art. no. 8101904)",
-    doi: "10.1109/TMAG.2015.2482987", domestic: false,
+    doi: "10.1109/TMAG.2015.2482987",
+    impact: "1.386",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -1242,7 +1308,9 @@ const PUBLICATIONS = [
     title: "Estimation of Rotor Type Using Ferrite Magnet Considering the Magnetization Process",
     venue: "IEEE Transactions on Magnetics",
     detail: "vol. 52, no. 3, pp. 1-4 (Art. no. 8101804)",
-    doi: "10.1109/TMAG.2015.2490281", domestic: false,
+    doi: "10.1109/TMAG.2015.2490281",
+    impact: "1.386",
+    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {

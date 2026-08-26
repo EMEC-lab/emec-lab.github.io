@@ -235,6 +235,29 @@ var Render = (function () {
     }).join(',');
   }
 
+  /* 게재 당시의 저널 지표. 채워진 값만 모아 대괄호로 묶는다.
+   *   [IF 8.9, JCR top 3.3% (6/182), Q1]
+   * 순위·분위는 연도별 JCR 자료가 생기면 데이터에 채우기만 하면 된다. */
+  function journalMetrics(p) {
+    var bits = [];
+
+    if (p.impact) bits.push('IF ' + esc(p.impact));
+
+    if (p.jcrTop) {
+      bits.push('JCR top ' + esc(p.jcrTop) + '%' +
+        (p.jcrRank ? ' (' + esc(p.jcrRank) + ')' : ''));
+    } else if (p.jcrRank) {
+      bits.push('JCR ' + esc(p.jcrRank));
+    }
+
+    if (p.jcrQuartile) bits.push(esc(p.jcrQuartile));
+
+    return bits.length
+      ? '<span class="ml-1.5 whitespace-nowrap font-semibold text-primary">[' +
+        bits.join(', ') + ']</span>'
+      : '';
+  }
+
   /* 논문 한 건 */
   function publicationItem(p) {
     var titleHtml = esc(p.title);
@@ -253,7 +276,10 @@ var Render = (function () {
     return '<li class="py-4">' +
       '<p class="text-sm font-semibold leading-snug text-slate-900">' + titleHtml + '</p>' +
       '<p class="mt-1 text-sm text-slate-600">' + boldAuthors(p.authors) + '</p>' +
-      (meta.length ? '<p class="mt-0.5 text-xs text-slate-500">' + meta.join(', ') + '</p>' : '') +
+      (meta.length
+        ? '<p class="mt-0.5 text-xs text-slate-500">' + meta.join(', ') +
+          journalMetrics(p) + '</p>'
+        : '') +
     '</li>';
   }
 

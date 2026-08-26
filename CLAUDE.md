@@ -357,6 +357,8 @@ const PUBLICATIONS = [
     venue: "IEEE Transactions on Magnetics",
     detail: "vol. 62, no. 3, pp. 1-5",
     doi: "",
+    impact: "1.9",            // 게재 당시의 JCR Impact Factor. 국제 저널에만
+    jcrTop: "", jcrRank: "", jcrQuartile: "",   // 상위 % / 순위 / 분위
     domestic: false,          // 화면 분류 기준. false → International, true → Domestic
     patentNo: "",             // patent 전용. 등록번호. 채워지면 Granted 로 분류된다
     applicationNo: "",        // patent 전용. 출원번호
@@ -378,6 +380,19 @@ detail: "Vancouver, Canada, 2026.10.04 ~ 10.08"
 - 풀네임 뒤에 **괄호로 약어를 병기**한다. 약어에는 년도를 포함한다 (`ECCE 2026`)
 - 약어가 없는 국내 학회는 풀네임만 적는다
 - 기간은 `개최지, YYYY.MM.DD ~ MM.DD`. 해가 넘어가면 끝 날짜도 연도까지 적는다
+
+**저널 지표는 국제 저널에만 적는다.**
+
+```
+[IF 8.9, JCR top 3.3% (6/182), Q1]
+```
+
+- 모두 **게재 시점에 공개되어 있던 JCR 판본** 기준이다.
+  JCR 은 매년 6월에 전년도 판이 나오므로, 2020년 1월 게재라면 JCR 2018 이 최신이다
+- 저널이 여러 카테고리에 속하면 **가장 높은 카테고리** 기준으로 적는다
+- 채워진 값만 대괄호 안에 모여 나온다. 비우면 그 조각만 생략된다
+- **순위·상위 %·분위는 연도별 JCR 자료가 없어 현재 비어 두었다.**
+  추측해서 채우지 않는다. 자료가 생기면 그때 넣는다
 
 **저자 역할 표기는 `authors` 문자열 안에 직접 붙인다.**
 

@@ -71,6 +71,8 @@ const NEWS = [
     venue: "IEEE Transactions on Magnetics",
     detail: "vol. 62, no. 8, pp. 1-6",
     doi: "10.1109/TMAG.2026.1234567",
+    impact: "1.9",
+    jcrTop: "", jcrRank: "", jcrQuartile: "",
     domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
@@ -144,6 +146,19 @@ const NEWS = [
   공동 주저자·공동 교신저자면 **해당하는 사람 모두에게** 붙입니다.
   한 사람이 둘 다면 `Min-Ro Park†*` 처럼 이어 씁니다.
 - `type` 은 `journal` / `conference` / `patent` 셋 중 하나입니다.
+- **국제 학술지**만 `impact` 에 Impact Factor 를 적습니다. 국내 학술지는 비워 둡니다.
+
+  반드시 **게재 당시에 나와 있던 값**을 적습니다. JCR 은 매년 6월에 전년도 판이
+  나오므로, 2026년 1월에 게재되었다면 JCR 2024 값이 맞습니다.
+
+  ```javascript
+  impact: "8.9",
+  jcrTop: "3.3", jcrRank: "6/182", jcrQuartile: "Q1",
+  ```
+
+  화면에는 `[IF 8.9, JCR top 3.3% (6/182), Q1]` 처럼 붙습니다.
+  순위·분위를 모르면 `""` 로 비워 두세요. 그 조각만 생략됩니다.
+  저널이 여러 분야에 속하면 **가장 높은 분야** 기준으로 적습니다.
 - **학술대회**는 `venue` 에 풀네임을 적고 뒤에 괄호로 약어를 붙입니다.
 
   ```javascript
