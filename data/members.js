@@ -60,10 +60,10 @@ const MEMBERS = [
     ],
 
     memberships: [
-      { period: "2022.03 – Present", org: "IEEE (Institute of Electrical and Electronics Engineers)" },
-      { period: "2014.04 – Present", org: "KIEE (The Korean Institute of Electrical Engineers)" },
-      { period: "2014.03 – Present", org: "KSAE (The Korean Society of Automotive Engineers)" },
-      { period: "2014.10 – Present", org: "KMS (The Korean Magnetics Society)" }
+      { period: "2022.03 – Present", org: "Institute of Electrical and Electronics Engineers (IEEE)" },
+      { period: "2014.04 – Present", org: "The Korean Institute of Electrical Engineers (KIEE)" },
+      { period: "2014.03 – Present", org: "The Korean Society of Automotive Engineers (KSAE)" },
+      { period: "2014.10 – Present", org: "The Korean Magnetics Society (KMS)" }
     ],
 
     talks: [
