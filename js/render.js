@@ -589,32 +589,61 @@ var Render = (function () {
   }
 
   /* 연도별 덩어리. 최신 연도부터 */
-  /* 올해 것만 펌쳐 두고 지난 연도는 접는다.
+  /* 올해 것만 펼쳐 두고, 지난 연도는 한 덩어리로 묶어 접는다.
+     연도마다 따로 펼쳐야 하면 예전 논문을 훑는 데 손이 너무 많이 간다.
      해마다 고칠 필요가 없도록 오늘 날짜에서 기준을 잡는다 */
   function openFromYear() { return new Date().getFullYear(); }
 
+  var PUB_HEAD_CLS = 'flex w-full items-center gap-2 border-b-2 border-primary pb-1 text-left' +
+    ' text-primary transition-colors hover:text-primary-dark';
+
+  function pubHead(label, count) {
+    return '<span class="font-mono text-lg font-bold text-primary">' + esc(label) + '</span>' +
+      '<span class="font-mono text-sm font-semibold text-slate-400">' + esc(count) + '</span>' +
+      '<span class="ml-auto"></span>';
+  }
+
+  function pubItems(items) {
+    return '<ul class="divide-y divide-slate-200">' +
+      items.map(function (p) { return publicationItem(p); }).join('') + '</ul>';
+  }
+
   function yearBlocks(list) {
     var openFrom = openFromYear();
+    var groups = groupByYear(list);
 
-    return groupByYear(list).map(function (g) {
-      var open = Number(g.year) >= openFrom;
+    var thisYear = groups.filter(function (g) { return Number(g.year) >= openFrom; });
+    var past     = groups.filter(function (g) { return Number(g.year) <  openFrom; });
 
-      var head =
-        '<span class="font-mono text-lg font-bold text-primary">' + esc(g.year) + '</span>' +
-        '<span class="font-mono text-sm font-semibold text-slate-400">' +
-          esc(g.items.length) + '</span>' +
-        '<span class="ml-auto"></span>';
-
-      var body = '<ul class="divide-y divide-slate-200">' +
-        g.items.map(function (p) { return publicationItem(p); }).join('') + '</ul>';
-
+    var html = thisYear.map(function (g) {
       return '<div class="mt-8 first:mt-0">' +
-        disclosure(head,
-          'flex w-full items-center gap-2 border-b-2 border-primary pb-1 text-left text-primary' +
-          ' transition-colors hover:text-primary-dark',
-          body, open) +
+        disclosure(pubHead(g.year, g.items.length), PUB_HEAD_CLS, pubItems(g.items), true) +
       '</div>';
     }).join('');
+
+    if (!past.length) return html;
+
+    /* 묶음 안에서는 연도를 작은 소제목으로만 두고 따로 접지 않는다 */
+    var count = past.reduce(function (n, g) { return n + g.items.length; }, 0);
+    var label = String((SITE.ui && SITE.ui.pubEarlier) || '{year} and earlier')
+      .replace('{year}', past[0].year);
+
+    var body = past.map(function (g) {
+      return '<div class="mt-6 first:mt-4">' +
+        '<div class="mb-1 flex items-baseline gap-2 border-b border-slate-200 pb-1">' +
+          '<span class="font-mono text-base font-bold text-slate-600">' + esc(g.year) + '</span>' +
+          '<span class="font-mono text-xs font-semibold text-slate-400">' +
+            esc(g.items.length) + '</span>' +
+        '</div>' +
+        pubItems(g.items) +
+      '</div>';
+    }).join('');
+
+    /* 올해 것이 하나도 없으면(예: 특허) 이 묶음을 펼쳐 둔다.
+       안 그러면 탭을 열자마자 빈 화면처럼 보인다 */
+    return html + '<div class="mt-8 first:mt-0">' +
+      disclosure(pubHead(label, count), PUB_HEAD_CLS, body, !html) +
+    '</div>';
   }
 
   /* 종류마다 나누는 기준이 다르다. 키는 SITE.pubGroups 의 키와 같다.

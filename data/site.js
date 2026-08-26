@@ -288,6 +288,9 @@ const SITE = {
     readMore:   "Read more",
     scrollDown: "Scroll down",
     empty:      "Nothing here yet.",
+    // PUBLICATIONS 에서 올해보다 이전 논문을 묶는 줄의 제목.
+    // {year} 자리에 묶음 안에서 가장 최근 연도가 들어간다
+    pubEarlier: "{year} and earlier",
     wip:        "Coming soon.",
     menu:       "Menu",
     openMenu:   "Open menu",
