@@ -450,7 +450,9 @@ const PROJECTS = [
     ministry: "과학기술정보통신부",       // 선택. 기본적으로 표시하지 않음
     startDate: "2024-03-01",            // YYYY-MM-DD 필수
     endDate:   "2027-02-28",            // YYYY-MM-DD 필수
-    role: "PI",                         // PI | Co-I  (지도교수 개인의 역할)
+    role: "PI",                         // PI | Co-I | Advisor  (지도교수 개인의 역할)
+    program: "",                        // 선택. 세부 사업명
+    pi: "",                             // 선택. 지도교수가 아닌 연구책임자 이름
     orgRole: "주관",                     // 선택. 주관 | 공동 | 위탁 (기관 단위). 화면 표시 안 함
     statusOverride: null,               // null이면 자동 판정
     grantNo: "",                        // 화면 표시 안 함. 논문 사사 문구 작성용
@@ -459,10 +461,22 @@ const PROJECTS = [
 ];
 
 const PROJECT_ROLES = {
-  "PI":   "Principal Investigator",
-  "Co-I": "Co-Investigator"
+  "PI":      "Principal Investigator",
+  "Co-I":    "Co-Investigator",
+  "Advisor": "Academic Advisor"
 };
 ```
+
+**학생이 연구책임자인 과제**는 `role: "Advisor"` 에 `program` 과 `pi` 를 함께 적는다.
+
+```javascript
+role: "Advisor",
+program: "석사과정생연구장려금지원사업",
+pi: "이용민 (석사과정)"
+```
+
+사업명과 연구책임자는 과제 한 줄 아래에 작게 따로 붙는다.
+둘 다 비우면 그 줄이 나오지 않는다. 라벨 문구는 `SITE.ui.projectPI` 에 있다.
 
 **`role`과 `orgRole`은 다른 축이다.**
 

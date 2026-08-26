@@ -9,6 +9,9 @@
  *   startDate      'YYYY-MM-DD' 필수
  *   endDate        'YYYY-MM-DD' 필수
  *   role           PI | Co-I | Advisor  지도교수 개인의 역할
+ *   program        선택. 세부 사업명. 예 "석사과정생연구장려금지원사업"
+ *   pi             선택. 지도교수가 아닌 사람이 연구책임자일 때 그 이름
+ *                  학생이 책임자이고 교수가 지도하는 과제에 쓴다 (role: "Advisor")
  *   orgRole        선택. 주관 | 공동 | 위탁 (기관 단위). 화면 표시 안 함
  *   statusOverride null 이면 endDate 로 자동 판정
  *   grantNo        화면 표시 안 함. 논문 사사 문구 작성용
@@ -77,6 +80,8 @@ const PROJECTS = [
     title: "전기자동차의 동적 주행 특성을 고려한 구동 모터의 전자기-열 특성 및 에너지 효율 분석",
     sponsor: { name: "한국연구재단", logo: "", url: "" },
     ministry: "과학기술정보통신부",
+    program: "석사과정생연구장려금지원사업",
+    pi: "이용민 (석사과정)",
     startDate: "2024-07-01", endDate: "2025-06-30",
     role: "Advisor", orgRole: "",
     statusOverride: null,
@@ -87,6 +92,8 @@ const PROJECTS = [
     title: "영구자석 동기전동기의 제작 공차를 고려한 해석적 방법 및 강건 최적 설계 프로세스",
     sponsor: { name: "한국연구재단", logo: "", url: "" },
     ministry: "과학기술정보통신부",
+    program: "석사과정생연구장려금지원사업",
+    pi: "고동훈 (석사과정)",
     startDate: "2024-09-01", endDate: "2025-08-31",
     role: "Advisor", orgRole: "",
     statusOverride: null,
@@ -137,6 +144,8 @@ const PROJECTS = [
     title: "다중물리 연성 해석을 통한 BLAC 및 BLDC 모터의 전자기-진동 특성 분석",
     sponsor: { name: "한국연구재단", logo: "", url: "" },
     ministry: "과학기술정보통신부",
+    program: "석사과정생연구장려금지원사업",
+    pi: "김혜성 (석사과정)",
     startDate: "2025-09-01", endDate: "2026-08-31",
     role: "Advisor", orgRole: "",
     statusOverride: "completed",
@@ -197,7 +206,7 @@ const PROJECTS = [
     title: "자속집중형 영구자석 동기모터의 전자기 가진력 분석 기반 진동 저감 설계",
     sponsor: { name: "한국전자기술연구원", logo: "", url: "" },
     ministry: "",
-    startDate: "2026-04-01", endDate: "2026-09-30",
+    startDate: "2026-04-01", endDate: "2026-11-02",
     role: "PI", orgRole: "",
     statusOverride: null,
     grantNo: "", description: ""
@@ -208,6 +217,16 @@ const PROJECTS = [
     sponsor: { name: "한국자동차연구원", logo: "", url: "" },
     ministry: "",
     startDate: "2026-04-01", endDate: "2026-11-30",
+    role: "PI", orgRole: "",
+    statusOverride: null,
+    grantNo: "", description: ""
+  },
+  {
+    id: "proj-2026-20",
+    title: "운전영역 기반 최적 전류 제어 및 고조파 손실저감을 통한 고효율·고출력 탈희토류 EV 구동모터 개발",
+    sponsor: { name: "충남RISE센터", logo: "", url: "" },
+    ministry: "교육부",
+    startDate: "2026-08-03", endDate: "2026-12-04",
     role: "PI", orgRole: "",
     statusOverride: null,
     grantNo: "", description: ""

@@ -716,6 +716,20 @@ var Render = (function () {
        아래 메타 줄에서는 기관명을 한 번 더 쓰지 않는다 */
     var showSponsorInMeta = !!(p.sponsor && p.sponsor.logo);
 
+    /* 세부 사업명과, 지도교수가 아닌 사람이 연구책임자일 때 그 이름.
+       학생이 연구책임자인 과제(예: 석사과정생연구장려금)에 쓴다 */
+    var sub = [];
+    if (p.program) {
+      sub.push('<span class="font-semibold text-primary">' + esc(p.program) + '</span>');
+    }
+    if (p.pi) {
+      sub.push('<span>' + esc(SITE.ui.projectPI) + ' ' + esc(p.pi) + '</span>');
+    }
+    var subMeta = sub.length
+      ? '<p class="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-slate-500">' +
+        sub.join('<span aria-hidden="true">&middot;</span>') + '</p>'
+      : '';
+
     return '<li class="flex flex-col gap-3 py-5 sm:flex-row sm:items-start sm:gap-6">' +
       '<div class="w-32 shrink-0">' + sponsorMark(p.sponsor) + '</div>' +
       '<div class="min-w-0 flex-1">' +
@@ -731,6 +745,7 @@ var Render = (function () {
           '<span class="font-mono">' + esc(period) + '</span>' +
           statusBadge(status) +
         '</p>' +
+        subMeta +
         (p.description ? '<p class="mt-2 text-sm leading-relaxed text-slate-600">' + esc(p.description) + '</p>' : '') +
       '</div>' +
     '</li>';
