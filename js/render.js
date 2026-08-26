@@ -631,7 +631,7 @@ var Render = (function () {
 
     /* 라벨은 묶음 안의 최근 연도가 아니라 항상 작년이다.
        그래야 탭을 옮겨도(예: 특허) 같은 문구가 나온다 */
-    var label = String((SITE.ui && SITE.ui.pubEarlier) || '~ {year}')
+    var label = String((SITE.ui && SITE.ui.pubEarlier) || '~{year}')
       .replace('{year}', openFrom - 1);
 
     /* 올해 것이 하나도 없으면(예: 특허) 이 묶음을 펼쳐 둔다.
