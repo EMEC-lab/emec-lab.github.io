@@ -162,18 +162,20 @@ var Render = (function () {
     return String(s || '').toLowerCase().replace(/[\s.\-_]/g, '');
   }
 
-  /* 구성원 한 명이 저자 목록에 쓰일 수 있는 표기들을 모은다.
+  /* PUBLICATIONS 에서 짚는 저자는 지도교수 한 명뿐이다.
+     학생까지 굵게 하면 한 줄에 강조가 여럿 개씩 생겨 누가 연구실 사람인지 분별이 안 된다.
+     학생 개인 강조는 프로필 창에서만, boldAuthors 의 only 로 따로 준다.
      성(姓)만으로 비교하면 동성이인(예: 다른 Park)까지 굵어지므로
      반드시 이름 전체 형태로 대조한다. */
   var tokenCache = null;
 
-  function memberTokens() {
+  function professorTokens() {
     if (tokenCache) return tokenCache;
 
     tokenCache = {};
     if (typeof MEMBERS === 'undefined') return tokenCache;
 
-    MEMBERS.forEach(function (m) {
+    MEMBERS.filter(function (m) { return m.role === 'professor'; }).forEach(function (m) {
       var raw = String(m.name || '');
       if (raw.charAt(0) === '[') return;
 
@@ -235,7 +237,7 @@ var Render = (function () {
      style 은 'member'(굵게+밑줄) 또는 'self'(굵게+파란색) */
   function boldAuthors(authors, only, style) {
     if (!authors) return '';
-    var tokens = only ? tokensOf(only) : memberTokens();
+    var tokens = only ? tokensOf(only) : professorTokens();
     var hitCls = 'font-bold text-slate-900 underline decoration-slate-400'
       + ' decoration-1 underline-offset-2';
 
