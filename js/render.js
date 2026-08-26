@@ -1263,6 +1263,9 @@ var Render = (function () {
           (meta.length ? '<span class="ml-2 text-sm text-slate-500">' + meta.join(' &middot; ') + '</span>' : '') +
           (m.thesis ? '<span class="mt-1 block text-xs leading-relaxed text-slate-500">' +
             esc(SITE.people.thesis) + ': ' + esc(m.thesis) + '</span>' : '') +
+          '<button type="button" class="js-profile mt-2 text-xs font-semibold text-slate-400' +
+            ' transition-colors hover:text-primary" data-member="' + esc(m.id) + '">' +
+            esc(SITE.people.viewProfile) + ' &rarr;</button>' +
         '</span>' +
       '</li>';
     }).join('') + '</ul>';

@@ -108,9 +108,9 @@ const MEMBERS = [
     title: "M.S. Candidate",
     photo: "images/members/lee-yongmin.jpg",
     email: "", office: "",
-    interests: "",
+    interests: "전기기기 최적설계, 전기기기 전자기·열 해석, 다물리 기반 전기기계 해석, 데이터 기반 대체 모델링 및 머신러닝",
     grade: null,
-    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "",
+    education: ["B.S., 2018.03 – 2024.02", "M.S., 2024.03 – 2026.08"], career: [], activities: [], memberships: [], talks: [], scholar: "",
     gradYear: null, thesis: "", currentPosition: ""
   },
   {
@@ -120,9 +120,9 @@ const MEMBERS = [
     title: "M.S. Candidate",
     photo: "images/members/kim-hyeseong.jpg",
     email: "", office: "",
-    interests: "",
+    interests: "전기기기 전자기 해석 및 설계, 전동기 진동·소음 특성 분석, 전기기기 고장 진단, 데이터 기반 대체모델링 및 머신러닝",
     grade: null,
-    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "",
+    education: ["B.S., 2021.03 – 2025.02", "M.S., 2025.03 – Present"], career: [], activities: [], memberships: [], talks: [], scholar: "",
     gradYear: null, thesis: "", currentPosition: ""
   },
   {
@@ -132,9 +132,9 @@ const MEMBERS = [
     title: "M.S. Candidate",
     photo: "images/members/lee-younghoon.jpg",
     email: "", office: "",
-    interests: "",
+    interests: "전기 모터 최적 설계 및 분석, 해석적 모델 기반 전자기·열 해석",
     grade: null,
-    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "",
+    education: ["B.S., 2020.03 – 2026.02", "M.S., 2026.03 – Present"], career: [], activities: [], memberships: [], talks: [], scholar: "",
     gradYear: null, thesis: "", currentPosition: ""
   },
   {
@@ -220,6 +220,21 @@ const MEMBERS = [
     grade: 3,
     education: [], career: [], activities: [], memberships: [], talks: [], scholar: "",
     gradYear: null, thesis: "", currentPosition: ""
+  },
+  {
+    id: "alumni-ko-donghoon",
+    role: "alumni",
+    name: "Dong-Hoon Ko (고동훈)",
+    title: "M.S.",
+    photo: "images/members/ko-donghoon.jpg",
+    email: "", office: "",
+    interests: "전기기계 설계 및 최적설계, 전기기계 해석 고속화, 데이터 기반 대체모델링 및 성능 예측, 강건설계 및 강건최적화",
+    grade: null,
+    education: ["B.S., 2018.03 – 2024.02", "M.S., 2024.03 – 2026.02"],
+    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: 2026,
+    thesis: "",
+    currentPosition: "Korea Automotive Technology Institute (KATECH)"
   }
 
   /* --- 학생 · 졸업생은 아래 형식으로 추가한다 --------------------------
