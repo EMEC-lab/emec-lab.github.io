@@ -726,7 +726,7 @@ var Render = (function () {
     /* 라벨 + 값 한 줄 */
     function metaRow(label, valueHTML) {
       return '<div class="flex gap-3">' +
-        '<dt class="w-14 shrink-0 font-semibold uppercase tracking-wider2 text-slate-400">' +
+        '<dt class="w-14 shrink-0 font-semibold text-slate-400">' +
           esc(label) + '</dt>' +
         '<dd class="min-w-0 flex-1">' + valueHTML + '</dd>' +
       '</div>';
@@ -737,7 +737,7 @@ var Render = (function () {
       '<div class="w-40 shrink-0">' +
         sponsorMark(p.sponsor) +
         (p.program
-          ? '<p class="mt-1 break-keep text-[11px] leading-snug text-slate-400">' + esc(p.program) + '</p>'
+          ? '<p class="-mt-1.5 break-keep text-[11px] leading-tight text-slate-400">' + esc(p.program) + '</p>'
           : '') +
       '</div>' +
       '<div class="min-w-0 flex-1">' +
