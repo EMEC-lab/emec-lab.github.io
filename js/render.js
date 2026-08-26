@@ -680,26 +680,25 @@ var Render = (function () {
 
   /* 지원기관 CI. 로고가 없으면 기관명 텍스트로 대체한다.
      로고마다 가로세로비가 달라 높이만 맞추고 너비는 auto 로 둔다. */
-  function sponsorMark(sp) {
+  /* 기관명. 로고는 사업명 아래에 따로 그린다 (sponsorLogo) */
+  function sponsorName(sp) {
     var name = (sp && sp.name) || '';
     if (!name) return '';
+    return '<p class="text-xs font-semibold leading-snug text-slate-600">' + esc(name) + '</p>';
+  }
 
-    /* 기관명을 로고로 대신하지 않는다. 이름을 먼저 적고 로고를 아래에 붙인다.
-       이름이 이미 적혀 있으므로 로고의 alt 는 비운다 (음성 안내에서 두 번 읽히지 않게) */
-    var inner =
-      '<p class="text-xs font-semibold leading-snug text-slate-600">' + esc(name) + '</p>' +
-      (sp.logo
-        ? '<span class="mt-1.5 flex h-7 items-center">' +
-            '<img src="' + esc(sp.logo) + '" alt="" loading="lazy" data-fallback' +
-            ' class="h-7 w-auto max-w-full object-contain">' +
-          '</span>'
-        : '');
+  /* 기관명이 이미 적혀 있으므로 alt 는 비운다 (음성 안내에서 중복되지 않게) */
+  function sponsorLogo(sp) {
+    if (!sp || !sp.logo) return '';
+
+    var img = '<img src="' + esc(sp.logo) + '" alt="" loading="lazy" data-fallback' +
+              ' class="h-7 w-auto max-w-full object-contain object-left">';
 
     if (sp.url) {
       return '<a href="' + esc(sp.url) + '" target="_blank" rel="noopener noreferrer"' +
-             ' class="block transition-opacity hover:opacity-70">' + inner + '</a>';
+             ' class="mt-2 flex h-7 items-center transition-opacity hover:opacity-70">' + img + '</a>';
     }
-    return '<div>' + inner + '</div>';
+    return '<span class="mt-2 flex h-7 items-center">' + img + '</span>';
   }
 
   function statusBadge(status) {
@@ -739,11 +738,12 @@ var Render = (function () {
     /* 로고가 없으면 CI 자리에 기관명 텍스트가 들어간다 */
     return '<li class="flex flex-col gap-3 py-5 sm:flex-row sm:items-start sm:gap-6">' +
       '<div class="w-40 shrink-0">' +
-        sponsorMark(p.sponsor) +
+        sponsorName(p.sponsor) +
         (p.program
-          ? '<p class="mt-1.5 break-keep text-[11px] leading-tight text-slate-400">' +
+          ? '<p class="mt-1 break-keep text-[11px] leading-tight text-slate-400">' +
             esc(p.program) + '</p>'
           : '') +
+        sponsorLogo(p.sponsor) +
       '</div>' +
       '<div class="min-w-0 flex-1">' +
         '<p class="text-sm font-semibold leading-snug text-slate-900">' + esc(p.title) + '</p>' +
