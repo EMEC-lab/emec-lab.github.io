@@ -74,7 +74,7 @@
 | 저널 | 논문 | 필요한 JCR 판본 |
 |---|---|---|
 | IEEE Transactions on Magnetics | 7건 | 2014, 2018, 2019, 2024 |
-| International Journal of Automotive Technology | 4건 | 2024, 최신 |
+| International Journal of Automotive Technology | 4건 | 2024, 최신(Early Access 3건) |
 | Journal of Magnetics | 3건 | 2018, 2021, 2023 |
 | Mathematics | 3건 | 2023 |
 | IEEE Transactions on Energy Conversion | 3건 | 2019 |
@@ -99,8 +99,10 @@
 
 - **IEEE Transactions on Magnetics, 2016.03 게재 2건** — IF `1.386`.
   엑셀 행렬이 2015년부터 시작해 이 값이 없다. 게재일로 보면 **JCR 2014** 다.
-- **International Journal of Automotive Technology, Early Access 1건** — IF `2.1`.
-  행렬의 IJAT 값(0.876~1.6)에 없다. **JCR 2025** 처럼 더 최근 판본으로 보인다.
+- **International Journal of Automotive Technology, Early Access 3건** — IF `2.1`.
+  엑셀에는 2건이 `1.5` 로 적혀 있었으나 사용자 확인으로 `2.1` 로 고쳤다.
+  **엑셀 원본도 같이 고쳐야 한다.** 행렬의 IJAT 값(0.876~1.6)에 없는 값이므로
+  **JCR 2025** 처럼 더 최근 판본이다.
 
 ---
 ## 4. 받아야 할 자료

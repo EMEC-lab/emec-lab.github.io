@@ -219,7 +219,7 @@ const PUBLICATIONS = [
     venue: "International Journal of Automotive Technology",
     detail: "Early Access",
     doi: "10.1007/s12239-026-00465-3",
-    impact: "1.5",
+    impact: "2.1",
     jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
@@ -243,7 +243,7 @@ const PUBLICATIONS = [
     venue: "International Journal of Automotive Technology",
     detail: "Early Access",
     doi: "10.1007/s12239-026-00462-6",
-    impact: "1.5",
+    impact: "2.1",
     jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
@@ -296,7 +296,7 @@ const PUBLICATIONS = [
   {
     type: "journal", year: 2026,
     date: "",
-    authors: "Young-Hoon Jung†, Ki-O Kim, Hye-Seong Kim, Min-Ro Park*",
+    authors: "Young-Hoon Jung†, Ki-O Kim†, Hye-Seong Kim, Min-Ro Park*",
     title: "Flux Linkage Decomposition-based Analysis and Harmonic Reduction Design of Induced Voltage in High-Speed Multilayer IPMSM",
     venue: "International Journal of Automotive Technology",
     detail: "Early Access",
@@ -332,9 +332,9 @@ const PUBLICATIONS = [
   {
     type: "journal", year: 2026,
     date: "",
-    authors: "Hye-Seong Kim†, Soo-Hwan Park, Yong-Min Lee, Min-Ro Park*",
+    authors: "Hye-Seong Kim†, Soo-Hwan Park†, Yong-Min Lee, Min-Ro Park*",
     title: "Transfer Learning-Assisted Analytical Quasi-3D Surrogate Modeling for Electromagnetic Performance Prediction of AFPMs Considering Eccentricity",
-    venue: "Transactions on Magnetics",
+    venue: "IEEE Transactions on Magnetics",
     detail: "pp. 1-6 (Art no. ), Early Access",
     doi: "10.1109/TMAG.2026.3701418",
     impact: "1.9",
