@@ -1043,7 +1043,12 @@ var Render = (function () {
       imageBox(m.photo, n.en, 'aspect-[3/4]', 'rounded') +
       '<p class="mt-4 text-sm font-bold text-slate-900">' + esc(n.en) + '</p>' +
       (n.ko ? '<p class="mt-0.5 text-xs text-slate-500">' + esc(n.ko) + '</p>' : '') +
-      (m.title ? '<p class="mt-1.5 text-xs font-semibold text-primary">' + esc(m.title) + '</p>' : '') +
+      /* 졸업생은 학위 옆에 졸업연도를 붙인다 */
+      (m.title ? '<p class="mt-1.5 text-xs font-semibold text-primary">' + esc(m.title) +
+        (m.gradYear ? '<span class="ml-1.5 font-mono font-normal text-slate-400">' +
+          esc(m.gradYear) + '</span>' : '') + '</p>' : '') +
+      (m.currentPosition ? '<p class="mt-1.5 text-xs leading-relaxed text-slate-600">' +
+        esc(m.currentPosition) + '</p>' : '') +
       interestTags(m.interests) +
       '<button type="button" class="js-profile mt-4 w-full rounded border border-slate-300' +
         ' px-3 py-1.5 text-xs font-semibold text-slate-600 transition-colors' +
@@ -1248,27 +1253,13 @@ var Render = (function () {
 
     if (!list.length) { host.innerHTML = emptyNote(); return; }
 
+    /* 최근 졸업이 앞으로 */
     list.sort(function (a, b) { return (b.gradYear || 0) - (a.gradYear || 0); });
 
-    host.innerHTML = '<ul class="divide-y divide-slate-200">' + list.map(function (m) {
-      var meta = [];
-      if (m.title) meta.push(esc(m.title));
-      if (m.currentPosition) meta.push(esc(m.currentPosition));
-
-      return '<li class="py-4 sm:flex sm:gap-6">' +
-        '<span class="block font-mono text-sm text-slate-400 sm:w-20 sm:shrink-0 sm:pt-0.5">' +
-          esc(m.gradYear || '') + '</span>' +
-        '<span class="block min-w-0">' +
-          '<span class="text-sm font-semibold text-slate-900">' + esc(m.name) + '</span>' +
-          (meta.length ? '<span class="ml-2 text-sm text-slate-500">' + meta.join(' &middot; ') + '</span>' : '') +
-          (m.thesis ? '<span class="mt-1 block text-xs leading-relaxed text-slate-500">' +
-            esc(SITE.people.thesis) + ': ' + esc(m.thesis) + '</span>' : '') +
-          '<button type="button" class="js-profile mt-2 text-xs font-semibold text-slate-400' +
-            ' transition-colors hover:text-primary" data-member="' + esc(m.id) + '">' +
-            esc(SITE.people.viewProfile) + ' &rarr;</button>' +
-        '</span>' +
-      '</li>';
-    }).join('') + '</ul>';
+    host.innerHTML =
+      '<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">' +
+        list.map(studentCard).join('') +
+      '</div>';
   }
 
   function people() {
