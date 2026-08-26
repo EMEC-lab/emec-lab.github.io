@@ -961,7 +961,23 @@ var Render = (function () {
       }).join('') + '</ul>';
   }
 
-  /* 학회 활동 / 학회 회원 — 기간이 있으면 앞에 붙인다 */
+  /* 학회 활동 / 학회 회원 — 기간이 있으면 앞에 붙인다.
+     org 에 가운데점(·)으로 여러 곳을 적으면 한 개씩 태그로 나누어 붙인다.
+     저널명에 쉼표가 들어가는 경우가 있어 쉼표로 나누지 않는다 */
+  function orgTags(text) {
+    var list = String(text || '').split(' · ')
+      .map(function (t) { return t.replace(/^\s+|\s+$/g, ''); })
+      .filter(Boolean);
+    if (list.length < 2) return esc(text);
+
+    return '<span class="mt-1.5 flex flex-wrap gap-1.5">' +
+      list.map(function (t) {
+        return '<span class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px]' +
+          ' leading-tight text-slate-600">' + esc(t) + '</span>';
+      }).join('') +
+    '</span>';
+  }
+
   function periodList(items, mainKey) {
     if (!items || !items.length) return '';
     return '<ul class="space-y-2 text-sm text-slate-600">' +
@@ -970,7 +986,7 @@ var Render = (function () {
         return '<li class="sm:flex sm:gap-4">' +
           '<span class="' + DATE_COL + '">' +
             esc(x.period || '') + '</span>' +
-          '<span class="block leading-relaxed">' + main + esc(x.org) + '</span>' +
+          '<span class="block min-w-0 leading-relaxed">' + main + orgTags(x.org) + '</span>' +
         '</li>';
       }).join('') + '</ul>';
   }
