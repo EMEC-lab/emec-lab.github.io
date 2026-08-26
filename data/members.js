@@ -108,11 +108,11 @@ const MEMBERS = [
     title: "M.S. Candidate",
     photo: "images/members/lee-yongmin.jpg",
     email: "", office: "",
-    interests: "전기기기 최적설계, 전기기기 전자기·열 해석, 다물리 기반 전기기계 해석, 데이터 기반 대체 모델링 및 머신러닝",
+    interests: "Optimal design of electric machines, Multi-physics analysis, Data-driven surrogate modeling, Machine learning",
     grade: null,
     education: [
-      "B.S., Department of Electrical Engineering, Soonchunhyang University, 2024",
-      "M.S., Department of Electrical and Communication Systems Engineering, Soonchunhyang University, 2026"
+      "B.S., Department of Electrical Engineering, Soonchunhyang University, 2024.02",
+      "M.S., Department of Electrical and Communication Systems Engineering, Soonchunhyang University, 2026.08"
     ], career: [], activities: [], memberships: [], talks: [], scholar: "",
     gradYear: null, thesis: "", currentPosition: ""
   },
@@ -123,11 +123,11 @@ const MEMBERS = [
     title: "M.S. Candidate",
     photo: "images/members/kim-hyeseong.png",
     email: "", office: "",
-    interests: "전기기기 전자기 해석 및 설계, 전동기 진동·소음 특성 분석, 전기기기 고장 진단, 데이터 기반 대체모델링 및 머신러닝",
+    interests: "Electromagnetic analysis and design, Vibration and noise analysis, Fault diagnosis of electric machines, Data-driven surrogate modeling, Machine learning",
     grade: null,
     education: [
-      "B.S., Department of Electrical Engineering, Soonchunhyang University, 2025",
-      "M.S., Department of Electrical and Communication Systems Engineering, Soonchunhyang University, 2025 – Present"
+      "B.S., Department of Electrical Engineering, Soonchunhyang University, 2025.02",
+      "M.S., Department of Electrical and Communication Systems Engineering, Soonchunhyang University, 2025.03 – Present"
     ], career: [], activities: [], memberships: [], talks: [], scholar: "",
     gradYear: null, thesis: "", currentPosition: ""
   },
@@ -138,11 +138,11 @@ const MEMBERS = [
     title: "M.S. Candidate",
     photo: "images/members/lee-younghoon.jpg",
     email: "", office: "",
-    interests: "전기 모터 최적 설계 및 분석, 해석적 모델 기반 전자기·열 해석",
+    interests: "Optimal design of electric machines, Multi-physics analysis, Analytical modeling",
     grade: null,
     education: [
-      "B.S., Department of Electrical Engineering, Soonchunhyang University, 2026",
-      "M.S., Department of Electrical and Communication Systems Engineering, Soonchunhyang University, 2026 – Present"
+      "B.S., Department of Electrical Engineering, Soonchunhyang University, 2026.02",
+      "M.S., Department of Electrical and Communication Systems Engineering, Soonchunhyang University, 2026.03 – Present"
     ], career: [], activities: [], memberships: [], talks: [], scholar: "",
     gradYear: null, thesis: "", currentPosition: ""
   },
@@ -237,11 +237,11 @@ const MEMBERS = [
     title: "M.S.",
     photo: "images/members/ko-donghoon.jpg",
     email: "", office: "",
-    interests: "전기기계 설계 및 최적설계, 전기기계 해석 고속화, 데이터 기반 대체모델링 및 성능 예측, 강건설계 및 강건최적화",
+    interests: "Optimal design of electric machines, Robust design optimization, Computationally efficient analysis, Data-driven surrogate modeling",
     grade: null,
     education: [
-      "B.S., Department of Electrical Engineering, Soonchunhyang University, 2024",
-      "M.S., Department of Electrical and Communication Systems Engineering, Soonchunhyang University, 2026"
+      "B.S., Department of Electrical Engineering, Soonchunhyang University, 2024.02",
+      "M.S., Department of Electrical and Communication Systems Engineering, Soonchunhyang University, 2026.02"
     ],
     career: [], activities: [], memberships: [], talks: [], scholar: "",
     gradYear: 2026,
