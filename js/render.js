@@ -970,13 +970,13 @@ var Render = (function () {
       .filter(Boolean);
     if (list.length < 2) return esc(text);
 
-    /* 한 줄에 세 개씩 줄을 맞춰 놓는다.
-       줄 끝의 구분점은 css/custom.css 의 .org-sep 규칙이 감춘다 —
-       칸 수가 화면 폭에 따라 3 → 2 → 1 로 바뀌기 때문이다 */
-    return '<span class="org-grid mt-1.5 grid gap-x-3 gap-y-1 sm:grid-cols-2 lg:grid-cols-3">' +
-      list.map(function (t) {
-        return '<span>' + esc(t) +
-          '<span class="org-sep ml-1.5 text-slate-300">·</span></span>';
+    /* 구분점을 앞 이름과 한 덩어리로 묶고 양쪽 간격을 같은 값으로 둔다.
+       이름 안에서는 줄이 나누어지지 않고, 줄바꿈은 구분점 뒤에서만 일어난다 */
+    return '<span class="mt-1.5 flex flex-wrap gap-x-2 gap-y-1">' +
+      list.map(function (t, i) {
+        var sep = (i < list.length - 1)
+          ? '<span class="ml-2 text-slate-300">·</span>' : '';
+        return '<span class="whitespace-nowrap">' + esc(t) + sep + '</span>';
       }).join('') +
     '</span>';
   }

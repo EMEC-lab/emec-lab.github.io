@@ -206,22 +206,6 @@ body {
   .hero-still { display: block; }
 }
 
-/* 심사 저널 나열 — 줄 끝에 매달리는 구분점을 감춘다.
-   칸 수는 lg 3 · sm 2 · 그 아래 1 로 바뀌므로 폭별로 따로 잡는다 */
-.org-grid > *:last-child .org-sep { display: none; }
-
-@media (max-width: 639px) {
-  .org-grid .org-sep { display: none; }
-}
-
-@media (min-width: 640px) and (max-width: 1023px) {
-  .org-grid > *:nth-child(2n) .org-sep { display: none; }
-}
-
-@media (min-width: 1024px) {
-  .org-grid > *:nth-child(3n) .org-sep { display: none; }
-}
-
 @media print {
   #site-header, #site-footer { display: none; }
   body { min-height: auto; }

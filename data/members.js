@@ -56,7 +56,7 @@ const MEMBERS = [
       { period: "2025.04 – 2026.06", role: "Guest editor", org: "Machines (SCIE), Special Issue (Electromagnetic and Multi-Physics Analysis and Design of Electric Machines)" },
       { period: "2026.01 – 2026.12", role: "편집위원", org: "The Transactions of The Korean Institute of Electrical Engineers (Scopus, KCI)" },
       { period: "2024.05 – 2025.07", role: "Technical Program Committee", org: "The 15th International Symposium on Linear Drives for Industry Applications (LDIA 2025)" },
-      { period: "2020.09 – Present", role: "Reviewer", org: "IEEE Transactions on Industrial Electronics · IEEE/ASME Transactions on Mechatronics · IEEE Transactions on Transportation Electrification · IEEE Transactions on Energy Conversion · IEEE Transactions on Industry Applications · IEEE Transactions on Magnetics · Journal of Electrical Engineering & Technology · Journal of Magnetics · International Journal of Automotive Technology · The Journal of Korea Robotics Society · Journal of Institute of Control, Robotics and Systems" }
+      { period: "2020.09 – Present", role: "Reviewer", org: "IEEE Transactions on Industrial Electronics · IEEE Transactions on Transportation Electrification · IEEE/ASME Transactions on Mechatronics · IEEE Transactions on Energy Conversion · IEEE Transactions on Industry Applications · IEEE Transactions on Magnetics · Journal of Electrical Engineering & Technology · International Journal of Automotive Technology · Journal of Magnetics · The Journal of Korea Robotics Society · Journal of Institute of Control, Robotics and Systems" }
     ],
 
     memberships: [
