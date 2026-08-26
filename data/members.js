@@ -111,8 +111,8 @@ const MEMBERS = [
     interests: "Optimal design of electric machines, Multi-physics analysis, Data-driven surrogate modeling, Machine learning",
     grade: null,
     education: [
-      "B.S., Department of Electrical Engineering, Soonchunhyang University, 2024.02",
-      "M.S., Department of Electrical and Communication Systems Engineering, Soonchunhyang University, 2026.08"
+      "B.S., Department of Electrical Engineering, Soonchunhyang University, 2018.03 – 2024.02",
+      "M.S., Department of Electrical and Communication Systems Engineering, Soonchunhyang University, 2024.03 – 2026.08"
     ], career: [], activities: [], memberships: [], talks: [], scholar: "",
     gradYear: null, thesis: "", currentPosition: ""
   },
@@ -126,7 +126,7 @@ const MEMBERS = [
     interests: "Electromagnetic analysis and design, Vibration and noise analysis, Fault diagnosis of electric machines, Data-driven surrogate modeling, Machine learning",
     grade: null,
     education: [
-      "B.S., Department of Electrical Engineering, Soonchunhyang University, 2025.02",
+      "B.S., Department of Electrical Engineering, Soonchunhyang University, 2021.03 – 2025.02",
       "M.S., Department of Electrical and Communication Systems Engineering, Soonchunhyang University, 2025.03 – Present"
     ], career: [], activities: [], memberships: [], talks: [], scholar: "",
     gradYear: null, thesis: "", currentPosition: ""
@@ -141,7 +141,7 @@ const MEMBERS = [
     interests: "Optimal design of electric machines, Multi-physics analysis, Analytical modeling",
     grade: null,
     education: [
-      "B.S., Department of Electrical Engineering, Soonchunhyang University, 2026.02",
+      "B.S., Department of Electrical Engineering, Soonchunhyang University, 2020.03 – 2026.02",
       "M.S., Department of Electrical and Communication Systems Engineering, Soonchunhyang University, 2026.03 – Present"
     ], career: [], activities: [], memberships: [], talks: [], scholar: "",
     gradYear: null, thesis: "", currentPosition: ""
@@ -240,8 +240,8 @@ const MEMBERS = [
     interests: "Optimal design of electric machines, Robust design optimization, Computationally efficient analysis, Data-driven surrogate modeling",
     grade: null,
     education: [
-      "B.S., Department of Electrical Engineering, Soonchunhyang University, 2024.02",
-      "M.S., Department of Electrical and Communication Systems Engineering, Soonchunhyang University, 2026.02"
+      "B.S., Department of Electrical Engineering, Soonchunhyang University, 2018.03 – 2024.02",
+      "M.S., Department of Electrical and Communication Systems Engineering, Soonchunhyang University, 2024.03 – 2026.02"
     ],
     career: [], activities: [], memberships: [], talks: [], scholar: "",
     gradYear: 2026,
