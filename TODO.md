@@ -63,48 +63,30 @@
 
 ---
 
-## 3. JCR 순위 자료 (조회 필요)
+## 3. JCR 순위 자료 — 반영 완료
 
-`data/publications.js` 의 `jcrTop` · `jcrRank` · `jcrQuartile` 을 채우려면
-아래 조합의 JCR 자료가 필요하다. **게재 시점에 공개되어 있던 판본** 기준이다.
-(JCR `<연도>` 판은 그 이듬해 6월 말에 공개된다)
+`Journal&Conference_2026update2.xlsx` 를 받아 **국제 저널 31건 전부** 채웠다.
+게재 시점에 공개되어 있던 판본을 골랐고, 저널이 여러 카테고리에 속하면
+상위 %가 가장 낮은 카테고리를 썼다.
 
-저널이 여러 카테고리에 속하면 **가장 높은 카테고리** 기준으로 적는다.
+판본은 논문에 적혀 있던 IF 값을 엑셀에서 역으로 찾아 확정했다.
+31건 중 30건이 정확히 일치했다.
 
-| 저널 | 논문 | 필요한 JCR 판본 |
+### 남은 확인 1건
+
+**Mechanical Systems and Signal Processing — JCR 2024판 IF 값이 두 파일에서 다르다.**
+
+| 출처 | 2024판 IF | 2025판 IF |
 |---|---|---|
-| IEEE Transactions on Magnetics | 7건 | 2014, 2018, 2019, 2024 |
-| International Journal of Automotive Technology | 4건 | 2024, 최신(Early Access 3건) |
-| Journal of Magnetics | 3건 | 2018, 2021, 2023 |
-| Mathematics | 3건 | 2023 |
-| IEEE Transactions on Energy Conversion | 3건 | 2019 |
-| IEEE Transactions on Industry Applications | 2건 | 2017, 2019 |
-| Energies | 1건 | 2019 |
-| Journal of Electrical Engineering & Technology | 1건 | 2021 |
-| Machines | 1건 | 2024 |
-| Mechanical Systems and Signal Processing | 1건 | 2024 |
-| Mechatronics | 1건 | 2020 |
-| Renewable and Sustainable Energy Reviews | 1건 | 2021 |
-| Sensors | 1건 | 2019 |
-| Structural and Multidisciplinary Optimization | 1건 | 2024 |
-| IEEE/ASME Transactions on Mechatronics | 1건 | 2016 |
+| `실적정리_20260428.xlsx` | 8.9 | — |
+| `Journal&Conference_2026update2.xlsx` | 10.2 | 10.2 |
 
-저널 15개 · 조합 22개 · 논문 31건
-
-**판본을 어떻게 정했나** — 논문에 이미 들어 있는 `impact` 값을
-엑셀 `Impact Factor` 시트의 연도별 IF 행렬에서 역으로 찾았다.
-교수님이 실제로 어느 판본을 쓰셨는지 그대로 나온다. 31건 중 29건이 이렇게 확정됐다.
-
-나머지 2건은 확인이 필요하다.
-
-- **IEEE Transactions on Magnetics, 2016.03 게재 2건** — IF `1.386`.
-  엑셀 행렬이 2015년부터 시작해 이 값이 없다. 게재일로 보면 **JCR 2014** 다.
-- **International Journal of Automotive Technology, Early Access 3건** — IF `2.1`.
-  엑셀에는 2건이 `1.5` 로 적혀 있었으나 사용자 확인으로 `2.1` 로 고쳤다.
-  **엑셀 원본도 같이 고쳐야 한다.** 행렬의 IJAT 값(0.876~1.6)에 없는 값이므로
-  **JCR 2025** 처럼 더 최근 판본이다.
+순위는 두 파일 모두 `6/182` 로 같고 IF 셀만 엇갈린다.
+2024판과 2025판이 똑같은 10.2 인 것이 어색해 **사이트에는 `8.9` 를 유지했다.**
+확인 후 고치면 된다.
 
 ---
+
 ## 4. 받아야 할 자료
 
 ### 이미지 · 영상
