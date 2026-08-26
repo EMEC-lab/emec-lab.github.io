@@ -996,9 +996,9 @@ var Render = (function () {
 
   function talkList(items) {
     if (!items || !items.length) return '';
-    return '<ul class="divide-y divide-slate-100 text-sm">' +
+    return '<ul class="space-y-2 text-sm text-slate-600">' +
       items.map(function (t) {
-        return '<li class="py-2.5 sm:flex sm:gap-4">' +
+        return '<li class="sm:flex sm:gap-4">' +
           '<span class="' + DATE_COL + '">' +
             esc(Util.formatDate(t.date)) + '</span>' +
           '<span class="block min-w-0 leading-relaxed">' +
