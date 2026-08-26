@@ -682,20 +682,24 @@ var Render = (function () {
      로고마다 가로세로비가 달라 높이만 맞추고 너비는 auto 로 둔다. */
   function sponsorMark(sp) {
     var name = (sp && sp.name) || '';
-    var inner;
+    if (!name) return '';
 
-    if (sp && sp.logo) {
-      inner = '<img src="' + esc(sp.logo) + '" alt="' + esc(name) +
-              '" loading="lazy" data-fallback class="h-8 w-auto max-w-full object-contain">';
-    } else {
-      inner = '<span class="text-xs font-semibold leading-snug text-slate-500">' + esc(name) + '</span>';
-    }
+    /* 기관명을 로고로 대신하지 않는다. 이름을 먼저 적고 로고를 아래에 붙인다.
+       이름이 이미 적혀 있으므로 로고의 alt 는 비운다 (음성 안내에서 두 번 읽히지 않게) */
+    var inner =
+      '<p class="text-xs font-semibold leading-snug text-slate-600">' + esc(name) + '</p>' +
+      (sp.logo
+        ? '<span class="mt-1.5 flex h-7 items-center">' +
+            '<img src="' + esc(sp.logo) + '" alt="" loading="lazy" data-fallback' +
+            ' class="h-7 w-auto max-w-full object-contain">' +
+          '</span>'
+        : '');
 
-    if (sp && sp.url) {
+    if (sp.url) {
       return '<a href="' + esc(sp.url) + '" target="_blank" rel="noopener noreferrer"' +
-             ' class="flex h-8 items-center">' + inner + '</a>';
+             ' class="block transition-opacity hover:opacity-70">' + inner + '</a>';
     }
-    return '<div class="flex h-8 items-center">' + inner + '</div>';
+    return '<div>' + inner + '</div>';
   }
 
   function statusBadge(status) {
@@ -737,10 +741,8 @@ var Render = (function () {
       '<div class="w-40 shrink-0">' +
         sponsorMark(p.sponsor) +
         (p.program
-          /* 기관명 상자는 h-8 고정이다. 로고는 그 높이를 꽉 채우지만,
-             글자는 세로 가운데 정렬돼 아래로 여백이 남는다. 그만큼만 끌어올린다 */
-          ? '<p class="' + (p.sponsor && p.sponsor.logo ? 'mt-1' : '-mt-1.5') +
-            ' break-keep text-[11px] leading-tight text-slate-400">' + esc(p.program) + '</p>'
+          ? '<p class="mt-1.5 break-keep text-[11px] leading-tight text-slate-400">' +
+            esc(p.program) + '</p>'
           : '') +
       '</div>' +
       '<div class="min-w-0 flex-1">' +
