@@ -252,10 +252,15 @@ var Render = (function () {
 
     if (p.jcrQuartile) bits.push(esc(p.jcrQuartile));
 
-    return bits.length
-      ? '<span class="ml-1.5 whitespace-nowrap font-semibold text-primary">[' +
-        bits.join(', ') + ']</span>'
-      : '';
+    if (!bits.length) return '';
+
+    /* Q1 · Q2 일 때만 색으로 짚어 눈에 들어오게 하고,
+       그 외에는 앞의 서지 정보와 같은 톤으로 둔다 */
+    var top = (p.jcrQuartile === 'Q1' || p.jcrQuartile === 'Q2');
+    var cls = top ? 'font-semibold text-primary' : 'text-slate-500';
+
+    return '<span class="ml-1.5 whitespace-nowrap ' + cls + '">[' +
+           bits.join(', ') + ']</span>';
   }
 
   /* 논문 한 건 */
