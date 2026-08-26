@@ -108,7 +108,7 @@ const MEMBERS = [
     title: "M.S. Candidate",
     photo: "images/members/lee-yongmin.jpg",
     email: "", office: "",
-    interests: "Electric machine design and analysis, Multi-physics analysis",
+    interests: "Data-driven optimal design and analysis of electric machines, AI-assisted analysis acceleration, LPTN-based thermal analysis",
     grade: null,
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2024.02",
@@ -123,7 +123,7 @@ const MEMBERS = [
     title: "M.S. Candidate",
     photo: "images/members/kim-hyeseong.png",
     email: "", office: "",
-    interests: "Electric machine design and analysis, Vibration and noise analysis",
+    interests: "Data-driven optimal design and analysis of electric machines, Electromagnetic force-based noise and vibration analysis, Transient characteristic analysis",
     grade: null,
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2025.02",
@@ -138,7 +138,7 @@ const MEMBERS = [
     title: "M.S. Candidate",
     photo: "images/members/lee-younghoon.jpg",
     email: "", office: "",
-    interests: "Electric machine design and analysis, Analytical modeling",
+    interests: "Analytical method-based analysis and optimal design of electric machines, Multi-physics analysis, System model-based design",
     grade: null,
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2026.02",
@@ -237,7 +237,7 @@ const MEMBERS = [
     title: "M.S.",
     photo: "images/members/ko-donghoon.jpg",
     email: "", office: "",
-    interests: "Electric machine design and analysis, Robust design optimization",
+    interests: "Analytical method-based analysis and optimal design of electric machines, Manufacturing uncertainty analysis, Robust optimal design",
     grade: null,
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2024.02",
