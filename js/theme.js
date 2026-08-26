@@ -19,6 +19,12 @@ tailwind.config = {
           dark:    '#1B3C71',   // hover, 강조
           light:   '#E8EEF7',   // 배경 톤
           mid:     '#5C81BC'    // 보조
+        },
+        /* 강조용 보조색. 메인 남색과 겹치지 않게 초록 계열로 잡았다.
+           저널 지표(Q1·Q2)처럼 '눈으로 짚어야 하는' 값에만 쓴다 */
+        accent: {
+          DEFAULT: '#047857',   // emerald 700
+          dark:    '#065F46'
         }
       },
       fontFamily: {

@@ -112,6 +112,8 @@ var Render = (function () {
 
       /* 주소가 바뀌었으니 상단 메뉴의 활성 표시도 맞춘다 */
       if (typeof Layout !== 'undefined' && Layout.refresh) Layout.refresh();
+
+      if (config.onApply) config.onApply(key);
     }
 
     var btns = document.querySelectorAll('.js-tab');
@@ -257,7 +259,7 @@ var Render = (function () {
     /* Q1 · Q2 일 때만 색으로 짚어 눈에 들어오게 하고,
        그 외에는 앞의 서지 정보와 같은 톤으로 둔다 */
     var top = (p.jcrQuartile === 'Q1' || p.jcrQuartile === 'Q2');
-    var cls = top ? 'font-semibold text-primary' : 'text-slate-500';
+    var cls = top ? 'font-semibold text-accent' : 'text-slate-500';
 
     return '<span class="ml-1.5 whitespace-nowrap ' + cls + '">[' +
            bits.join(', ') + ']</span>';
@@ -523,15 +525,70 @@ var Render = (function () {
     return order.map(function (y) { return { year: y, items: map[y] }; });
   }
 
+  /* --- 접었다 펴는 덩어리 -------------------------------------------
+   * 버튼을 누르면 바로 다음 형제 요소가 열리고 닫힌다.
+   * 클릭 처리는 문서에 한 번만 걸어 둔다 (bindDisclosure).
+   * JS 가 안 돌아도 내용이 숨지 않도록, 닫힌 상태는 JS 가 부여한다.
+   * ----------------------------------------------------------------- */
+  var CHEV = '<svg class="js-chev h-4 w-4 shrink-0 transition-transform" fill="none"' +
+    ' stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">' +
+    '<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/></svg>';
+
+  function disclosure(headInner, headCls, bodyHTML, open) {
+    return '<button type="button" class="js-disclose ' + headCls + '"' +
+        ' aria-expanded="' + (open ? 'true' : 'false') + '">' +
+        headInner + CHEV +
+      '</button>' +
+      '<div class="js-panel"' + (open ? '' : ' hidden') + '>' + bodyHTML + '</div>';
+  }
+
+  var discloseBound = false;
+  function bindDisclosure() {
+    if (discloseBound) return;
+    discloseBound = true;
+
+    document.addEventListener('click', function (e) {
+      var btn = e.target && e.target.closest && e.target.closest('.js-disclose');
+      if (!btn) return;
+
+      var panel = btn.nextElementSibling;
+      if (!panel || panel.className.indexOf('js-panel') < 0) return;
+
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+      panel.hidden = open;
+
+      var chev = btn.querySelector('.js-chev');
+      if (chev) chev.style.transform = open ? '' : 'rotate(180deg)';
+    });
+  }
+
   /* 연도별 덩어리. 최신 연도부터 */
+  /* 올해 것만 펌쳐 두고 지난 연도는 접는다.
+     해마다 고칠 필요가 없도록 오늘 날짜에서 기준을 잡는다 */
+  function openFromYear() { return new Date().getFullYear(); }
+
   function yearBlocks(list) {
+    var openFrom = openFromYear();
+
     return groupByYear(list).map(function (g) {
+      var open = Number(g.year) >= openFrom;
+
+      var head =
+        '<span class="font-mono text-lg font-bold text-primary">' + esc(g.year) + '</span>' +
+        '<span class="font-mono text-sm font-semibold text-slate-400">' +
+          esc(g.items.length) + '</span>' +
+        '<span class="ml-auto"></span>';
+
+      var body = '<ul class="divide-y divide-slate-200">' +
+        g.items.map(publicationItem).join('') + '</ul>';
+
       return '<div class="mt-8 first:mt-0">' +
-        '<h3 class="border-b-2 border-primary pb-1 font-mono text-lg font-bold text-primary">' +
-          esc(g.year) + '</h3>' +
-        '<ul class="divide-y divide-slate-200">' +
-          g.items.map(publicationItem).join('') +
-        '</ul></div>';
+        disclosure(head,
+          'flex w-full items-center gap-2 border-b-2 border-primary pb-1 text-left text-primary' +
+          ' transition-colors hover:text-primary-dark',
+          body, open) +
+      '</div>';
     }).join('');
   }
 
@@ -616,8 +673,15 @@ var Render = (function () {
     sectionTabs({
       tabs: PUBLICATION_TYPES.map(function (t) {
         return { key: t, label: SITE.submenu[t], count: counts[t] };
-      })
+      }),
+      /* 특허에는 주저자·교신저자 개념이 없어 범례를 감춘다 */
+      onApply: function (key) {
+        var host = document.getElementById('pub-legend');
+        if (host) host.hidden = (key === 'patent');
+      }
     });
+
+    bindDisclosure();
   }
 
   /* =====================================================================
@@ -787,15 +851,28 @@ var Render = (function () {
       { key: 'completed', items: all.filter(function (p) { return getStatus(p) !== 'ongoing'; }) }
     ].filter(function (g) { return g.items.length; });
 
+    /* 진행중은 펌쳐 두고, 종료된 과제는 접어 둔다 */
     host.innerHTML = groups.map(function (g) {
+      var open = (g.key === 'ongoing');
+
+      var head =
+        '<span>' + esc(SITE.sectionTitles[g.key]) + '</span>' +
+        '<span class="font-mono text-sm font-normal text-slate-400">' +
+          esc(g.items.length) + '</span>' +
+        '<span class="ml-auto"></span>';
+
+      var body = '<ul class="divide-y divide-slate-100">' +
+        g.items.map(projectRow).join('') + '</ul>';
+
       return '<div class="mt-10 first:mt-0">' +
-        '<h3 class="flex items-center gap-2 border-b border-slate-200 pb-2 text-lg font-bold text-slate-900">' +
-          esc(SITE.sectionTitles[g.key]) +
-          '<span class="font-mono text-sm font-normal text-slate-400">' + esc(g.items.length) + '</span>' +
-        '</h3>' +
-        '<ul class="divide-y divide-slate-100">' + g.items.map(projectRow).join('') + '</ul>' +
+        disclosure(head,
+          'flex w-full items-center gap-2 border-b border-slate-200 pb-2 text-left' +
+          ' text-lg font-bold text-slate-900 transition-colors hover:text-primary',
+          body, open) +
       '</div>';
     }).join('');
+
+    bindDisclosure();
   }
 
   function research() {
