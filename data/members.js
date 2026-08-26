@@ -123,7 +123,7 @@ const MEMBERS = [
     title: "M.S. Candidate",
     photo: "images/members/kim-hyeseong.png",
     email: "", office: "",
-    interests: "Data-driven optimal design and analysis, Electromagnetic force-based noise and vibration analysis, Transient characteristic analysis",
+    interests: "Data-driven optimal design and analysis, Electromagnetic force-based noise and vibration analysis, Fault diagnosis of electric machines",
     grade: null,
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2025.02",
