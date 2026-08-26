@@ -287,7 +287,7 @@ const ALUMNI_DEGREE_ORDER = ["phd", "ms", "undergrad"];
 const ALUMNI_DEGREE_LABELS = {
   phd:       "Ph.D. degree",
   ms:        "M.S. degree",
-  undergrad: "Undergraduate"
+  undergrad: "B.S. degree"
 };
 
 /* 역할별 표시 라벨 */
