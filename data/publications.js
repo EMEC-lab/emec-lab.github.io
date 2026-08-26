@@ -220,7 +220,7 @@ const PUBLICATIONS = [
     detail: "Early Access",
     doi: "10.1007/s12239-026-00465-3",
     impact: "2.1",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "56", jcrRank: "103/184", jcrQuartile: "Q3", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -232,7 +232,7 @@ const PUBLICATIONS = [
     detail: "vol. 62, no. 7, pp. 1-6 (Art no. 7401806)",
     doi: "10.1109/TMAG.2025.3640767",
     impact: "1.9",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "69.1", jcrRank: "255/369", jcrQuartile: "Q3", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -244,7 +244,7 @@ const PUBLICATIONS = [
     detail: "Early Access",
     doi: "10.1007/s12239-026-00462-6",
     impact: "2.1",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "56", jcrRank: "103/184", jcrQuartile: "Q3", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -256,7 +256,7 @@ const PUBLICATIONS = [
     detail: "vol. 14, no. 1, pp. 1-17 (3)",
     doi: "10.3390/machines14010003",
     impact: "2.5",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "40.7", jcrRank: "74/182", jcrQuartile: "Q2", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -268,7 +268,7 @@ const PUBLICATIONS = [
     detail: "vol. 27, no. 1, pp. 33-44",
     doi: "10.1007/s12239-025-00270-4",
     impact: "1.5",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "67.5", jcrRank: "52/77", jcrQuartile: "Q3", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -290,7 +290,7 @@ const PUBLICATIONS = [
     detail: "vol. 69, no. 115, pp. 1-16",
     doi: "10.1007/s00158-026-04316-8",
     impact: "4.0",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "16.8", jcrRank: "30/179", jcrQuartile: "Q1", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -302,7 +302,7 @@ const PUBLICATIONS = [
     detail: "Early Access",
     doi: "",
     impact: "2.1",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "56", jcrRank: "103/184", jcrQuartile: "Q3", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -314,7 +314,7 @@ const PUBLICATIONS = [
     detail: "vol. 62, no. 7, pp. 1-6 (Art no. 8100806)",
     doi: "10.1109/TMAG.2025.3616812",
     impact: "1.9",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "69.1", jcrRank: "255/369", jcrQuartile: "Q3", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -326,7 +326,7 @@ const PUBLICATIONS = [
     detail: "vol. 244, pp. 1-19 (113776)",
     doi: "10.1016/j.ymssp.2025.113776",
     impact: "8.9",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "3.3", jcrRank: "6/182", jcrQuartile: "Q1", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -338,7 +338,7 @@ const PUBLICATIONS = [
     detail: "pp. 1-6, Early Access",
     doi: "10.1109/TMAG.2026.3701418",
     impact: "1.9",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "69.1", jcrRank: "255/369", jcrQuartile: "Q3", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -590,7 +590,7 @@ const PUBLICATIONS = [
     detail: "vol. 13, no. 11, pp. 1-17 (1865)",
     doi: "10.3390/math13111865",
     impact: "2.3",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "4.3", jcrRank: "21/490", jcrQuartile: "Q1", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -602,7 +602,7 @@ const PUBLICATIONS = [
     detail: "vol. 13, no. 9, pp. 1-20 (1509)",
     doi: "10.3390/math13091509",
     impact: "2.3",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "4.3", jcrRank: "21/490", jcrQuartile: "Q1", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -614,7 +614,7 @@ const PUBLICATIONS = [
     detail: "vol. 13, no. 10, pp. 1-19 (1603)",
     doi: "10.3390/math13101603",
     impact: "2.3",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "4.3", jcrRank: "21/490", jcrQuartile: "Q1", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -686,7 +686,7 @@ const PUBLICATIONS = [
     detail: "vol. 29, no. 3, pp. 259-268",
     doi: "10.4283/JMAG.2024.29.3.259",
     impact: "0.6",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "93.2", jcrRank: "409/439", jcrQuartile: "Q4", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -748,7 +748,7 @@ const PUBLICATIONS = [
     detail: "vol. 17, no. 5, pp. 2779-2788",
     doi: "10.1007/s42835-022-01173-5",
     impact: "1.528",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "77.2", jcrRank: "213/276", jcrQuartile: "Q4", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -760,7 +760,7 @@ const PUBLICATIONS = [
     detail: "vol. 81, pp. 1-18 (102696)",
     doi: "10.1016/j.mechatronics.2021.102696",
     impact: "3.498",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "27.1", jcrRank: "36/133", jcrQuartile: "Q2", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -772,7 +772,7 @@ const PUBLICATIONS = [
     detail: "vol. 27, no. 3, pp. 298-302",
     doi: "10.4283/JMAG.2022.27.3.298",
     impact: "0.551",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "93.7", jcrRank: "74/79", jcrQuartile: "Q4", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -784,7 +784,7 @@ const PUBLICATIONS = [
     detail: "vol. 161, pp. 1-12 (112286)",
     doi: "10.1016/j.rser.2022.112286",
     impact: "16.799",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "2.1", jcrRank: "1/47", jcrQuartile: "Q1", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -866,7 +866,7 @@ const PUBLICATIONS = [
     detail: "vol. 14, no. 11, pp. 1-12 (3279)",
     doi: "10.3390/en14113279",
     impact: "2.702",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "56.2", jcrRank: "63/112", jcrQuartile: "Q3", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -878,7 +878,7 @@ const PUBLICATIONS = [
     detail: "vol. 57, no. 1, pp. 327-339",
     doi: "10.1109/TIA.2020.3033783",
     impact: "3.488",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "20.9", jcrRank: "19/91", jcrQuartile: "Q1", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -890,7 +890,7 @@ const PUBLICATIONS = [
     detail: "vol. 57, no. 2, pp. 1–5 (Art. no. 8103205)",
     doi: "10.1109/TMAG.2020.3030684",
     impact: "1.626",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "63.5", jcrRank: "169/266", jcrQuartile: "Q3", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -902,7 +902,7 @@ const PUBLICATIONS = [
     detail: "vol. 36, no. 2, pp. 883 - 894",
     doi: "10.1109/TEC.2020.3035165",
     impact: "4.501",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "16.2", jcrRank: "43/266", jcrQuartile: "Q1", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -914,7 +914,7 @@ const PUBLICATIONS = [
     detail: "vol. 21, no. 4, pp. 1-16 (1077)",
     doi: "10.3390/s21041077",
     impact: "3.275",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "23.4", jcrRank: "15/64", jcrQuartile: "Q2", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -1036,7 +1036,7 @@ const PUBLICATIONS = [
     detail: "vol. 35, no. 2, pp. 928-937",
     doi: "10.1109/TEC.2020.2966299",
     impact: "4.501",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "16.2", jcrRank: "43/266", jcrQuartile: "Q1", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -1048,7 +1048,7 @@ const PUBLICATIONS = [
     detail: "vol. 56, no. 1, pp. 1-4 (Art. no. 750074)",
     doi: "10.1109/TMAG.2019.2949613",
     impact: "1.651",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "60.1", jcrRank: "89/148", jcrQuartile: "Q3", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -1060,7 +1060,7 @@ const PUBLICATIONS = [
     detail: "vol. 35, no. 4, pp. 2076-2085",
     doi: "10.1109/TEC.2020.2999127",
     impact: "4.501",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "16.2", jcrRank: "43/266", jcrQuartile: "Q1", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -1182,7 +1182,7 @@ const PUBLICATIONS = [
     detail: "vol. 24, no. 4, pp. 641-649",
     doi: "10.4283/JMAG.2019.24.4.641",
     impact: "0.837",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "87", jcrRank: "255/293", jcrQuartile: "Q4", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -1194,7 +1194,7 @@ const PUBLICATIONS = [
     detail: "vol. 55, no. 2, pp. 1351-1359",
     doi: "10.1109/TIA.2018.2876329",
     impact: "2.743",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "16.3", jcrRank: "14/86", jcrQuartile: "Q1", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -1246,7 +1246,7 @@ const PUBLICATIONS = [
     detail: "vol. 22, no. 4, pp. 1554-1562",
     doi: "10.1109/TMECH.2017.2695059",
     impact: "4.357",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "2.3", jcrRank: "1/44", jcrQuartile: "Q1", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -1298,7 +1298,7 @@ const PUBLICATIONS = [
     detail: "vol. 52, no. 3, pp. 1-4 (Art. no. 8101904)",
     doi: "10.1109/TMAG.2015.2482987",
     impact: "1.386",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "44.2", jcrRank: "110/249", jcrQuartile: "Q2", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
@@ -1310,7 +1310,7 @@ const PUBLICATIONS = [
     detail: "vol. 52, no. 3, pp. 1-4 (Art. no. 8101804)",
     doi: "10.1109/TMAG.2015.2490281",
     impact: "1.386",
-    jcrTop: "", jcrRank: "", jcrQuartile: "", domestic: false,
+    jcrTop: "44.2", jcrRank: "110/249", jcrQuartile: "Q2", domestic: false,
     patentNo: "", applicationNo: "", country: ""
   },
   {
