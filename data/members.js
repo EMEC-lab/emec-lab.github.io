@@ -105,7 +105,7 @@ const MEMBERS = [
     id: "ms-lee-yongmin",
     role: "ms",
     name: "Yong-Min Lee (이용민)",
-    title: "M.S. Student",
+    title: "M.S. Candidate",
     photo: "images/members/lee-yongmin.jpg",
     email: "", office: "",
     interests: "",
@@ -117,7 +117,7 @@ const MEMBERS = [
     id: "ms-kim-hyeseong",
     role: "ms",
     name: "Hye-Seong Kim (김혜성)",
-    title: "M.S. Student",
+    title: "M.S. Candidate",
     photo: "images/members/kim-hyeseong.jpg",
     email: "", office: "",
     interests: "",
@@ -129,7 +129,7 @@ const MEMBERS = [
     id: "ms-lee-younghoon",
     role: "ms",
     name: "Young-Hoon Lee (이영훈)",
-    title: "M.S. Student",
+    title: "M.S. Candidate",
     photo: "images/members/lee-younghoon.jpg",
     email: "", office: "",
     interests: "",
@@ -228,7 +228,7 @@ const MEMBERS = [
     id: "student-kim",
     role: "ms",
     name: "Hyun-Woo Kim (김현우)",
-    title: "M.S. Student",
+    title: "M.S. Candidate",
     photo: "images/members/kim.jpg",
     email: "", office: "",
     interests: "IPMSM Design",
@@ -256,7 +256,7 @@ const MEMBER_ROLE_ORDER = ["postdoc", "phd", "ms", "undergrad"];
 /* 역할별 표시 라벨 */
 const MEMBER_ROLE_LABELS = {
   postdoc:   "Post-doctoral Researcher",
-  phd:       "Ph.D. Student",
-  ms:        "M.S. Student",
+  phd:       "Ph.D. Candidate",
+  ms:        "M.S. Candidate",
   undergrad: "Undergraduate Researcher"
 };

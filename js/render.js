@@ -236,9 +236,8 @@ var Render = (function () {
   function boldAuthors(authors, only, style) {
     if (!authors) return '';
     var tokens = only ? tokensOf(only) : memberTokens();
-    var hitCls = (style === 'self')
-      ? 'font-bold text-primary underline decoration-primary/40 decoration-1 underline-offset-2'
-      : 'font-bold text-slate-900 underline decoration-slate-400 decoration-1 underline-offset-2';
+    var hitCls = 'font-bold text-slate-900 underline decoration-slate-400'
+      + ' decoration-1 underline-offset-2';
 
     return String(authors).split(',').map(function (seg) {
       var part = splitMarks(seg);
@@ -607,7 +606,7 @@ var Render = (function () {
         '<span class="ml-auto"></span>';
 
       var body = '<ul class="divide-y divide-slate-200">' +
-        g.items.map(publicationItem).join('') + '</ul>';
+        g.items.map(function (p) { return publicationItem(p); }).join('') + '</ul>';
 
       return '<div class="mt-8 first:mt-0">' +
         disclosure(head,

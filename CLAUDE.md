@@ -627,8 +627,8 @@ Ph.D. Candidate     title 값 (파란색)
 - 논문은 **PUBLICATIONS 페이지와 같은 기준**으로 나눈다.
   종류(저널 → 학술대회 → 특허) 안에서 국제 → 국내, 그 안은 최신순이다.
   기준은 `PUB_SPLITS`, 제목은 `SITE.pubGroups` 를 그대로 쓴다
-- 프로필 창 안에서는 **그 사람만** 굵게 · 파란색으로 짚는다.
-  PUBLICATIONS 페이지에서 모든 구성원을 굵게·밑줄로 표시하는 것과 구분된다
+- 프로필 창 안에서는 **그 사람만** 짚는다.
+  표시 방식은 PUBLICATIONS 페이지와 같다 (굵게 + 밑줄). 달라지는 것은 대상뿐이다
 
 ### RESEARCH (research.html)
 
