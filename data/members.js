@@ -295,5 +295,5 @@ const MEMBER_ROLE_LABELS = {
   postdoc:   "Post-doctoral Researcher",
   phd:       "Ph.D. Candidate",
   ms:        "M.S. Candidate",
-  undergrad: "Undergraduate Researcher"
+  undergrad: "Undergraduate Student"
 };
