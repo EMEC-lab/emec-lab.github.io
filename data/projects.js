@@ -28,7 +28,7 @@ const PROJECTS = [
   {
     id: "proj-2022-01",
     title: "구동 모터와 인버터의 온도 특성을 고려한 전기자동차 구동 시스템 모델링 및 제어",
-    sponsor: { name: "한국연구재단", logo: "", url: "" },
+    sponsor: { name: "한국연구재단", logo: "images/sponsors/nrf.svg", url: "https://www.nrf.re.kr" },
     ministry: "과학기술정보통신부",
     program: "생애 첫 연구",
     startDate: "2022-09-01", endDate: "2025-02-28",
@@ -39,7 +39,7 @@ const PROJECTS = [
   {
     id: "proj-2022-02",
     title: "전기자동차 에너지 효율 예측을 위한 구동 모터와 인버터의 연성 전자기 손실해석",
-    sponsor: { name: "순천향대학교", logo: "", url: "" },
+    sponsor: { name: "순천향대학교", logo: "images/sponsors/sch.png", url: "https://home.sch.ac.kr" },
     ministry: "",
     startDate: "2022-09-01", endDate: "2023-08-31",
     role: "PI", orgRole: "",
@@ -69,7 +69,7 @@ const PROJECTS = [
   {
     id: "proj-2024-05",
     title: "열등가회로 기반 자속집중형 동기전동기 분석",
-    sponsor: { name: "한국전자기술연구원", logo: "", url: "" },
+    sponsor: { name: "한국전자기술연구원", logo: "images/sponsors/keti.png", url: "https://www.keti.re.kr" },
     ministry: "",
     startDate: "2024-07-01", endDate: "2024-10-31",
     role: "PI", orgRole: "",
@@ -79,7 +79,7 @@ const PROJECTS = [
   {
     id: "proj-2024-06",
     title: "전기자동차의 동적 주행 특성을 고려한 구동 모터의 전자기-열 특성 및 에너지 효율 분석",
-    sponsor: { name: "한국연구재단", logo: "", url: "" },
+    sponsor: { name: "한국연구재단", logo: "images/sponsors/nrf.svg", url: "https://www.nrf.re.kr" },
     ministry: "과학기술정보통신부",
     program: "석사과정생연구장려금지원사업",
     pi: "Yong-Min Lee, M.S. candidate",
@@ -91,7 +91,7 @@ const PROJECTS = [
   {
     id: "proj-2024-07",
     title: "영구자석 동기전동기의 제작 공차를 고려한 해석적 방법 및 강건 최적 설계 프로세스",
-    sponsor: { name: "한국연구재단", logo: "", url: "" },
+    sponsor: { name: "한국연구재단", logo: "images/sponsors/nrf.svg", url: "https://www.nrf.re.kr" },
     ministry: "과학기술정보통신부",
     program: "석사과정생연구장려금지원사업",
     pi: "Dong-Hoon Ko, M.S. candidate",
@@ -103,7 +103,7 @@ const PROJECTS = [
   {
     id: "proj-2025-08",
     title: "Deep Transfer Learning 적용 해석 정합성 향상 기반 CFSM 설계",
-    sponsor: { name: "한국전자기술연구원", logo: "", url: "" },
+    sponsor: { name: "한국전자기술연구원", logo: "images/sponsors/keti.png", url: "https://www.keti.re.kr" },
     ministry: "",
     startDate: "2025-03-03", endDate: "2025-10-31",
     role: "PI", orgRole: "",
@@ -123,7 +123,7 @@ const PROJECTS = [
   {
     id: "proj-2025-10",
     title: "미래 라이프스타일을 고려한 X care 컨셉 기반 지능형 모빌리티(제품 및 서비스) 플랫폼 로봇 디자인 개발",
-    sponsor: { name: "한국로봇융합연구원", logo: "", url: "" },
+    sponsor: { name: "한국로봇융합연구원", logo: "images/sponsors/kiro.png", url: "https://www.kiro.re.kr" },
     ministry: "",
     startDate: "2025-07-01", endDate: "2026-12-31",
     role: "Co-I", orgRole: "",
@@ -133,7 +133,7 @@ const PROJECTS = [
   {
     id: "proj-2025-11",
     title: "해석적 방법 기반 자속집중형 모터 특성 분석",
-    sponsor: { name: "한국전자기술연구원", logo: "", url: "" },
+    sponsor: { name: "한국전자기술연구원", logo: "images/sponsors/keti.png", url: "https://www.keti.re.kr" },
     ministry: "",
     startDate: "2025-07-23", endDate: "2025-10-31",
     role: "PI", orgRole: "",
@@ -143,7 +143,7 @@ const PROJECTS = [
   {
     id: "proj-2025-12",
     title: "다중물리 연성 해석을 통한 BLAC 및 BLDC 모터의 전자기-진동 특성 분석",
-    sponsor: { name: "한국연구재단", logo: "", url: "" },
+    sponsor: { name: "한국연구재단", logo: "images/sponsors/nrf.svg", url: "https://www.nrf.re.kr" },
     ministry: "과학기술정보통신부",
     program: "석사과정생연구장려금지원사업",
     pi: "Hye-Seong Kim, M.S. candidate",
@@ -155,7 +155,7 @@ const PROJECTS = [
   {
     id: "proj-2025-13",
     title: "고속 고출력 구동 모터의 회전자 구조 안정성 분석",
-    sponsor: { name: "한국자동차연구원", logo: "", url: "" },
+    sponsor: { name: "한국자동차연구원", logo: "images/sponsors/katech.png", url: "https://www.katech.re.kr" },
     ministry: "",
     startDate: "2025-09-09", endDate: "2025-11-30",
     role: "PI", orgRole: "",
@@ -165,7 +165,7 @@ const PROJECTS = [
   {
     id: "proj-2025-14",
     title: "고출력 모터 설계를 위한 코발트 강판 자성 특성 분석(자성데이터 측정)",
-    sponsor: { name: "한국생산기술연구원", logo: "", url: "" },
+    sponsor: { name: "한국생산기술연구원", logo: "images/sponsors/kitech.svg", url: "https://www.kitech.re.kr" },
     ministry: "",
     startDate: "2025-09-22", endDate: "2025-12-22",
     role: "PI", orgRole: "",
@@ -175,7 +175,7 @@ const PROJECTS = [
   {
     id: "proj-2025-15",
     title: "AI 서버 대용량 전력제어용 초고밀도 전력 모듈 개발",
-    sponsor: { name: "한국산업기술기획평가원", logo: "", url: "" },
+    sponsor: { name: "한국산업기술기획평가원", logo: "images/sponsors/keit.png", url: "https://www.keit.re.kr" },
     ministry: "산업통상부",
     startDate: "2025-10-01", endDate: "2028-12-31",
     role: "PI", orgRole: "",
@@ -195,7 +195,7 @@ const PROJECTS = [
   {
     id: "proj-2026-17",
     title: "상반회전 전기추진을 위한 이중회전자 모터 토폴로지 분석 및 고성능 설계-검증 프레임워크",
-    sponsor: { name: "한국연구재단", logo: "", url: "" },
+    sponsor: { name: "한국연구재단", logo: "images/sponsors/nrf.svg", url: "https://www.nrf.re.kr" },
     ministry: "과학기술정보통신부",
     program: "우수신진 연구",
     startDate: "2026-03-01", endDate: "2029-02-28",
@@ -206,7 +206,7 @@ const PROJECTS = [
   {
     id: "proj-2026-18",
     title: "자속집중형 영구자석 동기모터의 전자기 가진력 분석 기반 진동 저감 설계",
-    sponsor: { name: "한국전자기술연구원", logo: "", url: "" },
+    sponsor: { name: "한국전자기술연구원", logo: "images/sponsors/keti.png", url: "https://www.keti.re.kr" },
     ministry: "",
     startDate: "2026-04-01", endDate: "2026-11-02",
     role: "PI", orgRole: "",
@@ -216,7 +216,7 @@ const PROJECTS = [
   {
     id: "proj-2026-19",
     title: "5-in-1 EPT 통합시스템용 구동모터의 PWM 전류 고조파 반영 손실해석 프로세스 개발",
-    sponsor: { name: "한국자동차연구원", logo: "", url: "" },
+    sponsor: { name: "한국자동차연구원", logo: "images/sponsors/katech.png", url: "https://www.katech.re.kr" },
     ministry: "",
     startDate: "2026-04-01", endDate: "2026-11-30",
     role: "PI", orgRole: "",

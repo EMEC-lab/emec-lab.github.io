@@ -737,7 +737,10 @@ var Render = (function () {
       '<div class="w-40 shrink-0">' +
         sponsorMark(p.sponsor) +
         (p.program
-          ? '<p class="-mt-1.5 break-keep text-[11px] leading-tight text-slate-400">' + esc(p.program) + '</p>'
+          /* 기관명 상자는 h-8 고정이다. 로고는 그 높이를 꽉 채우지만,
+             글자는 세로 가운데 정렬돼 아래로 여백이 남는다. 그만큼만 끌어올린다 */
+          ? '<p class="' + (p.sponsor && p.sponsor.logo ? 'mt-1' : '-mt-1.5') +
+            ' break-keep text-[11px] leading-tight text-slate-400">' + esc(p.program) + '</p>'
           : '') +
       '</div>' +
       '<div class="min-w-0 flex-1">' +
