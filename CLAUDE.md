@@ -605,12 +605,21 @@ const ongoingCount = PROJECTS.filter(p => getStatus(p) === 'ongoing').length;
 - 카드 또는 행 하나에 담을 내용:
 
   ```
-  [지원기관 CI]  과제명
-                지원기관명 · Principal Investigator · 2024.03 ~ 2027.02   [Ongoing]
+  [지원기관 CI]   과제명
+  [세부 사업명]   Role     Principal Investigator
+                 Period   2024.03 ~ 2027.02   [Ongoing]
+  ```
+
+  학생이 연구책임자면 두 사람을 함께 적는다.
+
+  ```
+  Role     Principal Investigator (Yong-Min Lee, M.S. candidate) / Academic Advisor (Min-Ro Park)
   ```
 
 - 역할 라벨은 `PROJECT_ROLES[p.role]`에서 가져온다. 직접 문자열을 쓰지 않는다
-- 좁은 화면에서는 약어(`PI` / `Co-I`)로 대체 표기 가능
+- 역할에 이름을 붙이는 것은 **지도교수가 연구책임자가 아닐 때뿐**이다.
+  그 외에는 `Principal Investigator` 만 적는다 — 이 페이지의 과제는 모두 지도교수의 것이다
+- 세부 사업명(`program`)은 **지원기관 아래**에 작게 붙인다. 기관과 사업은 한 묶음이다
 - **기간 표시 형식은 `YYYY.MM ~ YYYY.MM`**
 - 과제가 없는 그룹은 소제목째 렌더링하지 않는다 (빈 섹션 노출 금지)
 

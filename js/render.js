@@ -710,42 +710,46 @@ var Render = (function () {
   function projectRow(p) {
     var status = getStatus(p);
     var period = Util.formatMonth(p.startDate) + ' ~ ' + Util.formatMonth(p.endDate);
-    var roleFull = (typeof PROJECT_ROLES !== 'undefined' && PROJECT_ROLES[p.role]) || p.role;
 
-    /* 로고가 없으면 CI 자리에 기관명 텍스트가 들어가므로
-       아래 메타 줄에서는 기관명을 한 번 더 쓰지 않는다 */
-    var showSponsorInMeta = !!(p.sponsor && p.sponsor.logo);
+    var roleOf = function (key) {
+      return (typeof PROJECT_ROLES !== 'undefined' && PROJECT_ROLES[key]) || key;
+    };
 
-    /* 세부 사업명과, 지도교수가 아닌 사람이 연구책임자일 때 그 이름.
-       학생이 연구책임자인 과제(예: 석사과정생연구장려금)에 쓴다 */
-    var sub = [];
-    if (p.program) {
-      sub.push('<span class="font-semibold text-primary">' + esc(p.program) + '</span>');
+    /* 역할. 지도교수가 아닌 사람이 연구책임자면 두 사람을 함께 적는다.
+       그렇지 않으면 이름을 붙이지 않는다 — 이 페이지의 과제는 모두 지도교수의 것이다 */
+    var roleText = p.pi
+      ? esc(roleOf('PI')) + ' (' + esc(p.pi) + ')' +
+        ' <span class="text-slate-400">/</span> ' +
+        esc(roleOf(p.role)) + ' (' + esc(SITE.professor) + ')'
+      : esc(roleOf(p.role));
+
+    /* 라벨 + 값 한 줄 */
+    function metaRow(label, valueHTML) {
+      return '<div class="flex gap-3">' +
+        '<dt class="w-14 shrink-0 font-semibold uppercase tracking-wider2 text-slate-400">' +
+          esc(label) + '</dt>' +
+        '<dd class="min-w-0 flex-1">' + valueHTML + '</dd>' +
+      '</div>';
     }
-    if (p.pi) {
-      sub.push('<span>' + esc(SITE.ui.projectPI) + ' ' + esc(p.pi) + '</span>');
-    }
-    var subMeta = sub.length
-      ? '<p class="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-slate-500">' +
-        sub.join('<span aria-hidden="true">&middot;</span>') + '</p>'
-      : '';
 
+    /* 로고가 없으면 CI 자리에 기관명 텍스트가 들어간다 */
     return '<li class="flex flex-col gap-3 py-5 sm:flex-row sm:items-start sm:gap-6">' +
-      '<div class="w-32 shrink-0">' + sponsorMark(p.sponsor) + '</div>' +
+      '<div class="w-40 shrink-0">' +
+        sponsorMark(p.sponsor) +
+        (p.program
+          ? '<p class="mt-1 break-keep text-[11px] leading-snug text-slate-400">' + esc(p.program) + '</p>'
+          : '') +
+      '</div>' +
       '<div class="min-w-0 flex-1">' +
         '<p class="text-sm font-semibold leading-snug text-slate-900">' + esc(p.title) + '</p>' +
-        '<p class="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-slate-500">' +
-          (showSponsorInMeta
-            ? '<span>' + esc(p.sponsor.name) + '</span><span aria-hidden="true">&middot;</span>'
-            : '') +
-          /* 좁은 화면에서는 약어(PI / Co-I)로 대체 표기 */
-          '<span class="sm:hidden">' + esc(p.role) + '</span>' +
-          '<span class="hidden sm:inline">' + esc(roleFull) + '</span>' +
-          '<span aria-hidden="true">&middot;</span>' +
-          '<span class="font-mono">' + esc(period) + '</span>' +
-          statusBadge(status) +
-        '</p>' +
-        subMeta +
+        '<dl class="mt-2 space-y-1 text-xs text-slate-500">' +
+          metaRow(SITE.ui.role, roleText) +
+          metaRow(SITE.ui.period,
+            '<span class="flex flex-wrap items-center gap-x-2 gap-y-1">' +
+              '<span class="font-mono">' + esc(period) + '</span>' +
+              statusBadge(status) +
+            '</span>') +
+        '</dl>' +
         (p.description ? '<p class="mt-2 text-sm leading-relaxed text-slate-600">' + esc(p.description) + '</p>' : '') +
       '</div>' +
     '</li>';

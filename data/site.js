@@ -280,7 +280,8 @@ const SITE = {
     phone:      "Phone",
     email:      "Email",
     directions: "Get Directions",
-    projectPI:  "연구책임자",   // 지도교수가 아닌 사람이 책임자일 때 과제에 붙는 라벨
+    role:       "Role",
+    period:     "Period",
     viewAll:    "View all",
     readMore:   "Read more",
     scrollDown: "Scroll down",
