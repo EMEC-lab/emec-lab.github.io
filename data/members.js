@@ -102,19 +102,19 @@ const MEMBERS = [
     currentPosition: ""
   },
   {
-    id: "ms-lee-yongmin",
-    role: "ms",
+    id: "alumni-lee-yongmin",
+    role: "alumni",
     name: "Yong-Min Lee (이용민)",
-    title: "M.S. Candidate",
+    title: "M.S.",
     photo: "images/members/lee-yongmin.jpg",
     email: "", office: "",
-    interests: "Data-driven optimal design and analysis of electric machines, AI-assisted analysis acceleration, LPTN-based thermal analysis",
+    interests: "Data-driven optimal design and analysis, AI-assisted analysis acceleration, LPTN-based thermal analysis",
     grade: null,
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2024.02",
       "M.S., Department of Electrical and Communication Systems Engineering, Soonchunhyang University, Asan, 2026.08"
     ], career: [], activities: [], memberships: [], talks: [], scholar: "",
-    gradYear: null, thesis: "", currentPosition: ""
+    gradYear: 2026, thesis: "", currentPosition: ""
   },
   {
     id: "ms-kim-hyeseong",
@@ -123,7 +123,7 @@ const MEMBERS = [
     title: "M.S. Candidate",
     photo: "images/members/kim-hyeseong.png",
     email: "", office: "",
-    interests: "Data-driven optimal design and analysis of electric machines, Electromagnetic force-based noise and vibration analysis, Transient characteristic analysis",
+    interests: "Data-driven optimal design and analysis, Electromagnetic force-based noise and vibration analysis, Transient characteristic analysis",
     grade: null,
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2025.02",
@@ -138,7 +138,7 @@ const MEMBERS = [
     title: "M.S. Candidate",
     photo: "images/members/lee-younghoon.jpg",
     email: "", office: "",
-    interests: "Analytical method-based analysis and optimal design of electric machines, Multi-physics analysis, System model-based design",
+    interests: "Analytical method-based analysis and optimal design, Multi-physics analysis, System model-based design",
     grade: null,
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2026.02",
@@ -237,7 +237,7 @@ const MEMBERS = [
     title: "M.S.",
     photo: "images/members/ko-donghoon.jpg",
     email: "", office: "",
-    interests: "Analytical method-based analysis and optimal design of electric machines, Manufacturing uncertainty analysis, Robust optimal design",
+    interests: "Analytical method-based analysis and optimal design, Manufacturing uncertainty analysis, Robust optimal design",
     grade: null,
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2024.02",
@@ -279,6 +279,16 @@ const MEMBERS = [
 
 /* people.html #current 에서 표시할 순서 (CLAUDE.md 7번: 박사 -> 석사 -> 학부) */
 const MEMBER_ROLE_ORDER = ["postdoc", "phd", "ms", "undergrad"];
+
+/* 졸업생 학위 구분. 순서대로 보이고, 비어 있는 단계는 나오지 않는다.
+   구분 기준은 각 졸업생의 title 이다 ("Ph.D." · "M.S." · "B.S.") */
+const ALUMNI_DEGREE_ORDER = ["phd", "ms", "undergrad"];
+
+const ALUMNI_DEGREE_LABELS = {
+  phd:       "Ph.D.",
+  ms:        "M.S.",
+  undergrad: "Undergraduate"
+};
 
 /* 역할별 표시 라벨 */
 const MEMBER_ROLE_LABELS = {

@@ -1305,7 +1305,7 @@ var Render = (function () {
         '</h3>' +
         (g.role === 'undergrad'
           ? undergradList(g.items)
-          : '<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">' +
+          : '<div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">' +
               g.items.map(studentCard).join('') +
             '</div>') +
       '</div>';
@@ -1313,6 +1313,22 @@ var Render = (function () {
   }
 
   /* --- 졸업생 : 사진 없이 텍스트 목록 ------------------------------------ */
+  /* 졸업생은 학위별로 나눈다. 학위는 title 에 그대로 적혀 있다 */
+  var ALUMNI_DEGREE_TESTS = {
+    phd:       /^ph\.?\s*d/i,
+    ms:        /^m\.?\s*s/i,
+    undergrad: /^b\.?\s*s|^under/i
+  };
+
+  function degreeOf(m) {
+    var title = String(m.title || '');
+    var keys = Object.keys(ALUMNI_DEGREE_TESTS);
+    for (var i = 0; i < keys.length; i++) {
+      if (ALUMNI_DEGREE_TESTS[keys[i]].test(title)) return keys[i];
+    }
+    return '';
+  }
+
   function peopleAlumni() {
     var host = document.getElementById('people-alumni');
     if (!host) return;
@@ -1325,10 +1341,33 @@ var Render = (function () {
     /* 최근 졸업이 앞으로 */
     list.sort(function (a, b) { return (b.gradYear || 0) - (a.gradYear || 0); });
 
-    host.innerHTML =
-      '<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">' +
-        list.map(studentCard).join('') +
+    var order = (typeof ALUMNI_DEGREE_ORDER !== 'undefined')
+      ? ALUMNI_DEGREE_ORDER : ['phd', 'ms', 'undergrad'];
+
+    var groups = order.map(function (key) {
+      return { key: key, items: list.filter(function (m) { return degreeOf(m) === key; }) };
+    });
+
+    /* 어느 단계에도 들어가지 않는 사람은 제목 없이 맨 아래에 붙인다 */
+    var rest = list.filter(function (m) { return order.indexOf(degreeOf(m)) < 0; });
+    if (rest.length) groups.push({ key: '', items: rest });
+
+    host.innerHTML = groups.filter(function (g) { return g.items.length; }).map(function (g) {
+      var label = (typeof ALUMNI_DEGREE_LABELS !== 'undefined' && ALUMNI_DEGREE_LABELS[g.key]) || '';
+
+      return '<div class="mt-12 first:mt-0">' +
+        (label
+          ? '<h3 class="mb-5 flex items-baseline gap-2 text-lg font-bold text-slate-900">' +
+              esc(label) +
+              '<span class="font-mono text-sm font-normal text-slate-400">' +
+                esc(g.items.length) + '</span>' +
+            '</h3>'
+          : '') +
+        '<div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">' +
+          g.items.map(studentCard).join('') +
+        '</div>' +
       '</div>';
+    }).join('');
   }
 
   function people() {
