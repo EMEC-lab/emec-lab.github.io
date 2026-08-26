@@ -108,7 +108,7 @@ const MEMBERS = [
     title: "M.S. Candidate",
     photo: "images/members/lee-yongmin.jpg",
     email: "", office: "",
-    interests: "Optimal design of electric machines, Multi-physics analysis, Data-driven surrogate modeling, Machine learning",
+    interests: "Electric machine design and analysis, Multi-physics analysis",
     grade: null,
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2024.02",
@@ -123,7 +123,7 @@ const MEMBERS = [
     title: "M.S. Candidate",
     photo: "images/members/kim-hyeseong.png",
     email: "", office: "",
-    interests: "Electromagnetic analysis and design, Vibration and noise analysis, Fault diagnosis of electric machines, Data-driven surrogate modeling, Machine learning",
+    interests: "Electric machine design and analysis, Vibration and noise analysis",
     grade: null,
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2025.02",
@@ -138,7 +138,7 @@ const MEMBERS = [
     title: "M.S. Candidate",
     photo: "images/members/lee-younghoon.jpg",
     email: "", office: "",
-    interests: "Optimal design of electric machines, Multi-physics analysis, Analytical modeling",
+    interests: "Electric machine design and analysis, Analytical modeling",
     grade: null,
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2026.02",
@@ -237,7 +237,7 @@ const MEMBERS = [
     title: "M.S.",
     photo: "images/members/ko-donghoon.jpg",
     email: "", office: "",
-    interests: "Optimal design of electric machines, Robust design optimization, Computationally efficient analysis, Data-driven surrogate modeling",
+    interests: "Electric machine design and analysis, Robust design optimization",
     grade: null,
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2024.02",
