@@ -382,7 +382,7 @@ var Render = (function () {
     if (!host) return;
     if (typeof RESEARCH === 'undefined' || !RESEARCH.length) { host.innerHTML = emptyNote(); return; }
 
-    host.innerHTML = RESEARCH.slice(0, 4).map(function (a) {
+    host.innerHTML = RESEARCH.map(function (a) {
       return '<a href="research.html#' + esc(a.id) + '"' +
         ' class="card-hover group flex flex-col overflow-hidden rounded-lg border border-slate-200 bg-white hover:border-primary-mid">' +
         imageBox(a.image, a.title, 'aspect-[16/10]') +

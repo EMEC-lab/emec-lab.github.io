@@ -42,7 +42,16 @@
         <div id="applications" class="scroll-mt-24 mt-16 border-t border-slate-200 pt-10">
           <h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl"
               data-section-title="applications"></h2>
-          <div id="research-applications" class="mt-8 grid gap-8 sm:grid-cols-2"></div>
+
+          <!-- 응용 영역 개관도. SVG 안에 은은한 반복 애니메이션이 들어 있다
+               (회전자 회전 · 연결선 흐름 · 노드 순차 강조).
+               prefers-reduced-motion 이면 SVG 안의 미디어 쿼리가 알아서 멈춘다 -->
+          <div class="reveal mt-8 hidden sm:block">
+            <img src="images/research/applications.svg" alt="" loading="lazy"
+                 class="mx-auto w-full max-w-4xl">
+          </div>
+
+          <div id="research-applications" class="mt-10 grid gap-8 sm:grid-cols-2"></div>
         </div>
       </div>
     </section>

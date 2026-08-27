@@ -583,7 +583,10 @@ const NEWS = [
 
 ### 기타
 
-- `research.js` — 연구분야 3~5개. 제목, 설명(한 문단), 대표 이미지
+- `research.js` — 연구분야 3~5개. 제목, 두 줄 요약(`summary`),
+  세부 주제 목록(`topics`, 한 줄씩 문자열), 설명(한 문단), 대표 이미지.
+  **분야는 방법론 축으로 잡는다.** 응용 대상(xEV · 로봇 · 가전 등)은 분야마다
+  겹치므로 같은 파일의 `APPLICATIONS` 배열(묶음명 + 항목)에 따로 둔다
 - `equipment.js` — 장비명, 사양, 사진
 - `gallery.js` — 앨범 단위. 앨범명, 날짜, 이미지 배열
 
@@ -596,7 +599,7 @@ const NEWS = [
 **섹션 순서**
 
 1. **히어로** — 9번 항목의 상세 규격에 따름
-2. **연구분야 요약** — 3~4개 카드, 제목 + 두 줄 설명 → `research.html#areas` 링크
+2. **연구분야 요약** — 분야 전체를 카드로, 제목 + 두 줄 요약 → `research.html#areas` 링크
 3. **최근 소식** — 최신 3건 → `news.html` 링크
 4. **모집 안내 요약** — `SITE.join.heading` + `highlights` → `join.html` 링크
 
@@ -684,10 +687,15 @@ Korea Automotive Technology Institute (KATECH)      currentPosition. 비우면 �
 ### RESEARCH (research.html)
 
 ```
-#areas       — 주제별 카드. 각 주제마다 한 문단 이상의 설명
-#equipment   — 장비명, 사양, 사진
-#projects    — 아래 규칙에 따름
+#areas          — 방법론 분야 카드. 요약 + 세부 주제 목록 + 한 문단 설명
+#applications   — 응용 대상. #areas 안의 하단 블록으로, 묶음별 태그 나열
+#equipment      — 장비명, 사양, 사진 (지금은 주석으로 감췄 둘)
+#projects       — 아래 규칙에 따름
 ```
+
+**연구분야와 응용 대상은 다른 축이다.** 분야는 방법론(해석 · 설계 · 시스템 · SW)으로 세우고,
+응용 대상(모빌리티 · 로봇 · 가전 · 산업)은 모든 분야를 가로지르므로 카드에 섞지 않고
+`#applications` 에서 한 번에 보여 준다. 한 논문이 두 축에 동시에 걸리는 것이 자연스럽다.
 
 **Projects 섹션**
 

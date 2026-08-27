@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" font-family="Pretendard, system-ui, sans-serif" role="img" aria-label="Application domains of EMEC research">
+<style>
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes flow { to { stroke-dashoffset: -28; } }
+  @keyframes glow {
+    0%, 55%, 100% { fill: white; }
+    12%           { fill: #E8EEF7; }
+  }
+  .rotor {
+    animation: spin 14s linear infinite;
+    transform-origin: 480px 200px;
+  }
+  .link { animation: flow 2.2s linear infinite; }
+  .halo { animation: glow 8s ease-in-out infinite; }
+  .halo-1 { animation-delay: 0s; }
+  .halo-2 { animation-delay: 2s; }
+  .halo-3 { animation-delay: 4s; }
+  .halo-4 { animation-delay: 6s; }
+  @media (prefers-reduced-motion: reduce) {
+    .rotor, .link, .halo { animation: none; }
+  }
+</style>
+<path class="link" d="M 388 173 Q 305 173 222 124" fill="none" stroke="#5C81BC" stroke-width="1.5" stroke-dasharray="1 6" stroke-linecap="round"/>
+<path class="link" d="M 572 173 Q 655 173 738 124" fill="none" stroke="#5C81BC" stroke-width="1.5" stroke-dasharray="1 6" stroke-linecap="round"/>
+<path class="link" d="M 388 227 Q 305 227 222 276" fill="none" stroke="#5C81BC" stroke-width="1.5" stroke-dasharray="1 6" stroke-linecap="round"/>
+<path class="link" d="M 572 227 Q 655 227 738 276" fill="none" stroke="#5C81BC" stroke-width="1.5" stroke-dasharray="1 6" stroke-linecap="round"/>
+<g stroke-linecap="round" stroke-linejoin="round">
+<circle cx="480" cy="200" r="92" fill="#E8EEF7"/>
+<circle cx="480" cy="200" r="78" fill="white" stroke="#26539C" stroke-width="3"/>
+<line x1="558.0" y1="200.0" x2="536.0" y2="200.0" stroke="#26539C" stroke-width="3"/>
+<line x1="547.5" y1="239.0" x2="528.5" y2="228.0" stroke="#26539C" stroke-width="3"/>
+<line x1="519.0" y1="267.5" x2="508.0" y2="248.5" stroke="#26539C" stroke-width="3"/>
+<line x1="480.0" y1="278.0" x2="480.0" y2="256.0" stroke="#26539C" stroke-width="3"/>
+<line x1="441.0" y1="267.5" x2="452.0" y2="248.5" stroke="#26539C" stroke-width="3"/>
+<line x1="412.5" y1="239.0" x2="431.5" y2="228.0" stroke="#26539C" stroke-width="3"/>
+<line x1="402.0" y1="200.0" x2="424.0" y2="200.0" stroke="#26539C" stroke-width="3"/>
+<line x1="412.5" y1="161.0" x2="431.5" y2="172.0" stroke="#26539C" stroke-width="3"/>
+<line x1="441.0" y1="132.5" x2="452.0" y2="151.5" stroke="#26539C" stroke-width="3"/>
+<line x1="480.0" y1="122.0" x2="480.0" y2="144.0" stroke="#26539C" stroke-width="3"/>
+<line x1="519.0" y1="132.5" x2="508.0" y2="151.5" stroke="#26539C" stroke-width="3"/>
+<line x1="547.5" y1="161.0" x2="528.5" y2="172.0" stroke="#26539C" stroke-width="3"/>
+<circle cx="480" cy="200" r="56" fill="none" stroke="#26539C" stroke-width="3"/>
+<g class="rotor">
+<path d="M 519.1 208.3 A 40 40 0 0 1 488.3 239.1" fill="none" stroke="#047857" stroke-width="7"/>
+<path d="M 471.7 239.1 A 40 40 0 0 1 440.9 208.3" fill="none" stroke="#5C81BC" stroke-width="7"/>
+<path d="M 440.9 191.7 A 40 40 0 0 1 471.7 160.9" fill="none" stroke="#047857" stroke-width="7"/>
+<path d="M 488.3 160.9 A 40 40 0 0 1 519.1 191.7" fill="none" stroke="#5C81BC" stroke-width="7"/>
+<circle cx="480" cy="200" r="26" fill="white" stroke="#26539C" stroke-width="3"/>
+<line x1="462" y1="200" x2="498" y2="200" stroke="#5C81BC" stroke-width="3"/>
+<circle cx="480" cy="200" r="7" fill="#26539C"/>
+</g>
+</g>
+<text x="480" y="322" text-anchor="middle" font-size="15" font-weight="700" fill="#26539C">Electric Machines</text>
+<text x="480" y="342" text-anchor="middle" font-size="12" fill="#64748b">analysis &#183; design &#183; optimization</text>
+<g stroke-linecap="round" stroke-linejoin="round"><circle class="halo halo-1" cx="168" cy="108" r="48" fill="white" stroke="#5C81BC" stroke-width="2.5"/><g fill="none" stroke="#26539C" stroke-width="3"><path d="M 138 113 h 8 l 7 -11 h 20 l 9 11 h 6 a 4 4 0 0 1 4 4 v 5 h -6"/><path d="M 182 122 h -14 M 160 122 h -12 M 138 122 h -6"/><circle cx="154" cy="122" r="5.5"/><circle cx="176" cy="122" r="5.5"/></g></g><text x="168" y="178" text-anchor="middle" font-size="15" font-weight="700" fill="#26539C">Mobility</text><text x="168" y="195" text-anchor="middle" font-size="11.5" fill="#64748b">xEV &#183; UAM &#183; e-ship</text>
+<g stroke-linecap="round" stroke-linejoin="round"><circle class="halo halo-2" cx="792" cy="108" r="48" fill="white" stroke="#5C81BC" stroke-width="2.5"/><g fill="none" stroke="#26539C" stroke-width="3"><rect x="779" y="86" width="26" height="20" rx="7"/><circle cx="786" cy="96" r="2.4" fill="#26539C" stroke="none"/><circle cx="798" cy="96" r="2.4" fill="#26539C" stroke="none"/><path d="M 792 86 v -6 M 779 96 h 8 M 805 96 h -8"/><path d="M 775 114 h 34 a 4 4 0 0 1 4 4 v 8 h -42 v -8 a 4 4 0 0 1 4 -4 z"/></g></g><text x="792" y="178" text-anchor="middle" font-size="15" font-weight="700" fill="#26539C">Robotics</text><text x="792" y="195" text-anchor="middle" font-size="11.5" fill="#64748b">humanoid &#183; manipulator</text>
+<g stroke-linecap="round" stroke-linejoin="round"><circle class="halo halo-4" cx="168" cy="292" r="48" fill="white" stroke="#5C81BC" stroke-width="2.5"/><g fill="none" stroke="#26539C" stroke-width="3"><rect x="148" y="270" width="40" height="44" rx="5"/><circle cx="168" cy="295" r="12"/><circle cx="168" cy="295" r="6" stroke="#5C81BC"/><circle cx="156" cy="277" r="2" fill="#26539C" stroke="none"/><circle cx="163" cy="277" r="2" fill="#26539C" stroke="none"/></g></g><text x="168" y="362" text-anchor="middle" font-size="15" font-weight="700" fill="#26539C">Home Appliances</text><text x="168" y="379" text-anchor="middle" font-size="11.5" fill="#64748b">compressor &#183; washer</text>
+<g stroke-linecap="round" stroke-linejoin="round"><circle class="halo halo-3" cx="792" cy="292" r="48" fill="white" stroke="#5C81BC" stroke-width="2.5"/><g fill="none" stroke="#26539C" stroke-width="3"><path d="M 783 274 a 6 6 0 0 1 0 12" /><path d="M 801 274 a 6 6 0 0 0 0 12" /><path d="M 783 286 a 6 6 0 0 1 0 12" /><path d="M 801 286 a 6 6 0 0 0 0 12" /><path d="M 783 298 a 6 6 0 0 1 0 12" /><path d="M 801 298 a 6 6 0 0 0 0 12" /><path d="M 783 310 a 6 6 0 0 1 0 12" /><path d="M 801 310 a 6 6 0 0 0 0 12" /><line x1="790" y1="270" x2="790" y2="314" stroke="#5C81BC"/><line x1="794" y1="270" x2="794" y2="314" stroke="#5C81BC"/></g></g><text x="792" y="362" text-anchor="middle" font-size="15" font-weight="700" fill="#26539C">Industrial &amp; Power</text><text x="792" y="379" text-anchor="middle" font-size="11.5" fill="#64748b">elevator &#183; generator</text>
+</svg>

@@ -89,12 +89,12 @@ const APPLICATIONS = [
     group: "Mobility",
     items: [
       "xEV traction", "Compressor", "EPS", "Brake", "ISG", "Turbocharger",
-      "Mobile robot", "UAM", "Electric propulsion ship"
+      "UAM", "Electric propulsion ship"
     ]
   },
   {
     group: "Robotics",
-    items: ["Manipulator", "Humanoid", "Wearable robot"]
+    items: ["Humanoid", "Manipulator", "Wearable robot", "Mobile robot"]
   },
   {
     group: "Home Appliances",
