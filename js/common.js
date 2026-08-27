@@ -107,7 +107,9 @@ var NAV = [
     key: 'research', page: 'research', href: 'research.html',
     children: [
       { key: 'areas',     page: 'research', href: 'research.html#areas' },
-      { key: 'equipment', page: 'research', href: 'research.html#equipment' },
+      /* 감췄 둔 항목 — 장비가 정해지면 주석만 풀면 된다.
+         함께 되살려야 하는 곳: render.js 의 research(), research.html 의 #equipment 섹션
+      { key: 'equipment', page: 'research', href: 'research.html#equipment' }, */
       { key: 'projects',  page: 'research', href: 'research.html#projects' }
     ]
   },

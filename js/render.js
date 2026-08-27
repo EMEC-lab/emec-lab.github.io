@@ -919,13 +919,16 @@ var Render = (function () {
 
   function research() {
     researchAreas();
-    researchEquipment();
     researchProjects();
+
+    /* 감췄 둔 항목 — 장비가 정해지면 아래 두 줄의 주석을 푸면 된다.
+       함께 되살려야 하는 곳: common.js 의 NAV, research.html 의 #equipment 섹션 */
+    // researchEquipment();
 
     sectionTabs({
       tabs: [
         { key: 'areas',     label: SITE.submenu.areas },
-        { key: 'equipment', label: SITE.submenu.equipment },
+        // { key: 'equipment', label: SITE.submenu.equipment },
         { key: 'projects',  label: SITE.submenu.projects }
       ]
     });
