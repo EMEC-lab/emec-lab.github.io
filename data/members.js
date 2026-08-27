@@ -121,7 +121,7 @@ const MEMBERS = [
     role: "ms",
     name: "Hye-Seong Kim (김혜성)",
     title: "M.S. Candidate",
-    photo: "images/members/kim-hyeseong.png",
+    photo: "images/members/kim-hyeseong.jpg",
     email: "", office: "",
     interests: "Data-driven optimal design and analysis, Electromagnetic force-based noise and vibration analysis, Fault diagnosis of electric machines",
     grade: null,
