@@ -677,13 +677,17 @@ var Render = (function () {
     return splits.map(function (sp) {
       return { key: sp.key, items: list.filter(sp.test) };
     }).filter(function (g) { return g.items.length; })
-     .map(function (g) {
+     .map(function (g, i) {
+       /* 특허에는 주저자·교신저자 개념이 없어 범례를 달지 않는다 */
+       var legend = (i === 0 && type !== 'patent') ? legendHTML() : '';
+
        return '<section class="mt-16 first:mt-0">' +
          '<h2 class="mb-8 flex flex-wrap items-baseline gap-x-3 text-2xl font-bold' +
            ' tracking-tight text-slate-900 sm:text-3xl">' +
            esc(labels[g.key] || g.key) +
            '<span class="font-mono text-base font-semibold text-slate-400">' +
              esc(g.items.length) + '</span>' +
+           legend +
          '</h2>' +
          yearBlocks(g.items) +
        '</section>';
@@ -702,28 +706,23 @@ var Render = (function () {
     return list.length;
   }
 
-  /* 저자 표기 안내. 문구는 SITE.pubMarks 에서 온다 */
-  function pubLegend() {
-    var host = document.getElementById('pub-legend');
-    if (!host) return;
-
+  /* 저자 표기 안내. 문구는 SITE.pubMarks 에서 온다.
+     줄을 따로 두지 않고 첫 묶음 제목의 오른쪽에 붙인다.
+     위에 한 줄을 더 두면 범례가 없는 특허 탭과 제목 위치가 어긋난다 */
+  function legendHTML() {
     var list = SITE.pubMarks || [];
-    if (!list.length) return;
+    if (!list.length) return '';
 
-    host.innerHTML =
-      '<div class="mx-auto max-w-6xl px-4 pt-8 sm:px-6 lg:px-8">' +
-        '<p class="flex flex-wrap gap-x-5 gap-y-1 text-xs text-slate-500">' +
-          list.map(function (m) {
-            return '<span><sup class="text-[0.9em] font-bold text-primary">' +
-              esc(m.mark) + '</sup> ' + esc(m.label) + '</span>';
-          }).join('') +
-        '</p>' +
-      '</div>';
+    return '<span class="ml-auto flex flex-wrap gap-x-4 gap-y-1' +
+      ' text-xs font-normal text-slate-500">' +
+      list.map(function (m) {
+        return '<span><sup class="text-[0.9em] font-bold text-primary">' +
+          esc(m.mark) + '</sup> ' + esc(m.label) + '</span>';
+      }).join('') +
+    '</span>';
   }
 
   function publications() {
-    pubLegend();
-
     var counts = {};
     PUBLICATION_TYPES.forEach(function (t) { counts[t] = renderPubType(t); });
 
@@ -731,12 +730,7 @@ var Render = (function () {
     sectionTabs({
       tabs: PUBLICATION_TYPES.map(function (t) {
         return { key: t, label: SITE.submenu[t], count: counts[t] };
-      }),
-      /* 특허에는 주저자·교신저자 개념이 없어 범례를 감춘다 */
-      onApply: function (key) {
-        var host = document.getElementById('pub-legend');
-        if (host) host.hidden = (key === 'patent');
-      }
+      })
     });
 
     bindDisclosure();
