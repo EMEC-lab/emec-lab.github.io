@@ -960,8 +960,11 @@ var Render = (function () {
   var PERIOD_HEAD = /^\s*(\d{4}(?:\.\d{2}(?:\.\d{2})?)?(?:\s*[–-]\s*(?:\d{4}(?:\.\d{2}(?:\.\d{2})?)?|Present))?)\s*,\s*/;
   var PERIOD_TAIL = /,\s*(\d{4}(?:\.\d{2}(?:\.\d{2})?)?(?:\s*[–-]\s*(?:\d{4}(?:\.\d{2}(?:\.\d{2})?)?|Present))?)\s*$/;
 
-  /* extraFor(index) 를 넘기면 그 줄 아래에 한 줄을 더 붙인다 (학위논문 등) */
-  function datedList(items, extraFor) {
+  /* opts.extraFor(index) 를 넘기면 그 줄 아래에 한 줄을 더 붙인다 (학위논문 등).
+     opts.leadWidth 를 넘기면 앞 조각(학위명)을 그 폭으로 고정해
+     뒤따르는 본문이 줄마다 같은 자리에서 시작한다 */
+  function datedList(items, opts) {
+    opts = opts || {};
     if (!items || !items.length) return '';
     return '<ul class="space-y-2 text-sm text-slate-600">' +
       items.map(function (raw, index) {
@@ -984,17 +987,43 @@ var Render = (function () {
         var lead = cut === -1 ? line : line.slice(0, cut);
         var rest = cut === -1 ? ''   : line.slice(cut + 1).replace(/^\s+/, '');
 
-        var extra = extraFor ? extraFor(index) : '';
+        var extra = opts.extraFor ? opts.extraFor(index) : '';
+        var leadCls = 'font-semibold text-slate-800' +
+          (opts.leadWidth ? ' inline-block ' + opts.leadWidth : '');
 
         return '<li class="sm:flex sm:gap-4">' +
           '<span class="' + DATE_COL + '">' + esc(when) + '</span>' +
           '<span class="block leading-relaxed">' +
-            '<span class="font-semibold text-slate-800">' + esc(lead) + '</span>' +
-            (rest ? ' ' + esc(rest) : '') +
+            '<span class="' + leadCls + '">' + esc(lead) + '</span>' +
+            (rest ? (opts.leadWidth ? '' : ' ') + esc(rest) : '') +
             extra +
           '</span>' +
         '</li>';
       }).join('') + '</ul>';
+  }
+
+  /* 기간·날짜 문자열에서 시작일을 빼 비교할 수 있는 값으로 바꿌다.
+     "2022.03 – Present, …" · "2026.01 – 2026.12" · "2025-12-23" 을 모두 받는다.
+     모르는 값은 빈 문자열이라 맨 아래로 내려간다 */
+  function startKey(v) {
+    var m = String(v || '').match(/(\d{4})[.\-]?(\d{2})?[.\-]?(\d{2})?/);
+    if (!m) return '';
+    return m[1] + (m[2] || '00') + (m[3] || '00');
+  }
+
+  /* 최신이 위로. 기간은 시작일 기준이다 */
+  function byStartDesc(pick) {
+    return function (a, b) {
+      var ka = startKey(pick(a)), kb = startKey(pick(b));
+      if (!ka && !kb) return 0;
+      if (!ka) return 1;
+      if (!kb) return -1;
+      return ka < kb ? 1 : (ka > kb ? -1 : 0);
+    };
+  }
+
+  function sortedBy(list, pick) {
+    return (list || []).slice().sort(byStartDesc(pick));
   }
 
   /* 학위 높낮이. 학력 목록은 사람마다 순서가 달라
@@ -1014,29 +1043,38 @@ var Render = (function () {
 
   /* 학력 — 최종 학위 줄 아래에 학위논문을 붙인다.
      박사는 dissertation, 석사는 thesis 로 가른다 (IEEE 표기 기준) */
+  /* 학위명 칸 폭. 학력 목록과 학위논문 들여쓰기가 같은 값을 쓴다 */
+  var EDU_LEAD_W   = 'w-14';
+  var EDU_LEAD_PAD = 'pl-14';
+
   function educationList(m) {
     var lines = m.education || [];
     if (!lines.length) return '';
 
     var thesis = String(m.thesis || '');
-    if (!thesis) return datedList(lines);
+    if (!thesis) return datedList(lines, { leadWidth: EDU_LEAD_W });
 
     var top = -1, best = 0;
     lines.forEach(function (line, i) {
       var d = degreeRank(String(line));
       if (d && d.rank > best) { best = d.rank; top = i; }
     });
-    if (top < 0) return datedList(lines);
+    if (top < 0) return datedList(lines, { leadWidth: EDU_LEAD_W });
 
     var kind = degreeRank(String(lines[top])).label;
     var label = (SITE.people && SITE.people[kind]) || kind;
 
-    return datedList(lines, function (index) {
-      if (index !== top) return '';
-      return '<span class="mt-1 block text-xs leading-relaxed text-slate-500">' +
-        '<span class="font-semibold uppercase tracking-wider2 text-slate-400">' +
-          esc(label) + '</span> ' + esc(thesis) +
-      '</span>';
+    return datedList(lines, {
+      leadWidth: EDU_LEAD_W,
+      extraFor: function (index) {
+        if (index !== top) return '';
+        /* 윈줄의 소속이 시작하는 자리에 맞춰 들여 쓴다 */
+        return '<span class="mt-0.5 block text-xs leading-relaxed text-slate-500 ' +
+          EDU_LEAD_PAD + '">' +
+          '<span class="font-semibold text-slate-600">' + esc(label) + '</span> ' +
+          esc(thesis) +
+        '</span>';
+      }
     });
   }
 
@@ -1138,10 +1176,14 @@ var Render = (function () {
       /* 아래: 학력 · 경력 · 학회 활동 · 학회 회원 · 초청강연 */
       '<div class="mt-10 border-t border-slate-200 pt-2">' +
         profileBlock(SITE.people.education,   educationList(prof)) +
-        profileBlock(SITE.people.career,      datedList(prof.career)) +
-        profileBlock(SITE.people.activities,  periodList(prof.activities, 'role')) +
-        profileBlock(SITE.people.memberships, periodList(prof.memberships, null)) +
-        profileBlock(SITE.people.talks,       talkList(prof.talks)) +
+        profileBlock(SITE.people.career,
+          datedList(sortedBy(prof.career, function (v) { return v; }))) +
+        profileBlock(SITE.people.activities,
+          periodList(sortedBy(prof.activities, function (x) { return x.period; }), 'role')) +
+        profileBlock(SITE.people.memberships,
+          periodList(sortedBy(prof.memberships, function (x) { return x.period; }), null)) +
+        profileBlock(SITE.people.talks,
+          talkList(sortedBy(prof.talks, function (x) { return x.date; }))) +
       '</div>';
   }
 
