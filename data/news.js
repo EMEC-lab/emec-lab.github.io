@@ -34,168 +34,126 @@ const NEWS = [
     date: "2026-08-19",
     category: "member",
     title: "이용민 석사 졸업",
-    text: "이용민 석사가 학위를 마치고 졸업하였습니다. 앞으로의 길에 좋은 일이 가득하기를 바랍니다.",
+    text: "이용민 석사가 학위를 마치고 졸업하였습니다. 앞으로의 앞날에 좋은 일이 가득하기를 바랍니다. 축하합니다!",
     link: "", image: ""
   },
   {
     date: "2026-06-09",
     category: "paper",
     title: "김혜성, IEEE Transactions on Magnetics 게재 승인",
-    text: "김혜성 석사과정이 제1저자로 작성한 “Transfer Learning-Assisted Analytical Quasi-3D Surrogate Modeling for Electromagnetic Performance Prediction of AFPMs Considering Eccentricity” 논문이 게재 승인되었습니다.",
+    text: "김혜성 석사과정이 제1저자로 작성한 “Transfer Learning-Assisted Analytical Quasi-3D Surrogate Modeling for Electromagnetic Performance Prediction of AFPMs Considering Eccentricity” 논문이 IEEE Transactions on Magnetics 저널에 게재 승인되었습니다. 축하합니다!",
     link: "", image: ""
   },
   {
     date: "2026-05-30",
     category: "paper",
     title: "고동훈, International Journal of Automotive Technology 게재 승인",
-    text: "고동훈 석사가 제1저자로 작성한 “Analytical Estimation and Verification of Cogging Torque in an SPMSM Considering Segmented-Core Manufacturing Tolerances for EPS Motors” 논문이 게재 승인되었습니다.",
+    text: "고동훈 석사가 제1저자로 작성한 “Analytical Estimation and Verification of Cogging Torque in an SPMSM Considering Segmented-Core Manufacturing Tolerances for EPS Motors” 논문이 International Journal of Automotive Technology 저널에 게재 승인되었습니다. 축하합니다!",
     link: "", image: ""
   },
   {
     date: "2026-04-03",
     category: "paper",
     title: "이용민, International Journal of Automotive Technology 게재 승인",
-    text: "이용민 석사과정이 제1저자로 작성한 “Comparative study of kriging and deep neural networks as surrogate models for parameter prediction of PMSM” 논문이 게재 승인되었습니다.",
-    link: "", image: ""
-  },
-  {
-    date: "2026-03-01",
-    category: "member",
-    title: "이영훈 석사과정 입학",
-    text: "이영훈 학생이 석사과정으로 연구실에 합류하였습니다.",
-    link: "", image: ""
-  },
-  {
-    date: "2026-02-20",
-    category: "paper",
-    title: "김유정, 전기학회논문지 게재 승인",
-    text: "김유정 학부연구생이 제1저자로 작성한 “Analysis of Energy Consumption in Electric Vehicles Considering Motor Materials and Driving Cycles” 논문이 게재 승인되었습니다.",
+    text: "이용민 석사과정이 제1저자로 작성한 “Comparative study of kriging and deep neural networks as surrogate models for parameter prediction of PMSM” 논문이 International Journal of Automotive Technology 저널에 게재 승인되었습니다. 축하합니다!",
     link: "", image: ""
   },
   {
     date: "2026-02-19",
     category: "member",
     title: "고동훈 석사 졸업",
-    text: "고동훈 석사가 학위를 마치고 졸업하였습니다. 앞으로의 길에 좋은 일이 가득하기를 바랍니다.",
+    text: "고동훈 석사가 학위를 마치고 졸업하였습니다. 앞으로의 앞날에 좋은 일이 가득하기를 바랍니다. 축하합니다!",
     link: "", image: ""
   },
   {
     date: "2026-02-19",
     category: "member",
-    title: "학부연구생 7명 졸업",
-    text: "김수경 · 김효희 · 이기욱 · 김유정 · 장선주 · 황인준 · 이영훈 학부연구생이 학사 학위를 취득하였습니다.",
+    title: "학부연구생 7명 졸업 · 이영훈 석사과정 입학",
+    text: "김수경 · 김효희 · 이기욱 · 김유정 · 장선주 · 황인준 · 이영훈 학부연구생이 학사 학위를 취득하였습니다. 이 가운데 이영훈 학생은 우리 연구실 석사과정으로 이어서 함께하게 되었습니다. 축하합니다!",
     link: "", image: ""
   },
   {
     date: "2025-12-05",
     category: "paper",
     title: "이용민, IEEE Transactions on Magnetics 게재 승인",
-    text: "이용민 석사과정이 제1저자로 작성한 “Characteristics Estimation and Design of SPMSM Using Analytic Method-Based Transfer Learning” 논문이 게재 승인되었습니다.",
+    text: "이용민 석사과정이 제1저자로 작성한 “Characteristics Estimation and Design of SPMSM Using Analytic Method-Based Transfer Learning” 논문이 IEEE Transactions on Magnetics 저널에 게재 승인되었습니다. 축하합니다!",
     link: "", image: ""
   },
   {
     date: "2025-11-20",
     category: "award",
     title: "대한전기학회 추계학술대회 우수논문상 수상",
-    text: "김유정 · 장선주 · 황인준 학부연구생이 2025 대한전기학회 추계학술대회에서 우수논문상을 수상하였습니다.",
+    text: "김유정 · 장선주 · 황인준 학부연구생이 2025 대한전기학회 추계학술대회에서 우수논문상을 수상하였습니다. 축하합니다!",
     link: "", image: ""
   },
   {
     date: "2025-09-01",
     category: "project",
     title: "김혜성, 석사과정생 연구장려금 선정",
-    text: "김혜성 석사과정이 한국연구재단 석사과정생연구장려금지원사업에 선정되었습니다.",
+    text: "우리 연구실 김혜성 석사과정이 한국연구재단 석사과정생연구장려금지원사업에 선정되었습니다. 축하합니다!",
     link: "", image: ""
   },
   {
     date: "2025-06-01",
     category: "member",
     title: "학부연구생 4명 합류",
-    text: "정민구 · 이현규 · 노진성 · 신주현 학생이 학부연구생으로 합류하였습니다.",
-    link: "", image: ""
-  },
-  {
-    date: "2025-03-01",
-    category: "member",
-    title: "김혜성 석사과정 입학",
-    text: "김혜성 학생이 석사과정으로 연구실에 합류하였습니다.",
+    text: "우리 연구실에 정민구 · 이현규 · 노진성 · 신주현 학생이 학부연구생으로 합류하였습니다. 환영합니다!",
     link: "", image: ""
   },
   {
     date: "2025-02-20",
     category: "member",
-    title: "학부연구생 7명 졸업",
-    text: "이영교 · 김혜성 · 정재혁 · 안도국 · 김운형 · 박지원 · 양준영 학부연구생이 학사 학위를 취득하였습니다.",
+    title: "학부연구생 7명 졸업 · 김혜성 석사과정 입학",
+    text: "이영교 · 김혜성 · 정재혁 · 안도국 · 김운형 · 박지원 · 양준영 학부연구생이 학사 학위를 취득하였습니다. 이 가운데 김혜성 학생은 우리 연구실 석사과정으로 이어서 함께하게 되었습니다. 축하합니다!",
     link: "", image: ""
   },
   {
     date: "2024-09-01",
     category: "project",
     title: "고동훈, 석사과정생 연구장려금 선정",
-    text: "고동훈 석사과정이 한국연구재단 석사과정생연구장려금지원사업에 선정되었습니다.",
+    text: "우리 연구실 고동훈 석사과정이 한국연구재단 석사과정생연구장려금지원사업에 선정되었습니다. 축하합니다!",
     link: "", image: ""
   },
   {
     date: "2024-07-01",
     category: "project",
     title: "이용민, 석사과정생 연구장려금 선정",
-    text: "이용민 석사과정이 한국연구재단 석사과정생연구장려금지원사업에 선정되었습니다.",
+    text: "우리 연구실 이용민 석사과정이 한국연구재단 석사과정생연구장려금지원사업에 선정되었습니다. 축하합니다!",
     link: "", image: ""
   },
   {
     date: "2024-03-06",
     category: "member",
     title: "학부연구생 7명 합류",
-    text: "김수경 · 김효희 · 이기욱 · 김유정 · 장선주 · 황인준 · 이영훈 학생이 학부연구생으로 합류하였습니다.",
-    link: "", image: ""
-  },
-  {
-    date: "2024-03-01",
-    category: "member",
-    title: "석사과정 2명 입학",
-    text: "이용민 · 고동훈 학생이 석사과정으로 연구실에 합류하였습니다.",
+    text: "우리 연구실에 김수경 · 김효희 · 이기욱 · 김유정 · 장선주 · 황인준 · 이영훈 학생이 학부연구생으로 합류하였습니다. 환영합니다!",
     link: "", image: ""
   },
   {
     date: "2024-02-22",
     category: "member",
-    title: "학부연구생 6명 졸업",
-    text: "이용민 · 고동훈 · 김동현 · 홍준택 · 이다은 · 김은서 학부연구생이 학사 학위를 취득하였습니다.",
+    title: "학부연구생 6명 졸업 · 석사과정 2명 입학",
+    text: "이용민 · 고동훈 · 김동현 · 홍준택 · 이다은 · 김은서 학부연구생이 학사 학위를 취득하였습니다. 이 가운데 이용민 · 고동훈 학생은 우리 연구실 석사과정으로 이어서 함께하게 되었습니다. 축하합니다!",
     link: "", image: ""
   },
   {
     date: "2023-11-08",
     category: "award",
     title: "공과대학 학술제 대상 수상",
-    text: "이용민 · 홍준택 · 김동현 학부연구생이 공과대학 학술제에서 대상을 수상하였습니다.",
+    text: "이용민 · 홍준택 · 김동현 학부연구생이 공과대학 학술제에서 대상을 수상하였습니다. 축하합니다!",
     link: "", image: ""
   },
   {
     date: "2023-03-31",
     category: "member",
-    title: "학부연구생 4명 합류",
-    text: "이영교 · 김혜성 · 정재혁 · 안도국 학생이 학부연구생으로 합류하였습니다.",
-    link: "", image: ""
-  },
-  {
-    date: "2022-11-01",
-    category: "member",
-    title: "학부연구생 3명 합류",
-    text: "김운형 · 박지원 · 양준영 학생이 학부연구생으로 합류하였습니다.",
-    link: "", image: ""
-  },
-  {
-    date: "2022-09-01",
-    category: "member",
-    title: "학부연구생 3명 합류",
-    text: "홍준택 · 이다은 · 김은서 학생이 학부연구생으로 합류하였습니다.",
+    title: "학부연구생 7명 합류",
+    text: "우리 연구실에 김운형 · 박지원 · 양준영 · 이영교 · 김혜성 · 정재혁 · 안도국 학생이 학부연구생으로 합류하였습니다. 환영합니다!",
     link: "", image: ""
   },
   {
     date: "2022-08-22",
     category: "member",
-    title: "학부연구생 3명 합류",
-    text: "이용민 · 고동훈 · 김동현 학생이 학부연구생으로 합류하였습니다.",
+    title: "학부연구생 6명 합류",
+    text: "우리 연구실에 이용민 · 고동훈 · 김동현 · 홍준택 · 이다은 · 김은서 학생이 학부연구생으로 합류하였습니다. 환영합니다!",
     link: "", image: ""
   },
   {
