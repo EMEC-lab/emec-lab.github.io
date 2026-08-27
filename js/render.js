@@ -121,6 +121,9 @@ var Render = (function () {
       /* 주소가 바뀌었으니 상단 메뉴의 활성 표시도 맞춘다 */
       if (typeof Layout !== 'undefined' && Layout.refresh) Layout.refresh();
 
+      /* 새로 드러난 섹션의 연출 대상을 다시 잡는다 */
+      if (typeof Anim !== 'undefined' && Anim.refresh) Anim.refresh();
+
       if (config.onApply) config.onApply(key);
     }
 
@@ -681,7 +684,7 @@ var Render = (function () {
        /* 특허에는 주저자·교신저자 개념이 없어 범례를 달지 않는다 */
        var legend = (i === 0 && type !== 'patent') ? legendHTML() : '';
 
-       return '<section class="mt-16 first:mt-0">' +
+       return '<section class="reveal mt-16 first:mt-0">' +
          '<h2 class="mb-8 flex flex-wrap items-baseline gap-x-3 text-2xl font-bold' +
            ' tracking-tight text-slate-900 sm:text-3xl">' +
            esc(labels[g.key] || g.key) +
@@ -759,7 +762,7 @@ var Render = (function () {
 
     host.innerHTML = RESEARCH.map(function (a, i) {
       var flip = (i % 2 === 1);   /* 짝수 번째는 이미지를 오른쪽으로 */
-      return '<article id="' + esc(a.id) + '" class="scroll-mt-4 border-t border-slate-200 py-10 first:border-t-0 first:pt-0">' +
+      return '<article id="' + esc(a.id) + '" class="reveal scroll-mt-4 border-t border-slate-200 py-10 first:border-t-0 first:pt-0">' +
         '<div class="grid items-start gap-8 md:grid-cols-5">' +
           '<div class="md:col-span-2' + (flip ? ' md:order-2' : '') + '">' +
             imageBox(a.image, a.title, 'aspect-[4/3]', 'rounded-lg') +
@@ -1390,14 +1393,14 @@ var Render = (function () {
       var label = (typeof MEMBER_ROLE_LABELS !== 'undefined' && MEMBER_ROLE_LABELS[g.role]) || g.role;
 
       return '<div class="mt-12 first:mt-0">' +
-        '<h3 class="mb-5 flex items-baseline gap-2 text-lg font-bold text-slate-900">' +
+        '<h3 class="reveal mb-5 flex items-baseline gap-2 text-lg font-bold text-slate-900">' +
           esc(label) +
           '<span class="font-mono text-sm font-normal text-slate-400">' +
             esc(g.items.length) + '</span>' +
         '</h3>' +
         (g.role === 'undergrad'
           ? undergradList(g.items)
-          : '<div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">' +
+          : '<div class="reveal-group grid gap-5 md:grid-cols-2 xl:grid-cols-3">' +
               g.items.map(studentCard).join('') +
             '</div>') +
       '</div>';
@@ -1478,13 +1481,13 @@ var Render = (function () {
 
       return '<div class="mt-12 first:mt-0">' +
         (label
-          ? '<h3 class="mb-5 flex items-baseline gap-2 text-lg font-bold text-slate-900">' +
+          ? '<h3 class="reveal mb-5 flex items-baseline gap-2 text-lg font-bold text-slate-900">' +
               esc(label) +
               '<span class="font-mono text-sm font-normal text-slate-400">' +
                 esc(g.items.length) + '</span>' +
             '</h3>'
           : '') +
-        '<div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">' +
+        '<div class="reveal-group grid gap-5 md:grid-cols-2 xl:grid-cols-3">' +
           g.items.map(studentCard).join('') +
         '</div>' +
       '</div>';

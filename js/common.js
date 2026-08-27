@@ -526,6 +526,7 @@ var Anim = (function () {
   var revealTargets = [];
   var countTargets  = [];
   var ticking = false;
+  var io = null;
 
   function enabled() {
     return !Util.reducedMotion();
@@ -599,6 +600,22 @@ var Anim = (function () {
     countTargets  = [].slice.call(document.querySelectorAll('.countup'));
   }
 
+  /* 모은 요소를 숨기고 관찰을 건다 */
+  function arm() {
+    revealTargets.forEach(function (el) { el.classList.add('reveal-init'); });
+
+    if (io) {
+      revealTargets.forEach(function (el) { io.observe(el); });
+      countTargets.forEach(function (el) { io.observe(el); });
+    }
+
+    /* 보조 검사: 첫 화면에 이미 들어와 있는 요소를 즉시 처리하고,
+       이후 스크롤할 때마다 관찰자가 놓친 요소를 회수한다 */
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    sweep();
+  }
+
   function init() {
     collect();
 
@@ -612,10 +629,8 @@ var Anim = (function () {
       return;
     }
 
-    revealTargets.forEach(function (el) { el.classList.add('reveal-init'); });
-
     if ('IntersectionObserver' in window) {
-      var io = new IntersectionObserver(function (entries) {
+      io = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           if (!entry.isIntersecting) return;
           var el = entry.target;
@@ -624,19 +639,21 @@ var Anim = (function () {
           io.unobserve(el);
         });
       }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
-
-      revealTargets.forEach(function (el) { io.observe(el); });
-      countTargets.forEach(function (el) { io.observe(el); });
     }
 
-    /* 보조 검사: 첫 화면에 이미 들어와 있는 요소를 즉시 처리하고,
-       이후 스크롤할 때마다 관찰자가 놓친 요소를 회수한다 */
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    sweep();
+    arm();
   }
 
-  return { init: init };
+  /* 탭을 바꾸면 숨겨져 있던 섹션이 드러난다.
+     그 안의 요소는 지금까지 화면 밖이어서 숨겨진 채로 남아 있다.
+     다시 모아 검사해 줌으로써 빈 화면이 나오지 않게 한다 */
+  function refresh() {
+    if (!enabled()) return;
+    collect();
+    arm();
+  }
+
+  return { init: init, refresh: refresh };
 })();
 
 /* =========================================================================
