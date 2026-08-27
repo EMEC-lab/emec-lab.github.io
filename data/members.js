@@ -98,7 +98,7 @@ const MEMBERS = [
     scholar: "",
 
     gradYear: null,
-    thesis: "",
+    thesis: "Electric Actuator Sizing for Robot Joint Based on Electro-Mechanical Characteristics",
     currentPosition: ""
   },
   {
@@ -114,7 +114,7 @@ const MEMBERS = [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2024.02",
       "M.S., Department of Electrical and Communication Systems Engineering, Soonchunhyang University, Asan, 2026.08"
     ], career: [], activities: [], memberships: [], talks: [], scholar: "",
-    gradYear: 2026, thesis: "", currentPosition: ""
+    gradYear: 2026, thesis: "Deep Transfer Learning-Based Optimal Design of Multi-Core Concentrated Flux-type Synchronous Motor Considering 3-D Axial Leakage Flux", currentPosition: ""
   },
   {
     id: "ms-kim-hyeseong",
@@ -245,7 +245,7 @@ const MEMBERS = [
     ],
     career: [], activities: [], memberships: [], talks: [], scholar: "",
     gradYear: 2026,
-    thesis: "",
+    thesis: "Robust Optimization Design of a Segmented-Stator SPMSM Using a Tolerance-Considered Analytical Method and Transfer Learning",
     currentPosition: "Korea Automotive Technology Institute (KATECH)"
   }
 

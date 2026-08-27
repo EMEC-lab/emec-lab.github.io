@@ -274,7 +274,9 @@ const SITE = {
     office:      "Office",
     email:       "Email",
     phone:       "Phone",
-    thesis:      "Thesis",
+    /* 학위논문 라벨. 박사는 dissertation, 석사는 thesis (IEEE 표기 기준) */
+    thesis:       "Thesis",
+    dissertation: "Dissertation",
     position:    "Current Position"
   },
 

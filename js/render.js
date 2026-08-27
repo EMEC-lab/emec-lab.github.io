@@ -960,10 +960,11 @@ var Render = (function () {
   var PERIOD_HEAD = /^\s*(\d{4}(?:\.\d{2}(?:\.\d{2})?)?(?:\s*[–-]\s*(?:\d{4}(?:\.\d{2}(?:\.\d{2})?)?|Present))?)\s*,\s*/;
   var PERIOD_TAIL = /,\s*(\d{4}(?:\.\d{2}(?:\.\d{2})?)?(?:\s*[–-]\s*(?:\d{4}(?:\.\d{2}(?:\.\d{2})?)?|Present))?)\s*$/;
 
-  function datedList(items) {
+  /* extraFor(index) 를 넘기면 그 줄 아래에 한 줄을 더 붙인다 (학위논문 등) */
+  function datedList(items, extraFor) {
     if (!items || !items.length) return '';
     return '<ul class="space-y-2 text-sm text-slate-600">' +
-      items.map(function (raw) {
+      items.map(function (raw, index) {
         var line = String(raw || '');
         var when = '';
 
@@ -983,14 +984,60 @@ var Render = (function () {
         var lead = cut === -1 ? line : line.slice(0, cut);
         var rest = cut === -1 ? ''   : line.slice(cut + 1).replace(/^\s+/, '');
 
+        var extra = extraFor ? extraFor(index) : '';
+
         return '<li class="sm:flex sm:gap-4">' +
           '<span class="' + DATE_COL + '">' + esc(when) + '</span>' +
           '<span class="block leading-relaxed">' +
             '<span class="font-semibold text-slate-800">' + esc(lead) + '</span>' +
             (rest ? ' ' + esc(rest) : '') +
+            extra +
           '</span>' +
         '</li>';
       }).join('') + '</ul>';
+  }
+
+  /* 학위 높낮이. 학력 목록은 사람마다 순서가 달라
+     몇 번째 줄이 최종 학력인지를 문자열에서 찾아야 한다 */
+  var DEGREE_RANK = [
+    { test: /^\s*ph\.?\s*d/i,  rank: 3, label: 'dissertation' },
+    { test: /^\s*m\.?\s*s/i,   rank: 2, label: 'thesis' },
+    { test: /^\s*b\.?\s*s/i,   rank: 1, label: 'thesis' }
+  ];
+
+  function degreeRank(line) {
+    for (var i = 0; i < DEGREE_RANK.length; i++) {
+      if (DEGREE_RANK[i].test.test(line)) return DEGREE_RANK[i];
+    }
+    return null;
+  }
+
+  /* 학력 — 최종 학위 줄 아래에 학위논문을 붙인다.
+     박사는 dissertation, 석사는 thesis 로 가른다 (IEEE 표기 기준) */
+  function educationList(m) {
+    var lines = m.education || [];
+    if (!lines.length) return '';
+
+    var thesis = String(m.thesis || '');
+    if (!thesis) return datedList(lines);
+
+    var top = -1, best = 0;
+    lines.forEach(function (line, i) {
+      var d = degreeRank(String(line));
+      if (d && d.rank > best) { best = d.rank; top = i; }
+    });
+    if (top < 0) return datedList(lines);
+
+    var kind = degreeRank(String(lines[top])).label;
+    var label = (SITE.people && SITE.people[kind]) || kind;
+
+    return datedList(lines, function (index) {
+      if (index !== top) return '';
+      return '<span class="mt-1 block text-xs leading-relaxed text-slate-500">' +
+        '<span class="font-semibold uppercase tracking-wider2 text-slate-400">' +
+          esc(label) + '</span> ' + esc(thesis) +
+      '</span>';
+    });
   }
 
   /* 학회 활동 / 학회 회원 — 기간이 있으면 앞에 붙인다.
@@ -1090,7 +1137,7 @@ var Render = (function () {
 
       /* 아래: 학력 · 경력 · 학회 활동 · 학회 회원 · 초청강연 */
       '<div class="mt-10 border-t border-slate-200 pt-2">' +
-        profileBlock(SITE.people.education,   datedList(prof.education)) +
+        profileBlock(SITE.people.education,   educationList(prof)) +
         profileBlock(SITE.people.career,      datedList(prof.career)) +
         profileBlock(SITE.people.activities,  periodList(prof.activities, 'role')) +
         profileBlock(SITE.people.memberships, periodList(prof.memberships, null)) +
@@ -1217,7 +1264,7 @@ var Render = (function () {
       '</section>';
     }
 
-    var edu = datedList(m.education);
+    var edu = educationList(m);
 
     /* PUBLICATIONS 페이지와 같은 기준으로 나눈다.
        종류(저널 → 학술대회 → 특허) 안에서 국제 → 국내, 그 안은 최신순 */
