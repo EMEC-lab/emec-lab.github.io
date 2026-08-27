@@ -106,9 +106,16 @@ var Render = (function () {
       /* 주소를 맞춰 두면 새로고침이나 링크 공유에도 같은 탭이 열린다.
          history 를 늘리지 않도록 replaceState 를 쓴다 (hashchange 도 발생하지 않는다).
          file:// 에서는 막힐 수 있어 실패해도 넘어간다. */
-      try {
-        window.history.replaceState(null, '', key === 'all' ? window.location.pathname : '#' + key);
-      } catch (e) { /* 무시 */ }
+      /* 단, load 전에 해시를 넣으면 브라우저가 load 시점에 그 섹션으로
+         스크롤해 버린다. 문서가 다 열린 뒤에 넣는다. */
+      function syncHash() {
+        try {
+          window.history.replaceState(null, '', key === 'all' ? window.location.pathname : '#' + key);
+        } catch (e) { /* 무시 */ }
+      }
+
+      if (document.readyState === 'complete') syncHash();
+      else window.addEventListener('load', syncHash, { once: true });
 
       /* 주소가 바뀌었으니 상단 메뉴의 활성 표시도 맞춘다 */
       if (typeof Layout !== 'undefined' && Layout.refresh) Layout.refresh();
@@ -121,7 +128,8 @@ var Render = (function () {
       btns[i].addEventListener('click', function () { apply(this.getAttribute('data-tab')); });
     }
 
-    var hash = (window.location.hash || '').replace('#', '');
+    var hash = ((typeof INITIAL_HASH !== 'undefined' && INITIAL_HASH) ||
+                window.location.hash || '').replace('#', '');
     apply(keys.indexOf(hash) !== -1 ? hash : (config.defaultKey || keys[0]));
 
     window.addEventListener('hashchange', function () {

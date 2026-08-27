@@ -11,6 +11,27 @@
  * file:// 에서 CORS 에 막히므로 문자열로 만들어 주입한다. (CLAUDE.md 3번)
  * ========================================================================= */
 
+/* 브라우저의 스크롤 복원을 끔다.
+   켜 두면 같은 주소를 다시 열 때 직전 위치로 복원했다가
+   아래 코드가 맨 위로 되돌려 화면이 한 번 출렁인다.
+   메뉴로 들어오면 항상 맨 위에서 시작하는 것이 이 사이트의 규칙이다. */
+try {
+  if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual';
+} catch (e) { /* 무시 */ }
+
+/* 주소의 #해시를 잠시 떼어 둔다.
+   브라우저는 load 시점에 주소의 해시로 한 번 더 스크롤하는데,
+   그것이 메뉴로 들어올 때 화면이 아래위로 출렁이는 원인이다.
+   어느 탭을 열지는 아래 INITIAL_HASH 로 전달되고,
+   주소는 sectionTabs 가 load 이후에 다시 넣는다. */
+var INITIAL_HASH = window.location.hash;
+
+try {
+  if (INITIAL_HASH.length > 1 && window.history.replaceState) {
+    window.history.replaceState(null, '', window.location.pathname + window.location.search);
+  }
+} catch (e) { /* 무시 */ }
+
 /* =========================================================================
  * 1) 공통 유틸
  * ======================================================================= */
@@ -654,12 +675,79 @@ Util.ready(function () {
     return !!(main && el.parentNode === main && el.tagName === 'SECTION');
   }
 
+  /* --- 맨 위 고정 -----------------------------------------------------
+   * 해시가 섹션을 가리키면 문서를 맨 위에 고정해 둔다.
+   *
+   * 브라우저는 (1) 문서를 읽은 직후와 (2) load 시점에 주소의 #해시로
+   * 스크롤한다. sectionTabs 가 replaceState 로 넣는 해시(#professor 등)도
+   * 그 대상이라, 해시 없이 들어와도 화면이 한 번 내려갔다 올라온다.
+   * 다 일어난 뒤에 되돌리면 그 움직임이 보이므로,
+   * 스크롤이 일어나는 즉시 같은 프레임에서 되돌린다.
+   * 사용자가 손을 대면(휠 · 터치 · 키 · 마우스) 즉시 푸다.
+   * ------------------------------------------------------------------- */
+  var pinUntil = 0;
+  var pinOn = false;
+
+  function pinSnap() {
+    if (!pinOn) return;
+    if (Date.now() > pinUntil) { pinRelease(); return; }
+    if (window.pageYOffset !== 0) window.scrollTo(0, 0);
+  }
+
+  function pinRelease() {
+    if (!pinOn) return;
+    pinOn = false;
+    window.removeEventListener('scroll', pinSnap);
+    document.documentElement.style.scrollBehavior = '';
+  }
+
+  function pinTop(ms) {
+    pinUntil = Math.max(pinUntil, Date.now() + ms);
+    if (pinOn) return;
+
+    pinOn = true;
+    /* 이 동안은 부드러운 스크롤을 끔다. 안 그러면 되돌리는 움직임이 보인다 */
+    document.documentElement.style.scrollBehavior = 'auto';
+
+    ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(function (type) {
+      window.addEventListener(type, pinRelease, { passive: true, once: true });
+    });
+
+    window.addEventListener('scroll', pinSnap, { passive: true });
+    window.scrollTo(0, 0);
+    window.setTimeout(pinSnap, ms);
+  }
+
+  /* 해시가 페이지 통째의 섹션이면 맨 위에서 시작한다 */
+  function topIfPageSection() {
+    var hash = INITIAL_HASH || window.location.hash;
+
+    if (hash.length > 1) {
+      var target;
+      try {
+        target = document.querySelector(hash);
+      } catch (e) {
+        return;
+      }
+      if (!target || !isPageSection(target)) return;
+    }
+
+    pinTop(700);
+  }
+
+  topIfPageSection();
+
+  /* 같은 페이지에서 드롭다운 항목을 누르면 문서가 다시 열리지 않고
+     해시만 바뀐다. 이때도 브라우저가 그 섹션으로 내려가므로 같이 잡는다 */
+  window.addEventListener('hashchange', topIfPageSection);
+
   function alignToHash() {
-    if (window.location.hash.length <= 1) return;
+    var hash = INITIAL_HASH || window.location.hash;
+    if (hash.length <= 1) return;
 
     var target;
     try {
-      target = document.querySelector(window.location.hash);
+      target = document.querySelector(hash);
     } catch (e) {
       return;                     /* 선택자로 쓸 수 없는 해시는 무시 */
     }
@@ -668,15 +756,7 @@ Util.ready(function () {
     /* 메뉴로 들어온 경우는 항상 맨 위에서 시작한다.
        섹션으로 건너뛰면 제목 밴드와 탭이 위로 밀려 현재 위치를 알 수 없다.
        어느 섹션을 보여 줄지는 sectionTabs 가 해시로 이미 골라 둔다 */
-    if (isPageSection(target)) {
-      /* 브라우저가 해시로 늦게 한 번 더 스크롤하는 경우가 있어 잠시 동안 붙잡는다 */
-      var back = 0;
-      (function toTop() {
-        window.scrollTo(0, 0);
-        if (++back < 6) window.setTimeout(toTop, 50);   /* 약 0.3초 */
-      })();
-      return;
-    }
+    if (isPageSection(target)) return;      /* topIfPageSection 이 이미 처리했다 */
 
     /* Tailwind CDN 은 DOM 변경을 감지해 CSS 를 다시 만들기 때문에,
        JS 로 넣은 내용의 스타일이 load 이후에 적용되는 경우가 있다.
@@ -697,8 +777,25 @@ Util.ready(function () {
     align();
   }
 
-  if (document.readyState === 'complete') alignToHash();
-  else window.addEventListener('load', alignToHash);
+  /* load 시점에 한 번 더 잡는다.
+     브라우저는 문서가 다 읽힌 뒤 주소의 #해시로 한 번 더 스크롤하는데,
+     sectionTabs 가 replaceState 로 넣은 해시(#professor 등)도 그 대상이 된다.
+     그래서 해시 없이 들어와도 화면이 한 번 내려갔다 올라오는 일이 생긴다. */
+  function onLoaded() {
+    topIfPageSection();
+    alignToHash();
+
+    /* 잠시 떼어 둔 해시를 되돌려 주소를 원래대로 맞춘다.
+       탭이 있는 페이지는 sectionTabs 가 먼저 넣으므로 여기서는 건드리지 않는다 */
+    if (INITIAL_HASH.length > 1 && window.location.hash.length <= 1) {
+      try {
+        window.history.replaceState(null, '', INITIAL_HASH);
+      } catch (e) { /* 무시 */ }
+    }
+  }
+
+  if (document.readyState === 'complete') onLoaded();
+  else window.addEventListener('load', onLoaded);
 
   /* 데이터 렌더링이 끝난 뒤에 처리한다 (동적으로 만든 요소까지 포함) */
   ImageFallback.init();
