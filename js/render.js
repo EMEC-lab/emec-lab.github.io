@@ -1750,11 +1750,15 @@ var Render = (function () {
   function newsItem(n) {
     var label = (SITE.newsCategories && SITE.newsCategories[n.category]) || n.category || '';
 
-    var body = esc(n.text);
+    /* 링크가 있으면 제목을 링크로 감싸다 */
+    var head = esc(n.title || n.text);
     if (n.link) {
-      body = '<a href="' + esc(n.link) + '" target="_blank" rel="noopener noreferrer"' +
-             ' class="underline-offset-2 hover:text-primary hover:underline">' + body + '</a>';
+      head = '<a href="' + esc(n.link) + '" target="_blank" rel="noopener noreferrer"' +
+             ' class="underline-offset-2 hover:text-primary hover:underline">' + head + '</a>';
     }
+
+    /* title 이 없던 예전 항목은 text 를 제목으로 쓰고 본문을 비운다 */
+    var detail = n.title ? String(n.text || '') : '';
 
     return '<li class="flex gap-4 py-5">' +
       (n.image
@@ -1767,7 +1771,10 @@ var Render = (function () {
           (label ? '<span class="rounded bg-primary-light px-1.5 py-0.5 text-[10px] font-semibold text-primary">' +
             esc(label) + '</span>' : '') +
         '</div>' +
-        '<p class="mt-1.5 text-sm leading-relaxed text-slate-700">' + body + '</p>' +
+        '<p class="mt-1.5 text-base font-bold leading-snug text-slate-900">' + head + '</p>' +
+        (detail
+          ? '<p class="mt-1 text-sm leading-relaxed text-slate-600">' + esc(detail) + '</p>'
+          : '') +
       '</div>' +
     '</li>';
   }
@@ -1840,6 +1847,17 @@ var Render = (function () {
     return imgs.length ? imgs[0].src : '';
   }
 
+  /* 격자에는 400px 썸네일을 쓴다. 본문용 1600px 을 그대로 깔면
+     첫 화면에서만 몇 MB 를 받게 된다.
+     images/resize.ps1 이 images/gallery/thumb/ 에 같은 이름으로 만든다.
+     썸네일이 없으면 ImageFallback 이 앨범명을 대신 보여 준다 */
+  function thumbOf(src) {
+    var s = String(src || '');
+    var cut = s.lastIndexOf('/');
+    if (cut < 0) return s;
+    return s.slice(0, cut) + '/thumb' + s.slice(cut);
+  }
+
   function gallery() {
     var host = document.getElementById('gallery-albums');
     if (!host) return;
@@ -1853,13 +1871,16 @@ var Render = (function () {
       var count = albumImages(al).length;
       return '<button type="button" class="js-album card-hover block overflow-hidden rounded-lg border border-slate-200 bg-white text-left"' +
         ' data-album="' + i + '">' +
-        imageBox(albumCover(al), al.title, 'aspect-[4/3]') +
+        imageBox(thumbOf(albumCover(al)), al.title, 'aspect-[4/3]') +
         '<div class="p-4">' +
           '<p class="text-sm font-bold text-slate-900">' + esc(al.title) + '</p>' +
           '<p class="mt-1 flex items-center gap-2 text-xs text-slate-500">' +
             '<time>' + esc(Util.formatDate(al.date)) + '</time>' +
             (count ? '<span aria-hidden="true">&middot;</span><span>' + esc(count) + '</span>' : '') +
           '</p>' +
+          (al.desc
+            ? '<p class="mt-2 text-xs leading-relaxed text-slate-600">' + esc(al.desc) + '</p>'
+            : '') +
         '</div>' +
       '</button>';
     }).join('');

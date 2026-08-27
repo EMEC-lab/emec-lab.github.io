@@ -20,8 +20,10 @@
    powershell -ExecutionPolicy Bypass -File .\resize.ps1 -Out members
    powershell -ExecutionPolicy Bypass -File .\resize.ps1 -Out research
 
- ── 썸네일도 같이 만들고 싶을 때 (갤러리용, 400px) ──────────────────────
-   powershell -ExecutionPolicy Bypass -File .\resize.ps1 -Thumb
+ ── 썸네일 ────────────────────────────────────────────────────────────
+   갤러리 격자에 쓸 400px 썸네일이 gallery\thumb\ 에 자동으로 함께 만들어진다.
+   만들지 않으려면:
+   powershell -ExecutionPolicy Bypass -File .\resize.ps1 -NoThumb
 
  설치할 프로그램은 없다. 윈도우에 들어 있는 기능만 쓴다.
 =============================================================================
@@ -32,7 +34,7 @@ param(
     [string] $Out  = "gallery",  # 결과를 저장할 폴더
     [int]    $Max  = 1600,       # 긴 변 최대 픽셀
     [int]    $Quality = 82,      # JPG 품질 (1~100)
-    [switch] $Thumb              # 400px 썸네일도 함께 생성
+    [switch] $NoThumb            # 붙이면 400px 썸네일을 만들지 않는다
 )
 
 Add-Type -AssemblyName System.Drawing
@@ -53,12 +55,36 @@ if (-not (Test-Path $inDir)) {
 }
 
 if (-not (Test-Path $outDir))   { New-Item -ItemType Directory -Path $outDir | Out-Null }
-if ($Thumb -and -not (Test-Path $thumbDir)) { New-Item -ItemType Directory -Path $thumbDir | Out-Null }
+if (-not $NoThumb -and -not (Test-Path $thumbDir)) { New-Item -ItemType Directory -Path $thumbDir | Out-Null }
 
 # JPG 인코더와 품질 설정
 $encoder = [System.Drawing.Imaging.ImageCodecInfo]::GetImageEncoders() |
            Where-Object { $_.MimeType -eq 'image/jpeg' }
 $params  = New-Object System.Drawing.Imaging.EncoderParameters 1
+
+# 스마트폰 사진은 화면에 바로 세워 찍지 않고, 눕힌 채로 저장한 뒤
+# EXIF 의 Orientation 값(0x0112)으로 "돌려서 보라"고 표시한다.
+# System.Drawing 은 그 값을 무시하므로 여기서 직접 돌려 준다.
+# 안 그러면 세로 사진이 홈페이지에서 옆으로 누워 나온다.
+function Apply-ExifOrientation {
+    param($Image)
+
+    if ($Image.PropertyIdList -notcontains 0x0112) { return }
+
+    $o = $Image.GetPropertyItem(0x0112).Value[0]
+    switch ($o) {
+        2 { $Image.RotateFlip([System.Drawing.RotateFlipType]::RotateNoneFlipX) }
+        3 { $Image.RotateFlip([System.Drawing.RotateFlipType]::Rotate180FlipNone) }
+        4 { $Image.RotateFlip([System.Drawing.RotateFlipType]::Rotate180FlipX) }
+        5 { $Image.RotateFlip([System.Drawing.RotateFlipType]::Rotate90FlipX) }
+        6 { $Image.RotateFlip([System.Drawing.RotateFlipType]::Rotate90FlipNone) }
+        7 { $Image.RotateFlip([System.Drawing.RotateFlipType]::Rotate270FlipX) }
+        8 { $Image.RotateFlip([System.Drawing.RotateFlipType]::Rotate270FlipNone) }
+    }
+
+    # 이미 돌려 놨으니 표시는 지운다 (두 번 돌지 않도록)
+    $Image.RemovePropertyItem(0x0112)
+}
 
 function Save-Resized {
     param($SourceImage, [string] $Path, [int] $MaxEdge, [int] $Q)
@@ -104,6 +130,7 @@ $done = 0
 foreach ($f in $files) {
     try {
         $img = [System.Drawing.Image]::FromFile($f.FullName)
+        Apply-ExifOrientation $img
 
         $name = [IO.Path]::GetFileNameWithoutExtension($f.Name).ToLower()
         $name = $name -replace '[^a-z0-9\-]', '-' -replace '-+', '-'
@@ -116,7 +143,7 @@ foreach ($f in $files) {
 
         $size = Save-Resized $img $target $Max $Quality
 
-        if ($Thumb) {
+        if (-not $NoThumb) {
             $tname = [IO.Path]::GetFileNameWithoutExtension($target)
             Save-Resized $img (Join-Path $thumbDir "$tname.jpg") 400 78 | Out-Null
         }
