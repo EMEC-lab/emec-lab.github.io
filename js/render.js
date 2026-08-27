@@ -73,7 +73,8 @@ var Render = (function () {
 
     var keys = tabs.map(function (t) { return t.key; });
 
-    host.className = 'sticky top-16 z-40 border-b border-slate-200 bg-white/95 backdrop-blur';
+    /* 고정하지 않는다. 상단 메뉴만 따라오고 탭은 스크롤과 함께 올라간다 */
+    host.className = 'border-b border-slate-200 bg-white';
     host.innerHTML =
       '<div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">' +
         '<div class="flex gap-2 overflow-x-auto py-3">' +

@@ -248,7 +248,7 @@ var Layout = (function () {
   function headerHTML() {
     return '' +
     '<a class="skip-link" href="#content">Skip to content</a>' +
-    '<div class="site-bar sticky top-0 z-50 border-b">' +
+    '<div class="site-bar border-b">' +
       '<div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">' +
         '<div class="flex h-16 items-center justify-between gap-3">' +
 
@@ -434,7 +434,12 @@ var Layout = (function () {
   function render() {
     var header = document.getElementById('site-header');
     var footer = document.getElementById('site-footer');
-    if (header) header.innerHTML = headerHTML();
+    if (header) {
+      /* 상단 메뉴는 항상 화면에 남는다.
+         sticky 는 부모 안에서만 버티므로 반드시 이 바깥 틀에 걸어야 한다 */
+      header.className = 'sticky top-0 z-50';
+      header.innerHTML = headerHTML();
+    }
     if (footer) footer.innerHTML = footerHTML();
 
     bindMenu();
@@ -448,6 +453,7 @@ var Layout = (function () {
   function refresh() {
     var header = document.getElementById('site-header');
     if (!header) return;
+    header.className = 'sticky top-0 z-50';
     header.innerHTML = headerHTML();
     bindMenu();
   }
