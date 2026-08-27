@@ -646,6 +646,14 @@ Util.ready(function () {
     }
   }
 
+  /* 해시가 페이지를 통째로 가리키는 섹션인가.
+     메뉴의 하위 항목(#current · #projects · #albums …)이 여기 해당한다.
+     본문 안의 개별 항목(#machine-design 등)은 섹션 안에 있으므로 제외된다 */
+  function isPageSection(el) {
+    var main = document.getElementById('content');
+    return !!(main && el.parentNode === main && el.tagName === 'SECTION');
+  }
+
   function alignToHash() {
     if (window.location.hash.length <= 1) return;
 
@@ -656,6 +664,19 @@ Util.ready(function () {
       return;                     /* 선택자로 쓸 수 없는 해시는 무시 */
     }
     if (!target) return;
+
+    /* 메뉴로 들어온 경우는 항상 맨 위에서 시작한다.
+       섹션으로 건너뛰면 제목 밴드와 탭이 위로 밀려 현재 위치를 알 수 없다.
+       어느 섹션을 보여 줄지는 sectionTabs 가 해시로 이미 골라 둔다 */
+    if (isPageSection(target)) {
+      /* 브라우저가 해시로 늦게 한 번 더 스크롤하는 경우가 있어 잠시 동안 붙잡는다 */
+      var back = 0;
+      (function toTop() {
+        window.scrollTo(0, 0);
+        if (++back < 6) window.setTimeout(toTop, 50);   /* 약 0.3초 */
+      })();
+      return;
+    }
 
     /* Tailwind CDN 은 DOM 변경을 감지해 CSS 를 다시 만들기 때문에,
        JS 로 넣은 내용의 스타일이 load 이후에 적용되는 경우가 있다.
