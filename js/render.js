@@ -1691,23 +1691,43 @@ var Render = (function () {
       map[y].push(n);
     });
 
-    host.innerHTML = order.map(function (y) {
+    /* 올해 것만 펼쳐 두고 지난 해는 한 덩어리로 묶어 접는다.
+       PUBLICATIONS 와 같은 규칙이다 */
+    var openFrom = openFromYear();
+    var thisYear = order.filter(function (y) { return Number(y) >= openFrom; });
+    var past     = order.filter(function (y) { return Number(y) <  openFrom; });
+
+    function feedList(items) {
+      return '<ul class="divide-y divide-slate-200">' + items.map(newsItem).join('') + '</ul>';
+    }
+
+    var html = thisYear.map(function (y) {
       return '<div class="mt-10 first:mt-0">' +
-        '<h2 class="border-b-2 border-primary pb-1 font-mono text-lg font-bold text-primary">' +
-          esc(y) + '</h2>' +
-        '<ul class="divide-y divide-slate-200">' + map[y].map(newsItem).join('') + '</ul>' +
+        disclosure(pubHead(y, map[y].length), PUB_HEAD_CLS, feedList(map[y]), true) +
       '</div>';
     }).join('');
+
+    if (past.length) {
+      var items = past.reduce(function (acc, y) { return acc.concat(map[y]); }, []);
+      var label = String((SITE.ui && SITE.ui.pubEarlier) || '~{year}')
+        .replace('{year}', openFrom - 1);
+
+      html += '<div class="mt-10 first:mt-0">' +
+        disclosure(pubHead(label, items.length), PUB_HEAD_CLS, feedList(items), !html) +
+      '</div>';
+    }
+
+    host.innerHTML = html;
   }
 
-  /* NEWS 페이지는 위에 글 소식, 아래에 사진 게시글을 이어 그린다 */
+  /* NEWS 페이지는 글 소식만 그린다. 사진은 gallery.html 로 떼어냈다 */
   function news() {
     newsFeed();
-    gallery();
+    bindDisclosure();
   }
 
   /* =====================================================================
-   * 사진 게시글 (NEWS 페이지 하단)
+   * 사진 게시글 (gallery.html)
    *   앨범 단위 격자 + 클릭 시 라이트박스.
    *   모든 이미지에 loading="lazy". (CLAUDE.md 7·8번)
    * =================================================================== */
@@ -1819,6 +1839,7 @@ var Render = (function () {
     contact: contact,
     join: join,
     news: news,
+    gallery: gallery,
 
     /* 다른 페이지에서 재사용할 조각 */
     getStatus: getStatus,

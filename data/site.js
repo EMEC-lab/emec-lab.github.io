@@ -77,7 +77,9 @@ const SITE = {
     projects:   "Projects",
     journal:    "Journal",
     conference: "Conference",
-    patent:     "Patent"
+    patent:     "Patent",
+    news:       "News",
+    gallery:    "Gallery"
   },
 
   sectionTitles: {
