@@ -783,6 +783,39 @@ var Render = (function () {
   }
 
   /* --- 연구분야 --------------------------------------------------------- */
+  /* 세부 주제 목록. 비어 있으면 아무것도 그리지 않는다 */
+  function topicList(items) {
+    if (!items || !items.length) return '';
+    return '<ul class="mt-4 space-y-1.5 text-sm leading-relaxed text-slate-600">' +
+      items.map(function (t) {
+        return '<li class="flex gap-2.5">' +
+          '<span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary-mid"></span>' +
+          '<span>' + esc(t) + '</span></li>';
+      }).join('') + '</ul>';
+  }
+
+  /* 응용 대상 — 방법론과 직교하는 축이라 분야 카드와 따로 보여 준다 */
+  function researchApplications() {
+    var host = document.getElementById('research-applications');
+    if (!host) return;
+    if (typeof APPLICATIONS === 'undefined' || !APPLICATIONS.length) {
+      host.innerHTML = emptyNote(); return;
+    }
+
+    host.innerHTML = APPLICATIONS.map(function (g) {
+      return '<div class="reveal">' +
+        '<h3 class="text-sm font-bold uppercase tracking-wider2 text-primary">' +
+          esc(g.group) + '</h3>' +
+        '<div class="mt-3 flex flex-wrap gap-1.5">' +
+          (g.items || []).map(function (t) {
+            return '<span class="rounded-full bg-slate-100 px-3 py-1.5 text-xs' +
+              ' leading-tight text-slate-700">' + esc(t) + '</span>';
+          }).join('') +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
   function researchAreas() {
     var host = document.getElementById('research-areas');
     if (!host) return;
@@ -798,6 +831,7 @@ var Render = (function () {
           '<div class="md:col-span-3' + (flip ? ' md:order-1' : '') + '">' +
             '<h3 class="text-xl font-bold text-slate-900">' + esc(a.title) + '</h3>' +
             '<p class="mt-2 text-sm font-medium text-primary">' + esc(a.summary) + '</p>' +
+            topicList(a.topics) +
             '<div class="mt-4 space-y-3 text-sm leading-relaxed text-slate-600">' +
               paragraphs(a.description) +
             '</div>' +
@@ -947,6 +981,7 @@ var Render = (function () {
 
   function research() {
     researchAreas();
+    researchApplications();
     researchProjects();
 
     /* 감췄 둔 항목 — 장비가 정해지면 아래 두 줄의 주석을 푸면 된다.

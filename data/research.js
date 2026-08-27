@@ -5,51 +5,103 @@
  *   id          research.html 안의 앵커로 쓰인다. 영문 소문자·하이픈
  *   title       카드 제목. 짧게
  *   summary     HOME 카드용 두 줄 설명
+ *   topics      세부 주제. 한 줄씩 문자열 — 카드 안에 목록으로 나온다
  *   description research.html 용 한 문단 이상. 줄바꿈은 \n
  *   image       'images/research/xxx.jpg'  대표 이미지
  *               자속밀도 분포도, 모터 단면 형상 등 해석 결과 이미지 권장
  *
- * 아래 4개 분야는 실적정리_20260428.xlsx 의 Research Interests 8개 항목을
- * 묶어 구성한 안이다. 항목 자체는 원문 그대로이며, 묶는 방식과 상세 설명은
- * 확인 후 조정할 것.
- *
- *   Analysis and design of electric machines            -> areas[0]
- *   Model-based electric machine design                 -> areas[0]
- *   Multi-physics analysis of electric machines         -> areas[1]
- *   Thermal management of e-powertrain system           -> areas[1]
- *   AI-assisted acceleration of designing of e-machines -> areas[2]
- *   Design automation with commercial software          -> areas[2]
- *   Design of 1-D electrified propulsion system         -> areas[3]
- *   Integrated inverter-motor system analysis           -> areas[3]
+ * 다섯 분야는 방법론 축이다. 응용 대상(xEV·로봇·가전 등)은 분야마다
+ * 겹치므로 여기 넣지 않고 아래 APPLICATIONS 로 따로 보여 준다.
  * ========================================================================= */
 
 const RESEARCH = [
   {
-    id: "machine-design",
-    title: "Electric Machine Analysis & Design",
-    summary: "Analysis and design of electric machines, and model-based electric machine design.",
+    id: "analysis-methods",
+    title: "Analysis Methods",
+    summary: "Electromagnetic, thermal, and multi-physics analysis of electric machines, from analytical models to FEA, with acceleration techniques.",
+    topics: [
+      "Electromagnetic analysis — analytical methods (space harmonic, equivalent magnetic circuit) and FEA",
+      "Loss analysis and electromagnetic force analysis linked to thermal and NVH studies",
+      "LPTN-based thermal analysis",
+      "Analysis acceleration — Quasi-3D modeling, multi-fidelity and transfer learning methods",
+      "Multi-physics coupling — vibration and noise, thermal, structural analysis"
+    ],
     description: "[한 문단 설명 — 추후 확정]",
     image: ""
   },
   {
-    id: "multi-physics",
-    title: "Multi-physics Analysis",
-    summary: "Multi-physics analysis of electric machines and thermal management of e-powertrain systems.",
+    id: "topology-design",
+    title: "Topology & Drive-aware Design",
+    summary: "Design across machine topologies and drive schemes, reflecting harmonics and electrical dynamics of the controller.",
+    topics: [
+      "Machine topologies — SPMSM, IPMSM, induction and reluctance machines, inner/outer rotor, radial/axial flux",
+      "Advanced topologies — dual-rotor and dual-stator machines, variable flux machines, magnetic gears and magnetically geared machines, vernier machines, brushless wound-field synchronous machines",
+      "Drive-aware design — sinusoidal/square-wave drive, open-end winding, multi-phase and multiplex windings",
+      "Winding changeover (Y-delta, series-parallel) and sensorless-oriented design"
+    ],
     description: "[한 문단 설명 — 추후 확정]",
     image: ""
   },
   {
-    id: "ai-design",
-    title: "AI-assisted & Automated Design",
-    summary: "AI-assisted acceleration of electric machine design and design automation with commercial software.",
+    id: "robust-design",
+    title: "Manufacturing-aware & Robust Design",
+    summary: "Design that embraces materials, manufacturing processes, and uncertainty — from tolerance analysis to robust optimization.",
+    topics: [
+      "Design with advanced materials — high slot fill factor coils, magnets, electrical steel, cobalt-iron, SMC, grain-oriented steel",
+      "Process-aware design — potting (thermal management materials), carbon fiber sleeves",
+      "Uncertainty analysis of material properties and manufacturing tolerances",
+      "Robust optimal design, tolerance design, and multi-objective optimization algorithms"
+    ],
     description: "[한 문단 설명 — 추후 확정]",
     image: ""
   },
   {
-    id: "propulsion-system",
-    title: "Electrified Propulsion System",
-    summary: "Design of 1-D electrified propulsion systems and integrated inverter-motor system analysis.",
+    id: "system-design",
+    title: "System-level Design",
+    summary: "Electric drive system modeling and motor design driven by system performance and driving profiles.",
+    topics: [
+      "Electric drive system modeling and system performance analysis — xEV, robots (humanoid, manipulator)",
+      "Driving profile-based motor performance analysis and design"
+    ],
     description: "[한 문단 설명 — 추후 확정]",
     image: ""
+  },
+  {
+    id: "design-automation",
+    title: "Design Automation & Software",
+    summary: "In-house tools for modeling automation, design automation, and characteristic analysis.",
+    topics: [
+      "Modeling automation",
+      "Design automation",
+      "Characteristic analysis programs"
+    ],
+    description: "[한 문단 설명 — 추후 확정]",
+    image: ""
+  }
+];
+
+/* =========================================================================
+ * 응용 대상 — 방법론과 직교하는 축이라 분야 카드에 섞지 않는다.
+ * research.html #applications 에 묶음별 태그로 나온다.
+ * ========================================================================= */
+const APPLICATIONS = [
+  {
+    group: "Mobility",
+    items: [
+      "xEV traction", "Compressor", "EPS", "Brake", "ISG", "Turbocharger",
+      "Mobile robot", "UAM", "Electric propulsion ship"
+    ]
+  },
+  {
+    group: "Robotics",
+    items: ["Manipulator", "Humanoid", "Wearable robot"]
+  },
+  {
+    group: "Home Appliances",
+    items: ["Compressor", "Washing machine", "Refrigerator", "Vacuum cleaner"]
+  },
+  {
+    group: "Industrial & Power",
+    items: ["Elevator", "Blower", "Generator", "Transformer"]
   }
 ];

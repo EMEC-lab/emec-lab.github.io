@@ -87,6 +87,7 @@ const SITE = {
     current:    "Researchers",
     alumni:     "Alumni",
     areas:      "Research Areas",
+    applications: "Applications",
     equipment:  "Facilities",
     projects:   "Research Projects",
     ongoing:    "Ongoing",
