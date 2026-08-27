@@ -156,7 +156,7 @@ const GALLERY = [
     id: "2025-eng-festival",
     title: "2025 공과대학 학술제",
     date: "2025-11-04",
-    desc: "",
+    desc: "학부 과정을 마무리하는 졸업논문 발표. 모두 수고 많았습니다",
     cover: "",
     images: [
       { src: "images/gallery/13.jpg", caption: "" }
@@ -212,7 +212,7 @@ const GALLERY = [
     id: "2025-teachers-day",
     title: "2025 스승의 날",
     date: "2025-05-15",
-    desc: "연구실을 꽃으로 꾸미고 각자 준비한 음식을 나누어 먹었습니다. 케이크와 꽃다발로 하루를 마무리했습니다",
+    desc: "연구실을 꾸미고 다 함께 저녁을 나눈 스승의 날",
     cover: "",
     images: [
       { src: "images/gallery/8-1.jpg", caption: "" },
@@ -244,7 +244,7 @@ const GALLERY = [
     id: "2024-teachers-day",
     title: "2024 스승의 날",
     date: "2024-05-15",
-    desc: "전동기 단면을 그대로 본뜬 케이크. 고정자 슬롯을 두른 권선과 가운데 회전자까지 옮겨 담았습니다",
+    desc: "학생들이 준비한 케이크와 함께한 스승의 날",
     cover: "",
     images: [
       { src: "images/gallery/4.jpg", caption: "" }
