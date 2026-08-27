@@ -51,7 +51,7 @@ const MEMBERS = [
     activities: [
       { period: "2026.01 – 2026.12", role: "편집이사", org: "대한전기학회 전기기기 및 에너지변환시스템 부문 (B부문)" },
       { period: "2025.02 – 2026.12", role: "간사", org: "한국자기학회 Electro-Magnetic Energy Conversion 분과" },
-      { period: "2026.01 – 2026.12", role: "Editor", org: "Journal of Electrical Engineering & Technology (SCIE)" },
+      { period: "2026.02 – 2026.12", role: "Editor", org: "Journal of Electrical Engineering & Technology (SCIE)" },
       { period: "2025.02 – 2029.12", role: "Associate editor", org: "Journal of Magnetics (SCIE)" },
       { period: "2025.04 – 2026.06", role: "Guest editor", org: "Machines (SCIE), Special Issue (Electromagnetic and Multi-Physics Analysis and Design of Electric Machines)" },
       { period: "2026.01 – 2026.12", role: "편집위원", org: "The Transactions of The Korean Institute of Electrical Engineers (Scopus, KCI)" },

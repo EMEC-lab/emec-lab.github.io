@@ -77,23 +77,25 @@ const SITE = {
     contact:      "CONTACT"
   },
 
-  // 드롭다운이 있는 세 메뉴에만 하위 항목이 있다
+  // 드롭다운이 있는 네 메뉴에만 하위 항목이 있다
   submenu: {
     professor:  "Professor",
-    current:    "Students",
+    current:    "Researchers",
     alumni:     "Alumni",
     areas:      "Overview",
     equipment:  "Facilities",
     projects:   "Projects",
     journal:    "Journal",
     conference: "Conference",
-    patent:     "Patent"
+    patent:     "Patent",
+    news:       "News",
+    gallery:    "Gallery"
   },
 
   // 페이지 안의 섹션 제목. HTML 은 <h2 data-section-title="areas"> 처럼 키만 적는다
   sectionTitles: {
     professor:  "Professor",
-    current:    "Students",
+    current:    "Researchers",
     alumni:     "Alumni",
     areas:      "Research Areas",
     equipment:  "Facilities",
@@ -230,7 +232,8 @@ tailwind.config = {
 ├── people.html
 ├── research.html
 ├── publications.html
-├── news.html        # 글 소식 + 사진 게시글
+├── news.html        # 글 소식
+├── gallery.html     # 사진 게시글 (앨범 단위)
 ├── join.html        # 대학원생 모집 안내
 ├── contact.html
 ├── .nojekyll
@@ -267,7 +270,7 @@ tailwind.config = {
 HOME                                → index.html
 PEOPLE ▾
   ├ Professor                       → people.html#professor
-  ├ Students                        → people.html#current
+  ├ Researchers                     → people.html#current
   └ Alumni                          → people.html#alumni
 RESEARCH ▾
   ├ Overview                        → research.html#areas
@@ -277,15 +280,21 @@ PUBLICATIONS ▾
   ├ Journal                         → publications.html#journal
   ├ Conference                      → publications.html#conference
   └ Patent                          → publications.html#patent
-NEWS                                → news.html
+NEWS ▾
+  ├ News                            → news.html#feed
+  └ Gallery                         → gallery.html#albums
 JOIN US                             → join.html
 CONTACT                             → contact.html
 ```
 
 - 1단계 메뉴는 **대문자**로 표기한다. 드롭다운 항목은 일반 표기.
-- 드롭다운은 **PEOPLE, RESEARCH, PUBLICATIONS 세 곳뿐**이고,
-  하위 항목은 **별도 파일이 아니라 같은 페이지의 앵커**로 연결한다.
-- HOME, NEWS, JOIN US, CONTACT 는 하위 항목이 없다. 한 번에 해당 페이지로 간다.
+- 드롭다운은 **PEOPLE, RESEARCH, PUBLICATIONS, NEWS 네 곳**이다.
+  앞 세 곳의 하위 항목은 **같은 페이지의 앵커**로 연결한다.
+  **NEWS 만 예외**로, Gallery 가 별도 파일(`gallery.html`)이다 — 사진이 무거워
+  소식과 같은 페이지에 두면 NEWS 가 느려지기 때문이다.
+  대메뉴와 다른 파일인 하위 항목은 `common.js` 의 `pageLabel()` 이
+  그 항목의 라벨로 제목 밴드를 채운다.
+- HOME, JOIN US, CONTACT 는 하위 항목이 없다. 한 번에 해당 페이지로 간다.
 - 각 섹션에는 반드시 아래 표의 `id` 속성을 부여한다.
 - 메뉴 라벨은 **상위·하위 모두** `SITE.menu` / `SITE.submenu`에서 읽어온다. 네비게이션 HTML에 직접 쓰지 않는다.
 - 상위 메뉴가 일곱 개라 가로로 빽빽하다. **더 늘릴 때는 가로 메뉴가 나타나는
@@ -296,7 +305,7 @@ CONTACT                             → contact.html
 | 메뉴 | 섹션 제목 | 데이터 파일 | 앵커 |
 |---|---|---|---|
 | Professor | Professor | `members.js` (`role: professor`) | `#professor` |
-| Students | Students | `members.js` | `#current` |
+| Researchers | Researchers | `members.js` | `#current` |
 | Alumni | Alumni | `members.js` (`role: alumni`) | `#alumni` |
 | Overview | Research Areas | `research.js` | `#areas` |
 | Facilities | Facilities | `equipment.js` | `#equipment` |
@@ -304,8 +313,8 @@ CONTACT                             → contact.html
 | Journal | International / Domestic Journal | `publications.js` (`type: journal`) | `#journal` |
 | Conference | International / Domestic Conference | `publications.js` (`type: conference`) | `#conference` |
 | Patent | Granted Patent / Patent Application | `publications.js` (`type: patent`) | `#patent` |
-| NEWS | — | `news.js` | `#feed` |
-| NEWS 하단 | Gallery | `gallery.js` | `#albums` |
+| News | — | `news.js` | `#feed` |
+| Gallery | — | `gallery.js` | `#albums` |
 | JOIN US | — | `site.js` (`SITE.join`) | `#join` |
 | CONTACT | Location | `site.js` | `#location` |
 
@@ -328,27 +337,48 @@ const MEMBERS = [
     photo: "images/members/park.jpg",
     email: "",                // SITE.email과 같으면 비워둘 것
     office: "",
-    interests: "Electric Machine Design, Multiphysics Analysis, Optimal Design",
+    interests: "Electric machine design and analysis, Multi-physics analysis",
     grade: null,              // 학부연구생 전용. 학년(숫자). 대학원생은 null
 
-    // 교수 전용
+    // 한 줄씩 문자열. 날짜는 줄 끝에, 학위명은 맨 앞에 둔다
     education: [
-      "Ph.D., Electrical Engineering, OO University, 2015",
-      "M.S., Electrical Engineering, OO University, 2010"
+      "Ph.D., Department of Automotive Engineering, Hanyang University, Seoul, 2020.02",
+      "B.S., Department of Electrical Engineering, Chungnam National University, Daejeon, 2013.02"
     ],
+    // 경력은 반대로 기간이 맨 앞에 온다. 렌더러가 양쪽을 다 받는다
     career: [
-      "2020–Present, Professor, Soonchunhyang University",
-      "학술이사, 대한전기학회 (전기기기 및 에너지변환시스템 부문)"
+      "2022.03 – Present, Assistant Professor, Department of Electrical Engineering, Soonchunhyang University, Asan"
     ],
     scholar: "",
 
     // 졸업생 전용
-    gradYear: null,           // 예: 2024
+    gradYear: null,           // 예: 2026. 묶음 정렬의 보조 값
     thesis: "",
     currentPosition: ""       // 예: "LG전자 책임연구원"
   }
 ];
+
+/* 재학생 묶음 — role 기준 */
+const MEMBER_ROLE_ORDER  = ["postdoc", "phd", "ms", "undergrad"];
+const MEMBER_ROLE_LABELS = {
+  postdoc: "Post-doctoral Researcher", phd: "Ph.D. Candidate",
+  ms: "M.S. Candidate", undergrad: "Undergraduate Student"
+};
+
+/* 졸업생 묶음 — title 기준 */
+const ALUMNI_DEGREE_ORDER  = ["phd", "ms", "undergrad"];
+const ALUMNI_DEGREE_LABELS = {
+  phd: "Ph.D. degree", ms: "M.S. degree", undergrad: "B.S. degree"
+};
 ```
+
+**학력 · 경력은 한 줄 문자열로 적고 모양은 렌더러가 만든다.**
+날짜를 앞으로 빼고 바로 뒤 조각(학위명 · 직위)을 굵게 하는 일은 `datedList()` 가 한다.
+데이터에 HTML 을 적지 않는다.
+
+**`interests` 는 쉼표로 가른다.** 한 조각이 카드의 태그 하나가 된다.
+조각 안에 쉼표를 넣지 말 것. 카드 폭에서 한 줄에 들어가도록
+**한 조각은 50자 안팔으로** 둔다.
 
 ### data/publications.js
 
@@ -596,7 +626,7 @@ const ongoingCount = PROJECTS.filter(p => getStatus(p) === 'ongoing').length;
 ```
 #professor   — 사진 크게, 학력·경력·연구관심사·Google Scholar 전체 노출
 #current     — 박사 / 석사 / 학부연구생 순. 학위 과정별로 소제목을 두고 카드 그리드
-#alumni      — 사진 없이 텍스트 목록. 이름, 학위, 졸업연도, 현재 소속
+#alumni      — 재학생과 같은 카드. 학위별로 소제목을 두고, 학위 옆에 졸업 년월을 적는다
 ```
 
 교수는 학생과 **다른 레이아웃**으로 렌더링한다. 같은 카드 크기로 나열하지 않는다.
@@ -605,13 +635,23 @@ const ongoingCount = PROJECTS.filter(p => getStatus(p) === 'ongoing').length;
 
 ```
 [증명사진 3:4]
-Yong-Min Lee        영문 이름 (굵게)
-이용민               국문 이름 (작게 · 회색)
-Ph.D. Candidate     title 값 (파란색)
-[Electric Machine Design] [Multi-physics Analysis]   interests 를 쉼표로 가른 태그
+Hye-Seong Kim       영문 이름 (굵게)
+김혜성               국문 이름 (작게 · 회색)
+M.S. Candidate      title 값 (파란색)
+[Data-driven optimal design and analysis]            interests 를 쉼표로 가른 태그
+[Vibration and noise analysis]
+```
+
+졸업생 카드는 같은 모양에 두 줄이 더 붙는다.
+
+```
+M.S. degree  2026.02        학위(ALUMNI_DEGREE_LABELS) + 졸업 년월(education 에서 읽음)
+Korea Automotive Technology Institute (KATECH)      currentPosition. 비우면 줄이 안 나온다
 ```
 
 - `interests` 는 **쉼표로 구분해 적으면 태그 하나씩으로 나눠진다**
+- **태그는 한 줄을 넘기지 않게 둔다.** 그래서 카드 열이 바뀌는 기준이
+  `md`(2열) · `xl`(3열) 이다. 한 단계씩 낮추면 좌우 칸이 좁아져 긴 태그가 접힌다
 - **학부연구생은 카드를 쓰지 않는다.** 인원이 많고 사진도 없어,
   `grade` 로 묶어 이름만 나열한다 (높은 학년부터)
 
@@ -619,7 +659,13 @@ Ph.D. Candidate     title 값 (파란색)
   4학년   정민구 · 신주현 · 이현규 · 김호윤 · 노진성 · 한영준 · 최영준
   3학년   정석환 · 김우성
   ```
-- 카드와 졸업생 줄의 **View Profile** 을 누르면 프로필 창이 열린다.
+- **졸업생은 학위별로 묶는다.** 순서와 라벨은 `members.js` 의
+  `ALUMNI_DEGREE_ORDER` · `ALUMNI_DEGREE_LABELS` 에 있다 (`Ph.D. degree` · `M.S. degree` · `B.S. degree`).
+  어느 묶음인지는 그 사람의 `title` 로 판정하므로 별도 필드를 두지 않는다.
+  **해당자가 없는 묶음은 소제목째 나오지 않는다**
+- **졸업 년월은 따로 적지 않는다.** `education` 의 해당 학위 줄 끝에 있는 날짜를
+  렌더러가 읽어 온다. 정렬도 이 값 기준이라 같은 해 졸업자끼리도 월까지 보고 가른다
+- 카드의 **View Profile** 을 누르면 프로필 창이 열린다.
   별도 페이지를 만들지 않고 `people.html` 안의 `#member-modal` 을 쓴다
 - 프로필 창은 **학력**과 **참여 논문**을 보여 준다.
   논문은 `PUBLICATIONS` 의 `authors` 에서 그 사람 이름을 찾아 **자동으로** 가져온다.
@@ -629,6 +675,11 @@ Ph.D. Candidate     title 값 (파란색)
   기준은 `PUB_SPLITS`, 제목은 `SITE.pubGroups` 를 그대로 쓴다
 - 프로필 창 안에서는 **그 사람만** 짚는다.
   표시 방식은 PUBLICATIONS 페이지와 같다 (굵게 + 밑줄). 달라지는 것은 대상뿐이다
+- **학력은 날짜를 앞에 두고 학위명을 굵게 한다.**
+  데이터는 `"B.S., 학과, 학교, 도시, 2024.02"` 처럼 한 줄 문자열로 적고,
+  렌더러(`datedList()`)가 끝의 년월을 떼 왜쪽 칸으로 옮긴다.
+  교수 페이지의 학력 · 경력 · 학회 활동 · 학회 회원 · 초청강연이 **모두 같은 날짜 칸**을 쓴다
+  (`render.js` 의 `DATE_COL` 한 곳에서 온다)
 
 ### RESEARCH (research.html)
 
@@ -684,10 +735,15 @@ Ph.D. Candidate     title 값 (파란색)
 - 묶음 안에서 다시 **연도별 그룹핑**, 최신순
 - 한 연도 안에서는 `date` 기준 최신순. Early Access 가 맨 위 (6번 항목 참조)
 - 비어 있는 묶음은 제목째 렌더링하지 않는다 (빈 섹션 노출 금지)
-- **올해 외의 연도는 접어 둔다.** 연도 줄을 누르면 펌쳐진다
+- **올해만 펼쳐 두고, 지난 해는 한 덩어리로 묶어 접는다.**
+  묶음 제목은 `~2025` 처럼 항상 **작년**을 가리키며, 문구는 `SITE.ui.pubEarlier` 에 있다.
+  묶음 안에서는 연도 구분을 두지 않는다 — 연도마다 따로 펼쳐야 하면 손이 너무 많이 간다.
+  올해 것이 하나도 없는 탭(예: 특허)은 이 묶음을 펼쳐 둔다
 - 특허 탭에서는 저자 표기 범례를 감춘다 (특허에는 주저자·교신저자 개념이 없다)
 - DOI가 있으면 제목을 링크로
-- 저자 목록에서 EMEC 구성원 이름은 **굵게 + 밑줄** (`MEMBERS` 데이터로 판별)
+- 저자 목록에서 **지도교수 이름만** 굵게 + 밑줄로 짚는다 (`role: professor` 로 판별).
+  학생까지 짚으면 한 줄에 강조가 여럿 개씩 생겨 누가 연구실 사람인지 분별이 안 된다.
+  학생 개인 강조는 PEOPLE 의 프로필 창에서만 한다
 - 주저자 `†` · 교신저자 `*` 를 윗첨자로 표시하고, 상단에 범례를 둔다 (6번 항목 참조)
 
 **묶는 기준과 제목 문구는 따로 둔다.**
@@ -699,25 +755,28 @@ Ph.D. Candidate     title 값 (파란색)
 
 ### NEWS (news.html)
 
-글 소식과 사진 게시글을 **한 페이지에 위아래로** 둔다. 탭을 두지 않는다.
+글 소식만 둔다. 사진은 `gallery.html` 로 떼어냈다.
 
 ```
 #feed     — 글 소식. 제목 없이 바로 피드가 시작된다
-#albums   — 사진 게시글. 연한 배경 밴드에 Gallery 제목을 단다
 ```
-
-**글 소식 (`#feed`)**
 
 - **게시판 형태 금지.** 상세 페이지, 목록 페이지, 페이지네이션 없음
 - 날짜 + 1~3문장이 시간순으로 누적되는 피드
-- 연도별 구분선
+- **접고 펼치는 규칙은 PUBLICATIONS 와 같다** — 올해만 펼쳐 두고
+  그 이전은 `~2025` 한 덩어리로 묶어 접는다. 두 페이지의 조작법을 같게 둔다
 - `link`가 있으면 문장을 링크로, `image`가 있으면 좌측에 작은 썸네일
 
-**사진 게시글 (`#albums`)**
+### GALLERY (gallery.html)
+
+```
+#albums   — 사진 게시글. 앨범 단위 격자
+```
 
 - 앨범 단위 격자 배치. 클릭 시 라이트박스로 확대
+- 라이트박스는 외부 라이브러리 없이 직접 만든다 (`bindLightbox`)
 - 이미지 `loading="lazy"` 필수
-- 앨범이 많아져 페이지가 무거워지면 다시 별도 파일로 분리하는 것을 검토한다
+- 제목 밴드가 이미 `Gallery` 라 안쪽에 섹션 제목을 다시 두지 않는다
 
 ### JOIN US (join.html)
 
@@ -896,7 +955,7 @@ Ph.D. Candidate     title 값 (파란색)
 - 과제 추가하는 법, 진행중/완료가 자동 전환된다는 설명
 - 구성원 추가 / 졸업생으로 이동시키는 법
 - 소식 올리는 법
-- 갤러리에 사진 올리는 법 (이미지 크기 조정 포함). 사진은 NEWS 페이지 하단에 보인다는 점도 적는다
+- 갤러리에 사진 올리는 법 (이미지 크기 조정 포함). 사진은 `gallery.html` 에 보인다는 점도 적는다
 - 모집 안내 문구를 고치는 법 (`data/site.js` 의 `SITE.join`)
 - 히어로 영상 교체 및 `ffmpeg` 압축 명령
 - **연구실 이름이나 색상을 바꾸는 법** (`data/site.js`, `js/theme.js` 위치 안내)
@@ -911,6 +970,4 @@ Ph.D. Candidate     title 값 (파란색)
 - **수상 페이지** — 현재는 `news.js`에 `category: "award"`로 누적. 충분히 쌓이면 필터링해서 생성
 - **About 독립 페이지** — 현재는 HOME에 통합. 연혁 등이 길어지면 `#about` 섹션을 분리
 - **Publications 페이지 분할** — 논문 200편 초과 시
-- **Gallery 페이지 분리** — 현재는 NEWS 하단에 함께 있다.
-  사진이 많아져 NEWS 페이지가 무거워지면 `gallery.html` 로 다시 떼어낸다
 - **커스텀 도메인 연결**
