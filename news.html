@@ -26,6 +26,9 @@
     <!-- 페이지 제목 밴드: common.js 가 SITE.menu 에서 채운다 -->
     <div id="page-head"></div>
 
+    <!-- 알약 탭 [News] [Gallery] — render.js 가 두 페이지를 오가는 링크로 만든다 -->
+    <div id="page-tabs"></div>
+
     <!-- ===== 소식 피드 =====
          data/news.js 를 날짜 내림차순으로 그린다. 연도마다 구분선이 들어간다.
          게시판·상세페이지·페이지네이션을 만들지 않는다 -->
@@ -43,6 +46,7 @@
   <!-- 로드 순서 고정: data/*.js → js/render.js → js/common.js -->
   <script src="data/site.js"></script>
   <script src="data/news.js"></script>
+  <script src="data/gallery.js"></script>   <!-- 상단 탭의 Gallery 건수 -->
   <script src="js/render.js"></script>
   <script src="js/common.js"></script>
 </body>

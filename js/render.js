@@ -64,6 +64,42 @@ var Render = (function () {
    * 페이지에 <div id="page-tabs"></div> 를 두면 그 자리에 그려진다.
    * =================================================================== */
 
+  /* 알약 탭 모양. sectionTabs 와 linkTabs 가 같은 값을 쓴다 */
+  var TAB_BAR  = 'border-b border-slate-200 bg-white';
+  var TAB_WRAP = '<div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">' +
+                 '<div class="flex gap-2 overflow-x-auto py-3">';
+  var TAB_BASE = 'shrink-0 rounded-full border px-4 py-1.5 text-sm font-semibold transition-colors ';
+  var TAB_ON   = 'border-primary bg-primary text-white';
+  var TAB_OFF  = 'border-slate-300 text-slate-600 hover:border-primary hover:text-primary';
+
+  function tabCount(n) {
+    return (n === undefined || n === null) ? ''
+      : ' <span class="font-mono text-xs opacity-70">' + esc(n) + '</span>';
+  }
+
+  /* --- 페이지를 오가는 탭 -------------------------------------------
+   * NEWS 하위의 News · Gallery 처럼 두 항목이 서로 다른 파일일 때 쓴다.
+   * sectionTabs 는 한 페이지 안의 섹션을 숨기고 보이는 방식이라
+   * 파일이 다르면 쓸 수 없다. 여기서는 그냥 링크를 그리고
+   * 지금 보고 있는 페이지만 켜 둔다.
+   * ------------------------------------------------------------------- */
+  function linkTabs(items) {
+    var host = document.getElementById('page-tabs');
+    if (!host || !items || !items.length) return;
+
+    var here = Util.currentFile();
+
+    host.className = TAB_BAR;
+    host.innerHTML = TAB_WRAP +
+      items.map(function (t) {
+        var on = Util.fileOf(t.href) === here;
+        return '<a href="' + esc(t.href) + '" class="' + TAB_BASE +
+          (on ? TAB_ON : TAB_OFF) + '"' + (on ? ' aria-current="page"' : '') + '>' +
+          esc(t.label) + tabCount(t.count) + '</a>';
+      }).join('') +
+      '</div></div>';
+  }
+
   function sectionTabs(config) {
     var host = document.getElementById('page-tabs');
     if (!host) return;
@@ -74,19 +110,13 @@ var Render = (function () {
     var keys = tabs.map(function (t) { return t.key; });
 
     /* 고정하지 않는다. 상단 메뉴만 따라오고 탭은 스크롤과 함께 올라간다 */
-    host.className = 'border-b border-slate-200 bg-white';
-    host.innerHTML =
-      '<div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">' +
-        '<div class="flex gap-2 overflow-x-auto py-3">' +
-          tabs.map(function (t) {
-            return '<button type="button" class="js-tab shrink-0 rounded-full border px-4 py-1.5 text-sm font-semibold transition-colors"' +
-              ' data-tab="' + esc(t.key) + '">' + esc(t.label) +
-              (t.count === undefined ? ''
-                : ' <span class="font-mono text-xs opacity-70">' + esc(t.count) + '</span>') +
-              '</button>';
-          }).join('') +
-        '</div>' +
-      '</div>';
+    host.className = TAB_BAR;
+    host.innerHTML = TAB_WRAP +
+      tabs.map(function (t) {
+        return '<button type="button" class="js-tab ' + TAB_BASE + '"' +
+          ' data-tab="' + esc(t.key) + '">' + esc(t.label) + tabCount(t.count) + '</button>';
+      }).join('') +
+      '</div></div>';
 
     function apply(key) {
       tabs.forEach(function (t) {
@@ -98,9 +128,7 @@ var Render = (function () {
       var btns = document.querySelectorAll('.js-tab');
       for (var i = 0; i < btns.length; i++) {
         var on = btns[i].getAttribute('data-tab') === key;
-        btns[i].className = 'js-tab shrink-0 rounded-full border px-4 py-1.5 text-sm font-semibold transition-colors ' +
-          (on ? 'border-primary bg-primary text-white'
-              : 'border-slate-300 text-slate-600 hover:border-primary hover:text-primary');
+        btns[i].className = 'js-tab ' + TAB_BASE + (on ? TAB_ON : TAB_OFF);
         btns[i].setAttribute('aria-pressed', on ? 'true' : 'false');
       }
 
@@ -1826,7 +1854,18 @@ var Render = (function () {
   }
 
   /* NEWS 페이지는 글 소식만 그린다. 사진은 gallery.html 로 떼어냈다 */
+  /* NEWS · GALLERY 상단에 공통으로 둘 다 대는 탭 */
+  function activityTabs() {
+    linkTabs([
+      { label: SITE.submenu.news,    href: 'news.html',
+        count: (typeof NEWS !== 'undefined') ? NEWS.length : undefined },
+      { label: SITE.submenu.gallery, href: 'gallery.html',
+        count: (typeof GALLERY !== 'undefined') ? GALLERY.length : undefined }
+    ]);
+  }
+
   function news() {
+    activityTabs();
     newsFeed();
     bindDisclosure();
   }
@@ -1856,6 +1895,12 @@ var Render = (function () {
     var cut = s.lastIndexOf('/');
     if (cut < 0) return s;
     return s.slice(0, cut) + '/thumb' + s.slice(cut);
+  }
+
+  /* gallery.html 진입점 — 상단 탭과 앨범 격자를 그린다 */
+  function galleryPage() {
+    activityTabs();
+    gallery();
   }
 
   function gallery() {
@@ -1958,7 +2003,7 @@ var Render = (function () {
     contact: contact,
     join: join,
     news: news,
-    gallery: gallery,
+    gallery: galleryPage,
 
     /* 다른 페이지에서 재사용할 조각 */
     getStatus: getStatus,
