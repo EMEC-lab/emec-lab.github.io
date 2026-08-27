@@ -63,7 +63,7 @@ const SITE = {
     people:       "PEOPLE",
     research:     "RESEARCH",
     publications: "PUBLICATIONS",
-    news:         "NEWS",
+    news:         "ACTIVITIES",   // 하위에 News · Gallery 를 둘 다 덮는 이름
     join:         "JOIN US",
     contact:      "CONTACT"
   },
