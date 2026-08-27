@@ -143,6 +143,13 @@ const NEWS = [
     link: "", image: ""
   },
   {
+    date: "2023-08-07",
+    category: "award",
+    title: "2023 IEEE PES General Meeting 우수논문상 수상",
+    text: "박민로 교수가 공동저자로 참여한 “High Efficiency PMSM With High Slot Fill Factor Coil for Heavy-Duty EV Traction Considering AC Resistance” 논문이 2023 IEEE Power & Energy Society General Meeting 에서 IEEE Transactions on Energy Conversion 우수논문상(Best Paper Award)을 수상하였습니다. 축하합니다!",
+    link: "", image: ""
+  },
+  {
     date: "2023-03-31",
     category: "member",
     title: "학부연구생 7명 합류",
@@ -172,13 +179,6 @@ const NEWS = [
  *   날짜를 임의로 지어내지 않고 아래에 주석으로 두었다.
  *   각 항목의 date 를 채운 뒤 위 NEWS 배열로 옮길 것.
  *
- *   {
- *     date: "2023-__-__",
- *     category: "award",
- *     title: "IEEE Trans. Energy Convers. 우수논문상",
- *     text: "Best Paper Award, IEEE Power & Energy Society Transactions on Energy Conversion",
- *     link: "", image: ""
- *   },
  *   {
  *     date: "2025-__-__",
  *     category: "award",

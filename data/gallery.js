@@ -42,7 +42,7 @@
 const GALLERY = [
   {
     id: "2026-ms-graduation",
-    title: "석사 학위 수여",
+    title: "2026 후기 학위 수여식",
     date: "2026-08-19",
     desc: "이용민 석사 졸업",
     cover: "",
@@ -52,7 +52,7 @@ const GALLERY = [
   },
   {
     id: "2026-workshop-3",
-    title: "3차 연구실 엠티",
+    title: "2026 여름 연구실 엠티",
     date: "2026-07-08",
     desc: "대한전기학회 하계학술대회 참가와 함께 (평창)",
     cover: "",
@@ -67,7 +67,7 @@ const GALLERY = [
   },
   {
     id: "2026-kiee-summer",
-    title: "대한전기학회 하계학술대회",
+    title: "2026 대한전기학회 하계학술대회",
     date: "2026-07-08",
     desc: "포스터 발표 4건",
     cover: "",
@@ -80,18 +80,8 @@ const GALLERY = [
     ]
   },
   {
-    id: "2026-teachers-day",
-    title: "스승의 날",
-    date: "2026-05-15",
-    desc: "연구실 학생들이 준비한 선물",
-    cover: "",
-    images: [
-      { src: "images/gallery/20.jpg", caption: "" }
-    ]
-  },
-  {
     id: "2026-kiee-spring",
-    title: "대한전기학회 춘계학술대회",
+    title: "2026 대한전기학회 춘계학술대회",
     date: "2026-04-23",
     desc: "포스터 발표 2건",
     cover: "",
@@ -115,7 +105,7 @@ const GALLERY = [
   },
   {
     id: "2026-commencement",
-    title: "학위 수여식",
+    title: "2026 전기 학위 수여식",
     date: "2026-02-12",
     desc: "고동훈 석사 졸업, 이영훈 석사 입학, 학부연구생 6명 학사 졸업",
     cover: "",
@@ -125,17 +115,18 @@ const GALLERY = [
   },
   {
     id: "2025-kiee-fall-award",
-    title: "대한전기학회 우수논문상",
+    title: "2025 대한전기학회 우수논문상",
     date: "2025-11-19",
     desc: "EV 구동 모터 재질 및 주행 사이클에 따른 에너지 소비 특성 분석",
     cover: "",
     images: [
-      { src: "images/gallery/16.jpg", caption: "" }
+      { src: "images/gallery/16.jpg", caption: "" },
+      { src: "images/gallery/16-2.jpg", caption: "" }
     ]
   },
   {
     id: "2025-workshop-2",
-    title: "2차 연구실 엠티",
+    title: "2025 가을 연구실 엠티",
     date: "2025-11-19",
     desc: "대한전기학회 추계학술대회 참가와 함께 (부산)",
     cover: "",
@@ -150,7 +141,7 @@ const GALLERY = [
   },
   {
     id: "2025-kiee-fall",
-    title: "대한전기학회 추계학술대회",
+    title: "2025 대한전기학회 추계학술대회",
     date: "2025-11-19",
     desc: "포스터 발표 3건",
     cover: "",
@@ -163,7 +154,7 @@ const GALLERY = [
   },
   {
     id: "2025-eng-festival",
-    title: "공과대학 학술제",
+    title: "2025 공과대학 학술제",
     date: "2025-11-04",
     desc: "",
     cover: "",
@@ -173,7 +164,7 @@ const GALLERY = [
   },
   {
     id: "2025-welcome-dinner",
-    title: "신입 학부연구생 환영회",
+    title: "2025 신입 학부연구생 환영회",
     date: "2025-07-28",
     desc: "새로 합류한 3학년 학생들을 환영하며",
     cover: "",
@@ -183,7 +174,7 @@ const GALLERY = [
   },
   {
     id: "2025-kiee-summer",
-    title: "대한전기학회 하계학술대회",
+    title: "2025 대한전기학회 하계학술대회",
     date: "2025-07-16",
     desc: "포스터 발표 3건",
     cover: "",
@@ -219,7 +210,7 @@ const GALLERY = [
   },
   {
     id: "2025-teachers-day",
-    title: "스승의 날",
+    title: "2025 스승의 날",
     date: "2025-05-15",
     desc: "각자 만들어 온 음식으로 저녁 식사",
     cover: "",
@@ -230,7 +221,7 @@ const GALLERY = [
   },
   {
     id: "2025-commencement",
-    title: "학위 수여식",
+    title: "2025 전기 학위 수여식",
     date: "2025-02-20",
     desc: "김혜성 석사 입학, 학부연구생 6명 학사 졸업",
     cover: "",
@@ -240,7 +231,7 @@ const GALLERY = [
   },
   {
     id: "2025-workshop-1",
-    title: "1차 연구실 엠티",
+    title: "2025 겨울 연구실 엠티",
     date: "2025-02-09",
     desc: "대부도 · 비발디파크",
     cover: "",
@@ -251,7 +242,7 @@ const GALLERY = [
   },
   {
     id: "2024-teachers-day",
-    title: "스승의 날",
+    title: "2024 스승의 날",
     date: "2024-05-15",
     desc: "모터 모양 케이크",
     cover: "",
@@ -261,7 +252,7 @@ const GALLERY = [
   },
   {
     id: "2024-kiee-spring",
-    title: "대한전기학회 춘계학술대회",
+    title: "2024 대한전기학회 춘계학술대회",
     date: "2024-04-25",
     desc: "포스터 발표 2건",
     cover: "",
@@ -271,7 +262,7 @@ const GALLERY = [
   },
   {
     id: "2024-commencement",
-    title: "학위 수여식",
+    title: "2024 전기 학위 수여식",
     date: "2024-02-22",
     desc: "이용민 · 고동훈 석사 입학, 학부연구생 4명 학사 졸업",
     cover: "",
@@ -281,12 +272,24 @@ const GALLERY = [
   },
   {
     id: "2023-eng-festival-award",
-    title: "공과대학 학술제 대상",
+    title: "2023 공과대학 학술제 대상",
     date: "2023-11-08",
     desc: "e-파워트레인 모델 기반 EV 구동용 IPMSM 설계",
     cover: "",
     images: [
       { src: "images/gallery/1.jpg", caption: "" }
+    ]
+  },
+  {
+    id: "2023-pes-gm",
+    title: "2023 IEEE PES General Meeting",
+    date: "2023-08-07",
+    desc: "IEEE Transactions on Energy Conversion 우수논문상 수상",
+    cover: "",
+    images: [
+      { src: "images/gallery/24-1.jpg", caption: "" },
+      { src: "images/gallery/24-2.jpg", caption: "" },
+      { src: "images/gallery/24-3.jpg", caption: "" }
     ]
   }
 ];
