@@ -1363,9 +1363,15 @@ var Render = (function () {
           (n.ko ? '<p class="mt-0.5 text-sm text-slate-500">' + esc(n.ko) + '</p>' : '') +
           (m.title ? '<p class="mt-1.5 text-sm font-semibold text-primary">' +
             esc(m.title) + '</p>' : '') +
+          /* 연락처는 이름 바로 아래. 관심분야 태그 묶음을 가로지르지 않게 한다 */
+          (m.email
+            ? '<p class="mt-2 flex flex-wrap items-baseline gap-x-2 text-xs">' +
+                '<span class="font-semibold text-slate-400">' + esc(SITE.people.email) + '</span>' +
+                '<a class="break-all text-slate-600 hover:text-primary hover:underline"' +
+                ' href="mailto:' + esc(m.email) + '">' + esc(m.email) + '</a>' +
+              '</p>'
+            : '') +
           interestTags(m.interests) +
-          (m.email ? '<a class="mt-3 block break-all text-xs text-slate-400 hover:text-primary"' +
-            ' href="mailto:' + esc(m.email) + '">' + esc(m.email) + '</a>' : '') +
         '</div>' +
       '</div>';
 
