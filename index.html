@@ -28,7 +28,7 @@
          muted·playsinline 이 없으면 모바일에서 자동 재생이 차단된다.
          768px 미만과 prefers-reduced-motion 에서는 css/custom.css 가
          영상을 숨기고 정지 이미지로 대체한다. -->
-    <section id="hero" class="relative h-[calc(100svh-4rem)] min-h-[30rem] overflow-hidden bg-primary-dark">
+    <section id="hero" class="relative h-[calc(100svh-4rem)] min-h-[30rem] overflow-hidden bg-white">
 
       <video class="hero-video absolute inset-0 h-full w-full object-cover"
              autoplay muted loop playsinline
@@ -39,20 +39,21 @@
       <img class="hero-still absolute inset-0 h-full w-full object-cover"
            src="images/hero-poster.jpg" alt="" loading="lazy" data-fallback>
 
-      <!-- 오버레이: 영상 위 텍스트 가독성 확보용. 없이 텍스트를 얹지 않는다 -->
-      <div class="absolute inset-0 bg-black/50"></div>
+      <!-- 오버레이: 영상 위 텍스트 가독성 확보용. 없이 텍스트를 얹지 않는다.
+           흰색 반투명이라 영상이 옅게 비치고 문구는 남색으로 얹는다 -->
+      <div class="absolute inset-0 bg-white/60"></div>
 
       <div class="relative z-10 flex h-full items-center">
         <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
           <h1 data-hero-title
-              class="max-w-4xl text-3xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl"></h1>
+              class="max-w-4xl text-3xl font-bold leading-tight tracking-tight text-primary-dark sm:text-5xl lg:text-6xl"></h1>
           <p data-hero-tagline
-             class="mt-6 max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg"></p>
+             class="mt-6 max-w-2xl text-base leading-relaxed text-slate-700 sm:text-lg"></p>
         </div>
       </div>
 
       <a href="#research"
-         class="absolute inset-x-0 bottom-8 z-10 mx-auto flex w-max flex-col items-center gap-2 text-white/75 transition-colors hover:text-white">
+         class="absolute inset-x-0 bottom-8 z-10 mx-auto flex w-max flex-col items-center gap-2 text-primary-dark/70 transition-colors hover:text-primary-dark">
         <span data-hero-scroll class="text-[11px] font-semibold uppercase tracking-wider2"></span>
         <svg class="scroll-arrow h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5"
              viewBox="0 0 24 24" aria-hidden="true">
