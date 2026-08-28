@@ -122,9 +122,18 @@ const RESEARCH = [
       "Design automation",
       "Characteristic analysis programs"
     ],
-    description: "[한 문단 설명 — 추후 확정]",
-    image: "",
-    images: []
+    description: "A good design method deserves to run without a person clicking through every step. We build in-house tools that automate the loop from parametric geometry and modeling, through batch analysis, to post-processing and evaluation — so a design space that once took weeks to explore can be swept overnight.\nThis automation is what lets the rest of our research scale. Optimization, uncertainty quantification, and system-level studies all stand on the ability to generate, analyze, and evaluate thousands of candidate designs automatically — and the same foundation grows into characteristic analysis programs that put our methods into the hands of engineers.",
+    image: "images/research/area-design-automation.svg",
+    images: [
+      { src: "images/research/automation-01-parametric.svg",
+        caption: "Parametric geometry family — one parameter sweeping through candidate rotor designs" },
+      { src: "images/research/automation-02-convergence.svg",
+        caption: "Optimization convergence — candidate generations and the best-so-far history" },
+      { src: "images/research/automation-03-software.svg",
+        caption: "In-house design and characteristic analysis software" },
+      { src: "images/research/automation-04-sweep.svg",
+        caption: "Automated design-space sweep with promising candidates selected automatically" }
+    ]
   }
 ];
 
