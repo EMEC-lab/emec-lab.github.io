@@ -79,9 +79,18 @@ const RESEARCH = [
       "Uncertainty analysis of material properties and manufacturing tolerances",
       "Robust optimal design, tolerance design, and multi-objective optimization algorithms"
     ],
-    description: "[한 문단 설명 — 추후 확정]",
-    image: "",
-    images: []
+    description: "Performance on the drawing and performance off the production line are not the same thing. We design with the realities of materials and manufacturing built in — high slot-fill-factor windings, advanced magnets and electrical steels, cobalt-iron, SMC and grain-oriented steel — and with the processes that shape them, from potting with thermal-management materials to carbon-fiber sleeves for high-speed rotors.\nEvery material property and every dimension carries uncertainty. We quantify how these variations propagate to machine performance, and apply robust and tolerance design with multi-objective optimization algorithms to find designs that are not only optimal at the nominal point, but insensitive to the spread of real manufacturing.",
+    image: "images/research/area-robust-design.svg",
+    images: [
+      { src: "images/research/robust-01-slotfill.svg",
+        caption: "High slot-fill-factor winding — packing more copper into the same slot" },
+      { src: "images/research/robust-02-tolerance.svg",
+        caption: "Rotor eccentricity within manufacturing tolerance and the resulting airgap variation" },
+      { src: "images/research/robust-03-material.svg",
+        caption: "Material property uncertainty — B-H curve spread and remanence distribution" },
+      { src: "images/research/robust-04-robustopt.svg",
+        caption: "Robust optimum on a flat plateau versus a sharp deterministic optimum" }
+    ]
   },
   {
     id: "system-design",
