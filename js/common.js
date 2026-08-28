@@ -193,7 +193,7 @@ var Layout = (function () {
       return '<div class="nav-item relative">' + trigger + panel + '</div>';
     }).join('');
 
-    return '<nav class="hidden items-center lg:flex" aria-label="' + esc(SITE.ui.menu) + '">' + html + '</nav>';
+    return '<nav class="hidden items-center xl:flex" aria-label="' + esc(SITE.ui.menu) + '">' + html + '</nav>';
   }
 
   /* --- 모바일 아코디언 --------------------------------------------------- */
@@ -223,7 +223,7 @@ var Layout = (function () {
         '</div></div></div>';
     }).join('');
 
-    return '<div id="mobile-menu" class="hidden max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-slate-200 bg-white lg:hidden">' +
+    return '<div id="mobile-menu" class="hidden max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-slate-200 bg-white xl:hidden">' +
              '<nav class="mx-auto max-w-6xl px-4 py-2 sm:px-6">' + items + '</nav></div>';
   }
 
@@ -259,7 +259,7 @@ var Layout = (function () {
           desktopNav() +
 
           '<button type="button" id="menu-toggle"' +
-            ' class="nav-link grid h-9 w-9 shrink-0 place-items-center rounded lg:hidden"' +
+            ' class="nav-link grid h-9 w-9 shrink-0 place-items-center rounded xl:hidden"' +
             ' aria-expanded="false" aria-controls="mobile-menu" aria-label="' + esc(SITE.ui.openMenu) + '">' +
             '<svg id="icon-open" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">' +
               '<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5"/></svg>' +

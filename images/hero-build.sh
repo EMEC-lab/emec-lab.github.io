@@ -1,25 +1,27 @@
 #!/usr/bin/env bash
 # =============================================================================
-#  히어로 영상 만들기  —  클립 8개 → hero.mp4 (약 19초, 이음새 없는 무한 반복)
+#  히어로 영상 만들기  —  클립 7개 → hero.mp4 (약 17초, 이음새 없는 무한 반복)
 #
 #  쓰는 법
-#    1. clip1.mp4 ~ clip8.mp4 를 이 폴더에 둔다
-#    2. Git Bash 에서:  bash build.sh
-#    3. 결과: hero.mp4 · hero-poster.jpg
+#    bash build.sh v2      ← v2 폴더의 클립으로 만든다
+#    bash build.sh         ← 폴더를 안 적으면 v1
+#
+#    소스 폴더 안에 clip1.mp4 ~ clip7.mp4 가 있어야 한다.
+#    결과물 hero.mp4 · hero-poster.jpg 는 이 폴더(hero\) 에 생긴다.
 #
 #  하는 일
 #    - 클립마다 3초씩만 사용 (클립 1은 앞부분, 나머지는 뒤쪽 클로즈업 구간)
 #    - 클립 사이를 0.6초 크로스페이드로 잇는다
-#    - 마지막↔처음도 크로스페이드해 반복 이음새를 없앤다
+#    - 마지막↔처음도 크로스페이드해 반복 이음새를 없앨다
 #    - 음성 트랙 제거, 5MB 이하로 압축
 # =============================================================================
 set -e
 
-# ffmpeg 이 PATH 에 없으면 아래 FF 를 설치 경로로 바꿔 주세요
-# (winget install --id Gyan.FFmpeg -e 로 설치했다면 셀 을 다시 열면 PATH 에 잡힙니다)
-FF=""
-FFMPEG="${FF:+$FF/}ffmpeg"
-FFPROBE="${FF:+$FF/}ffprobe"
+FF="/c/Users/user/AppData/Local/Microsoft/WinGet/Packages/Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/ffmpeg-9.0.1-full_build/bin"
+FFMPEG="$FF/ffmpeg"
+
+SRC="${1:-v1}"                 # 소스 폴더 (v1 · v2 …)
+[ -d "$SRC" ] || { echo "폴더가 없습니다: $SRC"; exit 1; }
 
 SEG=3.0        # 클립당 사용할 길이(초)
 FADE=0.6       # 크로스페이드 길이(초)
@@ -37,7 +39,7 @@ INPUTS=()
 FILTER=""
 i=0
 for c in "${ORDER[@]}"; do
-  INPUTS+=(-i "clip${c}.mp4")
+  INPUTS+=(-i "$SRC/clip${c}.mp4")
   s="${START[$c]}"
   e=$(awk "BEGIN{print $s+$SEG}")
   FILTER+="[${i}:v]trim=${s}:${e},setpts=PTS-STARTPTS,fps=${FPS},format=yuv420p[v${i}];"
@@ -59,7 +61,7 @@ FILTER="${FILTER%;}"
   -filter_complex "$FILTER" -map "$PREV" \
   -c:v libx264 -preset slow -crf 20 -pix_fmt yuv420p -an body.mp4
 
-BODY_DUR=$("$FFPROBE" -v error -show_entries format=duration -of csv=p=0 body.mp4)
+BODY_DUR=$("$FF/ffprobe" -v error -show_entries format=duration -of csv=p=0 body.mp4)
 echo "  body.mp4  ${BODY_DUR}s"
 
 echo "== 2단계: 반복 이음새 없애기 =="
@@ -82,7 +84,7 @@ echo "== 4단계: 포스터 이미지 =="
 
 rm -f body.mp4 head.mp4 looped.mp4
 
-DUR=$("$FFPROBE" -v error -show_entries format=duration -of csv=p=0 hero.mp4)
+DUR=$("$FF/ffprobe" -v error -show_entries format=duration -of csv=p=0 hero.mp4)
 SIZE=$(du -k hero.mp4 | cut -f1)
 echo ""
-echo "완료:  hero.mp4  ${DUR}s  ${SIZE} KB"
+echo "완료:  hero.mp4  ${DUR}s  ${SIZE} KB   (소스: $SRC)"
