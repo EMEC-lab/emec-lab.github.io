@@ -31,7 +31,7 @@ const RESEARCH = [
       "Analysis acceleration — Quasi-3D modeling, multi-fidelity and transfer learning methods",
       "Multi-physics coupling — vibration and noise, thermal, structural analysis"
     ],
-    description: "[한 문단 설명 — 추후 확정]",
+    description: "Accurate analysis is the foundation of every design decision. We develop and combine analysis methods across the full spectrum of fidelity — from analytical models such as space-harmonic and equivalent-magnetic-circuit methods that capture machine behavior in seconds, to finite-element analysis that resolves local saturation and loss distribution in detail.\nBeyond electromagnetics, we extend the analysis to the physics that determine real-world performance: losses and electromagnetic forces are linked to thermal behavior through lumped-parameter thermal networks, and to vibration and noise through structural coupling. To make these analyses practical in design loops, we also study acceleration techniques — quasi-3D modeling, multi-fidelity methods, and transfer learning — that trade minimal accuracy for order-of-magnitude speed-ups.",
     image: "images/research/area-analysis-methods.svg",
     images: [
       { src: "images/research/analysis-01-fea.svg",
