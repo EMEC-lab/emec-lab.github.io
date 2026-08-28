@@ -606,16 +606,32 @@ var Anim = (function () {
   function arm() {
     revealTargets.forEach(function (el) { el.classList.add('reveal-init'); });
 
-    if (io) {
-      revealTargets.forEach(function (el) { io.observe(el); });
-      countTargets.forEach(function (el) { io.observe(el); });
-    }
-
-    /* 보조 검사: 첫 화면에 이미 들어와 있는 요소를 즉시 처리하고,
-       이후 스크롤할 때마다 관찰자가 놓친 요소를 회수한다 */
+    /* 보조 검사: 관찰자가 놓친 요소를 스크롤할 때마다 회수한다 */
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
-    sweep();
+
+    /* ⚠ 숨긴 상태를 한 번 그린 뒤에 관찰과 첫 검사를 시작한다.
+       같은 프레임 안에서 숨겼다(.reveal-init) 바로 보이면(.is-visible)
+       브라우저가 시작 상태를 그리지 않아 transition 이 아예 일어나지 않는다.
+       첫 화면에 들어 있는 요소가 연출 없이 툴 나타나던 원인이다. */
+    var started = false;
+    function start() {
+      if (started) return;
+      started = true;
+
+      if (io) {
+        revealTargets.forEach(function (el) { io.observe(el); });
+        countTargets.forEach(function (el) { io.observe(el); });
+      }
+      sweep();
+    }
+
+    window.requestAnimationFrame(function () {
+      window.requestAnimationFrame(start);
+    });
+
+    /* 백그라운드 탭 등 rAF 가 멈추는 경우의 안전장치 */
+    window.setTimeout(start, 500);
   }
 
   function init() {

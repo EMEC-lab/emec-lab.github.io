@@ -1285,8 +1285,7 @@ var Render = (function () {
 
     return '<div class="card-hover rounded-lg border border-slate-200 bg-white p-4 text-center">' +
       imageBox(m.photo, n.en, 'aspect-[3/4]', 'rounded') +
-      '<p class="mt-4 text-sm font-bold text-slate-900">' + esc(n.en) + '</p>' +
-      (n.ko ? '<p class="mt-0.5 text-xs text-slate-500">' + esc(n.ko) + '</p>' : '') +
+      '<p class="mt-4 text-sm font-bold leading-snug text-slate-900">' + esc(m.name) + '</p>' +
       /* 졸업생은 학위 옆에 졸업 년월을 붙인다 */
       (m.title ? '<p class="mt-1.5 text-xs font-semibold text-primary">' + esc(degreeLabel(m)) +
         (gradDate(m) ? '<span class="ml-1.5 font-mono font-normal text-slate-400">' +
@@ -1359,8 +1358,7 @@ var Render = (function () {
           imageBox(m.photo, n.en, 'aspect-[3/4]', 'rounded') + '</div>' : '') +
         '<div class="min-w-0">' +
           '<h2 id="member-modal-name" class="text-2xl font-bold tracking-tight text-slate-900">' +
-            esc(n.en) + '</h2>' +
-          (n.ko ? '<p class="mt-0.5 text-sm text-slate-500">' + esc(n.ko) + '</p>' : '') +
+            esc(m.name) + '</h2>' +
           (m.title ? '<p class="mt-1.5 text-sm font-semibold text-primary">' +
             esc(degreeLabel(m)) + '</p>' : '') +
           /* 연락처는 이름 바로 아래. 관심분야 태그 묶음을 가로지르지 않게 한다 */
