@@ -33,7 +33,18 @@ const RESEARCH = [
     ],
     description: "[한 문단 설명 — 추후 확정]",
     image: "images/research/area-analysis-methods.svg",
-    images: []
+    images: [
+      { src: "images/research/analysis-01-fea.svg",
+        caption: "Flux density distribution and finite-element mesh of an 8-pole IPMSM" },
+      { src: "images/research/analysis-02-loss.svg",
+        caption: "Loss separation across operating points — copper, iron, PM eddy-current, and mechanical losses" },
+      { src: "images/research/analysis-03-lptn.svg",
+        caption: "Lumped-parameter thermal network and temperature-rise validation against measurement" },
+      { src: "images/research/analysis-04-accel.svg",
+        caption: "Quasi-3D modeling and multi-fidelity correlation for analysis acceleration" },
+      { src: "images/research/analysis-05-nvh.svg",
+        caption: "Stator vibration modes and electromagnetic noise spectrum" }
+    ]
   },
   {
     id: "topology-design",
