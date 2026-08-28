@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" font-family="Pretendard, system-ui, sans-serif" role="img" aria-label="How the five research areas relate: analysis as the foundation, design built on it, extended to the system level, and software automating the whole process">
+<style>
+  @keyframes flow { to { stroke-dashoffset: -28; } }
+  @keyframes glow {
+    0%, 60%, 100% { fill: #ffffff; }
+    15%           { fill: #E8EEF7; }
+  }
+  @keyframes rise {
+    0%, 100% { opacity: 0.35; }
+    50%      { opacity: 0.9; }
+  }
+  .link { animation: flow 2.2s linear infinite; }
+  .card { animation: glow 9s ease-in-out infinite; }
+  .card-1 { animation-delay: 0s; }
+  .card-2 { animation-delay: 1.6s; }
+  .card-3 { animation-delay: 2.4s; }
+  .card-4 { animation-delay: 4s; }
+  .feed { animation: rise 4s ease-in-out infinite; }
+  .feed-1 { animation-delay: 0s; }
+  .feed-2 { animation-delay: 0.8s; }
+  .feed-3 { animation-delay: 1.6s; }
+  .feed-4 { animation-delay: 2.4s; }
+  @media (prefers-reduced-motion: reduce) {
+    .link, .card, .feed { animation: none; }
+  }
+</style>
+
+<defs>
+  <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M 0 1 L 9 5 L 0 9 z" fill="#26539C"/>
+  </marker>
+</defs>
+
+<!-- 흐름선 : 토대 → 설계 두 갈래 → 시스템 -->
+<path class="link" d="M 222 150 Q 253 150 253 105 Q 253 88 283 88" fill="none" stroke="#5C81BC" stroke-width="2" stroke-dasharray="1 6" stroke-linecap="round" marker-end="url(#ah)"/>
+<path class="link" d="M 222 180 Q 253 180 253 227 Q 253 244 283 244" fill="none" stroke="#5C81BC" stroke-width="2" stroke-dasharray="1 6" stroke-linecap="round" marker-end="url(#ah)"/>
+<path class="link" d="M 592 88 Q 622 88 622 133 Q 622 150 652 150" fill="none" stroke="#5C81BC" stroke-width="2" stroke-dasharray="1 6" stroke-linecap="round" marker-end="url(#ah)"/>
+<path class="link" d="M 592 244 Q 622 244 622 199 Q 622 182 652 182" fill="none" stroke="#5C81BC" stroke-width="2" stroke-dasharray="1 6" stroke-linecap="round" marker-end="url(#ah)"/>
+
+<!-- 1. 토대 -->
+<rect class="card card-1" x="30" y="95" width="192" height="140" rx="10" fill="#ffffff" stroke="#26539C" stroke-width="2"/>
+<text x="46" y="123" font-size="11" font-weight="700" fill="#5C81BC" letter-spacing="1.2">FOUNDATION</text>
+<text x="46" y="155" font-size="17" font-weight="700" fill="#26539C">Analysis</text>
+<text x="46" y="177" font-size="17" font-weight="700" fill="#26539C">Methods</text>
+<text x="46" y="203" font-size="11.5" fill="#64748b">Electromagnetic, thermal,</text>
+<text x="46" y="219" font-size="11.5" fill="#64748b">multi-physics</text>
+
+<!-- 2. 설계 두 갈래 -->
+<rect class="card card-2" x="283" y="42" width="309" height="92" rx="10" fill="#ffffff" stroke="#26539C" stroke-width="2"/>
+<text x="301" y="68" font-size="11" font-weight="700" fill="#5C81BC" letter-spacing="1.2">DESIGN</text>
+<text x="301" y="94" font-size="16" font-weight="700" fill="#26539C">Topology &amp; Drive-aware Design</text>
+<text x="301" y="115" font-size="11.5" fill="#64748b">Machine topologies, windings, drive schemes</text>
+
+<rect class="card card-3" x="283" y="198" width="309" height="92" rx="10" fill="#ffffff" stroke="#26539C" stroke-width="2"/>
+<text x="301" y="224" font-size="11" font-weight="700" fill="#5C81BC" letter-spacing="1.2">DESIGN</text>
+<text x="301" y="250" font-size="15" font-weight="700" fill="#26539C">Manufacturing-aware &amp; Robust Design</text>
+<text x="301" y="271" font-size="11.5" fill="#64748b">Materials, processes, tolerance, uncertainty</text>
+
+<!-- 3. 시스템으로 확장 -->
+<rect class="card card-4" x="652" y="95" width="278" height="140" rx="10" fill="#ffffff" stroke="#26539C" stroke-width="2"/>
+<text x="670" y="123" font-size="11" font-weight="700" fill="#5C81BC" letter-spacing="1.2">EXTENSION</text>
+<text x="670" y="155" font-size="17" font-weight="700" fill="#26539C">System-level</text>
+<text x="670" y="177" font-size="17" font-weight="700" fill="#26539C">Design</text>
+<text x="670" y="203" font-size="11.5" fill="#64748b">Drive system modeling,</text>
+<text x="670" y="219" font-size="11.5" fill="#64748b">driving profiles</text>
+
+<!-- 자동화 : 위 전 과정을 감싸 올린다 -->
+<line class="feed feed-1" x1="126" y1="322" x2="126" y2="243" stroke="#047857" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round" marker-end="url(#ah)"/>
+<line class="feed feed-2" x1="437" y1="322" x2="437" y2="298" stroke="#047857" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round" marker-end="url(#ah)"/>
+<line class="feed feed-3" x1="791" y1="322" x2="791" y2="243" stroke="#047857" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round" marker-end="url(#ah)"/>
+
+<rect x="30" y="330" width="900" height="66" rx="10" fill="#26539C"/>
+<text x="52" y="358" font-size="11" font-weight="700" fill="#9DB6DC" letter-spacing="1.2">AUTOMATION</text>
+<text x="52" y="381" font-size="16" font-weight="700" fill="#ffffff">Design Automation &amp; Software</text>
+<text x="908" y="381" font-size="11.5" fill="#C7D6EC" text-anchor="end">In-house tools automating the whole process</text>
+</svg>
