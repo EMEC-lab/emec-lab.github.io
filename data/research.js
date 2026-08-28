@@ -56,9 +56,18 @@ const RESEARCH = [
       "Drive-aware design — sinusoidal/square-wave drive, open-end winding, multi-phase and multiplex windings",
       "Winding changeover (Y-delta, series-parallel) and sensorless-oriented design"
     ],
-    description: "[한 문단 설명 — 추후 확정]",
-    image: "",
-    images: []
+    description: "The right machine begins with the right topology. We design across the full family of rotating machines — surface-mounted and interior PM machines, induction and reluctance machines, inner- and outer-rotor structures, and radial- and axial-flux configurations — and extend to advanced concepts such as dual-rotor and dual-stator machines, variable flux machines, magnetic gears and magnetically geared machines, vernier machines, and brushless wound-field synchronous machines.\nA machine never runs alone — its real performance is decided together with the drive. We reflect the electrical dynamics of the controller from the earliest design stage: sinusoidal and square-wave drives, open-end winding, multi-phase and multiplex windings, winding changeover (Y-delta, series-parallel), and sensorless-oriented design, so that the machine and its inverter perform as one system.",
+    image: "images/research/area-topology-design.svg",
+    images: [
+      { src: "images/research/topology-01-portfolio.svg",
+        caption: "Machine topology portfolio — SPM, interior-PM, synchronous reluctance, induction, outer-rotor, and axial-flux configurations" },
+      { src: "images/research/topology-02-geared.svg",
+        caption: "Magnetically geared machine — two rotating fields coupled through a modulation ring" },
+      { src: "images/research/topology-03-drive.svg",
+        caption: "Drive-aware design — inverter and machine considered as one system, including current harmonics" },
+      { src: "images/research/topology-04-winding.svg",
+        caption: "Winding changeover (Y-delta) extending the torque-speed operating range" }
+    ]
   },
   {
     id: "robust-design",
