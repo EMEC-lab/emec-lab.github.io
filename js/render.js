@@ -841,24 +841,90 @@ var Render = (function () {
     if (!host) return;
     if (typeof RESEARCH === 'undefined' || !RESEARCH.length) { host.innerHTML = emptyNote(); return; }
 
-    host.innerHTML = RESEARCH.map(function (a, i) {
-      var flip = (i % 2 === 1);   /* 짝수 번째는 이미지를 오른쪽으로 */
-      return '<article id="' + esc(a.id) + '" class="reveal scroll-mt-4 border-t border-slate-200 py-10 first:border-t-0 first:pt-0">' +
-        '<div class="grid items-start gap-8 md:grid-cols-5">' +
-          '<div class="md:col-span-2' + (flip ? ' md:order-2' : '') + '">' +
-            imageBox(a.image, a.title, 'aspect-[4/3]', 'rounded-lg') +
+    /* 목록은 요약만 보여 준다. 자세한 내용은 research-area.html 이 맡는다 */
+    host.innerHTML = '<div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">' +
+      RESEARCH.map(function (a) {
+        return '<a href="research-area.html#' + esc(a.id) + '"' +
+          ' class="reveal card-hover group flex flex-col overflow-hidden rounded-lg' +
+          ' border border-slate-200 bg-white">' +
+          imageBox(a.image, a.title, 'aspect-[16/10]', '') +
+          '<div class="flex flex-1 flex-col p-5">' +
+            '<h3 class="text-base font-bold leading-snug text-slate-900' +
+              ' transition-colors group-hover:text-primary">' + esc(a.title) + '</h3>' +
+            '<p class="mt-2 flex-1 text-sm leading-relaxed text-slate-600">' + esc(a.summary) + '</p>' +
+            '<span class="mt-4 text-sm font-semibold text-primary">' +
+              esc(SITE.ui.readMore) + ' →</span>' +
           '</div>' +
-          '<div class="md:col-span-3' + (flip ? ' md:order-1' : '') + '">' +
-            '<h3 class="text-xl font-bold text-slate-900">' + esc(a.title) + '</h3>' +
-            '<p class="mt-2 text-sm font-medium text-primary">' + esc(a.summary) + '</p>' +
-            topicList(a.topics) +
-            '<div class="mt-4 space-y-3 text-sm leading-relaxed text-slate-600">' +
-              paragraphs(a.description) +
-            '</div>' +
-          '</div>' +
-        '</div>' +
-      '</article>';
+        '</a>';
+      }).join('') + '</div>';
+  }
+
+  /* --- 연구분야 상세 (research-area.html) -------------------------------
+     주소의 #해시로 어느 분야인지 고른다. 해시가 없거나 모르는 값이면 첫 분야.
+     common.js 가 해시를 INITIAL_HASH 로 떼어 두므로 그쪽을 먼저 본다 */
+  function researchAreaDetail() {
+    var host = document.getElementById('area-detail');
+    if (!host) return;
+    if (typeof RESEARCH === 'undefined' || !RESEARCH.length) { host.innerHTML = emptyNote(); return; }
+
+    var hash = (typeof INITIAL_HASH !== 'undefined' && INITIAL_HASH) || window.location.hash;
+    var id = String(hash).replace(/^#/, '');
+
+    var idx = 0;
+    RESEARCH.forEach(function (a, i) { if (a.id === id) idx = i; });
+    var a = RESEARCH[idx];
+
+    /* 제목 밴드는 RESEARCH 라 두고, 분야 이름은 본문 제목으로 세운다 */
+    document.title = a.title + ' | ' + SITE.labName;
+
+    var extra = (a.images || []).map(function (im) {
+      return '<figure class="reveal">' +
+        imageBox(im.src, im.caption || a.title, 'aspect-[4/3]', 'rounded-lg') +
+        (im.caption ? '<figcaption class="mt-2 text-xs text-slate-500">' +
+          esc(im.caption) + '</figcaption>' : '') +
+      '</figure>';
     }).join('');
+
+    var prev = RESEARCH[(idx - 1 + RESEARCH.length) % RESEARCH.length];
+    var next = RESEARCH[(idx + 1) % RESEARCH.length];
+    var navBtn = function (t, label, arrow, right) {
+      return '<a href="research-area.html#' + esc(t.id) + '"' +
+        ' class="flex max-w-[48%] flex-col gap-1 rounded-lg border border-slate-200 p-4' +
+        ' transition-colors hover:border-primary' + (right ? ' text-right' : '') + '">' +
+        '<span class="text-xs text-slate-500">' + esc(arrow) + ' ' + esc(label) + '</span>' +
+        '<span class="text-sm font-semibold text-slate-900">' + esc(t.title) + '</span></a>';
+    };
+
+    host.innerHTML =
+      '<div class="reveal">' +
+        '<a href="research.html#areas" class="text-sm font-medium text-primary' +
+          ' transition-colors hover:text-primary-dark">← ' +
+          esc(SITE.sectionTitles.areas) + '</a>' +
+        '<h1 class="mt-3 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">' +
+          esc(a.title) + '</h1>' +
+        '<p class="mt-3 max-w-3xl text-base leading-relaxed text-primary">' + esc(a.summary) + '</p>' +
+      '</div>' +
+
+      '<div class="reveal mt-8">' + imageBox(a.image, a.title, 'aspect-[21/9]', 'rounded-lg') + '</div>' +
+
+      '<div class="mt-10 grid gap-10 lg:grid-cols-3">' +
+        '<div class="reveal lg:col-span-2 space-y-3 text-sm leading-relaxed text-slate-600">' +
+          paragraphs(a.description) +
+        '</div>' +
+        '<div class="reveal">' +
+          '<h2 class="text-sm font-bold uppercase tracking-wider2 text-slate-500">' +
+            esc(SITE.ui.topics) + '</h2>' +
+          topicList(a.topics) +
+        '</div>' +
+      '</div>' +
+
+      (extra ? '<div class="mt-12 grid gap-6 sm:grid-cols-2">' + extra + '</div>' : '') +
+
+      '<nav class="mt-14 flex justify-between gap-4 border-t border-slate-200 pt-8"' +
+        ' aria-label="' + esc(SITE.sectionTitles.areas) + '">' +
+        navBtn(prev, SITE.ui.prevArea, '←', false) +
+        navBtn(next, SITE.ui.nextArea, '→', true) +
+      '</nav>';
   }
 
   /* --- 연구장비 --------------------------------------------------------- */
@@ -997,6 +1063,10 @@ var Render = (function () {
     }).join('');
 
     bindDisclosure();
+  }
+
+  function researchArea() {
+    researchAreaDetail();
   }
 
   function research() {
@@ -2100,6 +2170,7 @@ var Render = (function () {
     home: home,
     publications: publications,
     research: research,
+    'research-area': researchArea,
     people: people,
     contact: contact,
     join: join,

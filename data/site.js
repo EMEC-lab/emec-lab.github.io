@@ -296,6 +296,9 @@ const SITE = {
     period:     "Period",
     viewAll:    "View all",
     readMore:   "Read more",
+    topics:     "Topics",
+    prevArea:   "Previous",
+    nextArea:   "Next",
     scrollDown: "Scroll down",
     empty:      "Nothing here yet.",
     // PUBLICATIONS 에서 올해보다 이전 논문을 묶는 줄의 제목.

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/logo/emec-mark-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/logo/emec-mark-16.png">
+  <link rel="apple-touch-icon" href="images/logo/emec-mark-180.png">
+
+  <!-- 제목은 render.js 가 분야 이름으로 덮어쓴다 -->
+  <title>Lab Homepage</title>
+
+  <!-- 로드 순서 고정: Tailwind CDN → theme.js → custom.css -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/theme.js"></script>
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body data-page="research-area" class="bg-white font-sans text-slate-800 antialiased">
+
+  <!-- 헤더: js/common.js 가 주입한다. 직접 작성하지 말 것 -->
+  <div id="site-header"></div>
+
+  <main id="content">
+
+    <!-- 페이지 제목 밴드: common.js 가 SITE.menu 에서 채운다 (RESEARCH) -->
+    <div id="page-head"></div>
+
+    <!-- ===== 연구분야 상세 =====
+         어느 분야를 보여줄지는 주소의 #해시가 정한다 (research-area.html#analysis-methods).
+         내용은 data/research.js 의 RESEARCH 배열에서 온다. 알약 탭은 두지 않는다 -->
+    <section id="area" class="scroll-mt-32">
+      <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
+        <div id="area-detail"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 푸터: js/common.js 가 주입한다 -->
+  <div id="site-footer"></div>
+
+  <!-- 로드 순서 고정: data/*.js → render.js → common.js -->
+  <script src="data/site.js"></script>
+  <script src="data/research.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/common.js"></script>
+</body>
+</html>

@@ -105,6 +105,8 @@ var NAV = [
   },
   {
     key: 'research', page: 'research', href: 'research.html',
+    /* 드롭다운에는 없지만 이 대메뉴에 속하는 페이지 (분야 상세) */
+    also: ['research-area'],
     children: [
       { key: 'areas',     page: 'research', href: 'research.html#areas' },
       /* 감췄 둔 항목 — 장비가 정해지면 주석만 풀면 된다.
@@ -147,6 +149,7 @@ var Layout = (function () {
   function isGroupCurrent(item) {
     var page = currentPage();
     if (item.page === page) return true;
+    if ((item.also || []).indexOf(page) >= 0) return true;
     return (item.children || []).some(function (c) { return c.page === page; });
   }
 
@@ -383,6 +386,7 @@ var Layout = (function () {
 
     for (i = 0; i < NAV.length; i++) {
       if (NAV[i].page === page) { item = NAV[i]; break; }
+      if ((NAV[i].also || []).indexOf(page) >= 0) { item = NAV[i]; break; }
       if ((NAV[i].children || []).some(function (c) { return c.page === page; })) { item = NAV[i]; break; }
     }
     if (!item) return '';

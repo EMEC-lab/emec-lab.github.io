@@ -9,6 +9,11 @@
  *   description research.html 용 한 문단 이상. 줄바꿈은 \n
  *   image       'images/research/xxx.jpg'  대표 이미지
  *               자속밀도 분포도, 모터 단면 형상 등 해석 결과 이미지 권장
+ *   images      상세 페이지에 더 붙일 이미지. 한 장씩 { src, caption }
+ *               비워 두면 대표 이미지 하나만 나온다
+ *
+ * summary 는 목록 카드용, description 과 images 는 상세 페이지용이다.
+ * 상세는 research-area.html#<id> 로 열린다
  *
  * 다섯 분야는 방법론 축이다. 응용 대상(xEV·로봇·가전 등)은 분야마다
  * 겹치므로 여기 넣지 않고 아래 APPLICATIONS 로 따로 보여 준다.
@@ -27,7 +32,8 @@ const RESEARCH = [
       "Multi-physics coupling — vibration and noise, thermal, structural analysis"
     ],
     description: "[한 문단 설명 — 추후 확정]",
-    image: ""
+    image: "",
+    images: []
   },
   {
     id: "topology-design",
@@ -40,7 +46,8 @@ const RESEARCH = [
       "Winding changeover (Y-delta, series-parallel) and sensorless-oriented design"
     ],
     description: "[한 문단 설명 — 추후 확정]",
-    image: ""
+    image: "",
+    images: []
   },
   {
     id: "robust-design",
@@ -53,7 +60,8 @@ const RESEARCH = [
       "Robust optimal design, tolerance design, and multi-objective optimization algorithms"
     ],
     description: "[한 문단 설명 — 추후 확정]",
-    image: ""
+    image: "",
+    images: []
   },
   {
     id: "system-design",
@@ -64,7 +72,8 @@ const RESEARCH = [
       "Driving profile-based motor performance analysis and design"
     ],
     description: "[한 문단 설명 — 추후 확정]",
-    image: ""
+    image: "",
+    images: []
   },
   {
     id: "design-automation",
@@ -76,7 +85,8 @@ const RESEARCH = [
       "Characteristic analysis programs"
     ],
     description: "[한 문단 설명 — 추후 확정]",
-    image: ""
+    image: "",
+    images: []
   }
 ];
 
