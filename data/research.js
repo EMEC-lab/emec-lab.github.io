@@ -32,7 +32,7 @@ const RESEARCH = [
       "Multi-physics coupling — vibration and noise, thermal, structural analysis"
     ],
     description: "[한 문단 설명 — 추후 확정]",
-    image: "",
+    image: "images/research/area-analysis-methods.svg",
     images: []
   },
   {
