@@ -1252,6 +1252,13 @@ var Render = (function () {
   }
 
   /* --- 재학생 : 작은 카드 그리드 ----------------------------------------- */
+  /* 이름을 가나다순으로. 화면에 나오는 표기(국문 우선)를 기준으로 비교한다 */
+  function byKoreanName(a, b) {
+    var na = splitName(a.name), nb = splitName(b.name);
+    var x = na.ko || na.en, y = nb.ko || nb.en;
+    return String(x).localeCompare(String(y), 'ko');
+  }
+
   /* "Min-Ro Park (박민로)" → { en: "Min-Ro Park", ko: "박민로" } */
   function splitName(raw) {
     var m = String(raw || '').match(/^\s*([^(]*?)\s*(?:\(([^)]*)\))?\s*$/);
@@ -1312,7 +1319,7 @@ var Render = (function () {
 
     return '<dl class="space-y-3 text-sm leading-relaxed">' +
       order.map(function (g) {
-        var names = map[g].map(function (m) {
+        var names = map[g].slice().sort(byKoreanName).map(function (m) {
           var n = splitName(m.name);
           return esc(n.ko || n.en);
         }).join('<span class="px-1.5 text-slate-300">·</span>');
@@ -1536,7 +1543,7 @@ var Render = (function () {
 
     return '<dl class="space-y-3 text-sm leading-relaxed">' +
       order.map(function (d) {
-        var names = map[d].map(function (m) {
+        var names = map[d].slice().sort(byKoreanName).map(function (m) {
           var n = splitName(m.name);
           return esc(n.ko || n.en);
         }).join('<span class="px-1.5 text-slate-300">·</span>');

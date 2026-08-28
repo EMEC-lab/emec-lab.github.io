@@ -264,7 +264,7 @@ const GALLERY = [
     id: "2024-commencement",
     title: "2024 전기 학위 수여식",
     date: "2024-02-22",
-    desc: "이용민 · 고동훈 석사 입학, 학부연구생 4명 학사 졸업",
+    desc: "고동훈 · 이용민 석사 입학, 학부연구생 4명 학사 졸업",
     cover: "",
     images: [
       { src: "images/gallery/2.jpg", caption: "" }
