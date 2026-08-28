@@ -419,6 +419,24 @@ ffmpeg -i 원본영상.mp4 -t 20 -vf "scale=1920:-2" -c:v libx264 -crf 30 -prese
 ffmpeg -i images/hero.mp4 -ss 00:00:02 -vframes 1 -q:v 3 images/hero-poster.jpg
 ```
 
+### 짧은 클립 여럿 개를 이어 붙일 때
+
+AI 영상 도구는 한 번에 6~15초짜리 짧은 조각(클립)만 만듭니다.
+여러 개를 받아 한 편으로 재는 일은 **이미 스크립트로 만들어 두었습니다.**
+
+1. 클립을 `clip1.mp4` ~ `clip8.mp4` 로 이름 붙여 한 폴더에 모으고
+2. 같은 폴더에 `build.sh` 를 두고 Git Bash 에서 실행합니다
+
+```bash
+bash build.sh
+```
+
+클립마다 3초씩 쓰고, 사이를 0.6초 크로스페이드로 잉고,
+**마지막과 처음도 겹쳐** 반복 재생 이음새를 없쥜 줍니다.
+결과로 `hero.mp4` 와 `hero-poster.jpg` 가 나오면 `images/` 에 복사하면 됩니다.
+
+클립 순서나 길이를 바꾸려면 `build.sh` 위쪽의 `ORDER` · `SEG` · `FADE` 를 고치세요.
+
 **영상 소재로 좋은 것** (설득력 순서)
 
 1. 해석 결과 애니메이션 — 회전자 회전에 따른 자속밀도 분포 변화 (ANSYS Maxwell / JMAG 출력)
