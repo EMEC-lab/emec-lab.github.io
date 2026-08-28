@@ -1362,7 +1362,7 @@ var Render = (function () {
             esc(n.en) + '</h2>' +
           (n.ko ? '<p class="mt-0.5 text-sm text-slate-500">' + esc(n.ko) + '</p>' : '') +
           (m.title ? '<p class="mt-1.5 text-sm font-semibold text-primary">' +
-            esc(m.title) + '</p>' : '') +
+            esc(degreeLabel(m)) + '</p>' : '') +
           /* 연락처는 이름 바로 아래. 관심분야 태그 묶음을 가로지르지 않게 한다 */
           (m.email
             ? '<p class="mt-2 flex flex-wrap items-baseline gap-x-2 text-xs">' +
