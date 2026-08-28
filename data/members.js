@@ -249,6 +249,12 @@ const MEMBERS = [
     currentPosition: "Korea Automotive Technology Institute (KATECH)"
   },
 
+  /* --- 학사 졸업생 -------------------------------------------------
+   * 화면에는 졸업 년월별 이름 목록으로만 나온다 (카드 없음).
+   * 석사로 이어간 사람(이용민 · 고동훈 · 김혜성 · 이영훈)도
+   * 학사 취득 기록으로 여기 한 번 더 적는다.
+   * 사진 · 프로필 · 카드는 상위 학위 쪽 항목에만 있다.
+   * ------------------------------------------------------------------- */
   {
     id: "alumni-bs-2026-01",
     role: "alumni",
@@ -340,7 +346,22 @@ const MEMBERS = [
     gradYear: 2026, thesis: "", currentPosition: ""
   },
   {
-    id: "alumni-bs-2025-07",
+    id: "alumni-bs-2026-07",
+    role: "alumni",
+    name: "이영훈",
+    title: "B.S.",
+    photo: "",
+    email: "", office: "",
+    interests: "",
+    grade: null,
+    education: [
+      "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2026.02"
+    ],
+    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: 2026, thesis: "", currentPosition: ""
+  },
+  {
+    id: "alumni-bs-2025-08",
     role: "alumni",
     name: "이영교",
     title: "B.S.",
@@ -355,24 +376,9 @@ const MEMBERS = [
     gradYear: 2025, thesis: "", currentPosition: ""
   },
   {
-    id: "alumni-bs-2025-08",
-    role: "alumni",
-    name: "정재혁",
-    title: "B.S.",
-    photo: "",
-    email: "", office: "",
-    interests: "",
-    grade: null,
-    education: [
-      "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2025.02"
-    ],
-    career: [], activities: [], memberships: [], talks: [], scholar: "",
-    gradYear: 2025, thesis: "", currentPosition: ""
-  },
-  {
     id: "alumni-bs-2025-09",
     role: "alumni",
-    name: "안도국",
+    name: "김혜성",
     title: "B.S.",
     photo: "",
     email: "", office: "",
@@ -387,7 +393,7 @@ const MEMBERS = [
   {
     id: "alumni-bs-2025-10",
     role: "alumni",
-    name: "김운형",
+    name: "정재혁",
     title: "B.S.",
     photo: "",
     email: "", office: "",
@@ -402,7 +408,7 @@ const MEMBERS = [
   {
     id: "alumni-bs-2025-11",
     role: "alumni",
-    name: "박지원",
+    name: "안도국",
     title: "B.S.",
     photo: "",
     email: "", office: "",
@@ -417,6 +423,36 @@ const MEMBERS = [
   {
     id: "alumni-bs-2025-12",
     role: "alumni",
+    name: "김운형",
+    title: "B.S.",
+    photo: "",
+    email: "", office: "",
+    interests: "",
+    grade: null,
+    education: [
+      "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2025.02"
+    ],
+    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: 2025, thesis: "", currentPosition: ""
+  },
+  {
+    id: "alumni-bs-2025-13",
+    role: "alumni",
+    name: "박지원",
+    title: "B.S.",
+    photo: "",
+    email: "", office: "",
+    interests: "",
+    grade: null,
+    education: [
+      "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2025.02"
+    ],
+    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: 2025, thesis: "", currentPosition: ""
+  },
+  {
+    id: "alumni-bs-2025-14",
+    role: "alumni",
     name: "양준영",
     title: "B.S.",
     photo: "",
@@ -430,7 +466,37 @@ const MEMBERS = [
     gradYear: 2025, thesis: "", currentPosition: ""
   },
   {
-    id: "alumni-bs-2024-13",
+    id: "alumni-bs-2024-15",
+    role: "alumni",
+    name: "이용민",
+    title: "B.S.",
+    photo: "",
+    email: "", office: "",
+    interests: "",
+    grade: null,
+    education: [
+      "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2024.02"
+    ],
+    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: 2024, thesis: "", currentPosition: ""
+  },
+  {
+    id: "alumni-bs-2024-16",
+    role: "alumni",
+    name: "고동훈",
+    title: "B.S.",
+    photo: "",
+    email: "", office: "",
+    interests: "",
+    grade: null,
+    education: [
+      "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2024.02"
+    ],
+    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: 2024, thesis: "", currentPosition: ""
+  },
+  {
+    id: "alumni-bs-2024-17",
     role: "alumni",
     name: "김동현",
     title: "B.S.",
@@ -445,7 +511,7 @@ const MEMBERS = [
     gradYear: 2024, thesis: "", currentPosition: ""
   },
   {
-    id: "alumni-bs-2024-14",
+    id: "alumni-bs-2024-18",
     role: "alumni",
     name: "홍준택",
     title: "B.S.",
@@ -460,7 +526,7 @@ const MEMBERS = [
     gradYear: 2024, thesis: "", currentPosition: ""
   },
   {
-    id: "alumni-bs-2024-15",
+    id: "alumni-bs-2024-19",
     role: "alumni",
     name: "이다은",
     title: "B.S.",
@@ -475,7 +541,7 @@ const MEMBERS = [
     gradYear: 2024, thesis: "", currentPosition: ""
   },
   {
-    id: "alumni-bs-2024-16",
+    id: "alumni-bs-2024-20",
     role: "alumni",
     name: "김은서",
     title: "B.S.",
