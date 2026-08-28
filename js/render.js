@@ -1517,6 +1517,39 @@ var Render = (function () {
     return m.gradYear ? String(m.gradYear) : '';
   }
 
+  /* 학사 졸업생 — 사진이 없고 인원이 많아 카드 대신
+     졸업 년월로 묶어 이름만 나열한다 (재학생의 학부연구생 목록과 같은 꼴) */
+  function bsAlumniList(items) {
+    var order = [], map = {};
+    items.forEach(function (m) {
+      var d = gradDate(m) || '';
+      if (!map[d]) { map[d] = []; order.push(d); }
+      map[d].push(m);
+    });
+
+    /* 최근 졸업이 위로. 날짜 모름은 맨 아래 */
+    order.sort(function (a, b) {
+      if (!a) return 1;
+      if (!b) return -1;
+      return a < b ? 1 : -1;
+    });
+
+    return '<dl class="space-y-3 text-sm leading-relaxed">' +
+      order.map(function (d) {
+        var names = map[d].map(function (m) {
+          var n = splitName(m.name);
+          return esc(n.ko || n.en);
+        }).join('<span class="px-1.5 text-slate-300">·</span>');
+
+        return '<div class="sm:flex sm:gap-6">' +
+          '<dt class="shrink-0 font-mono text-xs font-semibold text-slate-500 sm:w-20 sm:pt-0.5">' +
+            esc(d || SITE.ui.empty) + '</dt>' +
+          '<dd class="mt-1 text-slate-700 sm:mt-0">' + names + '</dd>' +
+        '</div>';
+      }).join('') +
+    '</dl>';
+  }
+
   function peopleAlumni() {
     var host = document.getElementById('people-alumni');
     if (!host) return;
@@ -1553,9 +1586,11 @@ var Render = (function () {
                 esc(g.items.length) + '</span>' +
             '</h3>'
           : '') +
-        '<div class="reveal-group grid gap-5 md:grid-cols-2 xl:grid-cols-3">' +
-          g.items.map(studentCard).join('') +
-        '</div>' +
+        (g.key === 'undergrad'
+          ? bsAlumniList(g.items)
+          : '<div class="reveal-group grid gap-5 md:grid-cols-2 xl:grid-cols-3">' +
+              g.items.map(studentCard).join('') +
+            '</div>') +
       '</div>';
     }).join('');
   }

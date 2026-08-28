@@ -247,6 +247,247 @@ const MEMBERS = [
     gradYear: 2026,
     thesis: "Robust Optimization Design of a Segmented-Stator SPMSM Using a Tolerance-Considered Analytical Method and Transfer Learning",
     currentPosition: "Korea Automotive Technology Institute (KATECH)"
+  },
+
+  {
+    id: "alumni-bs-2026-01",
+    role: "alumni",
+    name: "김수경",
+    title: "B.S.",
+    photo: "",
+    email: "", office: "",
+    interests: "",
+    grade: null,
+    education: [
+      "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2026.02"
+    ],
+    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: 2026, thesis: "", currentPosition: ""
+  },
+  {
+    id: "alumni-bs-2026-02",
+    role: "alumni",
+    name: "김효희",
+    title: "B.S.",
+    photo: "",
+    email: "", office: "",
+    interests: "",
+    grade: null,
+    education: [
+      "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2026.02"
+    ],
+    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: 2026, thesis: "", currentPosition: ""
+  },
+  {
+    id: "alumni-bs-2026-03",
+    role: "alumni",
+    name: "이기욱",
+    title: "B.S.",
+    photo: "",
+    email: "", office: "",
+    interests: "",
+    grade: null,
+    education: [
+      "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2026.02"
+    ],
+    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: 2026, thesis: "", currentPosition: ""
+  },
+  {
+    id: "alumni-bs-2026-04",
+    role: "alumni",
+    name: "김유정",
+    title: "B.S.",
+    photo: "",
+    email: "", office: "",
+    interests: "",
+    grade: null,
+    education: [
+      "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2026.02"
+    ],
+    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: 2026, thesis: "", currentPosition: ""
+  },
+  {
+    id: "alumni-bs-2026-05",
+    role: "alumni",
+    name: "장선주",
+    title: "B.S.",
+    photo: "",
+    email: "", office: "",
+    interests: "",
+    grade: null,
+    education: [
+      "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2026.02"
+    ],
+    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: 2026, thesis: "", currentPosition: ""
+  },
+  {
+    id: "alumni-bs-2026-06",
+    role: "alumni",
+    name: "황인준",
+    title: "B.S.",
+    photo: "",
+    email: "", office: "",
+    interests: "",
+    grade: null,
+    education: [
+      "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2026.02"
+    ],
+    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: 2026, thesis: "", currentPosition: ""
+  },
+  {
+    id: "alumni-bs-2025-07",
+    role: "alumni",
+    name: "이영교",
+    title: "B.S.",
+    photo: "",
+    email: "", office: "",
+    interests: "",
+    grade: null,
+    education: [
+      "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2025.02"
+    ],
+    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: 2025, thesis: "", currentPosition: ""
+  },
+  {
+    id: "alumni-bs-2025-08",
+    role: "alumni",
+    name: "정재혁",
+    title: "B.S.",
+    photo: "",
+    email: "", office: "",
+    interests: "",
+    grade: null,
+    education: [
+      "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2025.02"
+    ],
+    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: 2025, thesis: "", currentPosition: ""
+  },
+  {
+    id: "alumni-bs-2025-09",
+    role: "alumni",
+    name: "안도국",
+    title: "B.S.",
+    photo: "",
+    email: "", office: "",
+    interests: "",
+    grade: null,
+    education: [
+      "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2025.02"
+    ],
+    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: 2025, thesis: "", currentPosition: ""
+  },
+  {
+    id: "alumni-bs-2025-10",
+    role: "alumni",
+    name: "김운형",
+    title: "B.S.",
+    photo: "",
+    email: "", office: "",
+    interests: "",
+    grade: null,
+    education: [
+      "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2025.02"
+    ],
+    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: 2025, thesis: "", currentPosition: ""
+  },
+  {
+    id: "alumni-bs-2025-11",
+    role: "alumni",
+    name: "박지원",
+    title: "B.S.",
+    photo: "",
+    email: "", office: "",
+    interests: "",
+    grade: null,
+    education: [
+      "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2025.02"
+    ],
+    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: 2025, thesis: "", currentPosition: ""
+  },
+  {
+    id: "alumni-bs-2025-12",
+    role: "alumni",
+    name: "양준영",
+    title: "B.S.",
+    photo: "",
+    email: "", office: "",
+    interests: "",
+    grade: null,
+    education: [
+      "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2025.02"
+    ],
+    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: 2025, thesis: "", currentPosition: ""
+  },
+  {
+    id: "alumni-bs-2024-13",
+    role: "alumni",
+    name: "김동현",
+    title: "B.S.",
+    photo: "",
+    email: "", office: "",
+    interests: "",
+    grade: null,
+    education: [
+      "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2024.02"
+    ],
+    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: 2024, thesis: "", currentPosition: ""
+  },
+  {
+    id: "alumni-bs-2024-14",
+    role: "alumni",
+    name: "홍준택",
+    title: "B.S.",
+    photo: "",
+    email: "", office: "",
+    interests: "",
+    grade: null,
+    education: [
+      "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2024.02"
+    ],
+    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: 2024, thesis: "", currentPosition: ""
+  },
+  {
+    id: "alumni-bs-2024-15",
+    role: "alumni",
+    name: "이다은",
+    title: "B.S.",
+    photo: "",
+    email: "", office: "",
+    interests: "",
+    grade: null,
+    education: [
+      "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2024.02"
+    ],
+    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: 2024, thesis: "", currentPosition: ""
+  },
+  {
+    id: "alumni-bs-2024-16",
+    role: "alumni",
+    name: "김은서",
+    title: "B.S.",
+    photo: "",
+    email: "", office: "",
+    interests: "",
+    grade: null,
+    education: [
+      "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2024.02"
+    ],
+    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    gradYear: 2024, thesis: "", currentPosition: ""
   }
 
   /* --- 학생 · 졸업생은 아래 형식으로 추가한다 --------------------------
