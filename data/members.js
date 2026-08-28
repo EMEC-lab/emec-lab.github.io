@@ -107,7 +107,7 @@ const MEMBERS = [
     name: "Yong-Min Lee (이용민)",
     title: "M.S.",
     photo: "images/members/lee-yongmin.jpg",
-    email: "", office: "",
+    email: "dydyong132@sch.ac.kr", office: "",
     interests: "Data-driven optimal design and analysis, AI-assisted analysis acceleration, LPTN-based thermal analysis",
     grade: null,
     education: [
@@ -122,7 +122,7 @@ const MEMBERS = [
     name: "Hye-Seong Kim (김혜성)",
     title: "M.S. Candidate",
     photo: "images/members/kim-hyeseong.jpg",
-    email: "", office: "",
+    email: "20257017@sch.ac.kr", office: "",
     interests: "Data-driven optimal design and analysis, Electromagnetic force-based noise and vibration analysis, Fault diagnosis of electric machines",
     grade: null,
     education: [
@@ -137,7 +137,7 @@ const MEMBERS = [
     name: "Young-Hoon Lee (이영훈)",
     title: "M.S. Candidate",
     photo: "images/members/lee-younghoon.jpg",
-    email: "", office: "",
+    email: "younghoon@sch.ac.kr", office: "",
     interests: "Analytical method-based optimal design and analysis, Multi-physics analysis of electric machines, System model-based design",
     grade: null,
     education: [
@@ -236,7 +236,7 @@ const MEMBERS = [
     name: "Dong-Hoon Ko (고동훈)",
     title: "M.S.",
     photo: "images/members/ko-donghoon.jpg",
-    email: "", office: "",
+    email: "oceo222@sch.ac.kr", office: "",
     interests: "Analytical method-based optimal design and analysis, Manufacturing uncertainty analysis, Robust optimal design",
     grade: null,
     education: [
