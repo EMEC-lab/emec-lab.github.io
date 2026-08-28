@@ -100,9 +100,18 @@ const RESEARCH = [
       "Electric drive system modeling and system performance analysis — xEV, robots (humanoid, manipulator)",
       "Driving profile-based motor performance analysis and design"
     ],
-    description: "[한 문단 설명 — 추후 확정]",
-    image: "",
-    images: []
+    description: "A machine is judged in the system it drives — a traction motor in the vehicle, a joint motor in the robot. We model the complete electric drive system — battery, inverter, machine, reducer, and load — and analyze performance at the system level for applications ranging from xEV powertrains to humanoids and manipulators.\nRather than designing to a single rated point, we design against how the machine is actually used. Driving profiles and duty cycles are translated into distributions of operating points on the torque-speed plane, and the machine is shaped so that its efficiency and thermal capability sit where the energy is actually spent.",
+    image: "images/research/area-system-design.svg",
+    images: [
+      { src: "images/research/system-01-effmap.svg",
+        caption: "Efficiency map with operating points extracted from a drive cycle" },
+      { src: "images/research/system-02-profile.svg",
+        caption: "Driving profile translated into speed and torque demand over time" },
+      { src: "images/research/system-03-chain.svg",
+        caption: "Electric drive system chain — from battery to wheel, and joint drives of a robot arm" },
+      { src: "images/research/system-04-sizing.svg",
+        caption: "Cycle-driven sizing — machine envelope chosen to cover the required operating points" }
+    ]
   },
   {
     id: "design-automation",
