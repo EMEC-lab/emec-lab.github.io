@@ -20,8 +20,16 @@ set -e
 FF="/c/Users/user/AppData/Local/Microsoft/WinGet/Packages/Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/ffmpeg-9.0.1-full_build/bin"
 FFMPEG="$FF/ffmpeg"
 
-SRC="${1:-v1}"                 # 소스 폴더 (v1 · v2 …)
+SRC="${1:-v1}"                 # 소스 폴더 (v1 · v2 · v3 …)
+ALT="${2:-}"                   # 보충 폴더. SRC 에 없는 클립은 여기서 가져온다
 [ -d "$SRC" ] || { echo "폴더가 없습니다: $SRC"; exit 1; }
+
+# 클립 한 개의 실제 경로를 찾는다
+pick() {
+  if   [ -f "$SRC/clip$1.mp4" ]; then echo "$SRC/clip$1.mp4"
+  elif [ -n "$ALT" ] && [ -f "$ALT/clip$1.mp4" ]; then echo "$ALT/clip$1.mp4"
+  else echo ""; fi
+}
 
 SEG=3.0        # 클립당 사용할 길이(초)
 FADE=0.6       # 크로스페이드 길이(초)
@@ -39,7 +47,10 @@ INPUTS=()
 FILTER=""
 i=0
 for c in "${ORDER[@]}"; do
-  INPUTS+=(-i "$SRC/clip${c}.mp4")
+  p=$(pick "$c")
+  [ -n "$p" ] || { echo "clip${c}.mp4 을 찾을 수 없습니다"; exit 1; }
+  echo "  clip${c}  <-  $p"
+  INPUTS+=(-i "$p")
   s="${START[$c]}"
   e=$(awk "BEGIN{print $s+$SEG}")
   FILTER+="[${i}:v]trim=${s}:${e},setpts=PTS-STARTPTS,fps=${FPS},format=yuv420p[v${i}];"
