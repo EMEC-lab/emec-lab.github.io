@@ -10,6 +10,11 @@
 
 const SITE = {
   labName:    "Electro-Mechanical Energy Conversion Lab",
+
+  // 히어로 제목을 끈는 자리. 한 줄에 다 들어가면 붙여 나오고,
+  // 좀아지면 이 조각 사이에서만 줄이 나뉘다.
+  // 조각을 공백으로 이으면 labName 과 같아야 한다 (다르면 render.js 가 labName 을 그대로 쓴다)
+  labNameLines: ["Electro-Mechanical", "Energy Conversion Lab"],
   labShort:   "EMEC",
   labNameKo:  "전기-기계 에너지변환 연구실",     // 푸터·타이틀에서 필요 시 병기
   university: "Soonchunhyang University",

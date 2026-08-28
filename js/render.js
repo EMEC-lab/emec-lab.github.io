@@ -363,13 +363,33 @@ var Render = (function () {
 
   /* 1. 히어로 — 문구는 SITE 에서 온다.
         tagline 은 <strong> 을 허용하므로 innerHTML 로 넣는다. (CLAUDE.md 9번) */
+  /* 히어로 제목 — 의미 덩어리가 중간에서 끈기지 않게 한다.
+     각 조각을 whitespace-nowrap 으로 묶으면 폭이 넘칠 때
+     조각 사이에서만 줄이 나뉘고, 넓은 화면에서는 한 줄로 붙는다 */
+  function heroTitle() {
+    var el = document.querySelector('[data-hero-title]');
+    if (!el) return;
+
+    var parts = SITE.labNameLines || [];
+    /* 조각을 합친 것이 이름과 다르면 손대지 않고 이름을 그대로 쓴다 */
+    if (parts.join(' ') !== SITE.labName) {
+      el.textContent = SITE.labName;
+      return;
+    }
+
+    el.innerHTML = parts.map(function (p) {
+      return '<span class="whitespace-nowrap">' + esc(p) + '</span>';
+    }).join(' ');
+  }
+
   function homeHero() {
     var setText = function (sel, value) {
       var el = document.querySelector(sel);
       if (el) el.textContent = value;
     };
 
-    setText('[data-hero-title]', SITE.labName);
+    heroTitle();
+
     setText('[data-hero-scroll]', SITE.ui.scrollDown);
 
     var tagline = document.querySelector('[data-hero-tagline]');
