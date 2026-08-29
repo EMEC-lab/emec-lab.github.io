@@ -10,3 +10,6 @@ node_modules/
 images/**/original/
 images/**/_raw/
 images/_raw/
+
+# 논문 PDF 보관소 — 그림 추출용 원본. 절대 커밋하지 않는다
+_papers/
