@@ -66,7 +66,9 @@
       <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div id="home-research-head"></div>
         <!-- render.js 가 RESEARCH 로 채운다. reveal-group = 카드마다 0.1초 시차 -->
-        <div id="home-research" class="reveal-group mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"></div>
+        <!-- 분야가 5개(홀수)라 3열 격자로는 빈 칸이 남는다.
+             6칸 격자에 앞 두 장 3칸 + 뒤 세 장 2칸(2+3)으로 꽉 채운다 -->
+        <div id="home-research" class="reveal-group mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-6"></div>
       </div>
     </section>
 
