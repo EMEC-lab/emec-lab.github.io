@@ -841,15 +841,18 @@ var Render = (function () {
     if (!host) return;
     if (typeof RESEARCH === 'undefined' || !RESEARCH.length) { host.innerHTML = emptyNote(); return; }
 
-    /* 목록은 요약만 보여 준다. 자세한 내용은 research-area.html 이 맡는다 */
-    host.innerHTML = '<div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">' +
+    /* 목록은 요약만 보여 준다. 자세한 내용은 research-area.html 이 맡는다.
+       분야 수가 홀수라 격자로 놓으면 빈 칸이 생겨, 가로형 행으로 나열한다 */
+    host.innerHTML = '<div class="space-y-5">' +
       RESEARCH.map(function (a) {
         return '<a href="research-area.html#' + esc(a.id) + '"' +
-          ' class="reveal card-hover group flex flex-col overflow-hidden rounded-lg' +
-          ' border border-slate-200 bg-white">' +
-          imageBox(a.image, a.title, 'aspect-[16/10]', '') +
-          '<div class="flex flex-1 flex-col p-5">' +
-            '<h3 class="text-base font-bold leading-snug text-slate-900' +
+          ' class="reveal card-hover group grid overflow-hidden rounded-lg' +
+          ' border border-slate-200 bg-white md:grid-cols-5">' +
+          '<div class="md:col-span-2">' +
+            imageBox(a.image, a.title, 'aspect-[16/10] md:aspect-auto md:h-full', '') +
+          '</div>' +
+          '<div class="flex flex-col p-5 sm:p-6 md:col-span-3">' +
+            '<h3 class="text-lg font-bold leading-snug text-slate-900' +
               ' transition-colors group-hover:text-primary">' + esc(a.title) + '</h3>' +
             '<p class="mt-2 flex-1 text-sm leading-relaxed text-slate-600">' + esc(a.summary) + '</p>' +
             '<span class="mt-4 text-sm font-semibold text-primary">' +
