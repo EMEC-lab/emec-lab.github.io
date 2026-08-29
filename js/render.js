@@ -402,12 +402,12 @@ var Render = (function () {
     if (!host) return;
     if (typeof RESEARCH === 'undefined' || !RESEARCH.length) { host.innerHTML = emptyNote(); return; }
 
-    /* 5장을 2+3 으로 놓는다. 마지막 장은 sm(2열)에서 혼자 남지 않게 가로로 편다 */
-    host.innerHTML = RESEARCH.map(function (a, i) {
-      var span = (i < 2) ? ' lg:col-span-3' : ' lg:col-span-2';
-      if (i === RESEARCH.length - 1 && RESEARCH.length % 2 === 1) span += ' sm:col-span-2 lg:col-span-2';
+    /* 카드 폭은 전부 같다 (중요도 차이를 만들지 않는다).
+       flex wrap 이라 마지막 줄(2장)이 저절로 가운데 정렬된다 */
+    var CARD_W = ' w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)]';
+    host.innerHTML = RESEARCH.map(function (a) {
       return '<a href="research.html#' + esc(a.id) + '"' +
-        ' class="card-hover group flex flex-col overflow-hidden rounded-lg border border-slate-200 bg-white hover:border-primary-mid' + span + '">' +
+        ' class="card-hover group flex flex-col overflow-hidden rounded-lg border border-slate-200 bg-white hover:border-primary-mid' + CARD_W + '">' +
         imageBox(a.image, a.title, 'aspect-[16/10]') +
         '<div class="flex flex-1 flex-col p-5">' +
           '<h3 class="text-base font-bold text-slate-900 group-hover:text-primary">' + esc(a.title) + '</h3>' +
