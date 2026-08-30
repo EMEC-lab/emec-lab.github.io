@@ -165,7 +165,7 @@ const APPLICATIONS = [
     items: ["Compressor", "Washing machine", "Refrigerator", "Vacuum cleaner"]
   },
   {
-    group: "Industrial & Power",
-    items: ["Elevator", "Blower", "Generator", "Transformer"]
+    group: "Power Systems",
+    items: ["Generator", "Power transformer", "High-frequency transformer"]
   }
 ];
