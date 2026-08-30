@@ -46,7 +46,7 @@ ORDER=(1 2 3 4 5 6 7)
 #   clip2 는 아래 전처리에서 후반 리빌을 늘려 두므로 0 부터 길게 쓴다
 #   clip5 는 4.2초부터 구동계가 수면 위처럼 보여 3.0초에서 끊는다
 declare -A START=( [1]=0.0 [2]=0.0 [3]=3.0 [4]=3.0 [5]=0.0 [6]=0.0 [7]=3.0 )
-declare -A LEN=(   [1]=3.0 [2]=3.5 [3]=3.0 [4]=3.0 [5]=3.0 [6]=3.0 [7]=3.0 )
+declare -A LEN=(   [1]=2.0 [2]=3.0 [3]=3.0 [4]=3.0 [5]=3.0 [6]=3.0 [7]=3.0 )
 
 # --- 전처리: clip2 후반(리빌)을 0.5배속으로 늘린다 ------------------------
 PREP="_prep"
@@ -54,8 +54,8 @@ mkdir -p "$PREP"
 C2=$(pick 2)
 if [ -n "$C2" ]; then
   echo "== 0단계: clip2 후반 리빌 늘리기 =="
-  "$FFMPEG" -y -hide_banner -loglevel error -i "$C2" -filter_complex     "[0]trim=3.0:4.8,setpts=PTS-STARTPTS[a];     [0]trim=4.8:6.04,setpts=(PTS-STARTPTS)/0.72[b];     [a][b]concat=n=2:v=1,fps=${FPS}[v]"     -map "[v]" -c:v libx264 -preset slow -crf 18 -pix_fmt yuv420p -an "$PREP/clip2.mp4"
-  echo "  clip2  3.0~4.8 정속 + 4.8~6.04 를 0.72배속  →  $("$FFPROBE" -v error         -show_entries format=duration -of csv=p=0 "$PREP/clip2.mp4")s"
+  "$FFMPEG" -y -hide_banner -loglevel error -i "$C2" -filter_complex     "[0]trim=3.0:5.0,setpts=PTS-STARTPTS[a];     [0]trim=5.0:6.04,setpts=(PTS-STARTPTS)/0.9[b];     [a][b]concat=n=2:v=1,fps=${FPS}[v]"     -map "[v]" -c:v libx264 -preset slow -crf 18 -pix_fmt yuv420p -an "$PREP/clip2.mp4"
+  echo "  clip2  3.0~5.0 정속 + 5.0~6.04 를 0.9배속  →  $("$FFPROBE" -v error         -show_entries format=duration -of csv=p=0 "$PREP/clip2.mp4")s"
 fi
 
 echo "== 1단계: 클립 이어 붙이기 =="
