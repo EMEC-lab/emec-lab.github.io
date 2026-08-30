@@ -154,10 +154,7 @@ const RESEARCH = [
 const APPLICATIONS = [
   {
     group: "Mobility",
-    items: [
-      "xEV traction", "Compressor", "EPS", "Brake", "ISG", "Turbocharger",
-      "UAM", "Electric propulsion ship"
-    ]
+    items: ["Automotive", "Air mobility", "Electric propulsion ship"]
   },
   {
     group: "Robotics",

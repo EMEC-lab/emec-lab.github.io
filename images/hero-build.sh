@@ -31,18 +31,33 @@ pick() {
   else echo ""; fi
 }
 
-SEG=3.0        # 클립당 사용할 길이(초)
+W=752          # 공통 가로 (클립마다 달라도 여기에 맞춘다)
+H=416          # 공통 세로
+SEG=3.0        # (구) 기본 길이 — 지금은 LEN 배열을 쓴다
 FADE=0.6       # 크로스페이드 길이(초)
 FPS=24
 
 # 화면에 나올 순서 — 파일 번호가 곧 순서다
-# 1 인트로 / 2 자동차 / 3 휴머노이드 / 4 항공 / 5 선박 / 6 세탁기 / 7 로봇팔
+# 1 인트로 / 2 자동차 / 3 휴머노이드 / 4 항공 / 5 선박 / 6 가전 / 7 로봇팔
 ORDER=(1 2 3 4 5 6 7)
 
-# 각 클립에서 잘라낼 시작 지점. 클립 1만 도입부를 살리고 나머지는 뒤쪽을 쓴다
-# 클립 6은 앞부분(창밖 → 실내 → 가전 전체)이 쓸 만해서 0초부터 쓴다
-# 클립 2는 5.3초쯤 차의 앞뒤가 뒤바뀐다. 그 전까지만 쓴다 (재생성 대기)
-declare -A START=( [1]=0.0 [2]=2.0 [3]=3.0 [4]=3.0 [5]=3.0 [6]=0.0 [7]=3.0 )
+# 클립마다 [시작초]와 [쓸 길이]를 따로 준다
+#   clip1 도입부 / clip6 은 앞부분(창밖→실내→가전)이 좋다
+#   clip2 는 아래 전처리에서 후반 리빌을 늘려 두므로 0 부터 길게 쓴다
+#   clip5 는 4.2초부터 구동계가 수면 위처럼 보여 3.4초에서 끊는다
+declare -A START=( [1]=0.0 [2]=0.0 [3]=3.0 [4]=3.0 [5]=0.0 [6]=0.0 [7]=3.0 )
+declare -A LEN=(   [1]=3.0 [2]=4.5 [3]=3.0 [4]=3.0 [5]=3.4 [6]=3.0 [7]=3.0 )
+
+# --- 전처리: clip2 후반(리빌)을 0.5배속으로 늘린다 ------------------------
+PREP="_prep"
+mkdir -p "$PREP"
+C2=$(pick 2)
+if [ -n "$C2" ]; then
+  echo "== 0단계: clip2 후반 리빌 늘리기 =="
+  "$FFMPEG" -y -hide_banner -loglevel error -i "$C2" -filter_complex     "[0]trim=3.0:4.6,setpts=PTS-STARTPTS[a];     [0]trim=4.6:6.04,setpts=(PTS-STARTPTS)/0.5[b];     [a][b]concat=n=2:v=1,fps=${FPS}[v]"     -map "[v]" -c:v libx264 -preset slow -crf 18 -pix_fmt yuv420p -an "$PREP/clip2.mp4"
+  echo "  clip2  3.0~4.6 정속 + 4.6~6.04 를 0.5배속  →  $("$FFPROBE" -v error         -show_entries format=duration -of csv=p=0 "$PREP/clip2.mp4")s"
+fi
+
 echo "== 1단계: 클립 이어 붙이기 =="
 
 INPUTS=()
@@ -50,23 +65,25 @@ FILTER=""
 i=0
 for c in "${ORDER[@]}"; do
   p=$(pick "$c")
+  if [ "$c" = "2" ] && [ -f "$PREP/clip2.mp4" ]; then p="$PREP/clip2.mp4"; fi
   [ -n "$p" ] || { echo "clip${c}.mp4 을 찾을 수 없습니다"; exit 1; }
   echo "  clip${c}  <-  $p"
   INPUTS+=(-i "$p")
   s="${START[$c]}"
-  e=$(awk "BEGIN{print $s+$SEG}")
-  FILTER+="[${i}:v]trim=${s}:${e},setpts=PTS-STARTPTS,fps=${FPS},format=yuv420p[v${i}];"
+  e=$(awk "BEGIN{print $s+${LEN[$c]}}")
+  FILTER+="[${i}:v]trim=${s}:${e},setpts=PTS-STARTPTS,fps=${FPS},scale=${W}:${H}:force_original_aspect_ratio=decrease,pad=${W}:${H}:(ow-iw)/2:(oh-ih)/2:black,setsar=1,format=yuv420p[v${i}];"
   i=$((i+1))
 done
 
 # xfade 를 사슬처럼 잇는다. 이어 붙일 때마다 (SEG - FADE) 만큼 길이가 는다
 PREV="[v0]"
-off=$(awk "BEGIN{print $SEG-$FADE}")
+acc="${LEN[${ORDER[0]}]}"                 # 지금까지 이어붙인 길이
 for ((n=1; n<${#ORDER[@]}; n++)); do
   OUT="[x${n}]"
+  off=$(awk "BEGIN{print $acc-$FADE}")
   FILTER+="${PREV}[v${n}]xfade=transition=fade:duration=${FADE}:offset=${off}${OUT};"
   PREV="$OUT"
-  off=$(awk "BEGIN{print $off+$SEG-$FADE}")
+  acc=$(awk "BEGIN{print $acc+${LEN[${ORDER[$n]}]}-$FADE}")
 done
 FILTER="${FILTER%;}"
 
