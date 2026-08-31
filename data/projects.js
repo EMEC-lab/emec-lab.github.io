@@ -234,6 +234,18 @@ const PROJECTS = [
     role: "PI", orgRole: "",
     statusOverride: null,
     grantNo: "", description: ""
+  },
+  {
+    id: "proj-2026-21",
+    title: "축방향 자속 영구자석 모터의 오버행 및 3차원 단부효과를 반영한 열-전자기 연성 등가회로 기반 열적 한계 고려 고토크밀도 설계",
+    sponsor: { name: "한국연구재단", logo: "images/sponsors/nrf.jpg", url: "https://www.nrf.re.kr" },
+    ministry: "과학기술정보통신부",
+    program: "석사과정생연구장려금지원사업",
+    pi: "Young-Hoon Lee, M.S. candidate",
+    startDate: "2026-09-01", endDate: "2027-08-31",
+    role: "Advisor", orgRole: "",
+    statusOverride: null,
+    grantNo: "", description: ""
   }
 ];
 

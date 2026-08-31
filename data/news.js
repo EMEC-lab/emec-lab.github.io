@@ -31,6 +31,13 @@
 
 const NEWS = [
   {
+    date: "2026-09-01",
+    category: "project",
+    title: "이영훈, 석사과정생 연구장려금 선정",
+    text: "우리 연구실 이영훈 석사과정이 한국연구재단 석사과정생연구장려금지원사업에 선정되었습니다. 축하합니다!",
+    link: "", image: ""
+  },
+  {
     date: "2026-08-19",
     category: "member",
     title: "이용민 석사 졸업",
