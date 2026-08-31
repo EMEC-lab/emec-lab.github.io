@@ -396,16 +396,25 @@ var Render = (function () {
     if (tagline) tagline.innerHTML = SITE.tagline;   /* <strong> 허용 */
   }
 
+  /* 감춰 둔 분야(hidden: true)는 목록·상세·이동 버튼 어디에도 내보내지 않는다.
+     Overview 관계도(overview.svg)에는 그대로 남는다 — 관계에서는 빼지 않되
+     아직 펼칠 내용이 없는 분야에 쓴다. 데이터의 hidden 줄만 지우면 되살아난다 */
+  function visibleAreas() {
+    if (typeof RESEARCH === 'undefined') return [];
+    return RESEARCH.filter(function (a) { return !a.hidden; });
+  }
+
   /* 2. 연구분야 요약 */
   function homeResearch() {
     var host = document.getElementById('home-research');
     if (!host) return;
-    if (typeof RESEARCH === 'undefined' || !RESEARCH.length) { host.innerHTML = emptyNote(); return; }
+    var areas = visibleAreas();
+    if (!areas.length) { host.innerHTML = emptyNote(); return; }
 
     /* 카드 폭은 전부 같다 (중요도 차이를 만들지 않는다).
        flex wrap 이라 마지막 줄(2장)이 저절로 가운데 정렬된다 */
     var CARD_W = ' w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)]';
-    host.innerHTML = RESEARCH.map(function (a) {
+    host.innerHTML = areas.map(function (a) {
       return '<a href="research.html#' + esc(a.id) + '"' +
         ' class="card-hover group flex flex-col overflow-hidden rounded-lg border border-slate-200 bg-white hover:border-primary-mid' + CARD_W + '">' +
         imageBox(a.image, a.title, 'aspect-[16/10]') +
@@ -842,12 +851,13 @@ var Render = (function () {
   function researchAreas() {
     var host = document.getElementById('research-areas');
     if (!host) return;
-    if (typeof RESEARCH === 'undefined' || !RESEARCH.length) { host.innerHTML = emptyNote(); return; }
+    var areas = visibleAreas();
+    if (!areas.length) { host.innerHTML = emptyNote(); return; }
 
     /* 목록은 요약만 보여 준다. 자세한 내용은 research-area.html 이 맡는다.
        분야 수가 홀수라 격자로 놓으면 빈 칸이 생겨, 가로형 행으로 나열한다 */
     host.innerHTML = '<div class="space-y-5">' +
-      RESEARCH.map(function (a) {
+      areas.map(function (a) {
         return '<a href="research-area.html#' + esc(a.id) + '"' +
           ' class="reveal card-hover group grid overflow-hidden rounded-lg' +
           ' border border-slate-200 bg-white md:grid-cols-5">' +
@@ -871,14 +881,15 @@ var Render = (function () {
   function researchAreaDetail() {
     var host = document.getElementById('area-detail');
     if (!host) return;
-    if (typeof RESEARCH === 'undefined' || !RESEARCH.length) { host.innerHTML = emptyNote(); return; }
+    var areas = visibleAreas();
+    if (!areas.length) { host.innerHTML = emptyNote(); return; }
 
     var hash = (typeof INITIAL_HASH !== 'undefined' && INITIAL_HASH) || window.location.hash;
     var id = String(hash).replace(/^#/, '');
 
     var idx = 0;
-    RESEARCH.forEach(function (a, i) { if (a.id === id) idx = i; });
-    var a = RESEARCH[idx];
+    areas.forEach(function (t, i) { if (t.id === id) idx = i; });
+    var a = areas[idx];
 
     /* 제목 밴드는 RESEARCH 라 두고, 분야 이름은 본문 제목으로 세운다 */
     document.title = a.title + ' | ' + SITE.labName;
@@ -891,8 +902,8 @@ var Render = (function () {
       '</figure>';
     }).join('');
 
-    var prev = RESEARCH[(idx - 1 + RESEARCH.length) % RESEARCH.length];
-    var next = RESEARCH[(idx + 1) % RESEARCH.length];
+    var prev = areas[(idx - 1 + areas.length) % areas.length];
+    var next = areas[(idx + 1) % areas.length];
     var navBtn = function (t, label, arrow, right) {
       return '<a href="research-area.html#' + esc(t.id) + '"' +
         ' class="flex max-w-[48%] flex-col gap-1 rounded-lg border border-slate-200 p-4' +

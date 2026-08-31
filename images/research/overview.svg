@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" font-family="Pretendard, system-ui, sans-serif" role="img" aria-label="How the five research areas relate: analysis and characteristics estimation as the foundation, design built on it through topology and materials, extended to the system level, with data-driven methods and in-house software automating the whole loop">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" font-family="Pretendard, system-ui, sans-serif" role="img" aria-label="How the research areas relate: electromagnetic analysis feeds coupled-field analysis, both underpin topology and materials design, which lead to data-driven and system-aware design, with in-house automation running the whole loop underneath">
 <style>
   @keyframes flow { to { stroke-dashoffset: -28; } }
   @keyframes glow {
@@ -10,16 +10,16 @@
     50%      { opacity: 0.9; }
   }
   .link { animation: flow 2.2s linear infinite; }
-  .card { animation: glow 9s ease-in-out infinite; }
+  .card { animation: glow 10s ease-in-out infinite; }
   .card-1 { animation-delay: 0s; }
-  .card-2 { animation-delay: 1.6s; }
+  .card-2 { animation-delay: 1.2s; }
   .card-3 { animation-delay: 2.4s; }
-  .card-4 { animation-delay: 4s; }
+  .card-4 { animation-delay: 3.2s; }
+  .card-5 { animation-delay: 4.4s; }
   .feed { animation: rise 4s ease-in-out infinite; }
   .feed-1 { animation-delay: 0s; }
   .feed-2 { animation-delay: 0.8s; }
   .feed-3 { animation-delay: 1.6s; }
-  .feed-4 { animation-delay: 2.4s; }
   @media (prefers-reduced-motion: reduce) {
     .link, .card, .feed { animation: none; }
   }
@@ -31,47 +31,55 @@
   </marker>
 </defs>
 
-<!-- 흐름선 : 토대 → 설계 두 갈래 → 시스템 -->
-<path class="link" d="M 222 150 Q 253 150 253 105 Q 253 88 283 88" fill="none" stroke="#5C81BC" stroke-width="2" stroke-dasharray="1 6" stroke-linecap="round" marker-end="url(#ah)"/>
-<path class="link" d="M 222 180 Q 253 180 253 227 Q 253 244 283 244" fill="none" stroke="#5C81BC" stroke-width="2" stroke-dasharray="1 6" stroke-linecap="round" marker-end="url(#ah)"/>
-<path class="link" d="M 592 88 Q 622 88 622 133 Q 622 150 652 150" fill="none" stroke="#5C81BC" stroke-width="2" stroke-dasharray="1 6" stroke-linecap="round" marker-end="url(#ah)"/>
-<path class="link" d="M 592 244 Q 622 244 622 199 Q 622 182 652 182" fill="none" stroke="#5C81BC" stroke-width="2" stroke-dasharray="1 6" stroke-linecap="round" marker-end="url(#ah)"/>
+<!-- 흐름선 : 해석 두 단 → 설계 두 갈래 → 설계 방법 -->
+<path class="link" d="M 155 186 L 155 200" fill="none" stroke="#5C81BC" stroke-width="2" stroke-dasharray="1 6" stroke-linecap="round" marker-end="url(#ah)"/>
+<path class="link" d="M 280 124 L 328 124" fill="none" stroke="#5C81BC" stroke-width="2" stroke-dasharray="1 6" stroke-linecap="round" marker-end="url(#ah)"/>
+<path class="link" d="M 280 254 L 328 254" fill="none" stroke="#5C81BC" stroke-width="2" stroke-dasharray="1 6" stroke-linecap="round" marker-end="url(#ah)"/>
+<path class="link" d="M 590 124 Q 618 124 618 150 Q 618 170 638 170" fill="none" stroke="#5C81BC" stroke-width="2" stroke-dasharray="1 6" stroke-linecap="round" marker-end="url(#ah)"/>
+<path class="link" d="M 590 254 Q 618 254 618 224 Q 618 202 638 202" fill="none" stroke="#5C81BC" stroke-width="2" stroke-dasharray="1 6" stroke-linecap="round" marker-end="url(#ah)"/>
 
-<!-- 1. 토대 -->
-<rect class="card card-1" x="30" y="95" width="192" height="140" rx="10" fill="#ffffff" stroke="#26539C" stroke-width="2"/>
-<text x="46" y="123" font-size="11" font-weight="700" fill="#5C81BC" letter-spacing="1.2">FOUNDATION</text>
-<text x="46" y="148" font-size="15" font-weight="700" fill="#26539C">Analysis &amp;</text>
-<text x="46" y="167" font-size="15" font-weight="700" fill="#26539C">Characteristics</text>
-<text x="46" y="186" font-size="15" font-weight="700" fill="#26539C">Estimation</text>
-<text x="46" y="209" font-size="11.5" fill="#64748b">Electromagnetic, thermal,</text>
-<text x="46" y="225" font-size="11.5" fill="#64748b">structural, NVH</text>
+<!-- 해석 : 전자기 영역 -->
+<rect class="card card-1" x="30" y="62" width="250" height="124" rx="10" fill="#ffffff" stroke="#26539C" stroke-width="2"/>
+<text x="48" y="88" font-size="11" font-weight="700" fill="#5C81BC" letter-spacing="1.2">ANALYSIS</text>
+<text x="48" y="114" font-size="14" font-weight="700" fill="#26539C">Electromagnetic Analysis</text>
+<text x="48" y="132" font-size="14" font-weight="700" fill="#26539C">&amp; Characteristics</text>
+<text x="48" y="150" font-size="14" font-weight="700" fill="#26539C">Estimation</text>
+<text x="48" y="172" font-size="11" fill="#64748b">Field · Loss · Torque · Force</text>
 
-<!-- 2. 설계 두 갈래 -->
-<rect class="card card-2" x="283" y="42" width="309" height="92" rx="10" fill="#ffffff" stroke="#26539C" stroke-width="2"/>
-<text x="301" y="68" font-size="11" font-weight="700" fill="#5C81BC" letter-spacing="1.2">DESIGN</text>
-<text x="301" y="94" font-size="16" font-weight="700" fill="#26539C">Machine &amp; Winding Topology</text>
-<text x="301" y="115" font-size="11.5" fill="#64748b">Machine topologies, windings, changeover</text>
+<!-- 해석 : 연성 영역 -->
+<rect class="card card-2" x="30" y="206" width="250" height="96" rx="10" fill="#ffffff" stroke="#26539C" stroke-width="2"/>
+<text x="48" y="232" font-size="11" font-weight="700" fill="#5C81BC" letter-spacing="1.2">ANALYSIS</text>
+<text x="48" y="259" font-size="15" font-weight="700" fill="#26539C">Coupled-field Analysis</text>
+<text x="48" y="283" font-size="11" fill="#64748b">Thermal · Structural · NVH</text>
 
-<rect class="card card-3" x="283" y="198" width="309" height="92" rx="10" fill="#ffffff" stroke="#26539C" stroke-width="2"/>
-<text x="301" y="224" font-size="11" font-weight="700" fill="#5C81BC" letter-spacing="1.2">DESIGN</text>
-<text x="301" y="250" font-size="16" font-weight="700" fill="#26539C">Materials &amp; Manufacturing</text>
-<text x="301" y="271" font-size="11.5" fill="#64748b">Processes, materials, tolerance, uncertainty</text>
+<!-- 설계 : 형상 -->
+<rect class="card card-3" x="334" y="62" width="256" height="124" rx="10" fill="#ffffff" stroke="#26539C" stroke-width="2"/>
+<text x="352" y="88" font-size="11" font-weight="700" fill="#5C81BC" letter-spacing="1.2">DESIGN</text>
+<text x="352" y="117" font-size="15" font-weight="700" fill="#26539C">Machine &amp; Winding</text>
+<text x="352" y="137" font-size="15" font-weight="700" fill="#26539C">Topology</text>
+<text x="352" y="161" font-size="11" fill="#64748b">Machine · Winding · Changeover</text>
 
-<!-- 3. 시스템으로 확장 -->
-<rect class="card card-4" x="652" y="95" width="278" height="140" rx="10" fill="#ffffff" stroke="#26539C" stroke-width="2"/>
-<text x="670" y="123" font-size="11" font-weight="700" fill="#5C81BC" letter-spacing="1.2">EXTENSION</text>
-<text x="670" y="155" font-size="17" font-weight="700" fill="#26539C">System Model-based</text>
-<text x="670" y="177" font-size="17" font-weight="700" fill="#26539C">Design</text>
-<text x="670" y="203" font-size="11.5" fill="#64748b">Drive system modeling, driving</text>
-<text x="670" y="219" font-size="11.5" fill="#64748b">profiles, thermal margin</text>
+<!-- 설계 : 재료와 공정 -->
+<rect class="card card-4" x="334" y="206" width="256" height="96" rx="10" fill="#ffffff" stroke="#26539C" stroke-width="2"/>
+<text x="352" y="232" font-size="11" font-weight="700" fill="#5C81BC" letter-spacing="1.2">DESIGN</text>
+<text x="352" y="259" font-size="15" font-weight="700" fill="#26539C">Materials &amp; Manufacturing</text>
+<text x="352" y="283" font-size="11" fill="#64748b">Process · Material · Uncertainty</text>
 
-<!-- 자동화 : 위 전 과정을 감싸 올린다 -->
-<line class="feed feed-1" x1="126" y1="322" x2="126" y2="243" stroke="#047857" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round" marker-end="url(#ah)"/>
-<line class="feed feed-2" x1="437" y1="322" x2="437" y2="298" stroke="#047857" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round" marker-end="url(#ah)"/>
-<line class="feed feed-3" x1="791" y1="322" x2="791" y2="243" stroke="#047857" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round" marker-end="url(#ah)"/>
+<!-- 설계 방법 -->
+<rect class="card card-5" x="638" y="118" width="292" height="132" rx="10" fill="#ffffff" stroke="#26539C" stroke-width="2"/>
+<text x="658" y="144" font-size="11" font-weight="700" fill="#5C81BC" letter-spacing="1.2">METHOD</text>
+<text x="658" y="172" font-size="16" font-weight="700" fill="#26539C">Data-driven &amp;</text>
+<text x="658" y="193" font-size="16" font-weight="700" fill="#26539C">System-aware Design</text>
+<text x="658" y="216" font-size="11" fill="#64748b">Optimization · Surrogate model</text>
+<text x="658" y="232" font-size="11" fill="#64748b">Operating profile · Thermal margin</text>
 
-<rect x="30" y="330" width="900" height="66" rx="10" fill="#26539C"/>
-<text x="52" y="358" font-size="11" font-weight="700" fill="#9DB6DC" letter-spacing="1.2">AUTOMATION</text>
-<text x="52" y="381" font-size="16" font-weight="700" fill="#ffffff">Data-driven Design &amp; Automation</text>
-<text x="908" y="381" font-size="11.5" fill="#C7D6EC" text-anchor="end">Optimization, surrogate models, in-house tools</text>
+<!-- 자동화 : 위 전 과정을 떠받친다 -->
+<line class="feed feed-1" x1="155" y1="344" x2="155" y2="312" stroke="#047857" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round" marker-end="url(#ah)"/>
+<line class="feed feed-2" x1="462" y1="344" x2="462" y2="312" stroke="#047857" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round" marker-end="url(#ah)"/>
+<line class="feed feed-3" x1="784" y1="344" x2="784" y2="260" stroke="#047857" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round" marker-end="url(#ah)"/>
+
+<rect x="30" y="352" width="900" height="72" rx="10" fill="#26539C"/>
+<text x="52" y="382" font-size="11" font-weight="700" fill="#9DB6DC" letter-spacing="1.2">AUTOMATION</text>
+<text x="52" y="405" font-size="16" font-weight="700" fill="#ffffff">Design Automation &amp; In-house Software</text>
+<text x="908" y="405" font-size="11.5" fill="#C7D6EC" text-anchor="end">Parametric modeling · Batch analysis · In-house programs</text>
 </svg>
