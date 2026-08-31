@@ -19,6 +19,7 @@ set -e
 
 FF="/c/Users/user/AppData/Local/Microsoft/WinGet/Packages/Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/ffmpeg-9.0.1-full_build/bin"
 FFMPEG="$FF/ffmpeg"
+FFPROBE="$FF/ffprobe"
 
 SRC="${1:-v1}"                 # 소스 폴더 (v1 · v2 · v3 …)
 ALT="${2:-}"                   # 보충 폴더. SRC 에 없는 클립은 여기서 가져온다
@@ -31,8 +32,8 @@ pick() {
   else echo ""; fi
 }
 
-W=752          # 공통 가로 (클립마다 달라도 여기에 맞춘다)
-H=416          # 공통 세로
+W=1920         # 공통 가로 (클립마다 달라도 여기에 맞춘다)
+H=1080         # 공통 세로
 SEG=3.0        # (구) 기본 길이 — 지금은 LEN 배열을 쓴다
 FADE=0.6       # 크로스페이드 길이(초)
 FPS=24
@@ -42,20 +43,46 @@ FPS=24
 ORDER=(1 2 3 4 5 6 7)
 
 # 클립마다 [시작초]와 [쓸 길이]를 따로 준다
-#   clip1 도입부 / clip6 은 앞부분(창밖→실내→가전)이 좋다
+#   v4(유료본) 기준. 리빌이 대부분 3~4초에 시작한다
+#   clip1 도입부 2초 / clip6 은 실내에 들어와 가전이 켜지는 구간
 #   clip2 는 아래 전처리에서 후반 리빌을 늘려 두므로 0 부터 길게 쓴다
-#   clip5 는 4.2초부터 구동계가 수면 위처럼 보여 3.0초에서 끊는다
-declare -A START=( [1]=0.0 [2]=0.0 [3]=3.0 [4]=3.0 [5]=0.0 [6]=0.0 [7]=3.0 )
-declare -A LEN=(   [1]=2.0 [2]=3.0 [3]=3.0 [4]=3.0 [5]=3.0 [6]=3.0 [7]=3.0 )
+#   clip5 는 A·B 두 영상을 겹쳐 만든 전처리본(_prep/clip5.mp4)을 쓴다
+#     — 이미 3.0초로 맞춰져 있으므로 0 부터 전부 쓴다
+declare -A START=( [1]=0.0 [2]=3.2 [3]=3.0 [4]=2.8 [5]=0.0 [6]=2.6 [7]=2.2 )
+declare -A LEN=(   [1]=2.0 [2]=3.0 [3]=3.0 [4]=3.0 [5]=3.0 [6]=3.0 [7]=2.2 )
 
 # --- 전처리: clip2 후반(리빌)을 0.5배속으로 늘린다 ------------------------
 PREP="_prep"
 mkdir -p "$PREP"
+SLOWMO2=0      # 1 이면 clip2 후반을 늘린다. 무료본 전용
 C2=$(pick 2)
-if [ -n "$C2" ]; then
+if [ "$SLOWMO2" = "1" ] && [ -n "$C2" ]; then
   echo "== 0단계: clip2 후반 리빌 늘리기 =="
   "$FFMPEG" -y -hide_banner -loglevel error -i "$C2" -filter_complex     "[0]trim=3.0:5.0,setpts=PTS-STARTPTS[a];     [0]trim=5.0:6.04,setpts=(PTS-STARTPTS)/0.9[b];     [a][b]concat=n=2:v=1,fps=${FPS}[v]"     -map "[v]" -c:v libx264 -preset slow -crf 18 -pix_fmt yuv420p -an "$PREP/clip2.mp4"
   echo "  clip2  3.0~5.0 정속 + 5.0~6.04 를 0.9배속  →  $("$FFPROBE" -v error         -show_entries format=duration -of csv=p=0 "$PREP/clip2.mp4")s"
+fi
+
+# --- 전처리: clip5 리빌 (A: 구동계 없음 → B: 구동계 보임) ----------------
+#     같은 원본이므로 B 도 REVEAL_AT 지점부터 잘라야 배 위치가 맞는다
+#     clip5a.mp4 · clip5b.mp4 가 둘 다 있을 때만 동작한다
+C5A=""; C5B=""
+for d in "$SRC" "$ALT"; do
+  [ -n "$d" ] || continue
+  [ -z "$C5A" ] && [ -f "$d/clip5a.mp4" ] && C5A="$d/clip5a.mp4"
+  [ -z "$C5B" ] && [ -f "$d/clip5b.mp4" ] && C5B="$d/clip5b.mp4"
+done
+REVEAL_AT=1.2      # 리빌이 시작되는 시점(초)
+REVEAL_LEN=1.0     # 켜지는 데 걸리는 시간(초)
+if [ -n "$C5A" ] && [ -n "$C5B" ]; then
+  echo "== 0단계: clip5 리빌 만들기 =="
+  aEnd=$(awk "BEGIN{print $REVEAL_AT+$REVEAL_LEN}")
+  "$FFMPEG" -y -hide_banner -loglevel error -i "$C5A" -i "$C5B" -filter_complex \
+    "[0]trim=0:${aEnd},setpts=PTS-STARTPTS,fps=${FPS}[a]; \
+     [1]trim=${REVEAL_AT}:3.0,setpts=PTS-STARTPTS,fps=${FPS}[b]; \
+     [a][b]xfade=transition=fade:duration=${REVEAL_LEN}:offset=${REVEAL_AT}[v]" \
+    -map "[v]" -c:v libx264 -preset slow -crf 18 -pix_fmt yuv420p -an "$PREP/clip5.mp4"
+  echo "  clip5  A 0~${REVEAL_AT}s → ${REVEAL_LEN}s 동안 B 로 전환  →  $("$FFPROBE" -v error \
+        -show_entries format=duration -of csv=p=0 "$PREP/clip5.mp4")s"
 fi
 
 echo "== 1단계: 클립 이어 붙이기 =="
@@ -66,6 +93,7 @@ i=0
 for c in "${ORDER[@]}"; do
   p=$(pick "$c")
   if [ "$c" = "2" ] && [ -f "$PREP/clip2.mp4" ]; then p="$PREP/clip2.mp4"; fi
+  if [ "$c" = "5" ] && [ -f "$PREP/clip5.mp4" ]; then p="$PREP/clip5.mp4"; fi
   [ -n "$p" ] || { echo "clip${c}.mp4 을 찾을 수 없습니다"; exit 1; }
   echo "  clip${c}  <-  $p"
   INPUTS+=(-i "$p")
