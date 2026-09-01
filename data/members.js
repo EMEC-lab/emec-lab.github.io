@@ -20,7 +20,7 @@
  *
  *   재학생 전용 필드
  *     honors     선발·장학 이력 한 줄. 카드와 프로필 창에 나온다
- *                예 "과학기술전문사관 · ADD". 비우면 그 줄이 안 나온다
+ *                예 "과학기술전문사관 · 국방과학연구소(ADD)". 비우면 그 줄이 안 나온다
  *
  *   졸업생 전용 필드
  *     gradYear / thesis / currentPosition
@@ -132,7 +132,7 @@ const MEMBERS = [
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2025.02",
       "M.S., Department of Electrical and Communication Systems Engineering, Soonchunhyang University, Asan, 2025.03 – Present"
-    ], career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "과학기술전문사관 · ADD",
+    ], career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "과학기술전문사관 · 국방과학연구소(ADD)",
     gradYear: null, thesis: "", currentPosition: ""
   },
   {
