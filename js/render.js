@@ -1372,6 +1372,18 @@ var Render = (function () {
     return m ? { en: m[1], ko: m[2] || '' } : { en: raw || '', ko: '' };
   }
 
+  /* honors 는 한 문자열이다. 카드는 좁아 괄호 앞에서 줄을 바꾸고,
+     프로필 창은 넓으므로 그대로 한 줄로 둔다.
+     예 "과학기술전문사관 장학생 (국방과학연구소, ADD)" */
+  function honorsCardHtml(v) {
+    if (!v) return '';
+    var i = v.lastIndexOf(' (');
+    var body = i > 0
+      ? esc(v.slice(0, i)) + '<br>' + esc(v.slice(i + 1))
+      : esc(v);
+    return '<p class="mt-1.5 text-xs leading-relaxed text-slate-600">' + body + '</p>';
+  }
+
   /* interests 는 쉼표로 가른 문자열이다. 하나씩 알약 태그로 보여 준다 */
   function interestTags(text) {
     var list = String(text || '').split(',')
@@ -1398,8 +1410,7 @@ var Render = (function () {
         (gradDate(m) ? '<span class="ml-1.5 font-mono font-normal text-slate-400">' +
           esc(gradDate(m)) + '</span>' : '') + '</p>' : '') +
       /* 선발·장학 이력. 재학생은 honors, 졸업생은 currentPosition 이 온다 */
-      (m.honors ? '<p class="mt-1.5 text-xs leading-relaxed text-slate-600">' +
-        esc(m.honors) + '</p>' : '') +
+      honorsCardHtml(m.honors) +
       (m.currentPosition ? '<p class="mt-1.5 text-xs leading-relaxed text-slate-600">' +
         esc(m.currentPosition) + '</p>' : '') +
       interestTags(m.interests) +
