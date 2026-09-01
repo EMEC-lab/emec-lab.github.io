@@ -18,6 +18,10 @@
  *     talks        date / host / title 객체 배열   초청강연
  *     scholar      Google Scholar URL
  *
+ *   재학생 전용 필드
+ *     honors     선발·장학 이력 한 줄. 카드와 프로필 창에 나온다
+ *                예 "과학기술전문사관 · ADD". 비우면 그 줄이 안 나온다
+ *
  *   졸업생 전용 필드
  *     gradYear / thesis / currentPosition
  *
@@ -95,7 +99,7 @@ const MEMBERS = [
       { date: "2022-08-19", host: "한국자동차연구원", title: "전동화 모듈 기술 동향" }
     ],
 
-    scholar: "",
+    scholar: "", honors: "",
 
     gradYear: null,
     thesis: "Electric Actuator Sizing for Robot Joint Based on Electro-Mechanical Characteristics",
@@ -113,7 +117,7 @@ const MEMBERS = [
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2024.02",
       "M.S., Department of Electrical and Communication Systems Engineering, Soonchunhyang University, Asan, 2026.08"
-    ], career: [], activities: [], memberships: [], talks: [], scholar: "",
+    ], career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: 2026, thesis: "Deep Transfer Learning-Based Optimal Design of Multi-Core Concentrated Flux-type Synchronous Motor Considering 3-D Axial Leakage Flux", currentPosition: ""
   },
   {
@@ -128,7 +132,7 @@ const MEMBERS = [
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2025.02",
       "M.S., Department of Electrical and Communication Systems Engineering, Soonchunhyang University, Asan, 2025.03 – Present"
-    ], career: [], activities: [], memberships: [], talks: [], scholar: "",
+    ], career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "과학기술전문사관 · ADD",
     gradYear: null, thesis: "", currentPosition: ""
   },
   {
@@ -143,7 +147,7 @@ const MEMBERS = [
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2026.02",
       "M.S., Department of Electrical and Communication Systems Engineering, Soonchunhyang University, Asan, 2026.03 – Present"
-    ], career: [], activities: [], memberships: [], talks: [], scholar: "",
+    ], career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: null, thesis: "", currentPosition: ""
   },
   {
@@ -155,7 +159,7 @@ const MEMBERS = [
     email: "", office: "",
     interests: "",
     grade: 4,
-    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "",
+    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: null, thesis: "", currentPosition: ""
   },
   {
@@ -167,7 +171,7 @@ const MEMBERS = [
     email: "", office: "",
     interests: "",
     grade: 4,
-    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "",
+    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: null, thesis: "", currentPosition: ""
   },
   {
@@ -179,7 +183,7 @@ const MEMBERS = [
     email: "", office: "",
     interests: "",
     grade: 4,
-    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "",
+    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: null, thesis: "", currentPosition: ""
   },
   {
@@ -191,7 +195,7 @@ const MEMBERS = [
     email: "", office: "",
     interests: "",
     grade: 4,
-    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "",
+    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: null, thesis: "", currentPosition: ""
   },
   {
@@ -203,7 +207,7 @@ const MEMBERS = [
     email: "", office: "",
     interests: "",
     grade: 4,
-    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "",
+    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: null, thesis: "", currentPosition: ""
   },
       {
@@ -215,7 +219,7 @@ const MEMBERS = [
     email: "", office: "",
     interests: "",
     grade: 3,
-    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "",
+    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: null, thesis: "", currentPosition: ""
   },
   {
@@ -227,7 +231,7 @@ const MEMBERS = [
     email: "", office: "",
     interests: "",
     grade: 3,
-    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "",
+    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: null, thesis: "", currentPosition: ""
   },
   {
@@ -243,7 +247,7 @@ const MEMBERS = [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2024.02",
       "M.S., Department of Electrical and Communication Systems Engineering, Soonchunhyang University, Asan, 2026.02"
     ],
-    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: 2026,
     thesis: "Robust Optimization Design of a Segmented-Stator SPMSM Using a Tolerance-Considered Analytical Method and Transfer Learning",
     currentPosition: "Korea Automotive Technology Institute (KATECH)"
@@ -267,7 +271,7 @@ const MEMBERS = [
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2026.02"
     ],
-    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: 2026, thesis: "", currentPosition: ""
   },
   {
@@ -282,7 +286,7 @@ const MEMBERS = [
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2026.02"
     ],
-    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: 2026, thesis: "", currentPosition: ""
   },
   {
@@ -297,7 +301,7 @@ const MEMBERS = [
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2026.02"
     ],
-    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: 2026, thesis: "", currentPosition: ""
   },
   {
@@ -312,7 +316,7 @@ const MEMBERS = [
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2026.02"
     ],
-    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: 2026, thesis: "", currentPosition: ""
   },
   {
@@ -327,7 +331,7 @@ const MEMBERS = [
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2026.02"
     ],
-    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: 2026, thesis: "", currentPosition: ""
   },
   {
@@ -342,7 +346,7 @@ const MEMBERS = [
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2026.02"
     ],
-    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: 2026, thesis: "", currentPosition: ""
   },
   {
@@ -357,7 +361,7 @@ const MEMBERS = [
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2026.02"
     ],
-    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: 2026, thesis: "", currentPosition: ""
   },
   {
@@ -372,7 +376,7 @@ const MEMBERS = [
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2025.02"
     ],
-    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: 2025, thesis: "", currentPosition: ""
   },
   {
@@ -387,7 +391,7 @@ const MEMBERS = [
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2025.02"
     ],
-    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: 2025, thesis: "", currentPosition: ""
   },
   {
@@ -402,7 +406,7 @@ const MEMBERS = [
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2025.02"
     ],
-    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: 2025, thesis: "", currentPosition: ""
   },
   {
@@ -417,7 +421,7 @@ const MEMBERS = [
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2025.02"
     ],
-    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: 2025, thesis: "", currentPosition: ""
   },
   {
@@ -432,7 +436,7 @@ const MEMBERS = [
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2025.02"
     ],
-    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: 2025, thesis: "", currentPosition: ""
   },
   {
@@ -447,7 +451,7 @@ const MEMBERS = [
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2025.02"
     ],
-    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: 2025, thesis: "", currentPosition: ""
   },
   {
@@ -462,7 +466,7 @@ const MEMBERS = [
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2025.02"
     ],
-    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: 2025, thesis: "", currentPosition: ""
   },
   {
@@ -477,7 +481,7 @@ const MEMBERS = [
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2024.02"
     ],
-    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: 2024, thesis: "", currentPosition: ""
   },
   {
@@ -492,7 +496,7 @@ const MEMBERS = [
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2024.02"
     ],
-    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: 2024, thesis: "", currentPosition: ""
   },
   {
@@ -507,7 +511,7 @@ const MEMBERS = [
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2024.02"
     ],
-    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: 2024, thesis: "", currentPosition: ""
   },
   {
@@ -522,7 +526,7 @@ const MEMBERS = [
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2024.02"
     ],
-    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: 2024, thesis: "", currentPosition: ""
   },
   {
@@ -537,7 +541,7 @@ const MEMBERS = [
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2024.02"
     ],
-    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: 2024, thesis: "", currentPosition: ""
   },
   {
@@ -552,7 +556,7 @@ const MEMBERS = [
     education: [
       "B.S., Department of Electrical Engineering, Soonchunhyang University, Asan, 2024.02"
     ],
-    career: [], activities: [], memberships: [], talks: [], scholar: "",
+    career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: 2024, thesis: "", currentPosition: ""
   }
 
@@ -566,7 +570,7 @@ const MEMBERS = [
     photo: "images/members/kim.jpg",
     email: "", office: "",
     interests: "IPMSM Design",
-    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "",
+    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: null, thesis: "", currentPosition: ""
   },
   {
@@ -576,7 +580,7 @@ const MEMBERS = [
     title: "M.S.",
     photo: "",
     email: "", office: "", interests: "",
-    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "",
+    education: [], career: [], activities: [], memberships: [], talks: [], scholar: "", honors: "",
     gradYear: 2024,
     thesis: "매입형 영구자석 전동기의 토크 리플 저감 설계",
     currentPosition: "LG전자 선임연구원"

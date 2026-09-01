@@ -1397,6 +1397,9 @@ var Render = (function () {
       (m.title ? '<p class="mt-1.5 text-xs font-semibold text-primary">' + esc(degreeLabel(m)) +
         (gradDate(m) ? '<span class="ml-1.5 font-mono font-normal text-slate-400">' +
           esc(gradDate(m)) + '</span>' : '') + '</p>' : '') +
+      /* 선발·장학 이력. 재학생은 honors, 졸업생은 currentPosition 이 온다 */
+      (m.honors ? '<p class="mt-1.5 text-xs leading-relaxed text-slate-600">' +
+        esc(m.honors) + '</p>' : '') +
       (m.currentPosition ? '<p class="mt-1.5 text-xs leading-relaxed text-slate-600">' +
         esc(m.currentPosition) + '</p>' : '') +
       interestTags(m.interests) +
@@ -1468,6 +1471,8 @@ var Render = (function () {
             esc(m.name) + '</h2>' +
           (m.title ? '<p class="mt-1.5 text-sm font-semibold text-primary">' +
             esc(degreeLabel(m)) + '</p>' : '') +
+          (m.honors ? '<p class="mt-1.5 text-sm text-slate-600">' +
+            esc(m.honors) + '</p>' : '') +
           /* 연락처는 이름 바로 아래. 관심분야 태그 묶음을 가로지르지 않게 한다 */
           (m.email
             ? '<p class="mt-2 flex flex-wrap items-baseline gap-x-2 text-xs">' +

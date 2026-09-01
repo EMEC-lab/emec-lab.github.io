@@ -351,6 +351,11 @@ const MEMBERS = [
     ],
     scholar: "",
 
+    // 재학생 전용
+    honors: "",               // 선발·장학 이력 한 줄. 예 "과학기술전문사관 · ADD"
+                              // 카드와 프로필 창의 학위 바로 아래에 나온다
+                              // 비우면 그 줄이 나오지 않는다
+
     // 졸업생 전용
     gradYear: null,           // 예: 2026. 묶음 정렬의 보조 값
     thesis: "",
@@ -643,6 +648,15 @@ Hye-Seong Kim       영문 이름 (굵게)
 M.S. Candidate      title 값 (파란색)
 [Data-driven optimal design and analysis]            interests 를 쉼표로 가른 태그
 [Vibration and noise analysis]
+```
+
+**선발·장학 이력은 `honors` 한 줄로 적는다.** 학위 바로 아래에 나온다.
+장학·사관 제도처럼 재학 중의 이력을 적는 자리이며, 졸업생의 `currentPosition`
+과는 다른 축이다. 국내 제도명은 국문 그대로 쓴다 (2번 항목).
+
+```
+M.S. Candidate
+과학기술전문사관 · ADD          honors
 ```
 
 졸업생 카드는 같은 모양에 두 줄이 더 붙는다.
