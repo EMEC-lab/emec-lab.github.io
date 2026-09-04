@@ -33,7 +33,7 @@ const RESEARCH = [
       "Control scheme — sinusoidal and square-wave drive, current harmonics, current vector control, sensorless control"
     ],
     description: "Every design decision rests on knowing what the machine will actually do. We develop and combine analysis methods across the full spectrum of fidelity — from analytical models such as space-harmonic and equivalent-magnetic-circuit methods that capture machine behavior in seconds, to finite element analysis that resolves local saturation and loss distribution in detail.\nFrom the field we estimate what the machine is judged by: losses and efficiency over the whole operating range, average torque and its ripple, and the electromagnetic excitation forces that later decide how the machine sounds and how long it survives.\nA machine is also never driven by an ideal current source. We reflect the control scheme in the analysis itself — sinusoidal and square-wave drive and the current harmonics they impose, current vector control, and sensorless operation — so that the estimated characteristics are the ones the machine will show on the bench, not on paper.",
-    image: "images/research/set-analysis-00.png",
+    image: "images/research/analysis-overview.png",
     images: [
       { src: "images/research/set-analysis-01.png",
         caption: "Three-dimensional equivalent magnetic circuit with axial leakage paths" },
