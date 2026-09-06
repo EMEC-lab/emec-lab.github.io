@@ -33,14 +33,12 @@ const RESEARCH = [
       "Control scheme — sinusoidal and square-wave drive, current harmonics, current vector control, sensorless control"
     ],
     description: "Every design decision rests on knowing what the machine will actually do. We develop and combine analysis methods across the full spectrum of fidelity — from analytical models such as space-harmonic and equivalent-magnetic-circuit methods that capture machine behavior in seconds, to finite element analysis that resolves local saturation and loss distribution in detail.\nFrom the field we estimate what the machine is judged by: losses and efficiency over the whole operating range, average torque and its ripple, and the electromagnetic excitation forces that later decide how the machine sounds and how long it survives.\nA machine is also never driven by an ideal current source. We reflect the control scheme in the analysis itself — sinusoidal and square-wave drive and the current harmonics they impose, current vector control, and sensorless operation — so that the estimated characteristics are the ones the machine will show on the bench, not on paper.",
-    image: "images/research/analysis-overview.png",
+    image: "images/research/analysis-overview.webp",
     images: [
-      { src: "images/research/set-analysis-01.png",
-        caption: "Three-dimensional equivalent magnetic circuit with axial leakage paths" },
-      { src: "images/research/set-analysis-02.png",
-        caption: "Magnetic flux vector plot around spoke-type magnets" },
-      { src: "images/research/set-analysis-03.png",
-        caption: "Iron-loss density surfaces for two core materials" }
+      { src: "images/research/analysis-analytical.webp",
+        caption: "Subdomain method and 2D/3D equivalent magnetic circuit, verified against finite element results" },
+      { src: "images/research/analysis-loss.webp",
+        caption: "Iron loss over the current harmonic spectrum, and AC ohmic loss in the conductor" }
     ]
   },
   {
@@ -52,10 +50,10 @@ const RESEARCH = [
       "Structural and NVH analysis — rotor stress, rotor dynamics"
     ],
     description: "The electromagnetic field is where the analysis starts, not where it ends. Losses become heat, and electromagnetic excitation forces become stress, deflection, and sound. A machine that is efficient but runs too hot, or quiet on the test bench but structurally marginal at overspeed, is not a finished design.\nOn the thermal side we build lumped-parameter thermal networks that resolve the path from copper and iron losses through the slot, the stack, and the housing to the coolant, and evaluate cooling methods against the duty the machine will actually see.\nOn the mechanical side we carry the same electromagnetic result into rotor stress at maximum speed, into rotor dynamics and critical speeds, and into the vibration and noise that the excitation force orders produce in the stator structure.",
-    image: "images/research/set-analysis-04.png",
+    image: "images/research/coupled-overview.webp",
     images: [
-      { src: "images/research/set-analysis-05.png",
-        caption: "Measured noise waterfall of an EV traction motor" }
+      { src: "images/research/coupled-thermal.webp",
+        caption: "Lumped-parameter thermal network built from housing, coil-slot, and cooling-method models" }
     ]
   },
   {
