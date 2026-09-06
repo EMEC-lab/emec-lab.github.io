@@ -41,10 +41,9 @@
 <!-- 해석 : 전자기 영역 -->
 <rect class="card card-1" x="30" y="62" width="250" height="124" rx="10" fill="#ffffff" stroke="#26539C" stroke-width="2"/>
 <text x="48" y="88" font-size="11" font-weight="700" fill="#5C81BC" letter-spacing="1.2">ANALYSIS</text>
-<text x="48" y="114" font-size="14" font-weight="700" fill="#26539C">Electromagnetic Analysis</text>
-<text x="48" y="132" font-size="14" font-weight="700" fill="#26539C">&amp; Characteristics</text>
-<text x="48" y="150" font-size="14" font-weight="700" fill="#26539C">Estimation</text>
-<text x="48" y="172" font-size="11" fill="#64748b">Field · Loss · Torque · Force</text>
+<text x="48" y="118" font-size="14" font-weight="700" fill="#26539C">Electromagnetic Field</text>
+<text x="48" y="138" font-size="14" font-weight="700" fill="#26539C">&amp; Characteristics Analysis</text>
+<text x="48" y="166" font-size="11" fill="#64748b">Field · Loss · Torque · Force</text>
 
 <!-- 해석 : 연성 영역 -->
 <rect class="card card-2" x="30" y="206" width="250" height="96" rx="10" fill="#ffffff" stroke="#26539C" stroke-width="2"/>

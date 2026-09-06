@@ -24,7 +24,7 @@
 const RESEARCH = [
   {
     id: "em-analysis",
-    title: "Electromagnetic Analysis & Characteristics Estimation",
+    title: "Electromagnetic Field & Characteristics Analysis",
     summary: "Field, loss, torque, and force estimation across the full range of fidelity — with the current harmonics the drive actually imposes.",
     topics: [
       "Electromagnetic field analysis — analytical methods (space harmonic, equivalent magnetic circuit) and finite element analysis",
