@@ -53,7 +53,9 @@ const RESEARCH = [
     image: "images/research/coupled-overview.webp",
     images: [
       { src: "images/research/coupled-thermal.webp",
-        caption: "Lumped-parameter thermal network built from housing, coil-slot, and cooling-method models" }
+        caption: "Lumped-parameter thermal network built from housing, coil-slot, and cooling-method models" },
+      { src: "images/research/coupled-structural.webp",
+        caption: "Rotor stress and rotor dynamics, electromagnetic excitation force, and the resulting structural vibration" }
     ]
   },
   {
