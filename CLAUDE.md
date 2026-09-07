@@ -739,6 +739,20 @@ Korea Automotive Technology Institute (KATECH)      currentPosition. 비우면 �
 응용 대상(모빌리티 · 로봇 · 가전 · 산업)은 모든 분야를 가로지르므로 카드에 섞지 않고
 `#applications` 에서 한 번에 보여 준다. 한 논문이 두 축에 동시에 걸리는 것이 자연스럽다.
 
+**두 개관도는 데이터에서 자동으로 그려지지 않는다.** 같은 내용이 두 곳에 있으니
+데이터를 고치면 그림도 함께 고쳐야 한다. 0번의 단일 소스 원칙이 닿지 않는 자리다.
+
+| 데이터 | 함께 고칠 그림 | 그림 안에 든 것 |
+|---|---|---|
+| `RESEARCH` (분야) | `images/research/overview.svg` | 분야 이름 · 한 줄 부제 · 카드 사이 연결선 |
+| `APPLICATIONS` | `images/research/applications.svg` | 묶음 이름 · 부제 |
+
+- 분야를 더하거나 합치면 `overview.svg` 의 **카드 수와 연결선 위치**까지 손봐야 한다.
+  카드 높이를 바꾸면 점선의 시작점이 어긋난다
+- `applications.svg` 의 부제는 항목을 그대로 옮기지 않고 소문자 축약형으로 둔다.
+  전체 항목은 그림 아래 태그로 나오므로 되풀이하지 않는다
+- 글자를 늘렸으면 `viewBox`(현재 각각 960×460, 960×400) 를 넘지 않는지 확인한다
+
 **Projects 섹션**
 
 - **Ongoing / Completed 두 그룹으로 나누어 표시**하고 각 그룹에 소제목을 둔다
