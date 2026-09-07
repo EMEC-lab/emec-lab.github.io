@@ -40,6 +40,18 @@ var Render = (function () {
            '" loading="lazy" data-fallback class="h-full w-full object-cover"></div>';
   }
 
+  /* 칸 높이를 정해 두지 않고 그림의 원래 비율을 그대로 쓴다.
+     세로가 제각각인 도해를 같은 높이의 칸에 넣으면 폭이 서로 달라 보인다.
+     폭을 맞추는 쪽이 나란히 놓았을 때 정돈돼 보이므로, 높이를 풀어 준다 */
+  function naturalImage(src, alt, extra) {
+    if (!src) {
+      return '<div class="aspect-[4/3] w-full overflow-hidden img-placeholder px-3 text-xs ' +
+             (extra || '') + '">' + esc(alt || '') + '</div>';
+    }
+    return '<img src="' + esc(src) + '" alt="' + esc(alt || '') +
+           '" loading="lazy" data-fallback class="block w-full ' + (extra || '') + '">';
+  }
+
   function sectionHead(title, lead, href) {
     return '<div class="reveal flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">' +
       '<div>' +
@@ -899,7 +911,7 @@ var Render = (function () {
 
     var extra = (a.images || []).map(function (im) {
       return '<figure class="reveal">' +
-        imageBox(im.src, im.caption || a.title, 'aspect-[4/3]', 'rounded-lg') +
+        naturalImage(im.src, im.caption || a.title, 'rounded-lg border border-slate-200') +
         (im.caption ? '<figcaption class="mt-2 text-xs text-slate-500">' +
           esc(im.caption) + '</figcaption>' : '') +
       '</figure>';

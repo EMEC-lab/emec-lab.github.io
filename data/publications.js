@@ -301,7 +301,7 @@ const PUBLICATIONS = [
     title: "Flux Linkage Decomposition-based Analysis and Harmonic Reduction Design of Induced Voltage in High-Speed Multilayer IPMSM",
     venue: "International Journal of Automotive Technology",
     detail: "Early Access",
-    doi: "",
+    doi: "10.1007/s12239-026-00533-8",
     impact: "2.1",
     jcrTop: "56", jcrRank: "103/184", jcrQuartile: "Q3", domestic: false,
     patentNo: "", applicationNo: "", country: ""
