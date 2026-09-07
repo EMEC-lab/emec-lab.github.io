@@ -32,8 +32,8 @@
 
 ```bash
 grep -rn "EMEC" *.html
-grep -rn "26539C" --include="*.html" --include="*.css" . | grep -v "theme.js\|custom.css"
-grep -rn "041-530\|minro@\|M417" *.html js/
+grep -rn "26539C" --include="*.html" --include="*.css" . | grep -v "theme.js\|custom.css\|_papers/"
+grep -rn "041-530\|minro@\|M41" *.html js/
 ```
 
 ### data/site.js
@@ -50,9 +50,15 @@ const SITE = {
   tagline: "[한 줄 정체성 문구 — 추후 확정]",   // <strong> 태그 사용 가능
 
   address: {
-    full:  "M417, Multimedia Building, Soonchunhyang University, 22 Soonchunhyang-ro, Asan-si, Chungcheongnam-do 31538, Republic of Korea",
-    fullKo: "충남 아산시 순천향로 22 순천향대학교 멀티미디어관 M417호",
-    short: "Multimedia Building, M417"
+    // 호실만 다르고 나머지 주소는 같다. 방마다 주소를 되풀이하지 않도록 떼어 둔다.
+    // 방이 늘면 rooms 에 한 줄만 더한다
+    rooms: [
+      { no: "M417", use: "Professor's Office", useKo: "교수 연구실" },
+      { no: "M416", use: "Research Lab",       useKo: "학생 연구실" }
+    ],
+    full:  "Multimedia Building, Soonchunhyang University, 22 Soonchunhyang-ro, Asan-si, Chungcheongnam-do 31538, Republic of Korea",
+    fullKo: "충남 아산시 순천향로 22 순천향대학교 멀티미디어관",
+    short: "Multimedia Building, M417"   // 교수 프로필의 연구실 한 줄
   },
 
   phone: "041-530-1334",
@@ -72,7 +78,7 @@ const SITE = {
     people:       "PEOPLE",
     research:     "RESEARCH",
     publications: "PUBLICATIONS",
-    news:         "NEWS",
+    news:         "ACTIVITIES",   // 하위에 News · Gallery 를 둘 다 덮는 이름
     join:         "JOIN US",
     contact:      "CONTACT"
   },
@@ -82,7 +88,7 @@ const SITE = {
     professor:  "Professor",
     current:    "Researchers",
     alumni:     "Alumni",
-    areas:      "Overview",
+    areas:      "Areas",
     equipment:  "Facilities",
     projects:   "Projects",
     journal:    "Journal",
@@ -97,7 +103,9 @@ const SITE = {
     professor:  "Professor",
     current:    "Researchers",
     alumni:     "Alumni",
-    areas:      "Research Areas",
+    overview:   "Overview",          // 분야 관계도
+    areas:      "Research Topics",   // 분야 카드 목록
+    applications: "Applications",
     equipment:  "Facilities",
     projects:   "Research Projects",
     ongoing:    "Ongoing",
@@ -231,6 +239,7 @@ tailwind.config = {
 ├── index.html          # HOME
 ├── people.html
 ├── research.html
+├── research-area.html  # 연구분야 상세. #해시로 어느 분야인지 고른다
 ├── publications.html
 ├── news.html        # 글 소식
 ├── gallery.html     # 사진 게시글 (앨범 단위)
@@ -273,14 +282,14 @@ PEOPLE ▾
   ├ Researchers                     → people.html#current
   └ Alumni                          → people.html#alumni
 RESEARCH ▾
-  ├ Overview                        → research.html#areas
+  ├ Areas                           → research.html#areas
   ├ Facilities                      → research.html#equipment
   └ Projects                        → research.html#projects
 PUBLICATIONS ▾
   ├ Journal                         → publications.html#journal
   ├ Conference                      → publications.html#conference
   └ Patent                          → publications.html#patent
-NEWS ▾
+ACTIVITIES ▾
   ├ News                            → news.html#feed
   └ Gallery                         → gallery.html#albums
 JOIN US                             → join.html
@@ -288,10 +297,10 @@ CONTACT                             → contact.html
 ```
 
 - 1단계 메뉴는 **대문자**로 표기한다. 드롭다운 항목은 일반 표기.
-- 드롭다운은 **PEOPLE, RESEARCH, PUBLICATIONS, NEWS 네 곳**이다.
+- 드롭다운은 **PEOPLE, RESEARCH, PUBLICATIONS, ACTIVITIES 네 곳**이다.
   앞 세 곳의 하위 항목은 **같은 페이지의 앵커**로 연결한다.
-  **NEWS 만 예외**로, Gallery 가 별도 파일(`gallery.html`)이다 — 사진이 무거워
-  소식과 같은 페이지에 두면 NEWS 가 느려지기 때문이다.
+  **ACTIVITIES 만 예외**로, Gallery 가 별도 파일(`gallery.html`)이다 — 사진이 무거워
+  소식과 같은 페이지에 두면 느려지기 때문이다.
   대메뉴와 다른 파일인 하위 항목은 `common.js` 의 `pageLabel()` 이
   그 항목의 라벨로 제목 밴드를 채운다.
 - HOME, JOIN US, CONTACT 는 하위 항목이 없다. 한 번에 해당 페이지로 간다.
@@ -307,7 +316,7 @@ CONTACT                             → contact.html
 | Professor | Professor | `members.js` (`role: professor`) | `#professor` |
 | Researchers | Researchers | `members.js` | `#current` |
 | Alumni | Alumni | `members.js` (`role: alumni`) | `#alumni` |
-| Overview | Research Areas | `research.js` | `#areas` |
+| Areas | Research Topics | `research.js` | `#areas` |
 | Facilities | Facilities | `equipment.js` | `#equipment` |
 | Projects | Research Projects | `projects.js` | `#projects` |
 | Journal | International / Domestic Journal | `publications.js` (`type: journal`) | `#journal` |
@@ -589,8 +598,11 @@ const NEWS = [
 
 ### 기타
 
-- `research.js` — 연구분야 3~5개. 제목, 두 줄 요약(`summary`),
-  세부 주제 목록(`topics`, 한 줄씩 문자열), 설명(한 문단), 대표 이미지.
+- `research.js` — 연구분야 3~5개(현재 4개). 제목, 두 줄 요약(`summary`),
+  세부 주제 목록(`topics`, 한 줄씩 문자열), 설명(`description`, 여러 문단은 `\n` 으로 가른다),
+  대표 이미지(`image`), 상세 페이지에 더 붙일 이미지(`images`, 한 장씩 `{ src, caption }`).
+  `hidden: true` 를 두면 목록·상세·이동 버튼 어디에도 나오지 않는다.
+  관계도(`overview.svg`)에는 그대로 남으므로, 내용이 준비되면 그 줄만 지우면 살아난다.
   **분야는 방법론 축으로 잡는다.** 응용 대상(xEV · 로봇 · 가전 등)은 분야마다
   겹치므로 같은 파일의 `APPLICATIONS` 배열(묶음명 + 항목)에 따로 둔다
 - `equipment.js` — 장비명, 사양, 사진
@@ -706,11 +718,22 @@ Korea Automotive Technology Institute (KATECH)      currentPosition. 비우면 �
 ### RESEARCH (research.html)
 
 ```
-#areas          — 방법론 분야 카드. 요약 + 세부 주제 목록 + 한 문단 설명
+#areas          — 관계도(Overview) + 분야 카드(Research Topics). 카드는 제목과 요약만
 #applications   — 응용 대상. #areas 안의 하단 블록으로, 묶음별 태그 나열
 #equipment      — 장비명, 사양, 사진 (지금은 주석으로 감췄 둘)
 #projects       — 아래 규칙에 따름
 ```
+
+**분야의 내용은 `research-area.html` 이 맡는다.** 카드를 누르면 그리로 간다.
+주소의 `#해시`가 곧 분야의 `id` 이고, 한 페이지가 네 분야를 모두 그린다.
+
+- 대표 그림은 **21:9** 로 만든다. 목록 카드와 상세 페이지 배너가 모두 이 비율이라
+  그대로 들어간다. 세부 그림은 비율이 자유이나, **한 분야 안의 두 장은 세로를 맞춘다** —
+  폭은 칸에 꽉 차므로 비율이 다르면 높이가 어긋나 보인다
+- 세부 주제 목록의 소제목은 `SITE.ui.topics`(현재 `Subjects`)다.
+  목록 쪽 `Research Topics` 와 말이 겹치지 않게 다른 낱말로 둔다
+- 이전·다음 버튼은 주소의 해시만 바꾼다. 브라우저가 문서를 다시 읽지 않으므로
+  `render.js` 의 `researchArea()` 가 `hashchange` 를 듣고 직접 다시 그린다
 
 **연구분야와 응용 대상은 다른 축이다.** 분야는 방법론(해석 · 설계 · 시스템 · SW)으로 세우고,
 응용 대상(모빌리티 · 로봇 · 가전 · 산업)은 모든 분야를 가로지르므로 카드에 섞지 않고
