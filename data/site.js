@@ -297,7 +297,7 @@ const SITE = {
     period:     "Period",
     viewAll:    "View all",
     readMore:   "Read more",
-    topics:     "Topics",
+    topics:     "Subjects",
     prevArea:   "Previous",
     nextArea:   "Next",
     scrollDown: "Scroll down",
