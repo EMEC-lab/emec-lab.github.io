@@ -412,8 +412,10 @@ var Render = (function () {
     if (!areas.length) { host.innerHTML = emptyNote(); return; }
 
     /* 카드 폭은 전부 같다 (중요도 차이를 만들지 않는다).
-       flex wrap 이라 마지막 줄(2장)이 저절로 가운데 정렬된다 */
-    var CARD_W = ' w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)]';
+       한 줄에 두 장씩 놓아 2x2 로 앉힌다. 분야 그림이 글자가 많은 종합 도해라
+       세 장씩 놓으면 카드가 좁아져 그림이 읽히지 않는다.
+       flex wrap 이라 분야가 홀수가 되어도 마지막 한 장이 가운데로 모인다 */
+    var CARD_W = ' w-full sm:w-[calc(50%-10px)]';
     host.innerHTML = areas.map(function (a) {
       return '<a href="research.html#' + esc(a.id) + '"' +
         ' class="card-hover group flex flex-col overflow-hidden rounded-lg border border-slate-200 bg-white hover:border-primary-mid' + CARD_W + '">' +
