@@ -1815,6 +1815,15 @@ var Render = (function () {
 
     var tel = String(SITE.phone || '').replace(/[^+0-9]/g, '');
 
+    /* 호실은 주소 아래에 따로 세운다. 방마다 같은 주소를 되풀이하지 않는다 */
+    var rooms = (SITE.address.rooms || []).map(function (r) {
+      return '<div class="flex gap-3">' +
+        '<span class="w-14 shrink-0 font-semibold text-slate-700">' + esc(r.no) + '</span>' +
+        '<span class="text-slate-700">' + esc(r.use) +
+          (r.useKo ? ' <span class="text-slate-500">' + esc(r.useKo) + '</span>' : '') +
+        '</span></div>';
+    }).join('');
+
     var info =
       '<dl class="space-y-5 text-sm">' +
         '<div>' +
@@ -1822,6 +1831,7 @@ var Render = (function () {
           '<dd class="mt-1.5 leading-relaxed text-slate-700">' +
             esc(String(SITE.address.full).replace(/\n/g, ' ')) + '</dd>' +
           '<dd class="mt-1 leading-relaxed text-slate-500">' + esc(SITE.address.fullKo) + '</dd>' +
+          (rooms ? '<dd class="mt-3 space-y-1 border-t border-slate-200 pt-3">' + rooms + '</dd>' : '') +
         '</div>' +
         '<div>' +
           '<dt class="text-xs font-bold uppercase tracking-wider2 text-primary">' + esc(SITE.ui.phone) + '</dt>' +

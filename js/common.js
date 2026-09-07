@@ -305,7 +305,14 @@ var Layout = (function () {
             '<p class="text-sm text-white/70">' + esc(SITE.labNameKo) + '</p>' +
             '<p class="mt-1 text-sm text-white/70">' + esc(SITE.department) + ', ' + esc(SITE.university) + '</p>' +
             '<dl class="mt-5 space-y-1.5 text-sm text-white/70">' +
-              contactRow(SITE.ui.address, esc(SITE.address.full).replace(/\n/g, '<br>')) +
+              /* 주소 뒤에 호실을 한 줄로 잇는다. 주소를 방마다 되풀이하지 않는다 */
+              contactRow(SITE.ui.address, esc(SITE.address.full).replace(/\n/g, '<br>') +
+                ((SITE.address.rooms || []).length
+                  ? '<br><span class="text-white/60">' +
+                    SITE.address.rooms.map(function (r) {
+                      return esc(r.no) + ' ' + esc(r.use);
+                    }).join(' · ') + '</span>'
+                  : '')) +
               contactRow(SITE.ui.phone,
                 '<a class="transition-colors hover:text-white" href="tel:' + esc(tel) + '">' + esc(SITE.phone) + '</a>') +
               contactRow(SITE.ui.email,

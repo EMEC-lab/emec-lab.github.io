@@ -27,9 +27,15 @@ const SITE = {
    * 폭이 좁은 CONTACT 페이지에서는 그냥 띄어쓰기로 이어진다.
    * 주소가 바뀌면 \n 위치도 보기 좋은 곳으로 옮기면 된다 */
   address: {
-    full:  "M417, Multimedia Building, Soonchunhyang University, 22 Soonchunhyang-ro,\nAsan-si, Chungcheongnam-do 31538, Republic of Korea",
-    fullKo: "충남 아산시 순천향로 22 순천향대학교 멀티미디어관 M417호",
-    short: "Multimedia Building, M417"
+    /* 호실만 다르고 나머지 주소는 같다. 방마다 주소를 되풀이하지 않도록 떼어 두었다.
+       방이 늘면 rooms 에 한 줄만 더한다 */
+    rooms: [
+      { no: "M417", use: "Professor's Office", useKo: "교수 연구실" },
+      { no: "M416", use: "Research Lab",       useKo: "학생 연구실" }
+    ],
+    full:  "Multimedia Building, Soonchunhyang University, 22 Soonchunhyang-ro,\nAsan-si, Chungcheongnam-do 31538, Republic of Korea",
+    fullKo: "충남 아산시 순천향로 22 순천향대학교 멀티미디어관",
+    short: "Multimedia Building, M417"    // 교수 프로필의 연구실 한 줄
   },
 
   phone: "041-530-1334",
