@@ -429,7 +429,9 @@ var Render = (function () {
        flex wrap 이라 분야가 홀수가 되어도 마지막 한 장이 가운데로 모인다 */
     var CARD_W = ' w-full sm:w-[calc(50%-10px)]';
     host.innerHTML = areas.map(function (a) {
-      return '<a href="research.html#' + esc(a.id) + '"' +
+      /* 그 분야의 상세로 바로 간다. research.html#<id> 로 보내면
+         해시를 알아보지 못해 Areas 탭 첫머리로만 떨어진다 */
+      return '<a href="research-area.html#' + esc(a.id) + '"' +
         ' class="card-hover group flex flex-col overflow-hidden rounded-lg border border-slate-200 bg-white hover:border-primary-mid' + CARD_W + '">' +
         /* 대표 그림이 21:9 다. 칸을 같은 비율로 두어야 좌우가 잘리지 않는다 */
         imageBox(a.image, a.title, 'aspect-[21/9]') +
@@ -893,13 +895,14 @@ var Render = (function () {
   /* --- 연구분야 상세 (research-area.html) -------------------------------
      주소의 #해시로 어느 분야인지 고른다. 해시가 없거나 모르는 값이면 첫 분야.
      common.js 가 해시를 INITIAL_HASH 로 떼어 두므로 그쪽을 먼저 본다 */
-  function researchAreaDetail() {
+  function researchAreaDetail(hashOverride) {
     var host = document.getElementById('area-detail');
     if (!host) return;
     var areas = visibleAreas();
     if (!areas.length) { host.innerHTML = emptyNote(); return; }
 
-    var hash = (typeof INITIAL_HASH !== 'undefined' && INITIAL_HASH) || window.location.hash;
+    var hash = hashOverride ||
+              (typeof INITIAL_HASH !== 'undefined' && INITIAL_HASH) || window.location.hash;
     var id = String(hash).replace(/^#/, '');
 
     var idx = 0;
@@ -1099,6 +1102,15 @@ var Render = (function () {
 
   function researchArea() {
     researchAreaDetail();
+
+    /* 이전·다음 버튼은 같은 문서의 해시만 바꾼다. 브라우저가 다시 읽지
+       않으므로 여기서 직접 새로 그린다. 화면은 맨 위에서 시작하고,
+       숨어 있던 요소를 다시 모아 검사해야 등장 연출이 살아난다 */
+    window.addEventListener('hashchange', function () {
+      researchAreaDetail(window.location.hash);
+      window.scrollTo(0, 0);
+      if (typeof Anim !== 'undefined' && Anim.refresh) Anim.refresh();
+    });
   }
 
   function research() {
