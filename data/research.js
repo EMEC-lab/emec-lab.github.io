@@ -59,64 +59,38 @@ const RESEARCH = [
     ]
   },
   {
-    id: "topology",
-    title: "Machine & Winding Topology",
-    summary: "Design across the family of rotating machines and their winding configurations, from conventional PM machines to magnetically geared and wound-field concepts.",
+    id: "machine-design",
+    title: "Electric Machine Design & Technology",
+    summary: "From the torque-speed requirement to a machine that can be built — topology and drive configuration, materials, and the manufacturing process.",
     topics: [
-      "Machine topology — SPMSM, IPMSM, induction and reluctance machines, inner- and outer-rotor machines, radial- and axial-flux machines",
-      "Advanced topology — dual-rotor and dual-stator machines, variable-flux machines, magnetic gears and magnetically geared machines, vernier machines, brushless wound-field synchronous machine (BL-WFSM)",
-      "Winding topology — open-end winding, multiplex winding",
-      "Winding changeover (Y-delta, series-parallel) for an extended operating range"
-    ],
-    description: "The right machine begins with the right topology. We design across the full family of rotating machines — surface-mounted and interior PM machines, induction and reluctance machines, inner- and outer-rotor structures, and radial- and axial-flux configurations — and extend to advanced concepts such as dual-rotor and dual-stator machines, variable-flux machines, magnetic gears and magnetically geared machines, vernier machines, and the brushless wound-field synchronous machine.\nThe winding is a topology of its own. Open-end and multiplex windings change what the inverter can do with the same iron, and winding changeover between Y and delta or between series and parallel reshapes the torque-speed envelope without adding a single lamination. Choosing the machine and the winding together is what turns a good cross-section into a machine that performs across its whole operating range.",
-    image: "images/research/set-topology-00.png",
-    images: [
-      { src: "images/research/set-topology-03.png",
-        caption: "Spoke-type flux-concentrating PMSM cross-section" },
-      { src: "images/research/set-topology-04.jpg",
-        caption: "Operating principle of a hybrid-flux machine" },
-      { src: "images/research/set-topology-05.jpg",
-        caption: "Design variables of a multi-layer ferrite IPMSM rotor" },
-      { src: "images/research/set-topology-01.png",
-        caption: "Series-parallel winding changeover for low- and high-speed modes" },
-      { src: "images/research/set-topology-02.png",
-        caption: "Efficiency map extended by winding changeover (dual 3-phase WFSM)" }
-    ]
-  },
-  {
-    id: "materials",
-    title: "Materials & Manufacturing",
-    summary: "Design that carries materials, manufacturing processes, and their unavoidable variation into the machine from the first sketch.",
-    topics: [
+      "Design process — sizing, parameter and characteristics analysis, and multi-physics verification under mechanical and electrical constraints",
+      "Machine topology — conventional machines (SPMSM, IPMSM, induction and reluctance machines, inner- and outer-rotor, radial- and axial-flux) and emerging machines (dual-rotor and dual-stator, variable-flux, magnetically geared, vernier, BL-WFSM)",
+      "Control and winding topology — sinusoidal and square-wave drive, winding changeover (Y-delta, series-parallel), dual three-phase winding, open-end winding",
       "Manufacturing technology — high slot-fill-factor winding, core stacking method, segmented core, heat dissipation (potting)",
-      "Materials technology — rare-earth-free machines, soft magnetic composite (SMC), next-generation electrical steel",
-      "Uncertainty analysis — geometric tolerance, material property variation"
+      "Materials technology — rare-earth-free machines, soft magnetic composite (SMC), next-generation electrical steel"
     ],
-    description: "Performance on the drawing and performance off the production line are not the same thing. We treat manufacturing as a design variable rather than a downstream constraint — high slot-fill-factor windings, core stacking methods, segmented cores, and potting for heat dissipation each change what the machine can be, and each has to be decided while the geometry is still open.\nMaterials carry the same weight. Rare-earth-free machines, soft magnetic composites, and next-generation electrical steels open design space that conventional laminated silicon steel and sintered magnets cannot reach, but they bring their own magnetic, thermal, and mechanical limits.\nAnd every dimension and every material property arrives with a spread. We quantify geometric tolerance and material property variation and trace how they propagate to torque ripple, cogging, and efficiency — so that the machine is judged by the distribution it will actually be manufactured into, not by its nominal point alone.",
-    image: "images/research/set-robust-00.png",
+    description: "A machine design begins with a requirement, not a cross-section. From the torque-speed-power envelope the application demands, and the spatial, thermal, voltage, and current limits the system imposes, we fix the pole-slot combination, the two-dimensional geometry, the axial length, and the number of armature turns — each step checked against those limits before the next one is taken — and carry the result through parameter and characteristics analysis to a performance the machine can be judged by.\nWhat that design can become depends on the topology available to it. We work across the conventional family of rotating machines — surface-mounted and interior PM machines, induction and reluctance machines, inner- and outer-rotor structures, and radial- and axial-flux configurations — and across emerging concepts such as dual-rotor and dual-stator machines, variable-flux machines, magnetically geared and vernier machines, and the brushless wound-field synchronous machine. The winding and the way it is driven form a topology of their own: open-end and dual three-phase windings change what the converter can do with the same iron, and winding changeover between series and parallel reshapes the torque-speed envelope without adding a single lamination.\nAnd the machine has to be built. We treat materials and manufacturing as design variables rather than downstream constraints — hairpin and other high slot-fill-factor windings, segmented, bonded, and welded cores, potting for heat dissipation, and materials such as dual-phase electrical steel, soft magnetic composites, bonded magnets, and rare-earth-free permanent magnets. Each opens design space that conventional laminated steel and sintered magnets cannot reach, and each brings magnetic, thermal, and mechanical limits that have to be decided while the geometry is still open.",
+    image: "images/research/design-overview.webp",
     images: [
-      { src: "images/research/set-robust-02.png",
-        caption: "Bonded-magnet manufacturing chain from powder to magnetized rotor" },
-      { src: "images/research/set-robust-05.jpg",
-        caption: "Welded versus bonded lamination stator prototypes" },
-      { src: "images/research/set-robust-04.png",
-        caption: "Irreversible demagnetization — operating points on the B-H curve" },
-      { src: "images/research/set-robust-03.png",
-        caption: "Measured stator segment radii versus the design value" }
+      { src: "images/research/design-topology.webp",
+        caption: "Control and machine topology — drive scheme and winding configuration, and machines from the conventional family to emerging concepts" },
+      { src: "images/research/design-material.webp",
+        caption: "Manufacturing and material technology — core and winding processes, and next-generation magnetic materials" }
     ]
   },
   {
     id: "design-methods",
-    title: "Data-driven & System-aware Design",
+    title: "System-aware & Data-driven Design",
     summary: "How the design is found — optimization on multi-fidelity surrogate models, and machine design driven by the system it serves.",
     topics: [
       "Multi-objective optimization",
       "Multi-fidelity surrogate model — multi-fidelity Gaussian process regression, deep transfer learning",
+      "Uncertainty analysis — geometric tolerance, material property variation",
       "Robust design optimization",
       "System-aware machine design — operating-profile-based efficiency design",
       "Thermal management — derating strategy, thermal margin estimation"
     ],
-    description: "Two questions decide how a design is found: how to search the space, and what to judge the result against.\nOn the search side, a single finite element evaluation is expensive, so we build multi-fidelity surrogate models that learn from a large body of cheap low-fidelity results and a handful of expensive high-fidelity ones — multi-fidelity Gaussian process regression and deep transfer learning — and run multi-objective optimization on the surrogate instead of the solver. This is also what makes robust design optimization affordable: finding a design insensitive to tolerance and material spread means evaluating not one candidate but the distribution around it.\nOn the judging side, a machine is judged in the system it drives — a traction motor in the vehicle, a joint motor in the robot. We model the complete electric drive system and translate operating profiles into distributions of points on the torque-speed plane, then shape the machine so its efficiency sits where the energy is actually spent. The same profile decides the thermal question, so derating strategy and thermal margin are designed together with the machine rather than checked afterwards.",
+    description: "Two questions decide how a design is found: how to search the space, and what to judge the result against.\nOn the search side, a single finite element evaluation is expensive, so we build multi-fidelity surrogate models that learn from a large body of cheap low-fidelity results and a handful of expensive high-fidelity ones — multi-fidelity Gaussian process regression and deep transfer learning — and run multi-objective optimization on the surrogate instead of the solver. This is also what makes robust design optimization affordable. Every dimension and every material property arrives with a spread, so we quantify geometric tolerance and material property variation, trace how they propagate to torque ripple, cogging, and efficiency, and search for a design judged by that distribution rather than by its nominal point alone.\nOn the judging side, a machine is judged in the system it drives — a traction motor in the vehicle, a joint motor in the robot. We model the complete electric drive system and translate operating profiles into distributions of points on the torque-speed plane, then shape the machine so its efficiency sits where the energy is actually spent. The same profile decides the thermal question, so derating strategy and thermal margin are designed together with the machine rather than checked afterwards.",
     image: "images/research/set-system-00.png",
     images: [
       { src: "images/research/set-robust-01.png",
