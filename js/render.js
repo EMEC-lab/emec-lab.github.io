@@ -419,7 +419,8 @@ var Render = (function () {
     host.innerHTML = areas.map(function (a) {
       return '<a href="research.html#' + esc(a.id) + '"' +
         ' class="card-hover group flex flex-col overflow-hidden rounded-lg border border-slate-200 bg-white hover:border-primary-mid' + CARD_W + '">' +
-        imageBox(a.image, a.title, 'aspect-[16/10]') +
+        /* 대표 그림이 21:9 다. 칸을 같은 비율로 두어야 좌우가 잘리지 않는다 */
+        imageBox(a.image, a.title, 'aspect-[21/9]') +
         '<div class="flex flex-1 flex-col p-5">' +
           '<h3 class="text-base font-bold text-slate-900 group-hover:text-primary">' + esc(a.title) + '</h3>' +
           '<p class="mt-2 text-sm leading-relaxed text-slate-600">' + esc(a.summary) + '</p>' +
