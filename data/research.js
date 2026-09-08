@@ -32,7 +32,7 @@ const RESEARCH = [
       "Torque and electromagnetic excitation force",
       "Control scheme — sinusoidal and square-wave drive, current harmonics, current vector control, sensorless control"
     ],
-    description: "Every design decision rests on knowing what the machine will actually do. We develop and combine analysis methods across the full spectrum of fidelity — from analytical models such as space-harmonic and equivalent-magnetic-circuit methods that capture machine behavior in seconds, to finite element analysis that resolves local saturation and loss distribution in detail.\nFrom the field we estimate what the machine is judged by: losses and efficiency over the whole operating range, average torque and its ripple, and the electromagnetic excitation forces that later decide how the machine sounds and how long it survives.\nA machine is also never driven by an ideal current source. We reflect the control scheme in the analysis itself — sinusoidal and square-wave drive and the current harmonics they impose, current vector control, and sensorless operation — so that the estimated characteristics are the ones the machine will show on the bench, not on paper.",
+    description: "목적에 맞는 정밀도로 자기장을 푼다 — 공간고조파·등가자기회로 같은 해석적 방법으로 수 초 만에, 유한요소해석으로 국부 포화와 손실 분포까지\n여기서 기기의 성적표가 나온다 — 전 운전영역의 손실과 효율, 평균 토크와 맥동, 소음과 수명을 좌우하는 전자기 가진력\n기기는 이상적인 전류원으로 돌지 않는다 — 정현파·구형파 구동과 그때의 전류 고조파, 전류벡터 제어, 센서리스 운전을 해석에 함께 넣는다",
     image: "images/research/analysis-overview.webp",
     images: [
       { src: "images/research/analysis-analytical.webp",
@@ -49,7 +49,7 @@ const RESEARCH = [
       "Thermal analysis — lumped-parameter thermal network (LPTN) and cooling methods",
       "Structural and NVH analysis — rotor stress, rotor dynamics"
     ],
-    description: "The electromagnetic field is where the analysis starts, not where it ends. Losses become heat, and electromagnetic excitation forces become stress, deflection, and sound. A machine that is efficient but runs too hot, or quiet on the test bench but structurally marginal at overspeed, is not a finished design.\nOn the thermal side we build lumped-parameter thermal networks that resolve the path from copper and iron losses through the slot, the stack, and the housing to the coolant, and evaluate cooling methods against the duty the machine will actually see.\nOn the mechanical side we carry the same electromagnetic result into rotor stress at maximum speed, into rotor dynamics and critical speeds, and into the vibration and noise that the excitation force orders produce in the stator structure.",
+    description: "전자기 해석은 시작일 뿐이다 — 손실은 열이 되고, 가진력은 응력·진동·소음이 된다\n열: 손실이 슬롯과 적층, 하우징을 거쳐 냉각재까지 가는 경로를 등가회로로 푼다. 냉각 방식은 실제 운전 조건으로 평가한다\n구조: 최고속도에서의 회전자 응력, 회전체 동역학과 위험속도, 가진력 차수가 고정자에 만드는 진동과 소음",
     image: "images/research/coupled-overview.webp",
     images: [
       { src: "images/research/coupled-thermal.webp",
@@ -69,7 +69,7 @@ const RESEARCH = [
       "Manufacturing technology — high slot-fill-factor winding, core stacking method, segmented core, heat dissipation (potting)",
       "Materials technology — rare-earth-free machines, soft magnetic composite (SMC), next-generation electrical steel"
     ],
-    description: "A machine design begins with a requirement, not a cross-section. From the torque-speed-power envelope the application demands, and the spatial, thermal, voltage, and current limits the system imposes, we fix the pole-slot combination, the two-dimensional geometry, the axial length, and the number of armature turns — each step checked against those limits before the next one is taken — and carry the result through parameter and characteristics analysis to a performance the machine can be judged by.\nWhat that design can become depends on the topology available to it. We work across the conventional family of rotating machines — surface-mounted and interior PM machines, induction and reluctance machines, inner- and outer-rotor structures, and radial- and axial-flux configurations — and across emerging concepts such as dual-rotor and dual-stator machines, variable-flux machines, magnetically geared and vernier machines, and the brushless wound-field synchronous machine. The winding and the way it is driven form a topology of their own: open-end and dual three-phase windings change what the converter can do with the same iron, and winding changeover between series and parallel reshapes the torque-speed envelope without adding a single lamination.\nAnd the machine has to be built. We treat materials and manufacturing as design variables rather than downstream constraints — hairpin and other high slot-fill-factor windings, segmented, bonded, and welded cores, potting for heat dissipation, and materials such as dual-phase electrical steel, soft magnetic composites, bonded magnets, and rare-earth-free permanent magnets. Each opens design space that conventional laminated steel and sintered magnets cannot reach, and each brings magnetic, thermal, and mechanical limits that have to be decided while the geometry is still open.",
+    description: "요구 조건에서 출발한다 — 토크·출력·속도 곡선, 그리고 시스템이 주는 공간·온도·전압·전류 한계\n극·슬롯 조합 → 2차원 형상 → 축장 → 권선 턴수 순으로 정하고, 매 단계를 한계와 대조한 뒤 특성 해석으로 성능을 확인한다\n쓸 수 있는 형상이 설계의 폭을 정한다 — 통상형 기기부터 이중회전자·이중고정자, 가변자속, 자기기어, 버니어, BL-WFSM 까지\n권선과 구동 방식도 형상이다 — 개방권선과 이중 3상은 같은 철심으로 인버터가 할 수 있는 일을 바꾸고, 직렬-병렬 절체는 적층 한 장 없이 토크-속도 영역을 넓힌다\n재료와 공정은 나중에 따지는 제약이 아니라 설계 변수다 — 헤어핀 권선, 분할·접착·용접 코어, 포팅, 이상 전기강판, SMC, 본드자석, 희토류 프리 자석",
     image: "images/research/design-overview.webp",
     images: [
       { src: "images/research/design-topology.webp",
@@ -90,7 +90,7 @@ const RESEARCH = [
       "System-aware machine design — operating-profile-based efficiency design",
       "Thermal management — derating strategy, thermal margin estimation"
     ],
-    description: "Two questions decide how a design is found: how to search the space, and what to judge the result against.\nOn the search side, a single finite element evaluation is expensive, so we build multi-fidelity surrogate models that learn from a large body of cheap low-fidelity results and a handful of expensive high-fidelity ones — multi-fidelity Gaussian process regression and deep transfer learning — and run multi-objective optimization on the surrogate instead of the solver. This is also what makes robust design optimization affordable. Every dimension and every material property arrives with a spread, so we quantify geometric tolerance and material property variation, trace how they propagate to torque ripple, cogging, and efficiency, and search for a design judged by that distribution rather than by its nominal point alone.\nOn the judging side, a machine is judged in the system it drives — a traction motor in the vehicle, a joint motor in the robot. We model the complete electric drive system and translate operating profiles into distributions of points on the torque-speed plane, then shape the machine so its efficiency sits where the energy is actually spent. The same profile decides the thermal question, so derating strategy and thermal margin are designed together with the machine rather than checked afterwards.",
+    description: "유한요소해석 한 번이 비싸다 — 값싼 저정확도 결과 다수와 비싼 고정확도 결과 소수를 함께 배우는 다중 정확도 대체모델을 세운다 (다중 정확도 가우시안 과정 회귀, 심층 전이학습)\n탐색은 해석기가 아니라 대체모델 위에서 한다. 강건 최적화도 이 위에서만 감당된다 — 후보 하나가 아니라 그 주변의 분포를 평가해야 하기 때문이다\n공차와 재료 물성의 편차가 토크 맥동·코깅·효율로 번지는 경로를 추적하고, 도면 위 한 점이 아니라 양산될 분포로 설계를 판정한다\n기기는 그것이 구동하는 시스템 안에서 평가된다 — 차량의 견인전동기, 로봇의 관절전동기. 운전 프로파일을 토크-속도 평면의 분포로 옮기고, 에너지가 실제로 쓰이는 자리에 효율을 맞춘다\n같은 프로파일이 열 문제도 정한다 — 디레이팅 전략과 열 여유를 기기와 함께 설계한다",
     image: "images/research/method-overview.webp",
     images: [
       { src: "images/research/method-system.webp",
@@ -112,7 +112,7 @@ const RESEARCH = [
       "Design automation — batch analysis and evaluation",
       "In-house characteristic analysis programs"
     ],
-    description: "A good design method deserves to run without a person clicking through every step. We build in-house tools that automate the loop from parametric geometry and meshing, through batch analysis, to post-processing and evaluation — so a design space that once took weeks to explore can be swept overnight.\nThis automation is what lets the rest of our research scale. Optimization, uncertainty quantification, and system-level studies all stand on the ability to generate, analyze, and evaluate thousands of candidate designs automatically.",
+    description: "좋은 설계 방법이라도 사람이 매 단계를 눌러야 하면 규모가 나오지 않는다\n파라메트릭 형상과 메시 생성부터 일괄 해석, 후처리와 평가까지 하나의 흐름으로 자동화한다\n이 자동화가 나머지 연구의 규모를 정한다 — 최적화, 불확실성 정량화, 시스템 단위 검토 모두 수천 개 후보를 자동으로 돌릴 수 있어야 성립한다",
     image: "images/research/set-automation-00.png",
     images: [
       { src: "images/research/set-automation-01.jpg",
