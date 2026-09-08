@@ -26,7 +26,7 @@
     <!-- 페이지 제목 밴드: common.js 가 SITE.menu 에서 채운다 -->
     <div id="page-head"></div>
 
-    <!-- 섹션 탭 [Journal] [Conference] [Patent]
+    <!-- 섹션 탭 [Journal] [Conference] [Patent] [Invited Talk]
          버튼과 건수는 render.js 가 PUBLICATIONS 를 집계해 만든다 -->
     <div id="page-tabs"></div>
 
@@ -50,6 +50,14 @@
     <section id="patent" class="scroll-mt-24">
       <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
         <div id="pub-patent"></div>
+      </div>
+    </section>
+
+    <!-- 초청강연. 데이터는 PUBLICATIONS 가 아니라
+         members.js 의 교수 항목 talks 에 있다 (render.js 의 talksOf 참조) -->
+    <section id="talk" class="scroll-mt-24">
+      <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+        <div id="pub-talk"></div>
       </div>
     </section>
 

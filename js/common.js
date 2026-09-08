@@ -120,7 +120,8 @@ var NAV = [
     children: [
       { key: 'journal',    page: 'publications', href: 'publications.html#journal' },
       { key: 'conference', page: 'publications', href: 'publications.html#conference' },
-      { key: 'patent',     page: 'publications', href: 'publications.html#patent' }
+      { key: 'patent',     page: 'publications', href: 'publications.html#patent' },
+      { key: 'talk',       page: 'publications', href: 'publications.html#talk' }
     ]
   },
   {

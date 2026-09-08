@@ -704,7 +704,9 @@ var Render = (function () {
       items.map(function (p) { return publicationItem(p); }).join('') + '</ul>';
   }
 
-  function yearBlocks(list) {
+  /* itemsFn 을 주면 항목 모양만 갈아 끼울 수 있다 (초청강연이 이걸 쓴다) */
+  function yearBlocks(list, itemsFn) {
+    var renderItems = itemsFn || pubItems;
     var openFrom = openFromYear();
     var groups = groupByYear(list);
 
@@ -713,7 +715,7 @@ var Render = (function () {
 
     var html = thisYear.map(function (g) {
       return '<div class="mt-8 first:mt-0">' +
-        disclosure(pubHead(g.year, g.items.length), PUB_HEAD_CLS, pubItems(g.items), true) +
+        disclosure(pubHead(g.year, g.items.length), PUB_HEAD_CLS, renderItems(g.items), true) +
       '</div>';
     }).join('');
 
@@ -731,7 +733,7 @@ var Render = (function () {
     /* 올해 것이 하나도 없으면(예: 특허) 이 묶음을 펼쳐 둔다.
        안 그러면 탭을 열자마자 빈 화면처럼 보인다 */
     return html + '<div class="mt-8 first:mt-0">' +
-      disclosure(pubHead(label, items.length), PUB_HEAD_CLS, pubItems(items), !html) +
+      disclosure(pubHead(label, items.length), PUB_HEAD_CLS, renderItems(items), !html) +
     '</div>';
   }
 
@@ -807,13 +809,65 @@ var Render = (function () {
     '</span>';
   }
 
+  /* --- 초청강연 --------------------------------------------------------
+     데이터는 PUBLICATIONS 가 아니라 교수 프로필(members.js 의 talks)에 있다.
+     초청강연은 연구실의 산출물이 아니라 지도교수 개인의 활동이라 그쪽이 제자리다.
+     화면에서만 ACHIEVEMENTS 로 끌어와 논문과 같은 규칙으로 보여 준다
+     (올해는 펼치고 그 이전은 ~작년 한 덩어리). 항목 모양만 다르다 */
+  function talksOf() {
+    if (typeof MEMBERS === 'undefined') return [];
+    var prof = MEMBERS.filter(function (m) { return m.role === 'professor'; })[0];
+    return ((prof && prof.talks) || []).map(function (t) {
+      return { date: t.date, host: t.host, title: t.title,
+               year: Number(String(t.date).slice(0, 4)) };
+    }).sort(function (a, b) {
+      return a.date < b.date ? 1 : (a.date > b.date ? -1 : 0);
+    });
+  }
+
+  function talkItems(items) {
+    return '<ul class="divide-y divide-slate-200">' +
+      items.map(function (t) {
+        return '<li class="py-3 sm:flex sm:gap-4">' +
+          '<span class="' + DATE_COL + '">' + esc(Util.formatDate(t.date)) + '</span>' +
+          '<span class="block min-w-0 leading-relaxed">' +
+            '<span class="text-slate-700">' + esc(t.title) + '</span>' +
+            (t.host ? '<span class="mt-0.5 block text-xs text-slate-500">' +
+              esc(t.host) + '</span>' : '') +
+          '</span>' +
+        '</li>';
+      }).join('') + '</ul>';
+  }
+
+  function renderTalks() {
+    var host = document.getElementById('pub-talk');
+    if (!host) return 0;
+
+    var list = talksOf();
+    if (!list.length) { host.innerHTML = emptyNote(); return 0; }
+
+    host.innerHTML =
+      '<section class="reveal mt-16 first:mt-0">' +
+        '<h2 class="mb-8 flex flex-wrap items-baseline gap-x-3 text-2xl font-bold' +
+          ' tracking-tight text-slate-900 sm:text-3xl">' +
+          esc(SITE.sectionTitles.talks) +
+          '<span class="font-mono text-base font-semibold text-slate-400">' +
+            esc(list.length) + '</span>' +
+        '</h2>' +
+        yearBlocks(list, talkItems) +
+      '</section>';
+
+    return list.length;
+  }
+
   function publications() {
     var counts = {};
     PUBLICATION_TYPES.forEach(function (t) { counts[t] = renderPubType(t); });
+    counts.talk = renderTalks();
 
     /* 한 번에 한 종류만 보여 준다. 첫 탭(Journal)이 기본이다 */
     sectionTabs({
-      tabs: PUBLICATION_TYPES.map(function (t) {
+      tabs: PUBLICATION_TYPES.concat(['talk']).map(function (t) {
         return { key: t, label: SITE.submenu[t], count: counts[t] };
       })
     });
@@ -1385,8 +1439,7 @@ var Render = (function () {
           periodList(sortedBy(prof.activities, function (x) { return x.period; }), 'role')) +
         profileBlock(SITE.people.memberships,
           periodList(sortedBy(prof.memberships, function (x) { return x.period; }), null)) +
-        profileBlock(SITE.people.talks,
-          talkList(sortedBy(prof.talks, function (x) { return x.date; }))) +
+        /* 초청강연은 ACHIEVEMENTS 의 Invited Talk 탭으로 옮겼다 (renderTalks) */
       '</div>';
   }
 

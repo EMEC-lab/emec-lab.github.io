@@ -75,7 +75,7 @@ const SITE = {
     home:         "HOME",
     people:       "PEOPLE",
     research:     "RESEARCH",
-    publications: "PUBLICATIONS",
+    publications: "ACHIEVEMENTS",
     news:         "ACTIVITIES",   // 하위에 News · Gallery 를 둘 다 덮는 이름
     join:         "JOIN US",
     contact:      "CONTACT"
@@ -91,6 +91,7 @@ const SITE = {
     journal:    "Journal",
     conference: "Conference",
     patent:     "Patent",
+    talk:       "Invited Talk",
     news:       "News",
     gallery:    "Gallery"
   },
@@ -107,6 +108,7 @@ const SITE = {
     ongoing:    "Ongoing",
     completed:  "Completed",
     location:   "Location",
+    talks:      "Invited Talks",   // ACHIEVEMENTS 의 초청강연 묶음 제목
     gallery:    "Gallery"
   },
 
