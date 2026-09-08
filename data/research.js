@@ -91,24 +91,12 @@ const RESEARCH = [
       "Thermal management — derating strategy, thermal margin estimation"
     ],
     description: "Two questions decide how a design is found: how to search the space, and what to judge the result against.\nOn the search side, a single finite element evaluation is expensive, so we build multi-fidelity surrogate models that learn from a large body of cheap low-fidelity results and a handful of expensive high-fidelity ones — multi-fidelity Gaussian process regression and deep transfer learning — and run multi-objective optimization on the surrogate instead of the solver. This is also what makes robust design optimization affordable. Every dimension and every material property arrives with a spread, so we quantify geometric tolerance and material property variation, trace how they propagate to torque ripple, cogging, and efficiency, and search for a design judged by that distribution rather than by its nominal point alone.\nOn the judging side, a machine is judged in the system it drives — a traction motor in the vehicle, a joint motor in the robot. We model the complete electric drive system and translate operating profiles into distributions of points on the torque-speed plane, then shape the machine so its efficiency sits where the energy is actually spent. The same profile decides the thermal question, so derating strategy and thermal margin are designed together with the machine rather than checked afterwards.",
-    image: "images/research/set-system-00.png",
+    image: "images/research/method-overview.webp",
     images: [
-      { src: "images/research/set-robust-01.png",
-        caption: "Cogging torque distribution before and after robust design optimization" },
-      { src: "images/research/set-analysis-06.png",
-        caption: "Deep transfer learning pipeline linking 2-D and 3-D FEA" },
-      { src: "images/research/set-automation-05.png",
-        caption: "Prediction accuracy with and without transfer learning" },
-      { src: "images/research/set-system-03.png",
-        caption: "Vehicle simulation model from drive cycle to wheels" },
-      { src: "images/research/set-system-04.jpg",
-        caption: "Road-load force decomposition on a gradient" },
-      { src: "images/research/set-system-01.jpg",
-        caption: "Operating points on the torque-speed plane" },
-      { src: "images/research/set-system-02.png",
-        caption: "Efficiency maps with operating points, before and after improvement" },
-      { src: "images/research/set-system-05.jpg",
-        caption: "Measured joint velocity and torque trajectories of a wearable robot" }
+      { src: "images/research/method-system.webp",
+        caption: "System model-based design — e-powertrain analysis over a driving cycle, and actuator sizing for robot joints" },
+      { src: "images/research/method-datadriven.webp",
+        caption: "Multi-fidelity surrogate model-based optimization, and robust design optimization under variable uncertainty" }
     ]
   },
   {
