@@ -27,10 +27,13 @@ const RESEARCH = [
     title: "Electromagnetic Field & Characteristics Analysis",
     summary: "Field, loss, torque, and force estimation across the full range of fidelity — with the current harmonics the drive actually imposes.",
     topics: [
-      "Electromagnetic field analysis — analytical methods (space harmonic, equivalent magnetic circuit) and finite element analysis",
-      "Loss and efficiency estimation over the whole operating range",
-      "Torque and electromagnetic excitation force",
-      "Control scheme — sinusoidal and square-wave drive, current harmonics, current vector control, sensorless control"
+      "전자기장 해석",
+      "공간고조파법 · 등가자기회로",
+      "유한요소해석 (2D · 3D)",
+      "손실 및 효율",
+      "토크 및 토크 맥동",
+      "전자기 가진력",
+      "전류벡터 제어 · 센서리스 운전"
     ],
     description: "해석적 기법과 유한요소해석의 병행 — 공간고조파법·등가자기회로에 의한 초기 탐색, 유한요소해석에 의한 국부 포화 및 손실 분포 규명\n전 운전영역 특성 산출 — 손실 및 효율, 평균 토크와 토크 맥동, 소음·수명을 좌우하는 전자기 가진력\n실제 구동 조건 반영 — 정현파·구형파 구동에 따른 전류 고조파, 전류벡터 제어, 센서리스 운전",
     image: "images/research/analysis-overview.webp",
@@ -46,8 +49,12 @@ const RESEARCH = [
     title: "Coupled-field Analysis",
     summary: "Where the electromagnetic result crosses into other physics — losses into heat, excitation forces into stress, vibration, and noise.",
     topics: [
-      "Thermal analysis — lumped-parameter thermal network (LPTN) and cooling methods",
-      "Structural and NVH analysis — rotor stress, rotor dynamics"
+      "열 해석",
+      "등가열회로 (LPTN)",
+      "냉각 방식",
+      "구조 해석 · 회전자 응력",
+      "회전체 동역학 · 위험속도",
+      "소음 · 진동 (NVH)"
     ],
     description: "전자기 해석 결과의 타 물리 영역 전달 — 손실은 열원으로, 전자기 가진력은 구조 응답의 입력으로\n열 해석 — 손실이 슬롯·적층·하우징을 거쳐 냉각재에 이르는 경로의 등가회로(LPTN) 구성, 운전 조건 기반 냉각 방식 평가\n구조·NVH 해석 — 최고속도 회전자 응력, 회전체 동역학 및 위험속도, 가진력 차수에 따른 고정자 진동·소음",
     image: "images/research/coupled-overview.webp",
@@ -63,11 +70,12 @@ const RESEARCH = [
     title: "Electric Machine Design & Technology",
     summary: "From the torque-speed requirement to a machine that can be built — topology and drive configuration, materials, and the manufacturing process.",
     topics: [
-      "Design process — sizing, parameter and characteristics analysis, and multi-physics verification under mechanical and electrical constraints",
-      "Machine topology — conventional machines (SPMSM, IPMSM, induction and reluctance machines, inner- and outer-rotor, radial- and axial-flux) and emerging machines (dual-rotor and dual-stator, variable-flux, magnetically geared, vernier, BL-WFSM)",
-      "Control and winding topology — sinusoidal and square-wave drive, winding changeover (Y-delta, series-parallel), dual three-phase winding, open-end winding",
-      "Manufacturing technology — high slot-fill-factor winding, core stacking method, segmented core, heat dissipation (potting)",
-      "Materials technology — rare-earth-free machines, soft magnetic composite (SMC), next-generation electrical steel"
+      "설계 절차 · 사이징",
+      "통상형 기기 (SPMSM · IPMSM · 유도기 · 릴럭턴스기)",
+      "신개념 기기 (이중회전자 · 가변자속 · 자기기어 · 버니어 · BL-WFSM)",
+      "권선 형상 · 권선 절체",
+      "제조 기술 (헤어핀 권선 · 분할코어 · 포팅)",
+      "재료 기술 (전기강판 · SMC · 희토류 프리 자석)"
     ],
     description: "요구 조건 정의 — 토크·출력·속도 곡선, 시스템이 부여하는 공간·온도·전압·전류 제약\n설계 절차 — 극·슬롯 조합, 2차원 형상, 축장, 전기자 권선 턴수의 순차 결정 및 특성 해석에 의한 성능 검증\n기기 형상 — 통상형 기기(SPMSM·IPMSM·유도기·릴럭턴스기)부터 신개념 기기(이중회전자·이중고정자, 가변자속, 자기기어, 버니어, BL-WFSM)까지\n권선 및 구동 형상 — 개방권선, 이중 3상 권선, 직렬-병렬 권선 절체를 통한 운전 영역 확장\n재료·제조 기술의 설계 변수화 — 헤어핀 권선, 분할·접착·용접 코어, 포팅, 이상 전기강판, 연자성 복합재(SMC), 본드자석, 희토류 프리 자석",
     image: "images/research/design-overview.webp",
@@ -83,12 +91,13 @@ const RESEARCH = [
     title: "System-aware & Data-driven Design",
     summary: "How the design is found — optimization on multi-fidelity surrogate models, and machine design driven by the system it serves.",
     topics: [
-      "Multi-objective optimization",
-      "Multi-fidelity surrogate model — multi-fidelity Gaussian process regression, deep transfer learning",
-      "Uncertainty analysis — geometric tolerance, material property variation",
-      "Robust design optimization",
-      "System-aware machine design — operating-profile-based efficiency design",
-      "Thermal management — derating strategy, thermal margin estimation"
+      "다목적 최적화",
+      "다중 정확도 대체모델",
+      "가우시안 과정 회귀 · 심층 전이학습",
+      "강건 최적화",
+      "불확실성 정량화 (기하 공차 · 재료 물성)",
+      "시스템 기반 설계 · 운전 프로파일",
+      "열 관리 · 디레이팅"
     ],
     description: "다중 정확도 대체모델 구축 — 저정확도 대량 데이터와 고정확도 소량 데이터의 결합 (다중 정확도 가우시안 과정 회귀, 심층 전이학습)\n대체모델 기반 다목적 최적화 — 해석기 직접 호출 대비 탐색 비용 절감, 강건 최적화 수행의 전제\n불확실성 정량화 — 기하 공차 및 재료 물성 편차가 토크 맥동·코깅토크·효율에 미치는 영향 추적, 공칭점이 아닌 분포 기준의 설계 판정\n시스템 관점 설계 — 차량·로봇의 운전 프로파일을 토크-속도 평면상 분포로 변환, 실사용 영역에 효율 정합\n열 관리 — 동일 프로파일에 기반한 디레이팅 전략 및 열적 여유 설계",
     image: "images/research/method-overview.webp",
@@ -108,9 +117,9 @@ const RESEARCH = [
     title: "Design Automation & In-house Software",
     summary: "In-house tools that run the loop from parametric modeling through batch analysis to evaluation.",
     topics: [
-      "Modeling automation — parametric geometry, mesh generation",
-      "Design automation — batch analysis and evaluation",
-      "In-house characteristic analysis programs"
+      "파라메트릭 모델링 · 메시 생성",
+      "일괄 해석 · 평가 자동화",
+      "자체 특성 해석 프로그램"
     ],
     description: "설계 절차 자동화 — 파라메트릭 형상 생성 및 메시 분할부터 일괄 해석, 후처리·평가까지 단일 흐름 구성\n자체 특성 해석 및 설계 프로그램 개발\n자동화가 확보하는 규모 — 최적화, 불확실성 정량화, 시스템 단위 검토 모두 수천 개 후보의 자동 평가를 전제",
     image: "images/research/set-automation-00.png",

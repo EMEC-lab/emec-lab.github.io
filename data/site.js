@@ -330,7 +330,7 @@ const SITE = {
     period:     "Period",
     viewAll:    "View all",
     readMore:   "Read more",
-    topics:     "Subjects",
+    topics:     "Keywords",
     prevArea:   "Previous",
     nextArea:   "Next",
     scrollDown: "Scroll down",
