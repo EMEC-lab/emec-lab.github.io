@@ -77,7 +77,7 @@ const SITE = {
     home:         "HOME",
     people:       "PEOPLE",
     research:     "RESEARCH",
-    publications: "PUBLICATIONS",
+    publications: "ACHIEVEMENTS",
     news:         "ACTIVITIES",   // 하위에 News · Gallery 를 둘 다 덮는 이름
     join:         "JOIN US",
     contact:      "CONTACT"
@@ -94,6 +94,7 @@ const SITE = {
     journal:    "Journal",
     conference: "Conference",
     patent:     "Patent",
+    talk:       "Invited Talk",
     news:       "News",
     gallery:    "Gallery"
   },
@@ -111,10 +112,12 @@ const SITE = {
     ongoing:    "Ongoing",
     completed:  "Completed",
     location:   "Location",
+    talks:      "Invited Talks",   // ACHIEVEMENTS 의 초청강연 묶음 제목
     gallery:    "Gallery"
   },
 
-  // PUBLICATIONS 의 묶음 제목. 판정 기준은 js/render.js 의 PUB_SPLITS
+  // ACHIEVEMENTS 의 묶음 제목. 판정 기준은 js/render.js 의 PUB_SPLITS
+  // 초청강연은 나눌 것이 없어 여기 두지 않고 sectionTitles.talks 를 쓴다
   pubGroups: {
     journal:    { international: "International Journal",    domestic:    "Domestic Journal" },
     conference: { international: "International Conference", domestic:    "Domestic Conference" },
@@ -285,10 +288,11 @@ RESEARCH ▾
   ├ Areas                           → research.html#areas
   ├ Facilities                      → research.html#equipment
   └ Projects                        → research.html#projects
-PUBLICATIONS ▾
+ACHIEVEMENTS ▾
   ├ Journal                         → publications.html#journal
   ├ Conference                      → publications.html#conference
-  └ Patent                          → publications.html#patent
+  ├ Patent                          → publications.html#patent
+  └ Invited Talk                    → publications.html#talk
 ACTIVITIES ▾
   ├ News                            → news.html#feed
   └ Gallery                         → gallery.html#albums
@@ -297,7 +301,7 @@ CONTACT                             → contact.html
 ```
 
 - 1단계 메뉴는 **대문자**로 표기한다. 드롭다운 항목은 일반 표기.
-- 드롭다운은 **PEOPLE, RESEARCH, PUBLICATIONS, ACTIVITIES 네 곳**이다.
+- 드롭다운은 **PEOPLE, RESEARCH, ACHIEVEMENTS, ACTIVITIES 네 곳**이다.
   앞 세 곳의 하위 항목은 **같은 페이지의 앵커**로 연결한다.
   **ACTIVITIES 만 예외**로, Gallery 가 별도 파일(`gallery.html`)이다 — 사진이 무거워
   소식과 같은 페이지에 두면 느려지기 때문이다.
@@ -322,6 +326,7 @@ CONTACT                             → contact.html
 | Journal | International / Domestic Journal | `publications.js` (`type: journal`) | `#journal` |
 | Conference | International / Domestic Conference | `publications.js` (`type: conference`) | `#conference` |
 | Patent | Granted Patent / Patent Application | `publications.js` (`type: patent`) | `#patent` |
+| Invited Talk | Invited Talks | `members.js` (교수의 `talks`) | `#talk` |
 | News | — | `news.js` | `#feed` |
 | Gallery | — | `gallery.js` | `#albums` |
 | JOIN US | — | `site.js` (`SITE.join`) | `#join` |
@@ -357,6 +362,16 @@ const MEMBERS = [
     // 경력은 반대로 기간이 맨 앞에 온다. 렌더러가 양쪽을 다 받는다
     career: [
       "2022.03 – Present, Assistant Professor, Department of Electrical Engineering, Soonchunhyang University, Asan"
+    ],
+
+    // 교수 전용. activities · memberships 는 career 와 같은 한 줄 문자열이다
+    activities: [], memberships: [],
+
+    // 초청강연. { date, host, title } 객체 배열.
+    // 데이터는 여기 있지만 화면에는 ACHIEVEMENTS 의 Invited Talk 탭에 나온다.
+    // 교수 프로필에는 더 이상 나오지 않는다 (7번 항목 참조)
+    talks: [
+      { date: "2026-06-10", host: "대구대학교", title: "고출력 밀도 전동기 설계를 위한 열등가회로 해석 기법" }
     ],
     scholar: "",
 
@@ -712,8 +727,10 @@ Korea Automotive Technology Institute (KATECH)      currentPosition. 비우면 �
 - **학력은 날짜를 앞에 두고 학위명을 굵게 한다.**
   데이터는 `"B.S., 학과, 학교, 도시, 2024.02"` 처럼 한 줄 문자열로 적고,
   렌더러(`datedList()`)가 끝의 년월을 떼 왜쪽 칸으로 옮긴다.
-  교수 페이지의 학력 · 경력 · 학회 활동 · 학회 회원 · 초청강연이 **모두 같은 날짜 칸**을 쓴다
-  (`render.js` 의 `DATE_COL` 한 곳에서 온다)
+  교수 페이지의 학력 · 경력 · 학회 활동 · 학회 회원이 **모두 같은 날짜 칸**을 쓴다
+  (`render.js` 의 `DATE_COL` 한 곳에서 온다). ACHIEVEMENTS 의 초청강연도 같은 칸이다
+- **초청강연은 교수 프로필에 두지 않는다.** ACHIEVEMENTS 의 `Invited Talk` 탭으로 옮겼다.
+  데이터는 그대로 `members.js` 의 교수 항목 `talks` 에 있다
 
 ### RESEARCH (research.html)
 
@@ -784,16 +801,27 @@ Korea Automotive Technology Institute (KATECH)      currentPosition. 비우면 �
 - 과제가 없는 그룹은 소제목째 렌더링하지 않는다 (빈 섹션 노출 금지)
 - **Completed 그룹은 접어 둔다.** 소제목을 누르면 펌쳐진다
 
-### PUBLICATIONS (publications.html)
+### ACHIEVEMENTS (publications.html)
 
 ```
 #journal      International Journal    / Domestic Journal
 #conference   International Conference / Domestic Conference
 #patent       Granted Patent           / Patent Application
+#talk         Invited Talks            (나누지 않는다)
 ```
 
-- 상단에 `[Journal] [Conference] [Patent]` 필터 버튼. **한 번에 한 종류만 보인다**
-  (첫 탭 Journal 이 기본. `All` 은 두지 않는다)
+**초청강연만 데이터가 다른 곳에 있다.** `publications.js` 가 아니라 `members.js` 의
+교수 항목 `talks` 다. 연구실의 산출물이 아니라 지도교수 개인의 활동이라 그쪽이 제자리이고,
+`publications.js` 에 `type: "talk"` 를 만들면 저자 · 학술지 같은 필드가 전부 빈 채로 남는다.
+화면에서만 끌어와 보여 준다 (`render.js` 의 `talksOf`).
+
+- 강연을 추가할 때는 `members.js` 의 `talks` 에 `{ date, host, title }` 한 줄을 넣는다
+- 접고 펴는 규칙 · 연도 묶음은 논문과 같다. 항목 모양만 다르다.
+  `yearBlocks(list, itemsFn)` 의 둘째 인자로 항목 렌더러를 갈아 끼운다
+- 파일 이름은 `publications.html` 그대로다. 바꾸면 링크와 북마크가 끊긴다
+
+- 상단에 `[Journal] [Conference] [Patent] [Invited Talk]` 필터 버튼.
+  **한 번에 한 종류만 보인다** (첫 탭 Journal 이 기본. `All` 은 두지 않는다)
 - 종류 제목(`Journal Papers` 등)은 따로 두지 않는다.
   위 표의 **묶음 이름이 그 페이지의 큰 제목**이다
 - 묶음 안에서 다시 **연도별 그룹핑**, 최신순
@@ -1003,7 +1031,7 @@ Korea Automotive Technology Institute (KATECH)      currentPosition. 비우면 �
 |---|---|
 | PEOPLE | 교수 블록 · 학위 소제목 · 카드 그리드(시차) |
 | RESEARCH | 연구분야 항목 · 장비 카드(시차) · 과제 목록 |
-| PUBLICATIONS | `International Journal` 같은 묶음 단위 |
+| ACHIEVEMENTS | `International Journal` 같은 묶음 단위 |
 | NEWS · GALLERY | 소식 피드 · 앨범 격자(시차) |
 | JOIN US · CONTACT | 본문 블록 |
 
