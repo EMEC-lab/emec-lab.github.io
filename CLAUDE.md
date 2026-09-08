@@ -905,6 +905,29 @@ Korea Automotive Technology Institute (KATECH)      currentPosition. 비우면 �
 - `images/` 폴더에 변환 스크립트를 두어 학생이 실행만 하면 되게 한다
 - 모든 `<img>`에 `alt` 속성과 `loading="lazy"` 부여
 
+**투명도가 있는 원본은 흰 바탕에 얹은 뒤 변환한다.** 그냥 줄이면 투명한 부분이 검게 나온다.
+파워포인트에서 뽑은 그림은 대개 투명도를 갖고 있다. `ffprobe` 로 `yuva420p` 가 나오면 그렇다.
+
+```bash
+ffmpeg -f lavfi -i color=white:s=1600x1600 -i in.webp \
+  -filter_complex "[1]scale=1600:1600:force_original_aspect_ratio=decrease[s];[0][s]overlay=(W-w)/2:(H-h)/2:shortest=1,format=yuv420p" \
+  -frames:v 1 -c:v libwebp -quality 92 out.webp
+```
+
+**쓰이지 않는 그림은 지운다.** 데이터에서 경로를 바꾸면 옛 파일이 그대로 남는다.
+`scan_unused.py` 를 만들어 두고 돌리면 참조 없는 파일이 나온다.
+
+```python
+import os, re, glob
+used = set()
+for p in glob.glob('data/*.js') + glob.glob('*.html') + glob.glob('images/research/*.svg'):
+    t = open(p, encoding='utf-8', errors='ignore').read()
+    used |= set(re.findall(r'images/[a-z]+/([A-Za-z0-9_.-]+)', t))
+for f in sorted(glob.glob('images/*/*')):
+    if os.path.isfile(f) and os.path.basename(f) not in used:
+        print(f)
+```
+
 ---
 
 ## 9. 디자인
