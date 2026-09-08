@@ -21,7 +21,9 @@ const SITE = {
   department: "Department of Electrical Engineering",
   professor:  "Min-Ro Park",
 
-  tagline: "[한 줄 정체성 문구 — 추후 확정]",   // <strong> 태그 사용 가능
+  // 히어로의 한 줄 문구. 비워 두면 그 줄 자체가 나오지 않는다.
+  // 채우면 연구실 이름 아래에 붙는다. <strong> 태그를 쓸 수 있다
+  tagline: "",
 
   /* \n 은 줄을 바꾸고 싶은 지점이다. 푸터에서만 적용되고,
    * 폭이 좁은 CONTACT 페이지에서는 그냥 띄어쓰기로 이어진다.

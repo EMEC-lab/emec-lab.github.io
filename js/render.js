@@ -404,8 +404,13 @@ var Render = (function () {
 
     setText('[data-hero-scroll]', SITE.ui.scrollDown);
 
+    /* 문구가 비어 있으면 줄째 감춘다. 빈 <p> 를 두면 mt-6 만큼
+       제목 아래에 빈 자리가 남는다 */
     var tagline = document.querySelector('[data-hero-tagline]');
-    if (tagline) tagline.innerHTML = SITE.tagline;   /* <strong> 허용 */
+    if (tagline) {
+      tagline.innerHTML = SITE.tagline || '';   /* <strong> 허용 */
+      tagline.hidden = !SITE.tagline;
+    }
   }
 
   /* 감춰 둔 분야(hidden: true)는 목록·상세·이동 버튼 어디에도 내보내지 않는다.
