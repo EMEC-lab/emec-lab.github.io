@@ -1002,8 +1002,10 @@ var Render = (function () {
       '<div class="reveal mt-8">' + imageBox(a.image, a.title, 'aspect-[21/9]', 'rounded-lg') + '</div>' +
 
       '<div class="mt-10 grid gap-10 lg:grid-cols-3">' +
+        /* 설명은 개조식 한 줄씩이다. 왼쪽에 얇은 선을 둘러 항목으로 읽히게 한다.
+           오른쪽 Subjects 는 점 목록이라 표시가 겹치지 않는다 */
         '<div class="reveal lg:col-span-2 space-y-3 text-sm leading-relaxed text-slate-600">' +
-          paragraphs(a.description) +
+          paragraphs(a.description, 'border-l-2 border-primary-light pl-4') +
         '</div>' +
         '<div class="reveal">' +
           '<h2 class="text-sm font-bold uppercase tracking-wider2 text-slate-500">' +

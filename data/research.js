@@ -32,7 +32,7 @@ const RESEARCH = [
       "Torque and electromagnetic excitation force",
       "Control scheme — sinusoidal and square-wave drive, current harmonics, current vector control, sensorless control"
     ],
-    description: "목적에 맞는 정밀도로 자기장을 푼다 — 공간고조파·등가자기회로 같은 해석적 방법으로 수 초 만에, 유한요소해석으로 국부 포화와 손실 분포까지\n여기서 기기의 성적표가 나온다 — 전 운전영역의 손실과 효율, 평균 토크와 맥동, 소음과 수명을 좌우하는 전자기 가진력\n기기는 이상적인 전류원으로 돌지 않는다 — 정현파·구형파 구동과 그때의 전류 고조파, 전류벡터 제어, 센서리스 운전을 해석에 함께 넣는다",
+    description: "해석적 기법과 유한요소해석의 병행 — 공간고조파법·등가자기회로에 의한 초기 탐색, 유한요소해석에 의한 국부 포화 및 손실 분포 규명\n전 운전영역 특성 산출 — 손실 및 효율, 평균 토크와 토크 맥동, 소음·수명을 좌우하는 전자기 가진력\n실제 구동 조건 반영 — 정현파·구형파 구동에 따른 전류 고조파, 전류벡터 제어, 센서리스 운전",
     image: "images/research/analysis-overview.webp",
     images: [
       { src: "images/research/analysis-analytical.webp",
@@ -49,7 +49,7 @@ const RESEARCH = [
       "Thermal analysis — lumped-parameter thermal network (LPTN) and cooling methods",
       "Structural and NVH analysis — rotor stress, rotor dynamics"
     ],
-    description: "전자기 해석은 시작일 뿐이다 — 손실은 열이 되고, 가진력은 응력·진동·소음이 된다\n열: 손실이 슬롯과 적층, 하우징을 거쳐 냉각재까지 가는 경로를 등가회로로 푼다. 냉각 방식은 실제 운전 조건으로 평가한다\n구조: 최고속도에서의 회전자 응력, 회전체 동역학과 위험속도, 가진력 차수가 고정자에 만드는 진동과 소음",
+    description: "전자기 해석 결과의 타 물리 영역 전달 — 손실은 열원으로, 전자기 가진력은 구조 응답의 입력으로\n열 해석 — 손실이 슬롯·적층·하우징을 거쳐 냉각재에 이르는 경로의 등가회로(LPTN) 구성, 운전 조건 기반 냉각 방식 평가\n구조·NVH 해석 — 최고속도 회전자 응력, 회전체 동역학 및 위험속도, 가진력 차수에 따른 고정자 진동·소음",
     image: "images/research/coupled-overview.webp",
     images: [
       { src: "images/research/coupled-thermal.webp",
@@ -69,7 +69,7 @@ const RESEARCH = [
       "Manufacturing technology — high slot-fill-factor winding, core stacking method, segmented core, heat dissipation (potting)",
       "Materials technology — rare-earth-free machines, soft magnetic composite (SMC), next-generation electrical steel"
     ],
-    description: "요구 조건에서 출발한다 — 토크·출력·속도 곡선, 그리고 시스템이 주는 공간·온도·전압·전류 한계\n극·슬롯 조합 → 2차원 형상 → 축장 → 권선 턴수 순으로 정하고, 매 단계를 한계와 대조한 뒤 특성 해석으로 성능을 확인한다\n쓸 수 있는 형상이 설계의 폭을 정한다 — 통상형 기기부터 이중회전자·이중고정자, 가변자속, 자기기어, 버니어, BL-WFSM 까지\n권선과 구동 방식도 형상이다 — 개방권선과 이중 3상은 같은 철심으로 인버터가 할 수 있는 일을 바꾸고, 직렬-병렬 절체는 적층 한 장 없이 토크-속도 영역을 넓힌다\n재료와 공정은 나중에 따지는 제약이 아니라 설계 변수다 — 헤어핀 권선, 분할·접착·용접 코어, 포팅, 이상 전기강판, SMC, 본드자석, 희토류 프리 자석",
+    description: "요구 조건 정의 — 토크·출력·속도 곡선, 시스템이 부여하는 공간·온도·전압·전류 제약\n설계 절차 — 극·슬롯 조합, 2차원 형상, 축장, 전기자 권선 턴수의 순차 결정 및 특성 해석에 의한 성능 검증\n기기 형상 — 통상형 기기(SPMSM·IPMSM·유도기·릴럭턴스기)부터 신개념 기기(이중회전자·이중고정자, 가변자속, 자기기어, 버니어, BL-WFSM)까지\n권선 및 구동 형상 — 개방권선, 이중 3상 권선, 직렬-병렬 권선 절체를 통한 운전 영역 확장\n재료·제조 기술의 설계 변수화 — 헤어핀 권선, 분할·접착·용접 코어, 포팅, 이상 전기강판, 연자성 복합재(SMC), 본드자석, 희토류 프리 자석",
     image: "images/research/design-overview.webp",
     images: [
       { src: "images/research/design-topology.webp",
@@ -90,7 +90,7 @@ const RESEARCH = [
       "System-aware machine design — operating-profile-based efficiency design",
       "Thermal management — derating strategy, thermal margin estimation"
     ],
-    description: "유한요소해석 한 번이 비싸다 — 값싼 저정확도 결과 다수와 비싼 고정확도 결과 소수를 함께 배우는 다중 정확도 대체모델을 세운다 (다중 정확도 가우시안 과정 회귀, 심층 전이학습)\n탐색은 해석기가 아니라 대체모델 위에서 한다. 강건 최적화도 이 위에서만 감당된다 — 후보 하나가 아니라 그 주변의 분포를 평가해야 하기 때문이다\n공차와 재료 물성의 편차가 토크 맥동·코깅·효율로 번지는 경로를 추적하고, 도면 위 한 점이 아니라 양산될 분포로 설계를 판정한다\n기기는 그것이 구동하는 시스템 안에서 평가된다 — 차량의 견인전동기, 로봇의 관절전동기. 운전 프로파일을 토크-속도 평면의 분포로 옮기고, 에너지가 실제로 쓰이는 자리에 효율을 맞춘다\n같은 프로파일이 열 문제도 정한다 — 디레이팅 전략과 열 여유를 기기와 함께 설계한다",
+    description: "다중 정확도 대체모델 구축 — 저정확도 대량 데이터와 고정확도 소량 데이터의 결합 (다중 정확도 가우시안 과정 회귀, 심층 전이학습)\n대체모델 기반 다목적 최적화 — 해석기 직접 호출 대비 탐색 비용 절감, 강건 최적화 수행의 전제\n불확실성 정량화 — 기하 공차 및 재료 물성 편차가 토크 맥동·코깅토크·효율에 미치는 영향 추적, 공칭점이 아닌 분포 기준의 설계 판정\n시스템 관점 설계 — 차량·로봇의 운전 프로파일을 토크-속도 평면상 분포로 변환, 실사용 영역에 효율 정합\n열 관리 — 동일 프로파일에 기반한 디레이팅 전략 및 열적 여유 설계",
     image: "images/research/method-overview.webp",
     images: [
       { src: "images/research/method-system.webp",
@@ -112,7 +112,7 @@ const RESEARCH = [
       "Design automation — batch analysis and evaluation",
       "In-house characteristic analysis programs"
     ],
-    description: "좋은 설계 방법이라도 사람이 매 단계를 눌러야 하면 규모가 나오지 않는다\n파라메트릭 형상과 메시 생성부터 일괄 해석, 후처리와 평가까지 하나의 흐름으로 자동화한다\n이 자동화가 나머지 연구의 규모를 정한다 — 최적화, 불확실성 정량화, 시스템 단위 검토 모두 수천 개 후보를 자동으로 돌릴 수 있어야 성립한다",
+    description: "설계 절차 자동화 — 파라메트릭 형상 생성 및 메시 분할부터 일괄 해석, 후처리·평가까지 단일 흐름 구성\n자체 특성 해석 및 설계 프로그램 개발\n자동화가 확보하는 규모 — 최적화, 불확실성 정량화, 시스템 단위 검토 모두 수천 개 후보의 자동 평가를 전제",
     image: "images/research/set-automation-00.png",
     images: [
       { src: "images/research/set-automation-01.jpg",
