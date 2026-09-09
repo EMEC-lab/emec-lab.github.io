@@ -47,16 +47,15 @@ const RESEARCH = [
   {
     id: "coupled-field",
     title: "Coupled-field Analysis",
-    summary: "전자기 해석 결과가 넘어가는 열·구조 영역까지, 손실과 가진력이 만드는 온도·응력·진동·소음 예측",
+    summary: "전자기 해석에서 산출된 손실과 가진력 기반 열·구조 연성 해석 및 온도·소음·진동·응력 예측",
     topics: [
-      "열 해석",
-      "등가열회로 (LPTN)",
-      "냉각 방식",
-      "구조 해석 · 회전자 응력",
-      "회전체 동역학 · 위험속도",
-      "소음 · 진동 (NVH)"
+      "열등가회로 (LPTN)",
+      "냉각 · 절연 방식",
+      "전자기 가진력",
+      "소음 · 진동 (NVH)",
+      "회전자 응력 · 회전체 동역학"
     ],
-    description: "Multi-physics Coupling : 전자기 해석에서 산출된 손실 및 전자기 가진력의 열·구조 해석 입력 변환\nThermal Analysis : 손실 발생부터 냉각재까지의 열 전달 경로에 대한 등가열회로(LPTN) 구성 및 냉각 방식별 온도 예측\nStructural & NVH Analysis : 최고속도 회전자 응력, 회전체 동역학 및 위험속도, 가진력 차수에 따른 고정자 진동·소음 해석",
+    description: "Thermal Analysis : 냉각·절연 방식과 방열 구조를 반영한 열등가회로 구성 및 온도 예측\nNoise & Vibration Analysis : 전자기 가진력과 모드 해석(Modal Analysis) 기반 구조 특성으로부터 고정자 진동·소음 해석\nStructural Analysis : 고속 운전 시 회전자 응력, 회전체 동역학 및 위험속도 해석",
     image: "images/research/coupled-overview.webp",
     images: [
       { src: "images/research/coupled-thermal.webp",
