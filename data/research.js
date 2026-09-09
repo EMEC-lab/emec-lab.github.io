@@ -35,7 +35,7 @@ const RESEARCH = [
       "전자기 가진력",
       "전류벡터제어 · 전류 고조파"
     ],
-    description: "Electromagnetic Field Analysis : 해석적 방법(공간고조파법·등가자기회로)과 유한요소해석(FEA)에 의한 전자기장 분포 산출\nCharacteristics Analysis : 전자기장 해석 기반 회로 정수, 손실, 토크, 전자기 가진력 등 주요 성능 도출\nConverter-fed Analysis : 제어 알고리즘 및 구동 방식에 따른 전류 고조파 예측 및 기기 특성 계산",
+    description: "Electromagnetic Field Analysis : 해석적 방법(공간고조파법·등가자기회로)과 유한요소해석(FEA)에 의한 전자기장 분포 산출\nCharacteristics Analysis : 전자기장 해석 기반 회로 정수, 손실, 토크, 전자기 가진력 등 주요 성능 도출\nPower Converter-fed Analysis : 제어 알고리즘 및 구동 방식에 따른 전류 고조파 예측 및 기기 특성 계산",
     image: "images/research/analysis-overview.webp",
     images: [
       { src: "images/research/analysis-analytical.webp",
@@ -111,13 +111,15 @@ const RESEARCH = [
     hidden: true,
     id: "automation",
     title: "Design Automation & In-house Software",
-    summary: "In-house tools that run the loop from parametric modeling through batch analysis to evaluation.",
+    summary: "형상 생성부터 일괄 해석·평가까지 단일 흐름으로 잇는 자체 개발 소프트웨어 기반 설계 자동화",
     topics: [
-      "파라메트릭 모델링 · 메시 생성",
-      "일괄 해석 · 평가 자동화",
-      "자체 특성 해석 프로그램"
+      "파라메트릭 형상 · 자동 메시 생성",
+      "자체 전자기장 해석기",
+      "역기전력 · 코깅토크 · 동특성",
+      "일괄 해석 · 후처리 자동화",
+      "최고효율 운전점 탐색"
     ],
-    description: "설계 절차 자동화 — 파라메트릭 형상 생성 및 메시 분할부터 일괄 해석, 후처리·평가까지 단일 흐름 구성\n자체 특성 해석 및 설계 프로그램 개발\n자동화가 확보하는 규모 — 최적화, 불확실성 정량화, 시스템 단위 검토 모두 수천 개 후보의 자동 평가를 전제",
+    description: "Parametric Modeling : 형상 파라미터 정의부터 자동 메시 생성까지의 전처리 절차 구성\nIn-house Solver : 자체 개발 전자기장 해석기 기반 역기전력, 코깅토크, 동특성 산출\nBatch Analysis & Evaluation : 수천 개 후보 형상의 일괄 해석·후처리 및 최고효율 운전점 탐색 자동화",
     image: "images/research/set-automation-00.png",
     images: [
       { src: "images/research/set-automation-01.jpg",
