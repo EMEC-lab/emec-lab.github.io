@@ -25,17 +25,17 @@ const RESEARCH = [
   {
     id: "em-analysis",
     title: "Electromagnetic Field & Characteristics Analysis",
-    summary: "Field, loss, torque, and force estimation across the full range of fidelity — with the current harmonics the drive actually imposes.",
+    summary: "전자기장 분포에서 회로 정수·손실·토크·가진력까지, 실제 구동 조건을 반영한 전기기기 특성 해석",
     topics: [
-      "전자기장 해석",
       "공간고조파법 · 등가자기회로",
       "유한요소해석 (2D · 3D)",
-      "손실 및 효율",
-      "토크 및 토크 맥동",
+      "회로 정수 · 쇄교자속",
+      "손실 · 효율",
+      "평균 토크 · 토크 리플",
       "전자기 가진력",
-      "전류벡터 제어 · 센서리스 운전"
+      "전류벡터 제어 · 전류 고조파"
     ],
-    description: "해석적 기법과 유한요소해석의 병행 — 공간고조파법·등가자기회로에 의한 초기 탐색, 유한요소해석에 의한 국부 포화 및 손실 분포 규명\n전 운전영역 특성 산출 — 손실 및 효율, 평균 토크와 토크 맥동, 소음·수명을 좌우하는 전자기 가진력\n실제 구동 조건 반영 — 정현파·구형파 구동에 따른 전류 고조파, 전류벡터 제어, 센서리스 운전",
+    description: "Electromagnetic Field Analysis : 해석적 방법(공간고조파법·등가자기회로)과 유한요소해석(FEA)에 의한 전자기장 분포 산출\nCharacteristics Analysis : 전자기장 해석 기반 회로 정수, 손실, 토크, 전자기 가진력 등 주요 성능 도출\nConverter-fed Analysis : 제어 알고리즘 및 구동 방식에 따른 전류 고조파 예측 및 기기 특성 계산",
     image: "images/research/analysis-overview.webp",
     images: [
       { src: "images/research/analysis-analytical.webp",
