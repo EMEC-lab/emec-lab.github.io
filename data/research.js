@@ -91,11 +91,11 @@ const RESEARCH = [
     summary: "시스템 모델 기반 실사용 운전 조건 도출과 대체모델 기반 다목적·강건 최적화를 통한 전기기기 설계",
     topics: [
       "e-파워트레인 · 로봇 관절 시스템 모델",
-      "가우시안 과정 회귀 · 심층 전이학습",
+      "가우시안 프로세스 (GP) · 심층 전이학습 (DTL)",
       "다목적 · 강건 최적화",
       "기하 공차 · 재료 물성 · 제작 오차"
     ],
-    description: "System Model-based Design : e-파워트레인 및 로봇 관절 시스템 모델을 통한 실사용 운전 프로파일 기반 효율·열 특성 검증, 액추에이터 사이징\nSurrogate Model-based Optimization : 저비용 저충실도와 고비용 고충실도 데이터를 결합한 다중 충실도 대체모델 기반 다목적 최적화\nRobust Design Optimization : 기하 공차, 재료 물성, 제작 오차의 불확실성 정량화 및 공칭점이 아닌 분포 기준의 강건 최적화",
+    description: "System Model-based Design : e-파워트레인 및 로봇 관절 시스템 모델을 통한 실사용 운전 프로파일 기반 효율·열 특성 검증, 액추에이터 사이징\nSurrogate Model-based Optimization : 저비용 저충실도와 고비용 고충실도 데이터를 결합한 다중 충실도 대체모델(GP · DTL) 기반 다목적 최적화\nRobust Design Optimization : 기하 공차, 재료 물성, 제작 오차의 불확실성 정량화 및 공칭점이 아닌 분포 기준의 강건 최적화",
     image: "images/research/method-overview.webp",
     images: [
       { src: "images/research/method-system.webp",
