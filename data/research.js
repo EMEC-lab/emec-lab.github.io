@@ -76,7 +76,7 @@ const RESEARCH = [
       "제조 기술 (헤어핀 권선 · 분할코어 · 접착 · 용접 · 포팅)",
       "재료 기술 (이상 전기강판 · SMC · 본드자석 · 희토류 프리 자석)"
     ],
-    description: "Design Process : 요구 토크-출력-속도 곡선과 기계적·전기적 제약으로부터 극·슬롯 조합, 2차원 형상, 축장, 전기자 권선 턴수의 순차 결정 및 특성 해석에 의한 성능 검증\nMachine & Winding Topology : 통상형 기기(SPMSM·IPMSM·유도기·릴럭턴스기)부터 신개념 기기(이중회전자, 가변자속, 자기기어, 버니어, BL-WFSM)까지의 형상 검토 및 개방권선·이중 3상 권선·권선 절체를 통한 운전 영역 확장\nManufacturing & Material Technology : 헤어핀 권선, 분할·접착·용접 코어, 포팅 등 제조 기술과 이상 전기강판, 연자성 복합재(SMC), 본드자석, 희토류 프리 자석 등 재료 기술의 설계 변수화",
+    description: "Design Process : 요구 토크-출력-속도 곡선과 기계적·전기적 제약으로부터 극·슬롯 조합, 2차원 형상, 축장, 전기자 권선 턴수의 순차 결정 및 특성 해석에 의한 성능 검증\nMachine, Winding & Drive Topology : 통상형 기기(SPMSM·IPMSM·유도기·릴럭턴스기)부터 신개념 기기(이중회전자, 가변자속, 자기기어, 버니어, BL-WFSM)까지의 형상 검토 및 개방권선·이중 3상 권선·권선 절체를 통한 운전 영역 확장\nManufacturing & Material Technology : 헤어핀 권선, 분할·접착·용접 코어, 포팅 등 제조 기술과 이상 전기강판, 연자성 복합재(SMC), 본드자석, 희토류 프리 자석 등 재료 기술의 설계 변수화",
     image: "images/research/design-overview.webp",
     images: [
       { src: "images/research/design-topology.webp",
