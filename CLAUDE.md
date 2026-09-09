@@ -47,7 +47,14 @@ const SITE = {
   department: "Department of Electrical Engineering",
   professor:  "Min-Ro Park",
 
-  tagline: "[한 줄 정체성 문구 — 추후 확정]",   // <strong> 태그 사용 가능
+  // 히어로의 연구실 소개. 자세한 규칙은 9번 항목에 있다.
+  // \n 은 줄을 바꾸고 싶은 지점, <strong> 은 강조에 쓴다
+  tagline: "전기-기계 에너지변환 연구실(EMEC)은 모빌리티, 로봇, 가전, 전력기기에 쓰이는\n"
+         + "전동기·발전기·변압기의 해석과 설계를 연구합니다.",
+  taglinePoints: [   // 비우거나 지우면 문장만 나온다
+    "전자기에서 열·구조·소음·진동까지 잇는 다중물리 해석 체계 구축",
+    "…"              // research.js 의 연구분야 차례를 따른다
+  ],
 
   address: {
     // 호실만 다르고 나머지 주소는 같다. 방마다 주소를 되풀이하지 않도록 떼어 둔다.
