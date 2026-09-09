@@ -27,7 +27,7 @@
          영상: images/hero.mp4  /  정지 이미지: images/hero-poster.jpg
          muted·playsinline 이 없으면 모바일에서 자동 재생이 차단된다.
          768px 미만과 prefers-reduced-motion 에서는 css/custom.css 가
-         영상을 숨기고 정지 이미지로 대체한다. -->
+         영상을 숨기고 아래 정지 컷으로 대체한다. -->
     <section id="hero" class="relative h-[calc(100svh-4rem)] min-h-[30rem] overflow-hidden bg-primary-dark">
 
       <video class="hero-video absolute inset-0 h-full w-full object-cover"
@@ -36,8 +36,24 @@
         <source src="images/hero.mp4" type="video/mp4">
       </video>
 
-      <img class="hero-still absolute inset-0 h-full w-full object-cover"
-           src="images/hero-poster.jpg" alt="" loading="lazy" data-fallback>
+      <!-- 768px 미만과 prefers-reduced-motion 에서 영상을 대신하는 정지 컷.
+           영상에서 뽑은 응용 분야 여섯 장면이 CSS 로 천천히 넘어간다.
+           내용(글자·링크)이 없는 배경이라 어느 장을 놓쳐도 잃는 것이 없다.
+           애니메이션을 줄이는 설정에서는 첫 장만 고정된다 (css/custom.css) -->
+      <div class="hero-stills absolute inset-0">
+        <img class="hero-still absolute inset-0 h-full w-full object-cover"
+             src="images/hero-still-1.webp" alt="" data-fallback>   <!-- 전기차 구동부 -->
+        <img class="hero-still absolute inset-0 h-full w-full object-cover"
+             src="images/hero-still-2.webp" alt="" data-fallback>   <!-- 휴머노이드 로봇 -->
+        <img class="hero-still absolute inset-0 h-full w-full object-cover"
+             src="images/hero-still-3.webp" alt="" data-fallback>   <!-- 에어모빌리티 -->
+        <img class="hero-still absolute inset-0 h-full w-full object-cover"
+             src="images/hero-still-4.webp" alt="" data-fallback>   <!-- 전기추진 선박 -->
+        <img class="hero-still absolute inset-0 h-full w-full object-cover"
+             src="images/hero-still-5.webp" alt="" data-fallback>   <!-- 가전 기기 -->
+        <img class="hero-still absolute inset-0 h-full w-full object-cover"
+             src="images/hero-still-6.webp" alt="" data-fallback>   <!-- 산업용 로봇 -->
+      </div>
 
       <!-- 오버레이: 영상 위 텍스트 가독성 확보용. 없이 텍스트를 얹지 않는다 -->
       <div class="absolute inset-0 bg-black/50"></div>
