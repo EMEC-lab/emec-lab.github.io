@@ -88,17 +88,14 @@ const RESEARCH = [
   {
     id: "design-methods",
     title: "System-aware & Data-driven Design",
-    summary: "대체모델과 최적화로 설계 공간을 탐색하고, 공차·물성 편차와 시스템 운전 조건까지 반영한 설계",
+    summary: "시스템 모델 기반 실사용 운전 조건 도출과 대체모델 기반 다목적·강건 최적화를 통한 전기기기 설계",
     topics: [
-      "다목적 최적화",
-      "다중 정확도 대체모델",
+      "e-파워트레인 · 로봇 관절 시스템 모델",
       "가우시안 과정 회귀 · 심층 전이학습",
-      "강건 최적화",
-      "불확실성 정량화 (기하 공차 · 재료 물성)",
-      "시스템 기반 설계 · 운전 프로파일",
-      "열 관리 · 디레이팅"
+      "다목적 · 강건 최적화",
+      "기하 공차 · 재료 물성 · 제작 오차"
     ],
-    description: "Surrogate Modeling : 저정확도 대량 데이터와 고정확도 소량 데이터를 결합한 다중 정확도 대체모델 구축 (다중 정확도 가우시안 과정 회귀, 심층 전이학습)\nMulti-objective Optimization : 대체모델 기반 탐색을 통한 해석 비용 절감 및 강건 최적화 수행\nUncertainty Quantification : 기하 공차 및 재료 물성 편차가 토크 리플·코깅토크·효율에 미치는 영향 추적, 공칭점이 아닌 분포 기준의 설계 판정\nSystem-aware Design : 차량·로봇의 운전 프로파일을 토크-속도 평면상 분포로 변환, 실사용 영역에 대한 효율 정합\nThermal Management : 동일 운전 프로파일에 기반한 디레이팅 전략 및 열적 여유 설계",
+    description: "System Model-based Design : 차량 e-파워트레인 및 로봇 관절 시스템 모델을 통한 실사용 운전 프로파일 기반 효율·열 특성 검증, 액추에이터 사이징\nSurrogate Model-based Optimization : 저비용 저충실도 데이터와 고비용 고충실도 데이터를 결합한 다중 충실도 대체모델(가우시안 과정 회귀·심층 전이학습) 기반 다목적 최적화\nRobust Design Optimization : 기하 공차, 재료 물성, 제작 오차의 불확실성 정량화 및 공칭점이 아닌 분포 기준의 강건 최적화",
     image: "images/research/method-overview.webp",
     images: [
       { src: "images/research/method-system.webp",
