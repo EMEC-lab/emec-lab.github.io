@@ -411,14 +411,18 @@ var Render = (function () {
     if (tagline) {
       var points = SITE.taglinePoints || [];
       var list = points.length
-        ? '<span class="mt-4 block space-y-1 text-sm text-white/75">' +
+        ? '<span class="mt-4 block space-y-1 text-sm text-white/80 sm:text-base">' +
             points.map(function (p) {
               return '<span class="flex gap-2">' +
                 '<span aria-hidden="true">·</span><span>' + esc(p) + '</span></span>';
             }).join('') +
           '</span>'
         : '';
-      tagline.innerHTML = (SITE.tagline || '') + list;   /* tagline 은 <strong> 허용 */
+      /* tagline 의 \n 은 줄을 바꾸고 싶은 지점이다. <strong> 은 그대로 허용한다 */
+      /* 좁은 화면에서는 어차피 여러 줄로 접히므로 줄바꿈 지점을 감춘다 */
+      var lead = String(SITE.tagline || '')
+        .split('\n').join(' <br class="hidden sm:inline">');
+      tagline.innerHTML = lead + list;
       tagline.hidden = !SITE.tagline && !points.length;
     }
   }

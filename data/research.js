@@ -25,7 +25,7 @@ const RESEARCH = [
   {
     id: "em-analysis",
     title: "Electromagnetic Field & Characteristics Analysis",
-    summary: "전자기장 분포에서 회로 정수·손실·토크·가진력까지, 실제 구동 조건을 반영한 전기기기 특성 해석",
+    summary: "전자기장 분포에서 회로 정수·손실·토크·가진력까지, 실제 구동 조건을 반영한 특성 해석",
     topics: [
       "공간고조파법 · 등가자기회로",
       "유한요소해석 (2D · 3D)",
@@ -67,7 +67,7 @@ const RESEARCH = [
   {
     id: "machine-design",
     title: "Electric Machine Design & Technology",
-    summary: "시스템 요구 조건으로부터 기기·권선·구동 토폴로지 및 제조·재료 기술을 고려한 전기기기 설계",
+    summary: "시스템 요구 조건으로부터 기기·권선·구동 토폴로지 및 제조·재료 기술을 고려한 설계",
     topics: [
       "극-슬롯 조합 · 사이징",
       "영구자석 기기 · 유도기 · 릴럭턴스기 (PMSM · IM · SynRM)",
