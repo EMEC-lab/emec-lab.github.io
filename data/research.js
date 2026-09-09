@@ -33,7 +33,7 @@ const RESEARCH = [
       "손실 · 효율",
       "평균 토크 · 토크 리플",
       "전자기 가진력",
-      "전류벡터 제어 · 전류 고조파"
+      "전류벡터제어 · 전류 고조파"
     ],
     description: "Electromagnetic Field Analysis : 해석적 방법(공간고조파법·등가자기회로)과 유한요소해석(FEA)에 의한 전자기장 분포 산출\nCharacteristics Analysis : 전자기장 해석 기반 회로 정수, 손실, 토크, 전자기 가진력 등 주요 성능 도출\nConverter-fed Analysis : 제어 알고리즘 및 구동 방식에 따른 전류 고조파 예측 및 기기 특성 계산",
     image: "images/research/analysis-overview.webp",
@@ -47,7 +47,7 @@ const RESEARCH = [
   {
     id: "coupled-field",
     title: "Coupled-field Analysis",
-    summary: "Where the electromagnetic result crosses into other physics — losses into heat, excitation forces into stress, vibration, and noise.",
+    summary: "전자기 해석 결과가 넘어가는 열·구조 영역까지, 손실과 가진력이 만드는 온도·응력·진동·소음 예측",
     topics: [
       "열 해석",
       "등가열회로 (LPTN)",
@@ -56,7 +56,7 @@ const RESEARCH = [
       "회전체 동역학 · 위험속도",
       "소음 · 진동 (NVH)"
     ],
-    description: "전자기 해석 결과의 타 물리 영역 전달 — 손실은 열원으로, 전자기 가진력은 구조 응답의 입력으로\n열 해석 — 손실이 슬롯·적층·하우징을 거쳐 냉각재에 이르는 경로의 등가회로(LPTN) 구성, 운전 조건 기반 냉각 방식 평가\n구조·NVH 해석 — 최고속도 회전자 응력, 회전체 동역학 및 위험속도, 가진력 차수에 따른 고정자 진동·소음",
+    description: "Multi-physics Coupling : 전자기 해석에서 산출된 손실 및 전자기 가진력의 열·구조 해석 입력 변환\nThermal Analysis : 손실 발생부터 냉각재까지의 열 전달 경로에 대한 등가열회로(LPTN) 구성 및 냉각 방식별 온도 예측\nStructural & NVH Analysis : 최고속도 회전자 응력, 회전체 동역학 및 위험속도, 가진력 차수에 따른 고정자 진동·소음 해석",
     image: "images/research/coupled-overview.webp",
     images: [
       { src: "images/research/coupled-thermal.webp",
@@ -68,7 +68,7 @@ const RESEARCH = [
   {
     id: "machine-design",
     title: "Electric Machine Design & Technology",
-    summary: "From the torque-speed requirement to a machine that can be built — topology and drive configuration, materials, and the manufacturing process.",
+    summary: "요구 조건에서 제작 가능한 기기까지, 형상·권선·구동 방식과 재료·제조 기술을 함께 다루는 설계",
     topics: [
       "설계 절차 · 사이징",
       "통상형 기기 (SPMSM · IPMSM · 유도기 · 릴럭턴스기)",
@@ -77,7 +77,7 @@ const RESEARCH = [
       "제조 기술 (헤어핀 권선 · 분할코어 · 포팅)",
       "재료 기술 (전기강판 · SMC · 희토류 프리 자석)"
     ],
-    description: "요구 조건 정의 — 토크·출력·속도 곡선, 시스템이 부여하는 공간·온도·전압·전류 제약\n설계 절차 — 극·슬롯 조합, 2차원 형상, 축장, 전기자 권선 턴수의 순차 결정 및 특성 해석에 의한 성능 검증\n기기 형상 — 통상형 기기(SPMSM·IPMSM·유도기·릴럭턴스기)부터 신개념 기기(이중회전자·이중고정자, 가변자속, 자기기어, 버니어, BL-WFSM)까지\n권선 및 구동 형상 — 개방권선, 이중 3상 권선, 직렬-병렬 권선 절체를 통한 운전 영역 확장\n재료·제조 기술의 설계 변수화 — 헤어핀 권선, 분할·접착·용접 코어, 포팅, 이상 전기강판, 연자성 복합재(SMC), 본드자석, 희토류 프리 자석",
+    description: "Design Requirements : 토크·출력·속도 곡선 및 시스템이 부여하는 공간·온도·전압·전류 제약 정의\nDesign Procedure : 극·슬롯 조합, 2차원 형상, 축장, 전기자 권선 턴수의 순차 결정 및 특성 해석에 의한 성능 검증\nMachine Topology : 통상형 기기(SPMSM·IPMSM·유도기·릴럭턴스기)부터 신개념 기기(이중회전자·이중고정자, 가변자속, 자기기어, 버니어, BL-WFSM)까지의 형상 검토\nWinding & Drive Configuration : 개방권선, 이중 3상 권선, 직렬-병렬 권선 절체를 통한 운전 영역 확장\nMaterials & Manufacturing : 헤어핀 권선, 분할·접착·용접 코어, 포팅, 이상 전기강판, 연자성 복합재(SMC), 본드자석, 희토류 프리 자석의 설계 변수화",
     image: "images/research/design-overview.webp",
     images: [
       { src: "images/research/design-topology.webp",
@@ -89,7 +89,7 @@ const RESEARCH = [
   {
     id: "design-methods",
     title: "System-aware & Data-driven Design",
-    summary: "How the design is found — optimization on multi-fidelity surrogate models, and machine design driven by the system it serves.",
+    summary: "대체모델과 최적화로 설계 공간을 탐색하고, 공차·물성 편차와 시스템 운전 조건까지 반영한 설계",
     topics: [
       "다목적 최적화",
       "다중 정확도 대체모델",
@@ -99,7 +99,7 @@ const RESEARCH = [
       "시스템 기반 설계 · 운전 프로파일",
       "열 관리 · 디레이팅"
     ],
-    description: "다중 정확도 대체모델 구축 — 저정확도 대량 데이터와 고정확도 소량 데이터의 결합 (다중 정확도 가우시안 과정 회귀, 심층 전이학습)\n대체모델 기반 다목적 최적화 — 해석기 직접 호출 대비 탐색 비용 절감, 강건 최적화 수행의 전제\n불확실성 정량화 — 기하 공차 및 재료 물성 편차가 토크 맥동·코깅토크·효율에 미치는 영향 추적, 공칭점이 아닌 분포 기준의 설계 판정\n시스템 관점 설계 — 차량·로봇의 운전 프로파일을 토크-속도 평면상 분포로 변환, 실사용 영역에 효율 정합\n열 관리 — 동일 프로파일에 기반한 디레이팅 전략 및 열적 여유 설계",
+    description: "Surrogate Modeling : 저정확도 대량 데이터와 고정확도 소량 데이터를 결합한 다중 정확도 대체모델 구축 (다중 정확도 가우시안 과정 회귀, 심층 전이학습)\nMulti-objective Optimization : 대체모델 기반 탐색을 통한 해석 비용 절감 및 강건 최적화 수행\nUncertainty Quantification : 기하 공차 및 재료 물성 편차가 토크 리플·코깅토크·효율에 미치는 영향 추적, 공칭점이 아닌 분포 기준의 설계 판정\nSystem-aware Design : 차량·로봇의 운전 프로파일을 토크-속도 평면상 분포로 변환, 실사용 영역에 대한 효율 정합\nThermal Management : 동일 운전 프로파일에 기반한 디레이팅 전략 및 열적 여유 설계",
     image: "images/research/method-overview.webp",
     images: [
       { src: "images/research/method-system.webp",

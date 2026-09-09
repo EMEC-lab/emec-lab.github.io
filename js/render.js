@@ -890,6 +890,21 @@ var Render = (function () {
       .join('');
   }
 
+  /* 연구분야 설명. "라벨 : 내용" 꼴이면 콜론 앞을 굵게 세운다.
+     콜론이 없는 줄은 통짜 문장 그대로 그린다 */
+  function descParagraphs(text, cls) {
+    return String(text || '').split('\n')
+      .filter(function (line) { return line.replace(/^\s+|\s+$/g, '') !== ''; })
+      .map(function (line) {
+        var i = line.indexOf(' : ');
+        var body = (i > 0)
+          ? '<strong class="font-semibold text-slate-900">' + esc(line.slice(0, i)) + '</strong>' +
+            '<span class="text-slate-400"> : </span>' + esc(line.slice(i + 3))
+          : esc(line);
+        return '<p class="' + (cls || '') + '">' + body + '</p>';
+      }).join('');
+  }
+
   /* --- 연구분야 --------------------------------------------------------- */
   /* 세부 주제 목록. 비어 있으면 아무것도 그리지 않는다 */
   function topicList(items) {
@@ -971,11 +986,12 @@ var Render = (function () {
     /* 제목 밴드는 RESEARCH 라 두고, 분야 이름은 본문 제목으로 세운다 */
     document.title = a.title + ' | ' + SITE.labName;
 
+    /* 캐프션은 화면에 적지 않는다. 그림 안에 이미 글자가 들어 있어
+       아래에 한 줄을 더 두면 같은 말이 두 번 된다.
+       data 의 caption 은 그대로 두고 alt 로만 쓴다 (음성 안내용) */
     var extra = (a.images || []).map(function (im) {
       return '<figure class="reveal">' +
         naturalImage(im.src, im.caption || a.title, 'rounded-lg border border-slate-200') +
-        (im.caption ? '<figcaption class="mt-2 text-xs text-slate-500">' +
-          esc(im.caption) + '</figcaption>' : '') +
       '</figure>';
     }).join('');
 
@@ -1005,7 +1021,7 @@ var Render = (function () {
         /* 설명은 개조식 한 줄씩이다. 왼쪽에 얇은 선을 둘러 항목으로 읽히게 한다.
            오른쪽 Subjects 는 점 목록이라 표시가 겹치지 않는다 */
         '<div class="reveal lg:col-span-2 space-y-3 text-sm leading-relaxed text-slate-600">' +
-          paragraphs(a.description, 'border-l-2 border-primary-light pl-4') +
+          descParagraphs(a.description, 'border-l-2 border-primary-light pl-4') +
         '</div>' +
         '<div class="reveal">' +
           '<h2 class="text-sm font-bold uppercase tracking-wider2 text-slate-500">' +
