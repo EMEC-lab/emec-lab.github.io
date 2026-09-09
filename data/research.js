@@ -88,7 +88,7 @@ const RESEARCH = [
   {
     id: "design-methods",
     title: "System-aware & Data-driven Design",
-    summary: "시스템 모델 기반 실사용 운전 조건 도출과 대체모델 기반 다목적·강건 최적화를 통한 전기기기 설계",
+    summary: "시스템 모델 기반 실사용 운전 조건 도출과 대체모델 기반 다목적·강건 최적화 설계",
     topics: [
       "e-파워트레인 · 로봇 관절 시스템 모델",
       "가우시안 프로세스 (GP) · 심층 전이학습 (DTL)",
