@@ -67,16 +67,16 @@ const RESEARCH = [
   {
     id: "machine-design",
     title: "Electric Machine Design & Technology",
-    summary: "요구 조건에서 제작 가능한 기기까지, 형상·권선·구동 방식과 재료·제조 기술을 함께 다루는 설계",
+    summary: "시스템 요구 조건으로부터 기기·권선·구동 토폴로지 및 제조·재료 기술을 고려한 전기기기 설계",
     topics: [
-      "극 · 슬롯 조합 · 사이징",
-      "통상형 기기 (SPMSM · IPMSM · 유도기 · 릴럭턴스기)",
-      "신개념 기기 (이중회전자 · 가변자속 · 자기기어 · 버니어 · BL-WFSM)",
-      "개방권선 · 이중 3상 권선 · 권선 절체",
-      "제조 기술 (헤어핀 권선 · 분할코어 · 접착 · 용접 · 포팅)",
-      "재료 기술 (이상 전기강판 · SMC · 본드자석 · 희토류 프리 자석)"
+      "극-슬롯 조합 · 사이징",
+      "영구자석 기기 · 유도기 · 릴럭턴스기 (PMSM · IM · SynRM)",
+      "자기기어 · 버니어 · 이중회전자/고정자 · 가변자속 기기",
+      "개방권선 · 이중 3상 권선 · 권선 절환",
+      "고점적률 권선 · 코어 제작 · 방열 기술",
+      "신규 자성·도전·절연 재료"
     ],
-    description: "Design Process : 요구 토크-출력-속도 곡선과 기계적·전기적 제약으로부터 극·슬롯 조합, 2차원 형상, 축장, 전기자 권선 턴수의 순차 결정 및 특성 해석에 의한 성능 검증\nMachine, Winding & Drive Topology : 통상형 기기(SPMSM·IPMSM·유도기·릴럭턴스기)부터 신개념 기기(이중회전자, 가변자속, 자기기어, 버니어, BL-WFSM)까지의 형상 검토 및 개방권선·이중 3상 권선·권선 절체를 통한 운전 영역 확장\nManufacturing & Material Technology : 헤어핀 권선, 분할·접착·용접 코어, 포팅 등 제조 기술과 이상 전기강판, 연자성 복합재(SMC), 본드자석, 희토류 프리 자석 등 재료 기술의 설계 변수화",
+    description: "Design Process : 요구 성능 및 제약 조건 기반 극-슬롯 조합, 주요 치수 결정 및 특성 해석에 의한 성능 검증\nMachine, Winding & Drive Topology : 권선 및 구동 방식과 연계한 다양한 기기 형상의 해석 및 설계\nManufacturing & Material Technology : 고점적률 권선, 코어 제작 및 방열 기술 등 제조 기술과 신규 자성·도전·절연 재료를 반영한 해석 및 설계",
     image: "images/research/design-overview.webp",
     images: [
       { src: "images/research/design-topology.webp",
