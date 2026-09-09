@@ -1018,7 +1018,7 @@ for f in sorted(glob.glob('images/*/*')):
 
   <div class="relative z-10 ...">
     <h1>Electro-Mechanical Energy Conversion Lab</h1>
-    <p>[tagline]</p>
+    <p>[tagline + taglinePoints]</p>
     <a href="#research">Scroll down ↓</a>
   </div>
 </section>
@@ -1055,7 +1055,23 @@ for f in sorted(glob.glob('images/*/*')):
 3. 실험실 전경 / 시제품 구동 촬영 영상
 4. 영상 확보가 어려우면 정지 이미지 + Ken Burns(20초에 걸쳐 1.0 → 1.08 확대)로 대체
 
-**슬로건 처리** — `SITE.tagline`에 `<strong>` 태그를 허용하여 강조 단어를 굵게 처리한다.
+**연구실 소개** — 연구실 이름 아래에 붙는다. `data/site.js` 의 두 값에서 온다.
+
+- `SITE.tagline` — **한 문장.** 무엇을 연구하는 곳인지. `<strong>` 태그를 쓸 수 있다
+- `SITE.taglinePoints` — **그 아래 항목 목록.** 비우거나 지우면 문장만 나온다
+
+**항목은 `research.js` 의 연구분야 차례를 따른다.** 해석(1·2) → 설계(3) → 방법(4) →
+자동화(5, 지금은 감춰 둠) 순으로 한 번씩 훑고, **마지막 줄이 도착점(양산 적용)을 밝힌다.**
+앞의 넷이 "어떻게 하는가"뿐이라 마지막 줄이 없으면 능력 목록으로 끝난다.
+연구분야를 고치면 이 목록도 함께 본다 — 7번의 두 개관도와 같은 자리다.
+
+**목록은 `<p>` 안에 들어가므로 `<ul>`·`<li>` 를 쓰지 않는다.** `<p>` 안에 블록 요소를
+넣으면 브라우저가 `<p>` 를 먼저 닫아 버려 문단이 둘로 쪼개진다.
+`render.js` 가 `<span class="flex">` 로 그린다.
+
+**폭은 `max-w-3xl` 이다.** 항목이 다섯 줄이라 `2xl` 에서는 한 줄이 접힌다.
+항목을 늘리거나 문장을 길게 쓰면 375px 화면에서 `Scroll down` 과 겹치는지 확인할 것
+(지금은 문구 끝 624px, `Scroll down` 737px).
 
 ### 애니메이션 규격
 

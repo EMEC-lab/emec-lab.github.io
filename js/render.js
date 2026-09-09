@@ -405,11 +405,21 @@ var Render = (function () {
     setText('[data-hero-scroll]', SITE.ui.scrollDown);
 
     /* 문구가 비어 있으면 줄째 감춘다. 빈 <p> 를 두면 mt-6 만큼
-       제목 아래에 빈 자리가 남는다 */
+       제목 아래에 빈 자리가 남는다.
+       항목 목록(taglinePoints)은 문장 아래에 붙는다. 없으면 문장만 나온다 */
     var tagline = document.querySelector('[data-hero-tagline]');
     if (tagline) {
-      tagline.innerHTML = SITE.tagline || '';   /* <strong> 허용 */
-      tagline.hidden = !SITE.tagline;
+      var points = SITE.taglinePoints || [];
+      var list = points.length
+        ? '<span class="mt-4 block space-y-1 text-sm text-white/75">' +
+            points.map(function (p) {
+              return '<span class="flex gap-2">' +
+                '<span aria-hidden="true">·</span><span>' + esc(p) + '</span></span>';
+            }).join('') +
+          '</span>'
+        : '';
+      tagline.innerHTML = (SITE.tagline || '') + list;   /* tagline 은 <strong> 허용 */
+      tagline.hidden = !SITE.tagline && !points.length;
     }
   }
 
