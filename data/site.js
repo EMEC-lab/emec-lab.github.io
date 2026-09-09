@@ -162,7 +162,7 @@ const SITE = {
    * ------------------------------------------------------------------- */
   home: {
     researchTitle:  "Research Areas",
-    researchLead:   "What we work on.",
+    researchLead:   "",   // 비우면 제목 아래 한 줄이 나오지 않는다
     professorTitle: "Professor",
     statsTitle:     "At a Glance",
     newsTitle:      "Recent News",
