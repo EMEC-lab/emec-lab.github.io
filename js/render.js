@@ -907,14 +907,16 @@ var Render = (function () {
 
   /* --- 연구분야 --------------------------------------------------------- */
   /* 세부 주제 목록. 비어 있으면 아무것도 그리지 않는다 */
-  function topicList(items) {
+  /* 설명 아래에 가로로 깔린다. 옆 칸에 세로로 쌓으면
+     설명 줄 수와 키워드 개수가 달라 아래쪽 바닥이 어긋난다.
+     모양은 Applications 의 태그와 같게 둔다 */
+  function topicTags(items) {
     if (!items || !items.length) return '';
-    return '<ul class="mt-4 space-y-1.5 text-sm leading-relaxed text-slate-600">' +
+    return '<div class="mt-3 flex flex-wrap gap-1.5">' +
       items.map(function (t) {
-        return '<li class="flex gap-2.5">' +
-          '<span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary-mid"></span>' +
-          '<span>' + esc(t) + '</span></li>';
-      }).join('') + '</ul>';
+        return '<span class="rounded-full bg-slate-100 px-3 py-1.5 text-xs' +
+          ' leading-tight text-slate-700">' + esc(t) + '</span>';
+      }).join('') + '</div>';
   }
 
   /* 응용 대상 — 방법론과 직교하는 축이라 분야 카드와 따로 보여 준다 */
@@ -1017,17 +1019,16 @@ var Render = (function () {
 
       '<div class="reveal mt-8">' + imageBox(a.image, a.title, 'aspect-[21/9]', 'rounded-lg') + '</div>' +
 
-      '<div class="mt-10 grid gap-10 lg:grid-cols-3">' +
-        /* 설명은 개조식 한 줄씩이다. 왼쪽에 얇은 선을 둘러 항목으로 읽히게 한다.
-           오른쪽 Subjects 는 점 목록이라 표시가 겹치지 않는다 */
-        '<div class="reveal lg:col-span-2 space-y-3 text-sm leading-relaxed text-slate-600">' +
-          descParagraphs(a.description, 'border-l-2 border-primary-light pl-4') +
-        '</div>' +
-        '<div class="reveal">' +
-          '<h2 class="text-sm font-bold uppercase tracking-wider2 text-slate-500">' +
-            esc(SITE.ui.topics) + '</h2>' +
-          topicList(a.topics) +
-        '</div>' +
+      /* 설명은 개조식 한 줄씩이다. 왼쪽에 얇은 선을 둘러 항목으로 읽히게 한다.
+         글줄이 너무 길어지면 읽히지 않아 폭을 max-w-4xl 로 묶어 둔다 */
+      '<div class="reveal mt-10 max-w-4xl space-y-3 text-sm leading-relaxed text-slate-600">' +
+        descParagraphs(a.description, 'border-l-2 border-primary-light pl-4') +
+      '</div>' +
+
+      '<div class="reveal mt-8 border-t border-slate-200 pt-6">' +
+        '<h2 class="text-sm font-bold uppercase tracking-wider2 text-slate-500">' +
+          esc(SITE.ui.topics) + '</h2>' +
+        topicTags(a.topics) +
       '</div>' +
 
       (extra ? '<div class="mt-12 grid gap-6 sm:grid-cols-2">' + extra + '</div>' : '') +
