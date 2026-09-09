@@ -76,7 +76,7 @@ const RESEARCH = [
       "고점적률 권선 · 코어 제작 · 방열 기술",
       "신규 자성·도전·절연 재료"
     ],
-    description: "Design Process : 요구 성능 및 제약 조건 기반 극-슬롯 조합, 주요 치수 결정 및 특성 해석에 의한 성능 검증\nMachine, Winding & Drive Topology : 권선 및 구동 방식과 연계한 다양한 기기 형상의 해석 및 설계\nManufacturing & Material Technology : 고점적률 권선, 코어 제작 및 방열 기술 등 제조 기술과 신규 자성·도전·절연 재료를 반영한 해석 및 설계",
+    description: "Design Process : 요구 사양 및 제약 조건 기반 극-슬롯 조합, 주요 치수 결정 및 특성 해석에 의한 성능 검증\nMachine, Winding & Drive Topology : 권선 및 구동 방식과 연계한 다양한 기기 형상의 해석 및 설계\nManufacturing & Material Technology : 고점적률 권선, 코어 제작 및 방열 등 제조 기술과 신규 자성·도전·절연 재료를 반영한 해석 및 설계",
     image: "images/research/design-overview.webp",
     images: [
       { src: "images/research/design-topology.webp",
