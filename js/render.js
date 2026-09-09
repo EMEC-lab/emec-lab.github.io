@@ -1019,16 +1019,20 @@ var Render = (function () {
 
       '<div class="reveal mt-8">' + imageBox(a.image, a.title, 'aspect-[21/9]', 'rounded-lg') + '</div>' +
 
-      /* 설명은 개조식 한 줄씩이다. 왼쪽에 얇은 선을 둘러 항목으로 읽히게 한다.
-         글줄이 너무 길어지면 읽히지 않아 폭을 max-w-4xl 로 묶어 둔다 */
-      '<div class="reveal mt-10 max-w-4xl space-y-3 text-sm leading-relaxed text-slate-600">' +
-        descParagraphs(a.description, 'border-l-2 border-primary-light pl-4') +
-      '</div>' +
-
-      '<div class="reveal mt-8 border-t border-slate-200 pt-6">' +
+      /* 키워드가 먼저다. 대표그림 바로 아래에서 무엇을 다루는 분야인지를
+         한 눈에 보여 주고, 자세한 내용은 아래 설명이 맡는다 */
+      '<div class="reveal mt-10">' +
         '<h2 class="text-sm font-bold uppercase tracking-wider2 text-slate-500">' +
           esc(SITE.ui.topics) + '</h2>' +
         topicTags(a.topics) +
+      '</div>' +
+
+      /* 설명은 개조식 한 줄씩이다. 왼쪽에 얇은 선을 둘러 항목으로 읽히게 한다.
+         글줄이 너무 길어지면 읽히지 않아 폭을 max-w-4xl 로 묶어 둔다 */
+      '<div class="reveal mt-8 border-t border-slate-200 pt-6">' +
+        '<div class="max-w-4xl space-y-3 text-sm leading-relaxed text-slate-600">' +
+          descParagraphs(a.description, 'border-l-2 border-primary-light pl-4') +
+        '</div>' +
       '</div>' +
 
       (extra ? '<div class="mt-12 grid gap-6 sm:grid-cols-2">' + extra + '</div>' : '') +
