@@ -44,14 +44,14 @@ const MEMBERS = [
     interests: "Analysis and design of electric machines, Multi-physics analysis, Model-based and AI-assisted design, Electrified propulsion system design",
 
     education: [
-      "Ph.D., Department of Automotive Engineering, Hanyang University, Seoul, 2020.02",
+      "Ph.D., Department of Automotive Engineering, Hanyang University, Seoul, 2020.08",
       "B.S., Department of Electrical Engineering, Chungnam National University, Daejeon, 2013.02"
     ],
 
     career: [
       "2022.03 – Present, Assistant Professor, Department of Electrical Engineering, Soonchunhyang University, Asan",
       "2025.02 – 2025.07, Lecturer, Global Partnership Center, Hyundai Motor Group",
-      "2020.07 – 2022.02, Senior Researcher, Human-Robot Interaction R&D Center, Korea Institute of Robotics & Technology Convergence"
+      "2020.07 – 2022.02, Senior Researcher, Human-Robot Interaction R&D Center, Interactive Robotics R&D Division, Korea Institute of Robotics & Technology Convergence"
     ],
 
     activities: [

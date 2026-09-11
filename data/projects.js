@@ -128,7 +128,7 @@ const PROJECTS = [
     sponsor: { name: "한국로봇융합연구원", logo: "images/sponsors/kiro.jpg", url: "https://www.kiro.re.kr" },
     ministry: "",
     startDate: "2025-07-01", endDate: "2026-12-31",
-    role: "Co-I", orgRole: "",
+    role: "Researcher", orgRole: "",
     statusOverride: null,
     grantNo: "", description: ""
   },
@@ -253,6 +253,7 @@ const PROJECTS = [
 const PROJECT_ROLES = {
   "PI":      "Principal Investigator",
   "Co-I":    "Co-Investigator",
+  "Researcher": "Participating Researcher",
   "Advisor": "Academic Advisor"
 };
 

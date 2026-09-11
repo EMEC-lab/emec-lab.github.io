@@ -706,7 +706,7 @@ const PUBLICATIONS = [
     authors: "박민로†, 정영훈, 임명섭*",
     title: "비희토류 매입형 영구자석 동기 모터의 다층 회전자 설계 기술",
     venue: "전기의세계",
-    detail: "제72권, 제4호, 46186쪽",
+    detail: "제72권, 제4호",
     doi: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11337884", domestic: true,
     patentNo: "", applicationNo: "", country: ""
   },
@@ -800,10 +800,10 @@ const PUBLICATIONS = [
   },
   {
     type: "journal", year: 2022,
-    date: "2022-01",
+    date: "2022-10",
     authors: "박민로†, 김규섭*",
     title: "조립 후 착자 공정을 고려한 컴프레서용 자속집중형 모터 특성 비교",
-    venue: "한국자기학회지 (Journal of the Korean Magneitcs Society)",
+    venue: "한국자기학회지 (Journal of the Korean Magnetics Society)",
     detail: "제32권, 제5호, 218-223쪽",
     doi: "10.4283/JKMS.2022.32.5.218", domestic: true,
     patentNo: "", applicationNo: "", country: ""
@@ -930,7 +930,7 @@ const PUBLICATIONS = [
   },
   {
     type: "journal", year: 2021,
-    date: "2021-01",
+    date: "2021-10",
     authors: "양견모†, 박민로, 구재완, 이종일, 곽동기, 이석재, 손동섭, 김민규, 서갑호*",
     title: "독립 구동형 다중 공기패드 기반 욕창 예방 매트리스 구조 연구",
     venue: "Journal of Institute of Control, Robotics and Systems",
@@ -950,7 +950,7 @@ const PUBLICATIONS = [
   },
   {
     type: "journal", year: 2021,
-    date: "2021-01",
+    date: "2021-10",
     authors: "구재완†, 박민로, 양견모, 김민규, 송민걸, 장웅, 김병곤, 송준찬, 이준우, 서갑호*",
     title: "손가락 부분 절단 환자를 위한 기능 의수 설계",
     venue: "Journal of Institute of Control, Robotics and Systems",
@@ -963,7 +963,7 @@ const PUBLICATIONS = [
     date: "2021-06",
     authors: "박민로†, 서갑호, 황성우, 임명섭*",
     title: "영구자석 비선형 자기특성을 고려한 회전자 타입에 따른 모터 특성 분석",
-    venue: "한국자기학회지 (Journal of the Korean Magneitcs Society)",
+    venue: "한국자기학회지 (Journal of the Korean Magnetics Society)",
     detail: "제31권, 제3호, 126-130쪽",
     doi: "10.4283/JKMS.2021.31.3.126", domestic: true,
     patentNo: "", applicationNo: "", country: ""
@@ -1231,7 +1231,7 @@ const PUBLICATIONS = [
   {
     type: "conference", year: 2017,
     date: "2017-05-23",
-    authors: "Min-Ro Park†, Doo-Young Kim, Jae-Woo Jung, J.P. Hong*",
+    authors: "Min-Ro Park†, Doo-Young Kim, Jae-Woo Jung, Jung-Pyo Hong*",
     title: "Design of high torque density multi-core concentrated flux-type synchronous motors considering vibration characteristic",
     venue: "2017 IEEE International Electric Machines and Drives Conference (IEMDC 2017)",
     detail: "Miami, FL, USA, 2017.05.21 ~ 05.24",
