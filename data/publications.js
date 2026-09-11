@@ -706,7 +706,7 @@ const PUBLICATIONS = [
     authors: "박민로†, 정영훈, 임명섭*",
     title: "비희토류 매입형 영구자석 동기 모터의 다층 회전자 설계 기술",
     venue: "전기의세계",
-    detail: "제72권, 제4호",
+    detail: "제72권, 제4호, 6-13쪽",
     doi: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11337884", domestic: true,
     patentNo: "", applicationNo: "", country: ""
   },
