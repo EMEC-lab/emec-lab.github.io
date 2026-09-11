@@ -533,7 +533,7 @@ const PROJECTS = [
     ministry: "과학기술정보통신부",       // 선택. 기본적으로 표시하지 않음
     startDate: "2024-03-01",            // YYYY-MM-DD 필수
     endDate:   "2027-02-28",            // YYYY-MM-DD 필수
-    role: "PI",                         // PI | Co-I | Advisor  (지도교수 개인의 역할)
+    role: "PI",                         // PI | Co-I | Researcher | Advisor  (지도교수 개인의 역할)
     program: "",                        // 선택. 세부 사업명
     pi: "",                             // 선택. 지도교수가 아닌 연구책임자 이름
     orgRole: "주관",                     // 선택. 주관 | 공동 | 위탁 (기관 단위). 화면 표시 안 함
@@ -546,6 +546,7 @@ const PROJECTS = [
 const PROJECT_ROLES = {
   "PI":      "Principal Investigator",
   "Co-I":    "Co-Investigator",
+  "Researcher": "Participating Researcher",   // 참여연구원
   "Advisor": "Academic Advisor"
 };
 ```
@@ -563,7 +564,7 @@ pi: "이용민 (석사과정)"
 
 **`role`과 `orgRole`은 다른 축이다.**
 
-- `role` — 지도교수 **개인**이 그 과제에서 연구책임자인지 공동연구원인지
+- `role` — 지도교수 **개인**이 그 과제에서 연구책임자인지 공동연구원인지 참여연구원인지
 - `orgRole` — **기관**(순천향대)이 컨소시엄에서 주관/공동/위탁 중 어디인지
 
 위탁과제의 연구책임자(`role: "PI"`, `orgRole: "위탁"`)처럼 조합이 교차할 수 있다.
