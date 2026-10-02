@@ -55,7 +55,7 @@ const PUBLICATIONS = [
   {
     type: "conference", year: 2026,
     date: "2026-07-10",
-    authors: "신주현†, 김혜성, 박민로*",
+    authors: "이영훈†, 박민로*",
     title: "AFPM의 오버행 고려 Quasi-3D EMC 기반 전자기 특성 분석",
     venue: "2026년도 대한전기학회 하계학술대회",
     detail: "용평, 2026.07.08 ~ 07.11",
@@ -95,7 +95,7 @@ const PUBLICATIONS = [
   {
     type: "conference", year: 2026,
     date: "2026-07-09",
-    authors: "이영훈†, 박민로*",
+    authors: "노진성†, 이영훈, 박민로*",
     title: "EMCN 기반 Quasi-3D 해석을 통한 YASA형 AFPM의 전자기 특성 분석",
     venue: "2026년도 대한전기학회 하계학술대회",
     detail: "용평, 2026.07.08 ~ 07.11",
@@ -155,7 +155,7 @@ const PUBLICATIONS = [
   {
     type: "conference", year: 2026,
     date: "2026-07-09",
-    authors: "노진성†, 이영훈, 박민로*",
+    authors: "이현규†, 김혜성, 이영훈, 박민로*",
     title: "Tooth-Tip Chamfer를 반영한 자기등가회로 기반 V-Type IPMSM의 전자기 특성 분석",
     venue: "2026년도 대한전기학회 하계학술대회",
     detail: "용평, 2026.07.08 ~ 07.11",
@@ -205,7 +205,7 @@ const PUBLICATIONS = [
   {
     type: "conference", year: 2026,
     date: "2026-07-09",
-    authors: "이현규†, 김혜성, 이영훈, 박민로*",
+    authors: "신주현†, 김혜성, 박민로*",
     title: "정편심 및 동편심을 고려한 AFPM의 해석적 Quasi-3D 모델링 및 전자기 특성 분석",
     venue: "2026년도 대한전기학회 하계학술대회",
     detail: "용평, 2026.07.08 ~ 07.11",
