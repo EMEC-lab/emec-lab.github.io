@@ -246,6 +246,16 @@ const PROJECTS = [
     role: "Advisor", orgRole: "",
     statusOverride: null,
     grantNo: "", description: ""
+  },
+  {
+    id: "proj-2026-22",
+    title: "AAM(Advanced Air Mobility)용 외전형 구동모터 열특성 분석 및 열해석 기술개발",
+    sponsor: { name: "한국자동차연구원", logo: "images/sponsors/katech.jpg", url: "https://www.katech.re.kr" },
+    ministry: "",
+    startDate: "2026-10-06", endDate: "2027-04-30",
+    role: "PI", orgRole: "",
+    statusOverride: null,
+    grantNo: "", description: ""
   }
 ];
 
