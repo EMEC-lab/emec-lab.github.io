@@ -1461,8 +1461,9 @@ var Render = (function () {
           '<p class="mt-1 text-sm text-slate-500">' + esc(SITE.department) + ', ' + esc(SITE.university) + '</p>' +
           contact +
           (prof.interests
-            ? '<p class="mt-6 border-t border-slate-200 pt-6 text-sm leading-relaxed text-slate-600">' +
-              esc(prof.interests) + '</p>'
+            ? '<div class="mt-6 border-t border-slate-200 pt-3">' +
+                interestTags(prof.interests, 'stack') +
+              '</div>'
             : '') +
         '</div>' +
       '</div>' +
@@ -1506,14 +1507,21 @@ var Render = (function () {
     return '<p class="mt-1.5 text-xs leading-relaxed text-slate-600">' + body + '</p>';
   }
 
-  /* interests 는 쉼표로 가른 문자열이다. 하나씩 알약 태그로 보여 준다 */
-  function interestTags(text) {
+  /* interests 는 쉼표로 가른 문자열이다. 하나씩 알약 태그로 보여 준다.
+     mode 'stack' 은 한 줄에 한 태그씩 쌓는다 (교수 블록). 항목이 길어
+     저절로 한 줄씩 되기를 기대하지 않고, 글자 수와 무관하게 줄을 끊는다.
+     그 외에는 카드 안에서 가운데로 모아 접는다 */
+  function interestTags(text, mode) {
     var list = String(text || '').split(',')
       .map(function (t) { return t.replace(/^\s+|\s+$/g, ''); })
       .filter(Boolean);
     if (!list.length) return '';
 
-    return '<div class="mt-3 flex flex-wrap justify-center gap-1.5">' +
+    var box = mode === 'stack'
+      ? 'flex flex-col items-start'
+      : 'flex flex-wrap justify-center';
+
+    return '<div class="mt-3 ' + box + ' gap-1.5">' +
       list.map(function (t) {
         return '<span class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px]' +
           ' leading-tight text-slate-600">' + esc(t) + '</span>';

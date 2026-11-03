@@ -41,7 +41,7 @@ const MEMBERS = [
     photo: "images/members/park.jpg",
     email: "",
     office: "",
-    interests: "Analysis and design of electric machines, Multi-physics analysis, Model-based and AI-assisted design, Electrified propulsion system design",
+    interests: "Electric machines and actuators for electrified mobility · robotics · mechatronics, Multi-physics analysis (electromagnetic · thermal · structural · NVH), Model-based sizing and system-level design, Surrogate-based robust optimization under manufacturing uncertainties",
 
     education: [
       "Ph.D., Department of Automotive Engineering, Hanyang University, Seoul, 2020.08",
