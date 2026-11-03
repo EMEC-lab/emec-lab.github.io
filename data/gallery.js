@@ -45,7 +45,7 @@ const GALLERY = [
     title: "ECCE 2026",
     date: "2026-10-04",
     desc: "포스터 발표 1건 (Vancouver, Canada)",
-    cover: "images/gallery/25-6.jpg",
+    cover: "images/gallery/25-7.jpg",
     images: [
       { src: "images/gallery/25-1.jpg", caption: "" },
       { src: "images/gallery/25-2.jpg", caption: "" },
