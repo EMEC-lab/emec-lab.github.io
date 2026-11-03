@@ -73,6 +73,7 @@ const MEMBERS = [
     ],
 
     talks: [
+      { date: "2026-10-22", host: "JMAG User Conference", title: "정-동편심에 따른 전자기력 및 진동 특성 분석" },
       { date: "2026-07-02", host: "한국자동차연구원", title: "로봇용 고토크밀도 모터의 제조 공차 분석 및 치수 최적화" },
       { date: "2026-06-10", host: "대구대학교", title: "고출력 밀도 전동기 설계를 위한 열등가회로 해석 기법" },
       { date: "2025-12-23", host: "대구대학교", title: "전기-기계 특성을 고려한 Multi-physics 해석 기반 구동 모터 고출력밀도 설계" },

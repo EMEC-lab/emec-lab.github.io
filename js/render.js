@@ -1698,12 +1698,18 @@ var Render = (function () {
     });
   }
 
+  /* PEOPLE 목록에서 감출 묶음. 데이터(members.js)는 그대로 두고 화면에서만 뺀다.
+     재학생은 role, 졸업생은 학위로 판정하므로 두 곳에 같이 걸린다.
+     다시 보이게 하려면 이 배열을 비운다 */
+  var PEOPLE_HIDE = ['undergrad'];
+
   function peopleCurrent() {
     var host = document.getElementById('people-current');
     if (!host) return;
 
     var all = (typeof MEMBERS !== 'undefined') ? MEMBERS : [];
-    var order = (typeof MEMBER_ROLE_ORDER !== 'undefined') ? MEMBER_ROLE_ORDER : [];
+    var order = ((typeof MEMBER_ROLE_ORDER !== 'undefined') ? MEMBER_ROLE_ORDER : [])
+      .filter(function (r) { return PEOPLE_HIDE.indexOf(r) < 0; });
 
     var groups = order.map(function (role) {
       return { role: role, items: all.filter(function (m) { return m.role === role; }) };
@@ -1811,7 +1817,9 @@ var Render = (function () {
     if (!host) return;
 
     var list = (typeof MEMBERS !== 'undefined')
-      ? MEMBERS.filter(function (m) { return m.role === 'alumni'; }) : [];
+      ? MEMBERS.filter(function (m) {
+          return m.role === 'alumni' && PEOPLE_HIDE.indexOf(degreeOf(m)) < 0;
+        }) : [];
 
     if (!list.length) { host.innerHTML = emptyNote(); return; }
 

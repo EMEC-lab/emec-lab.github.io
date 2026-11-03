@@ -41,6 +41,22 @@
 
 const GALLERY = [
   {
+    id: "2026-ecce",
+    title: "ECCE 2026",
+    date: "2026-10-04",
+    desc: "포스터 발표 1건 (Vancouver, Canada)",
+    cover: "images/gallery/25-6.jpg",
+    images: [
+      { src: "images/gallery/25-1.jpg", caption: "" },
+      { src: "images/gallery/25-2.jpg", caption: "" },
+      { src: "images/gallery/25-3.jpg", caption: "" },
+      { src: "images/gallery/25-4.jpg", caption: "" },
+      { src: "images/gallery/25-5.jpg", caption: "" },
+      { src: "images/gallery/25-6.jpg", caption: "" },
+      { src: "images/gallery/25-7.jpg", caption: "" }
+    ]
+  },
+  {
     id: "2026-ms-graduation",
     title: "2026 후기 학위 수여식",
     date: "2026-08-19",
