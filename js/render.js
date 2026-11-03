@@ -1525,7 +1525,11 @@ var Render = (function () {
     var n = splitName(m.name);
 
     return '<div class="card-hover rounded-lg border border-slate-200 bg-white p-4 text-center">' +
-      imageBox(m.photo, n.en, 'aspect-[3/4]', 'rounded') +
+      /* 사진은 카드 폭을 다 쓰지 않는다. 꽉 채우면 사진만 눈에 들어와
+         이름·관심분야가 묻힌다. 증명사진 비율(3:4)은 그대로 두고 폭만 줄인다 */
+      '<div class="mx-auto w-[55%] max-w-[180px]">' +
+        imageBox(m.photo, n.en, 'aspect-[3/4]', 'rounded') +
+      '</div>' +
       '<p class="mt-4 text-sm font-bold leading-snug text-slate-900">' + esc(m.name) + '</p>' +
       /* 졸업생은 학위 옆에 졸업 년월을 붙인다 */
       (m.title ? '<p class="mt-1.5 text-xs font-semibold text-primary">' + esc(degreeLabel(m)) +
