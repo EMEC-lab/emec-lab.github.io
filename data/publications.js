@@ -84,6 +84,16 @@ const PUBLICATIONS = [
   },
   {
     type: "conference", year: 2026,
+    date: "2026-09-06",
+    authors: "Min-Woo Jang†, Chan-Woo Kim, Seong-Won Jeong, Min-Ro Park*, Soo-Hwan Park*",
+    title: "EMC-Based Geometric Scaling Method for Axial Flux Permanent Magnet Motors",
+    venue: "27th International Conference on Electrical Machines (ICEM 2026)",
+    detail: "Funchal, Madeira, Portugal, 2026.09.06 ~ 09.09",
+    doi: "", domestic: false,
+    patentNo: "", applicationNo: "", country: ""
+  },
+  {
+    type: "conference", year: 2026,
     date: "2026-04-13",
     authors: "Yong-Min Lee†, Soo-Hwan Park, Hye-Seong Kim, Young-Hoon Lee, Min-Ro Park*",
     title: "Deep Transfer Learning-Assisted Fast Performance Prediction for AFPM",
